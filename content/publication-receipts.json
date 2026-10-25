@@ -15707,6 +15707,1189 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "literature:fch_dubynin_mozg_i_ego_potrebnosti": {
+      "schema_version": 1,
+      "item_sha256": "386839c3d27fe35711f9371a27f5fb607a18515280986e0f65d14fe2de3ffc2e",
+      "review_sha256": "19d6be3953a182ca3e2039d75c1825253b5395a306665cfd50683ce640704256",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_kandel_v_poiskah_pamyati": {
+      "schema_version": 1,
+      "item_sha256": "f11f413f36e5cde0e1063e87e1ae9dcddbfee84b99ae93c86d352eb8972dd331",
+      "review_sha256": "77d75e2c1f8c5d40dc81a8086b3142cb8afd5cde5c67d838d49d7070d449fb86",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_carter_kak_rabotaet_mozg": {
+      "schema_version": 1,
+      "item_sha256": "bfcde426c55fccec648ceb12a587664210f09e73c2c8e5648fcd1866bf172dff",
+      "review_sha256": "9765469c8ee122dfb5aec7799ffe949752299e6069807ee52bea5fc502195575",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_nicholls_martin_ot_neirona_k_mozgu": {
+      "schema_version": 1,
+      "item_sha256": "464af3c867fc46f28f3d7185a4a9c079a80b91f0e4f1b571821f8e6f86118231",
+      "review_sha256": "e71289515b0275b5d89206d558c67ce3213559a9a7235496e1a83aea0452599c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_pavlov_dvadtsatiletniy_opyt": {
+      "schema_version": 1,
+      "item_sha256": "4236e5dc985f2db07bab6ce2d28fb1602a43cb50f0171525c6f9e68ce1a3e109",
+      "review_sha256": "93232bb86956bf6087fda3356a6c5dc43a1876696776140b75564617f8941aeb",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_swaab_my_eto_nash_mozg": {
+      "schema_version": 1,
+      "item_sha256": "8ab50feb3bf61c36065da4001d5f1249611134fab10bc8e843e962de9c22ab8b",
+      "review_sha256": "513917e1ca38c161c446e3e7d539e25d4aa81ff0c1ff638f6c390b82f278b82d",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_sergeev_dubynin_telo_cheloveka": {
+      "schema_version": 1,
+      "item_sha256": "90e13391fc267a2af0aacc467ec3c24bec16c1ab2f8855c1fff57dc13425e79c",
+      "review_sha256": "46936605ec5215d497096cbe53714c73c0e789171661e800014e4db72d7693fd",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_simonov_motivirovanny_mozg": {
+      "schema_version": 1,
+      "item_sha256": "a3c0d78a4b3fb1114356f7536371a0486179eb15c2e1319ee21e214fa898a00d",
+      "review_sha256": "51423967c63b3784b3c8414df89fca846f577cca927261b471748b72f2fec42e",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_simonov_emotsionalny_mozg": {
+      "schema_version": 1,
+      "item_sha256": "34adaf4e55db325b956d0f97d21a79b7efcf54dc35156ee2fd1018c74aa003ec",
+      "review_sha256": "98b71b1dacc58bd2743141ce8d9b922c8a35627413c38b1afde3604ffabd1153",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_ukhtomsky_dominanta": {
+      "schema_version": 1,
+      "item_sha256": "6e24e3eaedf1961a933410ce6868046c81e3ea2babe04e21fa858073d515da8e",
+      "review_sha256": "3cdb368f69792e05103922cb253a665dfd49559a40f82e903b4887221ceb64f2",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_yakutenko_volya_i_samokontrol": {
+      "schema_version": 1,
+      "item_sha256": "d14b8f1f66f00367cce62b8e8ac5e98653d059604cd76996a7f12a109ef361ff",
+      "review_sha256": "7dd5b11ed93f5d347f4798f45a3311c50e9064ffb256298cbd80ac99970e0408",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_dubynin_mozg_i_ego_potrebnosti": {
+      "schema_version": 1,
+      "item_sha256": "9213a52b3bb0188f511a4503ceb54c5a7bd16017267ed2e7bff6238e147bb70e",
+      "review_sha256": "6c2ab418472cbc89b063e7ae4b0dfe86c45554c275a78cdc0cde5ad9990e725c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_kandel_v_poiskah_pamyati": {
+      "schema_version": 1,
+      "item_sha256": "f99b15212b16514e42cbb368c16271a63fdc63478b115f7fb86f4b2dbf7cd34a",
+      "review_sha256": "bee01bb90937f0f187f5b60eeb5a375b5cb43c87768a48e15d2595b5f6c61228",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_carter_kak_rabotaet_mozg": {
+      "schema_version": 1,
+      "item_sha256": "dfc81041033cf30a6079637ae80f693d97c43d1bd1bf6c7edc98a8e530ed3086",
+      "review_sha256": "5ee096cb20e1ae922d7cc037f802622148aafd66cc023b4b5b283c715dc81547",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_nicholls_martin_ot_neirona_k_mozgu": {
+      "schema_version": 1,
+      "item_sha256": "5029a4ae3338712a2b71f443cdc4a260cac6b1b16fc7164d3084da60f42ae0b4",
+      "review_sha256": "c3708347d74b4e08729943c671b00c835fc79f4db138b15e0ebbe0c864c00f82",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_pavlov_dvadtsatiletniy_opyt": {
+      "schema_version": 1,
+      "item_sha256": "326f3cbed9e9c21e853502a195cfdcbe1c92facf83f1d4f63d245d62ff0de7ac",
+      "review_sha256": "2dece4d6c28077cac2a2bbca8c7cd58777ecd5753de68316d88b727ea18141e3",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_swaab_my_eto_nash_mozg": {
+      "schema_version": 1,
+      "item_sha256": "39633ab4750b89f852cadd339e81e8b45516abe1350411ed3186ea234ccfc1a3",
+      "review_sha256": "24c47234d0c96ebb5beeaf1939de8ad0a527a64f93dc7f36f1efb45b7507d10e",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_sergeev_dubynin_telo_cheloveka": {
+      "schema_version": 1,
+      "item_sha256": "1f36b23beeb6e3dc47312fc6641854424774c1327ee225eb1638810faa10cec7",
+      "review_sha256": "43a484e038ea597d27a03299398b36dc7a18b854acd03ca71f3448b6ea73179d",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_simonov_motivirovanny_mozg": {
+      "schema_version": 1,
+      "item_sha256": "610de513f4424ed32067aae3fedceead81439f15bfe483dda482a6d0bcacda8a",
+      "review_sha256": "b16627ffc7fd1acfbd8d2f2837857f637d50aa08e523df3505b8b56993df6c93",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_simonov_emotsionalny_mozg": {
+      "schema_version": 1,
+      "item_sha256": "acc040b4ebdd407a207e68792a83cc8de595ba7a0a9dcb26436d82fb7b4a8fa2",
+      "review_sha256": "27fe0ebed8ddfcdab1f5b96ce6b17368d2f6ab61f704a6334affb4085a506012",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_ukhtomsky_dominanta": {
+      "schema_version": 1,
+      "item_sha256": "0167015b1c9b5e3e5ad8f975f0ba383a495cdeee5c14cbe9e8ddb7c4fd222ab1",
+      "review_sha256": "a3a88b33e0d718f882a5f68feb76b1bdc72a787d4373b6b2c6b5fbe966fd1216",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_yakutenko_volya_i_samokontrol": {
+      "schema_version": 1,
+      "item_sha256": "5199b928c0e7bcdd958e972b468968734d61f7fd79e2a438ca633ea683ad2ced",
+      "review_sha256": "c5009a6ab6db8e925509b4455a4c0521b88a07ef0a961fba765de49edc2f5d08",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_12ca0a14d27fe4f9": {
+      "schema_version": 1,
+      "item_sha256": "20d5fd4a787cd3793ed8e807a9207fc6a9f12a18d31abed3e56b3d0e776a815d",
+      "review_sha256": "7316f4be0aef9e64ab72a48703a9bfbdc84db95670038cae3a58939654261f4b",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_16a62202b82667da": {
+      "schema_version": 1,
+      "item_sha256": "3b0107b417cc96400bc48cb7d11a52cc04b85b9351894ed76b0670b149e06ac0",
+      "review_sha256": "52d7f2564c2cc71b7b609fdce0347b4836bc84cb278ea2d9d3ee036c6cbeb80f",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_6d7bc0cc3c9ce6eb": {
+      "schema_version": 1,
+      "item_sha256": "54c59c194431790befe5ac02975b04296f54389671cb27209e09c600f6c7bec4",
+      "review_sha256": "9181cff44dccd40fd21422f8970ba843387a32906f353a2b5d97ca11cf539845",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_e5921321564edbc4": {
+      "schema_version": 1,
+      "item_sha256": "0b30414fcf28ba98d06cb3ccf1bc84453dee82bf108f1cfa998986e76111c6b7",
+      "review_sha256": "ddbca5b5c9642bc572871a4920c0ada29c3cf2b517f2b8f9e7467ec4f65296f2",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_f207603bd416c4be": {
+      "schema_version": 1,
+      "item_sha256": "d349cf0a19ef0ea53277cadb392d5e13936da876b2bf535b2bb5a5bf33f19971",
+      "review_sha256": "3ed14dbea5877d4e15bea6c8454c59953750f53f98a3d6c12e6c2e6b5ac56d0c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_5568f7c20141100f": {
+      "schema_version": 1,
+      "item_sha256": "dc0df37a906a1bfef90f47db9b697ee3853dbe364f3fb75a0d89d0fec2edc1d4",
+      "review_sha256": "9fc559cb3ee875c8f88390cad8340f8b0e507ca3027f998ad1d21f0d38385103",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_ae000be9a73115a6": {
+      "schema_version": 1,
+      "item_sha256": "6be9dd128468b45229a164bda42d61d2643f875575743d3b307f33b54cf86591",
+      "review_sha256": "f2809c956170104afcdda263cfe985d9d7ba51e77820c5ab32bf93db5df797c3",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_e397986f81e37d22": {
+      "schema_version": 1,
+      "item_sha256": "c3d4995fa1374e67d709892f278035f4b70d134efbfec551661d74bae0c37bb7",
+      "review_sha256": "75d2162bee9eda5b9fe7777c0f00bdc2785721187d1ad8cd604e0b0516e94dc3",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_7b4d2c2bdc54b178": {
+      "schema_version": 1,
+      "item_sha256": "b829e0e0d10173beb4347b6b21eef4713d6b61a5b20ba49d762f06e3cf10b426",
+      "review_sha256": "f70448db1fb3d7cc32ea781130dba01fbaf0f75b129c0f238f060d9df328ad99",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_1febe2b9612a7668": {
+      "schema_version": 1,
+      "item_sha256": "3f6dbe89b9a31e894d7e363cb6514b5e1982de3f8baf6aefb808bde2c671abae",
+      "review_sha256": "fa24ffbca3a45f3f098080779c469479134c2ee5ec2a81f3f38a7991a1fbbc35",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_7d6fbb6d57ed5a71": {
+      "schema_version": 1,
+      "item_sha256": "e5fb6e26101bf2d0e532a11fe47fb45334d43b959bfa0e2eae22a98fde4075b7",
+      "review_sha256": "a5f08ab3af54280c4aa609364a59c1d9ff06ab75da7837672a13dfc3440d9d9c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_97e355592d42be46": {
+      "schema_version": 1,
+      "item_sha256": "d491366420816cccd1a9e7a2a786b6cedca2a42d0b85d5c5c06bbb4e7bd21e1b",
+      "review_sha256": "1894414686ff7835ea9592502252d6251495604c0817a33a2a93e6eedfc8c2f6",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_3fe49ed705cbf4cc": {
+      "schema_version": 1,
+      "item_sha256": "1a844bbb50aa5d46980622b60c6c5fe5f8a2b47efbe99282142e130a29e62b07",
+      "review_sha256": "45bd8dcc86943cebffefaaa53a9a7b96f22b46154f3b5c1d10730d638255c6fe",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_6491072220dbf2cb": {
+      "schema_version": 1,
+      "item_sha256": "8bc29694140e4965e6fb836570d7acc7e017e5ad121b1900e3d54b248da5a379",
+      "review_sha256": "003e42b8adef685af0a7d52dd7d37096002ab22a4c4280519e4a1c27cf084600",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_cefdc62fe30c6d9d": {
+      "schema_version": 1,
+      "item_sha256": "302faf675fb0c2213b26973f24aef0d5a5bc98c713727eafb61cf1bf937d550b",
+      "review_sha256": "e3dfebe5014bb6c0e11a7d378e085bf5707d0ebf01c684e80605f38379afe3c3",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_5852670b2e030af5": {
+      "schema_version": 1,
+      "item_sha256": "a7ac5ca625819f659489b186a4c930bb855e2d5989ec6746181e75433c65dde9",
+      "review_sha256": "4ada09c30cf075ef6c651aa415fafd5cb43b98f70368dbf7f31822f1ffa3747b",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_79347303885d264c": {
+      "schema_version": 1,
+      "item_sha256": "e4f2a5ba63d9f4c4430fda4907b72d74eab9c62ba2649a5e5efd4817c6ab0aeb",
+      "review_sha256": "20baef7bfad6dee15a35f91414533284d761621e31f1db7589c5992140d956e9",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_00a7af60c24a8221": {
+      "schema_version": 1,
+      "item_sha256": "c6f684938ac629fe0e044bb0bbf1a32aac597e7be3d3bb3c965d0962f0769e8c",
+      "review_sha256": "ec2ddc42f8ce573e1ccceb35f42f973613e38fe8bca9c0ee78be54cbcf2dde91",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_917071a82ba4c6db": {
+      "schema_version": 1,
+      "item_sha256": "312226a1ea2660c8ac002a6c2e4fbc8e01aea10f9aa68233b8d9ed8d93b168e6",
+      "review_sha256": "65a073447e239776f1e6c26ed381c2a87461aba8d2554a7c3bef7a8faa115de0",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_5505760c8ef8c4b8": {
+      "schema_version": 1,
+      "item_sha256": "c41b84cd25bde3dfce7fb6b155f123a4bbb2d7873c95daf79e16a3aedd4a7319",
+      "review_sha256": "fa2ff98f450e787deee6d987c8d54680326bbc228b71b6168ad7546765aabf72",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_2055c41e007c80b8": {
+      "schema_version": 1,
+      "item_sha256": "6f62c3a7853d3735d901cdd85fe141a62597f88f159b8180861fbe4b9f8609cb",
+      "review_sha256": "43411de792e2ce8b597c6f7f8a636ccb4f1e2e45fb88d8860d04342c2d4c26e6",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_4bfaf8e48c20ad8b": {
+      "schema_version": 1,
+      "item_sha256": "e6f65cce6ce35263bdacf87f8fd63c42093291b4687bc258ddea6304243178cc",
+      "review_sha256": "913ceee8c408b1078aea6109d0017a8a815b42e513af201746ad1c5705fe08d7",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_1e9a50757f2caf6e": {
+      "schema_version": 1,
+      "item_sha256": "504b7bd9eadc7c7f3de22814d718b24b62385a95a1eaf6a6ae887f97a84a5fad",
+      "review_sha256": "218557da673f1f23a21531a7978cb5fc3998f0b3465ed6e2a59f750513cfc592",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_7ff4b50c4911b5f7": {
+      "schema_version": 1,
+      "item_sha256": "6d2c7cf6d35eec4692a324245cb1df799f64cf6f1af5fd6c434ae3cc1ca6267b",
+      "review_sha256": "40bd31b95cb05f54de5fbc146749cbd66095a6de5ae9229e478d4878a39f1fb3",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_98bfb98e25b39800": {
+      "schema_version": 1,
+      "item_sha256": "8de608cb712fcb420f2e432f5d42cfc9283c03b25b65e6b35380a6dc9dbb42c1",
+      "review_sha256": "e2ee7f9df0804be9d76e31c10c20ead4d49a9cd6081ef72f975e301e50aa61ab",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_802f13c56eea6319": {
+      "schema_version": 1,
+      "item_sha256": "5ed4dd37f34008a8d7726c9210fe20c19afaf204f47210c9ea23f26e2b183244",
+      "review_sha256": "7a3ba3cbacfee290b2574f0b52f58e947d8d2593316d40d3263fff2fcbe6a45c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_4c4514f492edb1c6": {
+      "schema_version": 1,
+      "item_sha256": "10359596bf71b0315ff3e940e1b7221107ce9aaabfcd0cefd66a2c67ef005527",
+      "review_sha256": "da2fafe24f174a0a7f734f42490c04f6ce756080eb3040facc14cd881e0e800b",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_bd48225c86c8de17": {
+      "schema_version": 1,
+      "item_sha256": "0043349e0004a7d68514c5c22a7717b19cbc902b07990d646eebae2a86b338ff",
+      "review_sha256": "4915219cf3c2b8ca97f4dc8eac89554c5cbe32169730240c9753331db17366c9",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_0199865ad8d23ecb": {
+      "schema_version": 1,
+      "item_sha256": "3211e22a8f6077b238dbee08f9e2529b7b9e684e181c85af6b5027cbb4c7940a",
+      "review_sha256": "40e038273f2360b7fa73e20e58b01d3e33bf67f0b3652e3553399cdce4f06a81",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_819808cf97ad8eb5": {
+      "schema_version": 1,
+      "item_sha256": "097428acb7d198fa5768004f0bafe11ec233e7da1da192116528098d8ab3a041",
+      "review_sha256": "c8d1f6698b819b738cb08a901d55227437aba5f06507705e8e70e5f29ad80dbc",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_ee1fe3562df0c482": {
+      "schema_version": 1,
+      "item_sha256": "3c90989fd44b8e567806e4a75ca4076f499a98fa685aa99ce4e9b3da4a0bc0ff",
+      "review_sha256": "dc1ef7640e13e78315090af14299b52a69ac526a188a957239c55b5d8d454b4c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_a172ffe221539480": {
+      "schema_version": 1,
+      "item_sha256": "2a71ce624dba20949bab59afc706f2d8a01ee1827357cdb2eebdc7277fb7c214",
+      "review_sha256": "33b1258f6902b34e1d892a4a263c70fdf6ea2b63868b4b46e2e6d31363c7c8b9",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_e8a91d867727899b": {
+      "schema_version": 1,
+      "item_sha256": "ab212c7f34a63a8f28bf68b4af9f1c6c2bee45eea9e7cb5adf0e7bc0671d00e3",
+      "review_sha256": "aafef76a458d4ba6ef099b543f766ee390981e247e93eaa1bcf51605dff63ef0",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_4bad7531005a5e23": {
+      "schema_version": 1,
+      "item_sha256": "fb29c0ccc8aa52d40d627d329cc1f24a199cbf65b8700889d10d22685c301689",
+      "review_sha256": "0d23bda641863823b10c98a9a049c4ace393eded2aa4a36e934d48d940a78c90",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_ce87499b1e725a4d": {
+      "schema_version": 1,
+      "item_sha256": "3bb10e034211c9f644317aab81ba95c8a19fa75b81f575bbe215f92eb2a9bb80",
+      "review_sha256": "0cea3e022953a06c667735aeb664b921ec36bdff36165d1da257c424acb9c576",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_319ec2108977ce66": {
+      "schema_version": 1,
+      "item_sha256": "4517432cf2d9dfd10d0b19e1a5797d8763365d1a1ed453740bb93a03a9f13264",
+      "review_sha256": "27cc4155f8f60f362cae22690cc714812c55fe3847ed32597efdd83a4c657035",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_3c68e7fa4c7ec0ba": {
+      "schema_version": 1,
+      "item_sha256": "ad5c98af91531dd6039baa00afe718c6a6f50fb65ecfbbb5f1e353acc6fcf2cb",
+      "review_sha256": "94745981b86de900811c938fd12487859045437a87fc20cace5aca64a37909aa",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_d326f6da3f94e03b": {
+      "schema_version": 1,
+      "item_sha256": "59025c1197e07bac3ba56ca6396ffb81009c16a7b63e9cfb492ac23ff1ccfe8a",
+      "review_sha256": "e6ffd18bb14a5f9e9a503286dc2e8efd2e36f0b7cb0b2271ef6cebe4923485e4",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_925e5ff861131189": {
+      "schema_version": 1,
+      "item_sha256": "53983f9d6e0ab84220aed39d7c4286e49f51f48b4e7b1232ae6b67b3566f78ec",
+      "review_sha256": "f2db1225b6b7e4a687b1d0d2dfb86749a3d1fe3c504841d2fa733e7ffabde716",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_f0436ade24a5adb3": {
+      "schema_version": 1,
+      "item_sha256": "a07ec3d82b03fc0a9034e534f817382338e547350f8162b3e91f63254e953e32",
+      "review_sha256": "844691bc9600e9ba229f685e980ce554f03e0237bf528ceafd26c1e8a878fe36",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_7a7c03e9f990308e": {
+      "schema_version": 1,
+      "item_sha256": "470ebed524728c26ffa933f1da775957c7f5e285bf259cec8b7a707835b4a4e9",
+      "review_sha256": "4a8a26c9bf1491a3e0348dcf4538976b2e1fcfd56ebb2ff4b23add1e40e9f485",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_909b215a9fece3cc": {
+      "schema_version": 1,
+      "item_sha256": "d8795b8b49bdcbcb7c66ea3b099340a70f104eba172319caaee243f4a9e7147f",
+      "review_sha256": "68b2926f879c2f712e9cab492d8a2e58d1cb46b1f1322a85103361e8adc4157a",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_543dcd562c0460c5": {
+      "schema_version": 1,
+      "item_sha256": "27f5e6a4111ec1094d83467ee9ae7b4fac33fc4a7fd916feacb90144598f9a01",
+      "review_sha256": "84b9055208c7fdc30f7a32bd7ca36a6878a1f621f0fda8bf9cfe16b1e465bc2b",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_b31bb7b1dc37d79d": {
+      "schema_version": 1,
+      "item_sha256": "8fc7d54ffa63b9f462b3e54f6fd3a7275f78fdf76a09d3bd22edb4839bda2b01",
+      "review_sha256": "78039e70d701976e2ac029cf00a0ef262acf0d70c674b78116b99a9532429369",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_4bbfe78685eb81c2": {
+      "schema_version": 1,
+      "item_sha256": "2dc4a9166f5fe06558096816e6e723310a25a0f6f25323a3b1658c025ed19388",
+      "review_sha256": "9a2fd719644ba3794b978807012c4f5648d22de8216f2bf2c7757d335f27ef90",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_5643db88a7fa06b2": {
+      "schema_version": 1,
+      "item_sha256": "ec6fa86ef4f7aa4eaba498cf056674ae8852bed088951532d52e56e3bcd44e18",
+      "review_sha256": "4db797eb5859a94cffe6d47a7542117f348bffe9c86c25aaf268e7ee381ed1d1",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_4326336ddc0d7a05": {
+      "schema_version": 1,
+      "item_sha256": "346012a7e88be17219ab78c896ba8a7ea86681175aa7a32d2ff34d0f5a724684",
+      "review_sha256": "691d7117fe9958bad676325102c59e345c6b66e20f5025c2d52d372e5fcda740",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_e29fc4e37d6eef9b": {
+      "schema_version": 1,
+      "item_sha256": "f03bafb4584686bf8eb76355873d0f8a2f388bb6ae513f3820c7d59637f62336",
+      "review_sha256": "de85916fd5ab11c1e6e8d859cc37c32946614a214ef3efbf42fbdc76b4cb70fd",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_caa8d94a943aae0d": {
+      "schema_version": 1,
+      "item_sha256": "1c7ee52818a074be2b387bf352abae91bcc613014c53350ac3f52b35ea1196de",
+      "review_sha256": "318e293cbbaa8ab1565834d8c8a205f6d8b3a50703d080f07f32c0f6f5cf8f9e",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_a851d2e2d491dfed": {
+      "schema_version": 1,
+      "item_sha256": "a38bc4a1b044bba14a6406d70ade04e3e208b00844fe676c65323f85fd513c6a",
+      "review_sha256": "2a1f7652683fd7266d73c962a8b111d6c8ebdca224cddc9ef629b68656a89261",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_28136036489db778": {
+      "schema_version": 1,
+      "item_sha256": "81276e385b481c370b7bfe8ddec5a7ed41db82cc60094b512283061d2f563b0b",
+      "review_sha256": "27eb759e26e129a46a936ca5371a87c5718d5bb6c66900993b33ef040c31124e",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_88dee04d51aa3119": {
+      "schema_version": 1,
+      "item_sha256": "95b6c6a247a534147d468dad9bc49f29e8d56e8d61a67bcc9c7fa5bec4956f3a",
+      "review_sha256": "81a3bd18224311ca63c2cc73e382b9d49a735dd4865c9e0a3cb749679d68d9e1",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_6968d12a30949ae7": {
+      "schema_version": 1,
+      "item_sha256": "841b88849c249fd9c1db469b2c57d193924871c63d109e396fad29a564037849",
+      "review_sha256": "18c770af9375ae8527d472bca700abd8706bb286f4abbd05890eff59aa29e7da",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_4ac5113ca33225a9": {
+      "schema_version": 1,
+      "item_sha256": "08a233e5177d8a1cf2a989ccf5cfe1f5b1342f7599ea1e081aead499e2b9f806",
+      "review_sha256": "3c2550dc1d7c80c7e2e21f287df4db9bf31abfebc3785e86a1f46de2d9984953",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_7bcfce2256481407": {
+      "schema_version": 1,
+      "item_sha256": "53af228ad186a4e7d2c06a03b1d288b2657f33b26f2114ab442bf66540e9c0e9",
+      "review_sha256": "17b052e4690555c318ff4f3caacd65efba6d77ffc3f0471a40118ce8f6de88d3",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_89d363ca5a33cb7d": {
+      "schema_version": 1,
+      "item_sha256": "fb8efacc8c8b9d558eaec8794d503102c62c475bc0a1127a0e1c99ad4d75d0ff",
+      "review_sha256": "ac5d804d81da1d57b1fbfbbc0534c7d602048a20832cb6147f11fa648ab39df8",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_4f9768a778fe2a01": {
+      "schema_version": 1,
+      "item_sha256": "d9d381d95e6b2e356fd49a31e6c582fd9b3947d0226db77f4967d63200216570",
+      "review_sha256": "c65615617e0e4ab1b9336e482deb01dbbcac0264c376343dfac8041d78d89e51",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_25a5d2f1c7ba76e1": {
+      "schema_version": 1,
+      "item_sha256": "9ce04689558304641f488630b227aa91084d42530289c69a87edf70a5482ef61",
+      "review_sha256": "1e1eef364a5ff131bec249157ec0e8d9fa811edea4250f9a19d24d00e9f5376e",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_a29dd1990e36a236": {
+      "schema_version": 1,
+      "item_sha256": "f8dfc3a2554cf274884be6b7c4597f07752c49400bed6ca0729094110eadf3d1",
+      "review_sha256": "8c38d066d5d20142ea4d860756009e70d366d42f6d1cb80199dfa818c8af67f7",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_ca9234874710e30d": {
+      "schema_version": 1,
+      "item_sha256": "bf2e9ea2551211074a96c58cb4c72c5f15f7123cba8abc90fff3f1d07080ba64",
+      "review_sha256": "7bd4dc67e7f8f3ac5dd4b239631482ac17d72a0d4374bbf0d7b995c672a24549",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_08357e2b580707a7": {
+      "schema_version": 1,
+      "item_sha256": "8870639e6b433810189c79174d3b72bad9ed5fa844dbf292e92bdeb7531c02fe",
+      "review_sha256": "4f08fd1903da2c5d6172d6a66917950ec26a61f771464b34b89e47c47f176d4a",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_d4fe5859f2ce2c33": {
+      "schema_version": 1,
+      "item_sha256": "2e9e0f8b91fa600dd814d5443b7a5c1d89e52bc41769c1e095371dcdb95ea8e6",
+      "review_sha256": "27db23a3035a4027ef8a09879ab8a68b5a33155d3c2f55edc9939223580a2ff8",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_d9803abbb663e67c": {
+      "schema_version": 1,
+      "item_sha256": "d5709818cd4173c888863481a45215d609c8a214f4a5bd14f59523c6724d5a14",
+      "review_sha256": "1645f7f22ce783ce71c7d53c09d91e6cb12eea85b302e750b27879417063d625",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_510a576872873c35": {
+      "schema_version": 1,
+      "item_sha256": "fefaa9aa0f1bf520c23c987e6c1be01d98a28302efaba395646964bda39a763d",
+      "review_sha256": "235e7330c4af0ffb01f1c9b3c174592d105bf0076b5a3edfa56b6e3310502ff1",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_cd5ce1720bc8bc2b": {
+      "schema_version": 1,
+      "item_sha256": "8cdcf434d1b4c64fab724c33058a012c7acd31c93becffec3f1bc7432933f852",
+      "review_sha256": "ba61c6cb902b2887d6ff8c7ae2ce8a53f9e7154366f9aa72c84c231c282a87c2",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_398a49d30e4ed132": {
+      "schema_version": 1,
+      "item_sha256": "2fe915974887e5d08d72b3e57169f375ba6d4c67eb9d17bd2e59826d0ed72b4b",
+      "review_sha256": "2c03903d79e84dfff951c8a991899627845aa9aa67ade5d0c10a99366598cba6",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_2bc65fc1b8868a95": {
+      "schema_version": 1,
+      "item_sha256": "d93ec3c2283936ba16e6e010f2ec5477a1e23b85a3e73dd0d27f3d4f59e73373",
+      "review_sha256": "4fe88f3b7c7fe36973599398d10dee9071993da02df34544214a32401edf9eb6",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_7e152869797af503": {
+      "schema_version": 1,
+      "item_sha256": "2482158e8330b057a04597585770a201d639f5a1e5dd550e71dadfff3ef1ae34",
+      "review_sha256": "3bf02a9e8a91a36f8e486762defdd81c965f44ce6cf0d126b44d76c45504ace8",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_13f7ecd9b94275d0": {
+      "schema_version": 1,
+      "item_sha256": "d8a84178d1994caaf26707554f8816926108b665a9160579cfa969aae622aa9d",
+      "review_sha256": "0ce25257976208ef0b4e77f0386d1a0646aae2ccab26feba684f21b262ccbd28",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
