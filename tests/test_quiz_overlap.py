@@ -47,9 +47,17 @@ def test_distinct_learning_objectives_are_not_deferred_as_duplicates():
     )
     for first, second in distinct_pairs:
         assert diverse_first([(1, first), (2, second)], 2) == [1, 2]
-    assert diverse_first([
-        (1, "m2_exp_098"), (2, "m2_exp_110"), (3, "m2_exp_023")
-    ], 2) == [1, 3]
+    assert diverse_first([(1, "m2_exp_098"), (3, "m2_exp_023")], 2) == [1, 3]
+    # The richer control/confounding task replaces the identification-only duplicate.
+    import json
+    from pathlib import Path
+    from app.content_publication import load_policy
+    items = json.loads(Path("content/questions/module2/osnovy_eksperimentalnoy_psihologii.json").read_text(encoding="utf-8"))
+    by_id = {item["id"]: item for item in items}
+    assert load_policy().can_publish("questions", by_id["m2_exp_098"])
+    assert by_id["m2_exp_110"]["status"] == "retired"
+    assert not load_policy().can_publish("questions", by_id["m2_exp_110"])
+    assert "m2_exp_110" not in memberships()
 
 
 def test_request_concepts_separate_definition_unrealistic_goal_and_case_formulation():

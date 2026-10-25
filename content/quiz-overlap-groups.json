@@ -120,13 +120,6 @@
         "m1_phys_006",
         "m1_psyf_004"
       ]
-    },
-    {
-      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "question_ids": [
-        "m2_exp_098",
-        "m2_exp_110"
-      ]
     }
   ]
 }
