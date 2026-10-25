@@ -1161,17 +1161,17 @@
     },
     "literature:lit_course_mention_6a0411db5000673f": {
       "schema_version": 1,
-      "item_sha256": "7aed4f046d8af35977078ae9de41a9b3c5805629dc82ab67563e7a1708111558",
-      "review_sha256": "53b274cc58c47b6ed49da35d45aa1441a01db5594d15868c2170799f5e2e2b80",
+      "item_sha256": "669e3dadfb7d74f7bdfbe1c66be8615863a600ba72fa912197a30b9ac5466dd6",
+      "review_sha256": "590c2d08ccfc0e850a84edaa73b56c9165bbda683d6f3484946c89790aeffb27",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "ehwoOzPfzoBGoS4aVGLRPGJqXS4Lx/839z8yO+kJcmufb0UjfJv5GmC1z26JekyhQAlOwYIXIDCq+AX8l5tvCQ=="
+      "signature": "NpEK8pWhEoGLkcNq7dwqgx5d8flevzKHny1DXsXPGl2f1VeME200O73aWLvVi8sL5ZRo0LMSesC+y8fbmaLnCQ=="
     },
     "literature:lit_course_mention_bcb1d48d8219a2de": {
       "schema_version": 1,
-      "item_sha256": "a3e50bb73b9150950c828bce929e20ff7084edb11ffe9fceae75f18e7f33766a",
-      "review_sha256": "7e3d4ac2575238f46c2dc2e9d134222ab2869934bab5fbd8f229921d97a675dd",
+      "item_sha256": "a0e9545b78c0e2a925a553cf30c5e74b0717244c1e1e2262deadf6c1f5c015eb",
+      "review_sha256": "b4bb3a0cf6bf4485a8ace7c6807658dad5978b8f8029ebf37f4a4f755403ae0f",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "aNApOuWzOCAV9LdsrfyMIcn1SWX+CR/cG2vJ7fpo96KdBo2SwX/hF0HgCAAyk8JMidAbjYzUqLVIU17yKbQDBA=="
+      "signature": "d6Cg6kHYVy7DuaRgSaLqYN5FVu7B/cWiWJEC2o2nKvLwie8qI5rIinsNDAIBDJPj9BC8I7ggJk8yZo6zgWKmAw=="
     },
     "literature:lit_course_mention_e50e0babc4a8e1ac": {
       "schema_version": 1,
@@ -4792,6 +4792,62 @@
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "PYkymWMaPZo5yio7Pf1BtMZnSQAcE4CAYUURik4zkkvANVydJr1s7ERKRPLiIbUhTapHwQTJ5rhsS7xMKw53Cg==",
       "topic_id": "t_2476fabb75f8"
+    },
+    "literature:fch_gazzaniga_kto_za_glavnogo": {
+      "schema_version": 1,
+      "item_sha256": "ac7021a0e60feb81917a062381c4a03c35fcd87fab3e74193704730e6f513dd0",
+      "review_sha256": "ffdab3c9062ab7f95880e1fb0e5ff5119fdbb48c777b85380329f6877595c1a2",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "xmw1tbEcqAOXx83cBAyIxa/4TpLiaBMghBL5XW7pAWN82XilcoejxDOApbq67uE3xPNrjHdHaSUJOdrjFJEhAw=="
+    },
+    "literature:fch_ramachandran_mozg_rasskazyvaet": {
+      "schema_version": 1,
+      "item_sha256": "f4d60168917402421147a28140ee7c436e46b08f6cdbda393d2823c7b4211167",
+      "review_sha256": "0b9a9a2474d683959e9cd1b8ce6360d377163750156e3e961ba005d521208ab3",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "MbbsQ4aIEiEfjoOdU0tKC+G0Ur77W4lXTyDtDbE8YMcs2hVJkSbj/mOV/fwoWVJPgZcxQpxtPBU/xAdwKDdeBA=="
+    },
+    "literature:fch_shulgovsky_neirofiziologiya": {
+      "schema_version": 1,
+      "item_sha256": "645ddb16719ac2fc5ed313d78384bcaf6036dd1fb4d03e8b81d8b7abb8316fdc",
+      "review_sha256": "73ddebb30780d4e2c3b1b4544deb917e455a10775a5c6901e82f9fcf496c3d4e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "JZ9xZv2LM7XiNP6TVm2IAJk87ZvkJ2IRUMJSFwAT0fOPK/gzZxboPerWik0dZ4q/FyzD2QoVKXQUe+UyJQqJBA=="
+    },
+    "literature:fvnd_gazzaniga_kto_za_glavnogo": {
+      "schema_version": 1,
+      "item_sha256": "de05bfadb982076747580ccad33468c36fee1f955799c2b1eb6d5f552039c45f",
+      "review_sha256": "a64c312524e1b25b3ca500bbd7ada0306a65d9edd146abf543bc37064f826e57",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "xuHg/6kwrRealWzyhssR55cWZJ8Ze7rKYEL2eYc1DLn1HMRmERNpQ+91H/1rmf3pWnHilWoXZ/UWBRb7AB9zAQ=="
+    },
+    "literature:fvnd_ramachandran_mozg_rasskazyvaet": {
+      "schema_version": 1,
+      "item_sha256": "28a0f1d824e7bf5a7d20b44104b149f2de3c50fd724092444fd13d5bb80b153b",
+      "review_sha256": "8845a34302e12a0b69b3f5ad256b5fd63a4147f0c0ddbd749a75e4cb174c6aec",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "wjtiyQbNuWQL4awArqqHt7oNL7OZ3M759wd2cNJNGeuEVhXfGyf5QvXjTYZ93A+VOjDvyUqKeziuMHfCAinRCw=="
+    },
+    "literature:fvnd_shulgovsky_neirofiziologiya": {
+      "schema_version": 1,
+      "item_sha256": "217a715891f770f5950df587c231a255e8d1c3f612b1b029c82cff25cbc7683d",
+      "review_sha256": "3b6895a210de55ed9572c1c656b0cc09bff6d3960746157f80e8d7c230c107dd",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "NcbXyKU7yKcJK0a6llAZecWSKAXOPNVuO72NlQspRfWojADkxBHIU/bZANptlbFQO5aEqPRSE6FMOOmaiAF+Cw=="
+    },
+    "literature:lit_8c4dd1a3c39ecbcf": {
+      "schema_version": 1,
+      "item_sha256": "24adfdb670aba8873b76dd700eea45a894cb78d9869c0f1cb8c2fad72ea839ca",
+      "review_sha256": "5ff5457acffc6b290e43fe5ffcd0f69643bdec57aa2a7ec4315482617f6941b3",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "I98eT6Oqg27Vi5iQ4Sl2y9ohzHs4p14RPr59kYllRB5i7pPYjIMcsSfJ/kXksbxLtivkxo6hSyy/3n5byUHEBQ=="
+    },
+    "literature:lit_09470e6d0794b19a": {
+      "schema_version": 1,
+      "item_sha256": "afa0b429ada3044d442b4ad796e60d1ef0cfa11e786eb5189db9d3b804bc1644",
+      "review_sha256": "7991357dd2f918a39efcc946ea64fedaf5841dbd7231796490ea1cd36456d89e",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Db+pu2bhMQN/LCF7vZZmhWGGlQbWY/dpDaPE9uE6zin3Jh2IITJqb02gmWrmswFsvX/Z92Fd4jPbeHc4beixCg=="
     }
   }
 }
