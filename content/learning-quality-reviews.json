@@ -18048,8 +18048,8 @@
     "questions:other_tp_002": {
       "item_sha256": "0e52968c21b33f9cfc3a7883e87275ed490b3e535ff0d8d8b8a83e51e23647ac",
       "discipline_id": "turning_point",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-exact-reuse-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18061,15 +18061,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Apply influence/control distinction to an authored work situation; distinguish object of action and decision authority, not a universal claim of complete mental control. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Apply influence/control distinction to an authored work situation; distinguish object of action and decision authority, not a universal claim of complete mental control. Full current wording/key/options/explanation checked; selected safe passage only; old source/scientific holds retained. Exact prior body and source edition reused;current complete source/held-range checks pass. Original substantive-review provenance retained privately.",
+      "sources": [
+        {
+          "source_id": "src_fd30c4765c67e08c206f2d9ba7fdcabaef679341cc79c16c2a67b1b410d924d8",
+          "modified_time": "2026-04-06T10:58:33.766Z",
+          "snapshot_sha256": "87f65ec58b4a479f85f18217bd4ed4145919447bb42e70da9f685c6f628f6a5f",
+          "locator": "characters:8850:9850"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:other_tp_003": {
       "item_sha256": "cfea3c6bd36206ee08d88303ea91cef47fea4d0fa50b168ae0a78fe0e2ea3b02",
       "discipline_id": "turning_point",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-exact-reuse-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18081,9 +18088,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace yes/no/emotional-proof/random-acquaintance straw alternatives with actual planning/narrative/scheduling lenses; selected set is part, not exhaustive list of contexts. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Replace yes/no/emotional-proof/random-acquaintance straw alternatives with actual planning/narrative/scheduling lenses; selected set is part, not exhaustive list of contexts. Full current wording/key/options/explanation checked; selected safe passage only; old source/scientific holds retained. Exact prior body and source edition reused;current complete source/held-range checks pass. Original substantive-review provenance retained privately.",
+      "sources": [
+        {
+          "source_id": "src_88885416218cb79ac8928be3fd7fab7b27832830da10e4b9bbdea1d40878e2db",
+          "modified_time": "2026-04-06T10:57:01.370Z",
+          "snapshot_sha256": "081bd88212a5506340f689fe4ff92a5918283692e159e634733651ccca62e385",
+          "locator": "characters:7200:8450"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:other_tp_004": {
       "item_sha256": "719b9e8a6d4379fa15b751d8c0f23e7a8496beb08f48c1df46ac0bbf85474a2c",
@@ -18108,8 +18122,8 @@
     "questions:other_tp_005": {
       "item_sha256": "d4d2fc917d1caada2907abf00d12ec20e12f6d0064548dfd2e2750d4b84ca2d0",
       "discipline_id": "turning_point",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-exact-reuse-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18121,9 +18135,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace tautological before/after timing recall with analysis of a specific unsuccessful trial; no forced positive thinking or guarantee that reflection solves the difficulty. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Replace tautological before/after timing recall with analysis of a specific unsuccessful trial; no forced positive thinking or guarantee that reflection solves the difficulty. Full current wording/key/options/explanation checked; selected safe passage only; old source/scientific holds retained. Exact prior body and source edition reused;current complete source/held-range checks pass. Original substantive-review provenance retained privately.",
+      "sources": [
+        {
+          "source_id": "src_1eba221fa4f40d2dd6355cdd89fdcf0605e1500c8c221d437f8a2331b1cc250b",
+          "modified_time": "2026-04-06T10:56:36.904Z",
+          "snapshot_sha256": "dc540bf18580c91cb49f7d73a30b7c929eb5c9511a4a1bd5cbcf2fb65ada5724",
+          "locator": "characters:7350:7850"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_quant_001": {
       "item_sha256": "1aa0597c659abc0f1849b4971c1b28f97512fbd076fe71a3f5c2756448c5b861",
@@ -20880,8 +20901,8 @@
     "questions:m6_ethics_005": {
       "item_sha256": "c081c36a70e4f9229f71e16a8127de8e6f2c4c7ca9b7bbdc931be4b020447357",
       "discipline_id": "professional_legal_ethics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-exact-reuse-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20893,9 +20914,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace nonexistent relations-without-participants distractors by actual neighboring categories; theoretical classification only, no current legal advice. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Replace nonexistent relations-without-participants distractors by actual neighboring categories; theoretical classification only, no current legal advice. Full current wording/key/options/explanation checked; selected safe passage only; old source/scientific holds retained. Exact prior body and source edition reused;current complete source/held-range checks pass. Original substantive-review provenance retained privately.",
+      "sources": [
+        {
+          "source_id": "src_d842ba2b2d7ff1eb04eb99a55f012b62cec12fb9169100d7bf1016a0267c61a2",
+          "modified_time": "2026-09-21T12:27:48.174Z",
+          "snapshot_sha256": "3263a8d2115e5e4a0f06453556ed729cdd31f350ede6aa8ebccf92baa576aba5",
+          "locator": "characters:9300:11000"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_ethics_006": {
       "item_sha256": "b9fe08c3fbdad7fb22742584f4f4375dbb3efbcac2394534933d4d660daf7521",
@@ -21353,8 +21381,8 @@
     "questions:other_tp_006": {
       "item_sha256": "7b9d8727744cc1f6f27a067491a3ad6acddc8111f90f90f5fdcc5854d0bd1fc6",
       "discipline_id": "turning_point",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-exact-reuse-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21366,9 +21394,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace universal any-busyness/one-cause assertions with differentiated information needs; no laziness label or causal inference from activity alone. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Replace universal any-busyness/one-cause assertions with differentiated information needs; no laziness label or causal inference from activity alone. Full current wording/key/options/explanation checked; selected safe passage only; old source/scientific holds retained. Exact prior body and source edition reused;current complete source/held-range checks pass. Original substantive-review provenance retained privately.",
+      "sources": [
+        {
+          "source_id": "src_20baa4df2e52dd9b399ca797a5a2750e82ef2fba0b207f3535e62fe97807c6bf",
+          "modified_time": "2026-04-06T10:58:40.440Z",
+          "snapshot_sha256": "762add118fda2ee3749e12743109b796561c907382464564cc2c52555152a3a4",
+          "locator": "characters:3200:4250"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:other_tp_007": {
       "item_sha256": "c72f973a9ce94d59cabec9d107a3336a3b241bd1c3f1e83cfff2fb724f2da904",
@@ -21528,8 +21563,8 @@
     "questions:m2_pd_016": {
       "item_sha256": "245ccb2e0773de7edb1f771a792fac7027e98de5f0c7a30d3d3d0130b88cc0e4",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-exact-reuse-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21541,9 +21576,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use actual neighboring norm criteria instead of observer-ethnocentrism and every-difference-is-disease caricatures; no blanket cultural exemption. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Use actual neighboring norm criteria instead of observer-ethnocentrism and every-difference-is-disease caricatures; no blanket cultural exemption. Current full item read: one supported key, plausible alternatives and explicit inference limits. Selected source fragments only; historical holds unchanged, no global approval. Authored situations are instructional, no real client history reused. Exact prior body and source edition reused;current complete source/held-range checks pass. Original substantive-review provenance retained privately.",
+      "sources": [
+        {
+          "source_id": "src_48e78a915735128988f7c741611af91ec299a42d6c015ea4485a3901c55112f2",
+          "modified_time": "2026-05-29T10:07:28.618Z",
+          "snapshot_sha256": "62d775b72af9d15ab8a264bf52a7063f9e19b65b88611330a087a8b352b0dd92",
+          "locator": "characters:2387:2951"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m3_psychological_consulting_115": {
       "item_sha256": "65fad8cf226f9bc85c360791c725db64de9dff27bfd6ea92d67b60087a87637a",
@@ -21632,8 +21674,8 @@
     "questions:other_tp_008": {
       "item_sha256": "cf36c80bd97d1d7ae083f2029ab7c766e857320ad7aaa59667bc3c3defec6d09",
       "discipline_id": "turning_point",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-exact-reuse-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21645,15 +21687,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace recall of arbitrary letter C with functional support/barrier assessment; remove diagnosis and only-position straw alternatives. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Replace recall of arbitrary letter C with functional support/barrier assessment; remove diagnosis and only-position straw alternatives. Full current wording/key/options/explanation checked; selected safe passage only; old source/scientific holds retained. Exact prior body and source edition reused;current complete source/held-range checks pass. Original substantive-review provenance retained privately.",
+      "sources": [
+        {
+          "source_id": "src_1eba221fa4f40d2dd6355cdd89fdcf0605e1500c8c221d437f8a2331b1cc250b",
+          "modified_time": "2026-04-06T10:56:36.904Z",
+          "snapshot_sha256": "dc540bf18580c91cb49f7d73a30b7c929eb5c9511a4a1bd5cbcf2fb65ada5724",
+          "locator": "characters:4200:4800"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:other_tp_009": {
       "item_sha256": "d46836597264155d8c5c9acd575191c5b1a46687d8903bbe1acd94d469c18c79",
       "discipline_id": "turning_point",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-exact-reuse-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21665,9 +21714,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Keep external-influence objective while using real goal dimensions as distractors; reject lecture blanket inference that external norms replace true wishes. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Keep external-influence objective while using real goal dimensions as distractors; reject lecture blanket inference that external norms replace true wishes. Full current wording/key/options/explanation checked; selected safe passage only; old source/scientific holds retained. Exact prior body and source edition reused;current complete source/held-range checks pass. Original substantive-review provenance retained privately.",
+      "sources": [
+        {
+          "source_id": "src_88885416218cb79ac8928be3fd7fab7b27832830da10e4b9bbdea1d40878e2db",
+          "modified_time": "2026-04-06T10:57:01.370Z",
+          "snapshot_sha256": "081bd88212a5506340f689fe4ff92a5918283692e159e634733651ccca62e385",
+          "locator": "characters:4400:5050"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_pd_017": {
       "item_sha256": "fd800a0c7f8ef6c2d9f14a1fd66be7a092b2446271a45032593756f36774a7cf",
