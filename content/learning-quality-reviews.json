@@ -5565,10 +5565,10 @@
       ]
     },
     "questions:m1_vnd_009": {
-      "item_sha256": "f93fda77cbafddc6b2646175df1745ffefd43f48c117d4fe7fa1cb37c4e5b403",
+      "item_sha256": "68356cbe9c7a3b3352b2a9f9c91e13b22c4c569e98d88b657b13df8ecd9caaae",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5578,9 +5578,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact selected inhibition passage describes weakened acquired skill; distinguishes reaction limitation from innate acquisition or stimulus change. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Attributed Pavlov conditioned-inhibition procedures include weakening through nonreinforcement;no cell-mechanism diagnosis or trace/delay conflation. Retained exact reviewed target m1_vnd_047 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5588,7 +5590,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:14042:14857"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_010": {
       "item_sha256": "88b93ccb4d79ef5b471b268509bc07aae86fd91097b63bb0c591539b6d31a728",
@@ -6138,10 +6141,10 @@
       ]
     },
     "questions:m1_vnd_031": {
-      "item_sha256": "2d22ee3ebfb1df24b20e69d7cc9e53435589b4a7fa4f97241f145fff212cbfa2",
+      "item_sha256": "0c3cc74b38c405f5519b4acd2c1622b30b902bf3ded759d434875d712e1e270f",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6151,9 +6154,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Устранена сильная подсказка длиной без искусственного удлинения distractors. Точное определение динамического стереотипа в лекции; не сводится к одиночному врождённому рефлексу, эмоции или случайному набору. Ответ и пояснение сохраняют учебный смысл.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Historical dynamic-stereotype model as a stable learned sequence;loose ready-made habit claims replaced by bounded model. Retained exact reviewed target m1_vnd_032 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6161,7 +6166,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:26229:26929"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_032": {
       "item_sha256": "a3ecab68bb49aa8ea676eaf6b121d2583cf745c42a18b497bdb87bc2fdeb78c3",
@@ -6643,10 +6649,10 @@
       ]
     },
     "questions:m1_vnd_050": {
-      "item_sha256": "c13a2186e1383492cbb1e3100f57da0c8d2cd24b9b29e82945bae4534f27307d",
+      "item_sha256": "14d026e404043e9bc3018650f383ed95678a37d935d2c327e72825112aafb6cb",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6656,9 +6662,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Historical dynamic-stereotype model as a stable learned sequence;loose ready-made habit claims replaced by bounded model. Retained exact reviewed target m1_vnd_032 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6666,7 +6674,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:26343:26700"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_051": {
       "item_sha256": "065769eb55b3fb3678ebae86cd9bd6acf068178a39f39575a76ccfb6f6e33495",
@@ -6810,10 +6819,10 @@
       ]
     },
     "questions:m1_vnd_056": {
-      "item_sha256": "7577fd8b8e8dcf897cb5d549395d531ed8178ddc2496460178efade757c5307f",
+      "item_sha256": "fa5b17be4c46799b47a599b971da16e00bdf23672fc409597b85b3e7d2c91ff8",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6823,9 +6832,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact linked sequence and possible change fragment read; parallel assertions remove because-stem cue and automatic forgetting claim. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Reorganization of stable learned sequence when conditions/order change,not merely naming habit. Retained exact reviewed target m1_vnd_042 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6833,7 +6844,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:26343:26800"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_057": {
       "item_sha256": "3d88b2c709186f63308451e57996098eeff1568bb1bd3ba831f12005c0aa7605",
@@ -7219,10 +7231,10 @@
       "sources": []
     },
     "questions:m1_psyf_002": {
-      "item_sha256": "10152a39dd18176644acb25d6c944d2febaa0562c720483d0866da46977a6030",
+      "item_sha256": "1c291c21db170eb822dfba79e744fefe580a7bc8a10787557fc04d6dbb926986",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7232,10 +7244,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact primary lesson, version and question reviewed in private dossier; source-free current receipt and lesson binding supplied. Earlier glossary record preserved privately.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Basic dendritic receiving/integration function with adjacent axonal/terminal/trigger operations as contrasts. Retained exact reviewed target m1_phys_002 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m1_psyf_003": {
       "item_sha256": "31dd775f4008355c3d11f46666e1227f6e95cbfa31238e04e277a26ef0729879",
@@ -7444,10 +7459,10 @@
       "sources": []
     },
     "questions:m1_psyf_013": {
-      "item_sha256": "9243ee8c79eb7af133ae0ecc750d0d1a1eb35e891ca21803a81f99d8690bed68",
+      "item_sha256": "2a1a0517ebec20a803a3121ffdd6d7fb62556eb2f16d556010007cfcc0b590fb",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7457,9 +7472,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw introductory perception/attention context and attributed three-network statement reviewed outside all eight existing holds. Independently read OpenStax Psychology2e5.1 perception definition, bottom-up/top-down processing, goal-directed search and experience/context paragraphs; original Petersen/Posner2012 introduction78-81 explicitly describes anatomical network and different functions. Course snippets alone do not establish all definition details; independent support is explicit. No beverage-experiment rates, subconscious universal thresholds, what/where-attention conflation, exact region/transmitter assignments, anxiety diagnosis or medical imaging advice approved. Eight holds unchanged.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Context-dependent perceptual interpretation;authored ambiguous-symbol illustration,not reported experimental result. Retained exact reviewed target m1_psyf_027 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_db85647c78a44e33101b8b932b09235b6d3ee30b18b730d65698d8094bafc35e",
@@ -7467,7 +7484,8 @@
           "snapshot_sha256": "1bb4c8763e0f951dde7821e0d34e17ffdb4d0b0faa55623d463dc197cd985aa3",
           "locator": "characters:180:480"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_psyf_014": {
       "item_sha256": "efd94f67216eb7664c3446c62d5911f2e4a3c45f206cd96ac755e47abe483ccc",
@@ -7655,10 +7673,10 @@
       "sources": []
     },
     "questions:m1_psyf_021": {
-      "item_sha256": "d4ebd3a35e45af2bc5653557099c284368f115ed93f0202f0b98de2457ab852b",
+      "item_sha256": "30e9f99e0ed6f7565bb33c5a04116cc92be402d913e9124b4df62585c93df86c",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7668,10 +7686,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact allocation fragment; alternatives now concern inference/priority/competition errors without clinical attribution. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Investigating actual task demands/priorities/switching to test attentional competition,not diagnosing from complaint. Retained exact reviewed target m1_psyf_061 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m1_psyf_022": {
       "item_sha256": "f83158108ca327ab8a60cdc6bf368d939323170afe9c0fca895c569565a04ce7",
@@ -7898,10 +7919,10 @@
       ]
     },
     "questions:m1_psyf_031": {
-      "item_sha256": "d283e97d8154918dc9c4f2bf9d39061c60a5f8eff7b62fac0c14f0e660f4d8b8",
+      "item_sha256": "f1bf6131ef754c79f6791b8fa2bc7495ec43ce8e266cf44829fbf0f8a3c214ec",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7911,10 +7932,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Reviewed limited-capacity allocation and priorities as a resource model. Applied scenarios are explicitly hypotheses or conditional task examples; no literal energy reservoir, notification diagnosis, guaranteed recovery, universal noise benefit or psychosis causality is approved. Supplementary primary textbook reviewed only for allocation/selection, not clinical advice. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Investigating actual task demands/priorities/switching to test attentional competition,not diagnosing from complaint. Retained exact reviewed target m1_psyf_061 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m1_psyf_032": {
       "item_sha256": "42559460575912111aa4d05446a3dbf38ebe33f9c4a984a4b2237ee56d6775d5",
@@ -14481,10 +14505,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_003": {
-      "item_sha256": "37025b9009795edcdcd0274a3e8b2e0ddf1c23a5941418b33ffbdf21f228a172",
+      "item_sha256": "3e561d0774da1be0b2a63d18bdc81d3d90ce52cc87cd2e606050210f344de586",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14494,16 +14518,19 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Client participates in choosing and implementing decisions with consultant support. No promise of change or attribution of all problems or unsuccessful outcomes to client choices; consultant professional responsibility retained. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Collaborative comparison of client-important choices while preserving decision autonomy;no substitute decision by counselor. Retained exact reviewed target case_client_choice_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_004": {
-      "item_sha256": "1b0951614028ef3306a246ff090845fb3f4f84ede9495aeed46df5a8155b2d1a",
+      "item_sha256": "3bbc76743911aaa6ab82bbdbbc626666faf93c5b5188ea593d715f07b896f85b",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14513,9 +14540,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Complaint/request distinction using two actual utterances;definition-only variants add no distinct objective. Retained exact reviewed target m3_psychological_consulting_030 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -14523,13 +14552,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:1227:1370"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_005": {
-      "item_sha256": "d4eb737e68319a768332e7c2c4b3ef22c6f4df0a65970e8b5a5696b9209fe001",
+      "item_sha256": "a2ac3c343590c9dd49b2ef8c0948eb2f70cda2cfec8863eb35061020a35d58e2",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14539,9 +14569,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 9. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Complaint/request distinction using two actual utterances;definition-only variants add no distinct objective. Retained exact reviewed target m3_psychological_consulting_030 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -14549,7 +14581,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:1370:1493"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_006": {
       "item_sha256": "ada31eeee05b587f219c2be18769f6a8a148c0687e7f4c3e18a95e8e085c816d",
@@ -14701,10 +14734,10 @@
       ]
     },
     "questions:m3_psychological_consulting_012": {
-      "item_sha256": "06a38073c3e381e645a8bdf186a11d5465ea8621390512bfaf32cfe72d9fb8bb",
+      "item_sha256": "1cb58b98ec4969d586b8a072bb6bf414419b85ad81b1df75037c18fb66d3414e",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14714,10 +14747,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact client-choice/autonomy passages read; realistic premature or delegated decisions replace medical/withdrawal trivia. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Collaborative comparison of client-important choices while preserving decision autonomy;no substitute decision by counselor. Retained exact reviewed target case_client_choice_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_013": {
       "item_sha256": "eb779c0e0323fe43ad85977874de6e1ed0843ce0ebcc72aee7fe69535439cf9f",
@@ -14746,10 +14782,10 @@
       ]
     },
     "questions:m3_psychological_consulting_014": {
-      "item_sha256": "654b23762336be7cca4ec38d47aece8f1805449009c7f4a258c7fe86d0574cc5",
+      "item_sha256": "0fec250cc5ac894e28dd4235841a95484f448163c775038aaae72b7dab7bff32",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14759,9 +14795,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact synthesis-of-narrative fragment read; distinguish summary from neighboring listening operations. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Synthesizing several narrative episodes into a checked summary without hidden-motive inference. Retained exact reviewed target case_session_summary_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -14769,13 +14807,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:6689:6854"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_015": {
-      "item_sha256": "35fee8e3355dd93fd8208af59fe2370b4bbe401abad48d742f6eac8e249669c7",
+      "item_sha256": "bce2cf7482930f8b48512cc9f5f357c267597359d25ad099243abd5c59557bd5",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14785,9 +14824,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 14,18. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Understandable format/roles/confidentiality discussion and questions before an informed decision;not exhaustive legal checklist. Retained exact reviewed target case_informed_start_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -14795,7 +14836,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:2227:2400;characters:2855:3039"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_016": {
       "item_sha256": "407023803ef95c3790d8d82b81e57e59336afbeaadb094b99ba38b34b4218b91",
@@ -14850,10 +14892,10 @@
       ]
     },
     "questions:m3_psychological_consulting_018": {
-      "item_sha256": "d4fd845a3bf4fb206d49012480fc7937258d6789923ee9a863872337f13d98b4",
+      "item_sha256": "0b224c34a843243b0c7231ec052ae75d69005f6256222cd5c036b50e8abe6c8f",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14863,9 +14905,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 30. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Collaboratively planned observable prediction test and comparison,not treatment prescription from one symptom. Retained exact reviewed target case_cbt_behavioral_test_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -14873,13 +14917,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:4950:5106"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_019": {
-      "item_sha256": "17dca18cdc6f5395ba2575730c8f1e1c2830a67ac0ad3a8bb161ea8fd1dcfb6e",
+      "item_sha256": "f3f7a80b317a9674c3c2ea6daeabf1368fa0f148ab518b370c6307ffc137d788",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14889,9 +14934,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 5. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Breaking a broad agreed goal into feasible concrete action steps. Retained exact reviewed target case_goal_decomposition_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -14899,7 +14946,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:821:919"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_020": {
       "item_sha256": "483b976a288f6eef7bffc4a418c5d8bdb4f5b193c53d350e5fe80c2566bd1177",
@@ -14968,10 +15016,10 @@
       ]
     },
     "questions:m3_psychological_consulting_023": {
-      "item_sha256": "5b3a48eb781108f2167bc86bbb11086a9c3c2beb0e7237f202b90ac9be9b8c89",
+      "item_sha256": "79d05953e3d0e17d770ea7bbc0b31c7515bc39692f3401d53a3684039ce3f7b3",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14981,16 +15029,19 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "For non-emergency uncertainty seek supervision or refer within competence. No prescription entitlement or claim that a more experienced ordinary colleague alone suffices for an emergency. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Recognize competence limitation,discuss supervision/referral as appropriate,not clientabandonment. Retained exact reviewed target case_competence_limit_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_024": {
-      "item_sha256": "4e5697bde871c80ed572bf837f88dd0e2a26a652ea2b8986efbbe0dc66320496",
+      "item_sha256": "154aa8daa3bda7a1da4907845e26e595f3d7582e23e39a051e5a787186062e12",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15000,9 +15051,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 7,9,40,46. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Feasible agreed goal in client actions/influence rather than guarantee changing absent person. Retained exact reviewed target case_goal_own_actions_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -15010,7 +15063,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:1047:1227;characters:1370:1493;characters:6854:7061;characters:7948:8144"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_025": {
       "item_sha256": "67b30aed7d4766def0462898d2d2f78362af8daf74726f241d66e0349e0bc798",
@@ -15065,10 +15119,10 @@
       ]
     },
     "questions:m3_psychological_consulting_027": {
-      "item_sha256": "7d5fd3cadc68775385b35ff7f16473f148ace3204687924e277c6f733da5f157",
+      "item_sha256": "7acce1439b232602ad8069dd143eba66dd5086a21b16b8cedea0fec9cc5576af",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15078,9 +15132,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Understandable format/roles/confidentiality discussion and questions before an informed decision;not exhaustive legal checklist. Retained exact reviewed target case_informed_start_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_64404c421f559925f008f3065aae298544e8a1dcbbf9a09f0422fb304d62c978",
@@ -15088,13 +15144,14 @@
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
           "locator": "characters:55800:56555;characters:69584:69775"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_028": {
-      "item_sha256": "a77ac1f5d32e03d3b5a0751d637bc5dbf59105fbe119b5b4f7e14e3802ced627",
+      "item_sha256": "2920a9ee2380ba087c99b8dbd66631b421e3efd69d3bc3a43e9cf0a801493d52",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15104,9 +15161,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Agreed session time boundary illustrated by lateness;fixed50/60minutes not universal norm. Retained exact reviewed target m3_psychological_consulting_033 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_64404c421f559925f008f3065aae298544e8a1dcbbf9a09f0422fb304d62c978",
@@ -15114,7 +15173,8 @@
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
           "locator": "characters:34995:35250;characters:55800:56555"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_029": {
       "item_sha256": "f5f5ab250a8ab3884bec42f5d1885b82593d0c4e3d774d7d6fe3c35a5e349de0",
@@ -15169,10 +15229,10 @@
       ]
     },
     "questions:m3_psychological_consulting_031": {
-      "item_sha256": "206e8a7c02e7b701736c32bdcd40e46026d598b144973fb5d42b83b751bb81bd",
+      "item_sha256": "f8e7a523e3a3eeb37e7f9c4324c25632e9647ab41520f23d1425ad8c6afea380",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15182,9 +15242,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Experienced trust/understanding/working contact;one nonverbal cue not definitive rapport assay. Retained exact reviewed target m3_psychological_consulting_009 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_52cf1a1fed01b30c7b4689a8ab432bb363f85ccf46ed7d59943dec0982442a11",
@@ -15192,13 +15254,14 @@
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
           "locator": "characters:1818:2260"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_032": {
-      "item_sha256": "0fe18835ea9b4702b3b0b18f1beba014d5b9e2937c38ce43253a134fa3f0a877",
+      "item_sha256": "770dcf144ac42beecb51e1d3bd51cd25ace266b6b32781ce1d81f9ff6903aef1",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15208,9 +15271,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Experienced trust/understanding/working contact;one nonverbal cue not definitive rapport assay. Retained exact reviewed target m3_psychological_consulting_009 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_52cf1a1fed01b30c7b4689a8ab432bb363f85ccf46ed7d59943dec0982442a11",
@@ -15218,7 +15283,8 @@
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
           "locator": "characters:4044:4700;characters:6080:6200"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_033": {
       "item_sha256": "23cf715b8a338520b08f43f8cea1a00fe284dd981f3b93b803405bf9273ccd98",
@@ -15294,10 +15360,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_036": {
-      "item_sha256": "236ae6e35bd003d03a8e3f8d908eff605e2212803a1e313b3e360ad271c4ead7",
+      "item_sha256": "56ca4c86f1c2fb01cbc6586f346696c0e7662f40987620c6e0f1f0429faaba41",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15307,9 +15373,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Initial introduction/frame and open invitation to state reason for coming;no immediate safety threat stipulated. Retained exact reviewed target m3_psychological_consulting_085 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_64404c421f559925f008f3065aae298544e8a1dcbbf9a09f0422fb304d62c978",
@@ -15317,7 +15385,8 @@
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
           "locator": "characters:26104:27538;characters:69584:69775"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_037": {
       "item_sha256": "785e06d34a18d922c13e6e4f47fb79fc844b3913e336d8797bf6cc6df8d0cdce",
@@ -15398,10 +15467,10 @@
       ]
     },
     "questions:m3_psychological_consulting_040": {
-      "item_sha256": "9f6fc6b1b491e49fc82ab1043a238e9b87389922a914aee563e650a752ba44bb",
+      "item_sha256": "c75e7496004df0dbc71b08f142b62c5d0d3a89f190dc916b9c83b987dcea1101",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15411,9 +15480,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Feasible agreed goal in client actions/influence rather than guarantee changing absent person. Retained exact reviewed target case_goal_own_actions_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_75f9731160659a51c53e0c047bc5a42b9f236b786a16daec88e8ad57cbf7a528",
@@ -15421,13 +15492,14 @@
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
           "locator": "characters:30600:31500"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_041": {
-      "item_sha256": "651eb8605ace29d4e92e24f329945f2cf6208d0061149c2c93215ac8183758bb",
+      "item_sha256": "ab26eb1b4f443fc5ff5cf7eb055b86161e85e9e6dc9fd685dad20cccde2b4498",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15437,9 +15509,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson3 passages: the specific four-stage model, emotional/rational sides of a desired result, open questions and paraphrase, goals within client influence, alternatives, summary/action and flexibility. Not a universal mandatory counselling sequence or safety/effectiveness guarantee. Applied scenarios are bounded educational adaptations; no numerical anxiety threshold, limitation on feedback, diagnosis or competence claim inferred. All seven current source holds retained; whole source not approved.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Expand alternatives before final evaluation/choice;concrete task distinguishes stages. Retained exact reviewed target m3_psychological_consulting_042 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_75f9731160659a51c53e0c047bc5a42b9f236b786a16daec88e8ad57cbf7a528",
@@ -15447,7 +15521,8 @@
           "snapshot_sha256": "5f3b232302be4e5ce93b95b06a8dc41688ca1e84f34863aac1b06cdcb69d1ee9",
           "locator": "characters:2719:3239"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_042": {
       "item_sha256": "47de19006aea61431ef16d4d64eb28e9a1adedf6792d01c81ba6a605d8d1216f",
@@ -15528,10 +15603,10 @@
       ]
     },
     "questions:m3_psychological_consulting_045": {
-      "item_sha256": "2c6402d6f11604226fa27a4a140c77c224194d8bdd06cb47645fd8cee2e21de4",
+      "item_sha256": "20a5c221eae06600a7533bef992e062842eb763a18f3139030b1c8fbd207943c",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15541,9 +15616,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact rapport definition read; possible support rather than guaranteed fear reduction, realistic inference errors as alternatives. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Experienced trust/understanding/working contact;one nonverbal cue not definitive rapport assay. Retained exact reviewed target m3_psychological_consulting_009 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -15551,13 +15628,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:6311:6491"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_046": {
-      "item_sha256": "29874fb3782fd481c829c26a5184fc6a970c9868561c3ef132543ca10b4218ec",
+      "item_sha256": "9b57f70b357351a7c3ba74a31083b31f24f051bac5a5492c58096f259e0ad0be",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15567,9 +15645,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Describe observed change and gently clarify its meaning;do not mindread rapport/motive from appearance. Retained exact reviewed target case_nonverbal_observation_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_52cf1a1fed01b30c7b4689a8ab432bb363f85ccf46ed7d59943dec0982442a11",
@@ -15577,13 +15657,14 @@
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
           "locator": "characters:6080:6200"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_047": {
-      "item_sha256": "81cdf23c686a62a7505bed86d0f2c15f5b1532741ddd1d685736efe341b58490",
+      "item_sha256": "aa2a22cd52a05da17a64d8492fffa482d64767aaa900ab8fdeb3cb039f8bcb30",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15593,9 +15674,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Describe observed change and gently clarify its meaning;do not mindread rapport/motive from appearance. Retained exact reviewed target case_nonverbal_observation_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_52cf1a1fed01b30c7b4689a8ab432bb363f85ccf46ed7d59943dec0982442a11",
@@ -15603,13 +15686,14 @@
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
           "locator": "characters:6080:7060"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_048": {
-      "item_sha256": "c428a6ca0bd4ea9a7617ac8de1d2db44d0ee6cceb6ad25d54a8cec248faad21a",
+      "item_sha256": "f8a77a9008e7cd98b072ff0004939168aa5fe9eb52b7295223e01bae81157efb",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15619,9 +15703,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Describe observed change and gently clarify its meaning;do not mindread rapport/motive from appearance. Retained exact reviewed target case_nonverbal_observation_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_52cf1a1fed01b30c7b4689a8ab432bb363f85ccf46ed7d59943dec0982442a11",
@@ -15629,7 +15715,8 @@
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
           "locator": "characters:6400:7060"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_049": {
       "item_sha256": "e15547ba0763490c91b3344a98b61f4368d5d61ffb556e3e86d914330913b72e",
@@ -15658,10 +15745,10 @@
       ]
     },
     "questions:m3_psychological_consulting_050": {
-      "item_sha256": "9c0544a42ac54002fe6fb85595aaae009a981b275988610bdeda22389de208f5",
+      "item_sha256": "60d88e3227799588d70f640c7f2a50d1338b0f24e9ae4068c28299d605b6e34f",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15671,9 +15758,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson4 passages: rapport as mutual contact/understanding, possible conversational indicators and explicit caution against conclusions from one indicator, gently checking current experience, therapist attitudes and attention to readiness. Behavioural signs are context-dependent observations, not validated diagnoses or universal guarantees. _049 independently bounded by Rogers1957 reprint abstract six-condition model; no claim that three attitudes alone are necessary/sufficient clinical change conditions. _050 is specific educational model, not technique-only causal/efficacy assertion. All nine source holds preserved, no whole-source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Discuss understanding/readiness and agree a workable method;technique label alone not sufficient. Retained exact reviewed target case_cbt_alliance_collaboration_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_52cf1a1fed01b30c7b4689a8ab432bb363f85ccf46ed7d59943dec0982442a11",
@@ -15681,13 +15770,14 @@
           "snapshot_sha256": "c8213208636b34a019551264b4ffb105a547da5e13187f45cc9c2a3f67f241d2",
           "locator": "characters:6080:7060"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_051": {
-      "item_sha256": "329956644760ba6d82cb08346054d26e2ccbcf90b423de83f7afdbcc56d4425b",
+      "item_sha256": "dc8e678928085dcb49ae8d0f21e914426541ea4bc6af4f8bcc7f4d4f0311273d",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15697,10 +15787,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Private space and keeping others from hearing the conversation are the selected professional recommendations. Authored scenario indicates uncertainty about privacy, not proven unauthorized disclosure, universally harmful virtual backgrounds or diagnostic interpretation of room furniture. All eight source holds unchanged. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Pause personal disclosure and ensure online privacy before agreed continuation. Retained exact reviewed target case_online_privacy_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_052": {
       "item_sha256": "90769460f797750452a03bd921ad4c568a257cf7b8617f7a8c2486bf2cc85719",
@@ -15755,10 +15848,10 @@
       ]
     },
     "questions:m3_psychological_consulting_054": {
-      "item_sha256": "a76ecd100a53464b624be74e0a060a0223d39903782e649c77e41a7fa83d4732",
+      "item_sha256": "b44804440c68db558e0c6381a5f5ffdc7f930c74e49e5e97a96bf9a8f007aa5e",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15768,10 +15861,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Hypotheses remain provisional and checked against new information, not psychological diagnosis or true by consultant authority. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Test and revise/drop initial hypothesis when concrete new information does not fit. Retained exact reviewed target case_revise_hypothesis_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_055": {
       "item_sha256": "e74ab01d66e96c050a416cebb98cd8f6bd597f5ffb3bf254af200b893735b69e",
@@ -15793,10 +15889,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_056": {
-      "item_sha256": "8b0355abb7309ada2152452d4a10dddc90774902375b39859620462aebf969ed",
+      "item_sha256": "128ff625fec3c7275400215f33183d0134d9ffe53f54eddd6eab90871b2d60c6",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15806,16 +15902,19 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact attainable/client-responsibility passage read; plausible incomplete goal criteria replace absurd unattainability demands. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Feasible agreed goal in client actions/influence rather than guarantee changing absent person. Retained exact reviewed target case_goal_own_actions_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_057": {
-      "item_sha256": "bdd984c91f9dae671c9ac5677321a8c532f2f508dda8aa2b7c1ab92369359fcd",
+      "item_sha256": "bad25b70ff8bed16a41e06e654ab4952bd37192bb6e9c919da28d32194268130",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15825,16 +15924,19 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Technique selection considers characteristics/context/preferences/resources and working conceptualization, not random choice or fixed symptom-to-method prescription. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Discuss method fit to agreed goal/context rather than familiar technique applied without discussion. Retained exact reviewed target case_goal_method_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_058": {
-      "item_sha256": "42facf58fe02e1b6838c150b674064a4ae8e2f77cf3c4d3f6f009004aecee71a",
+      "item_sha256": "cade80919352312029bca4fb2902b92a94bad8e8010124ac86d65fe005af98ad",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15844,9 +15946,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact between-session skill/transfer/autonomy definition read; distinguish transfer from invalid automatic outcome/process inferences. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Agreed practice supports applying learned skill outside sessions;not a guarantee of change. Retained exact reviewed target case_homework_transfer_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -15854,7 +15958,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:1047:1227"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_059": {
       "item_sha256": "818358fe3b850922c234e4ee5cc9423e33d42db75116a9345fc4c6af250ab3c4",
@@ -15902,10 +16007,10 @@
       ]
     },
     "questions:m3_psychological_consulting_061": {
-      "item_sha256": "1045b81e152ad8970b0ab3c0943ac0583c3966a39f89033b2033eee97526429e",
+      "item_sha256": "f42b1a489cc23e2a8388ad4b70d85d40fc8b5171e72da8ea464b8122112d4fb3",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15915,10 +16020,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Course illustration of unguided questions contrasted with organized relevant inquiry. Framework can guide selection; not an empirical guarantee of prevention of every irrelevant question. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Select relevant concrete episode information to test hypothesis rather than unfocused questioning;conceptualization purpose also remains in017. Retained exact reviewed target case_test_hypothesis_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_062": {
       "item_sha256": "3a4212ffa6c96b51c0f8aa390671f80235f0d76b7515f718c028178d8b0b2264",
@@ -15959,10 +16067,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_064": {
-      "item_sha256": "d7fdbc8635ab91eb65a734aaea6d58dc1552b46b6148dbef3a8cd0a5ddd004c9",
+      "item_sha256": "c90ed5b86d6e007291099b88b467560337499b3cca66ba264dff5d2e548f825e",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15972,9 +16080,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8,9,16. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Clarify client-valued expected consultation result without presuming a hidden true request. Retained exact reviewed target m3_psychological_consulting_011 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -15982,13 +16092,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:1227:1493;characters:2492:2670"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_065": {
-      "item_sha256": "bada948476b475ab06c3bde8be6cd47479dadf057f4c65d8108da5bbad3461d6",
+      "item_sha256": "ecc7ed8062ababae28767105c570c91ca3114bd4e3d76c75006d300fcd173aef",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -15998,16 +16109,19 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Goal helps orient attention and assess progress; no claim that all open exploratory conversation is useless or every session must be metric driven. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Concrete goal described as an agreed expected change in client actions;no arbitrary imposed count or change of otherperson. Retained exact reviewed target m3_psychological_consulting_055 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_066": {
-      "item_sha256": "268d64c94b47d33e71d796a265828a9ccfae8b71e33080c0daad165fd1b0c9db",
+      "item_sha256": "034fa8d049c648643f785538db363ed985fb2e7c6b6336d1846c08602a960984",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16017,10 +16131,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Authored conflict-communication goal describes client own observable practice and awareness, not promised compliance by others or immediate calm. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Feasible agreed goal in client actions/influence rather than guarantee changing absent person. Retained exact reviewed target case_goal_own_actions_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_067": {
       "item_sha256": "0033ccb3929dce68c60cc00643b16da4ccbe3dba62a3da7b5319dfba13097153",
@@ -16042,10 +16159,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_068": {
-      "item_sha256": "44c91a9ddfee810ca0fc74f9e7b885dd6586a6df6afcde9a1bc30046e2c30b9f",
+      "item_sha256": "0ae2ffa4e490489d9440671aaa65ec41f94d54f898b44ddfae04d45363fb2115",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16055,9 +16172,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 18. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Working agreement on goals/roles/conditions/confidentiality;not all professional obligations exhausted by one question. Retained exact reviewed target m3_psychological_consulting_008 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -16065,7 +16184,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:2855:3039"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_069": {
       "item_sha256": "4cef20123838e33a799c301fb352cab5eb02932369cf688e68d20aeaabf664af",
@@ -16106,10 +16226,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_071": {
-      "item_sha256": "037c80659664018acf96036628d5961bf6994b90ef2147d7c6f1ca99597ed4da",
+      "item_sha256": "cbbe03eefa9d3ab0261b9b2b4aae9702ccf4818befdf70dfe5c80a4d1b884d9a",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16119,10 +16239,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact named behavioral-experiment fragment read; adjacent consultation operations replace unsafe treatment prescriptions and straw cases; no efficacy or diagnosis claim added. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Collaboratively planned observable prediction test and comparison,not treatment prescription from one symptom. Retained exact reviewed target case_cbt_behavioral_test_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_072": {
       "item_sha256": "c9c90245dedb7efbdba1e603296837381cdc6b4b5a177d9c91f4f6f2b2986a1a",
@@ -16172,10 +16295,10 @@
       ]
     },
     "questions:m3_psychological_consulting_074": {
-      "item_sha256": "9ecc4723b960b9de9690f2e91a1cb6d99948b90977c194d21e87bdc3b9176b77",
+      "item_sha256": "abb08ef227871098e02f2da5266ae3add19454940e4bef2ffcb3531364644d7f",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16185,9 +16308,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 22. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Silence has no uniquely established meaning;clarify gently without forcing disclosure. Retained exact reviewed target case_silence_uncertainty_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -16195,7 +16320,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:3540:3770"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_075": {
       "item_sha256": "9440357863c52c54d6e9f1fd66fbf67cfd229937519ac806be3050bac6f5e346",
@@ -16271,10 +16397,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_078": {
-      "item_sha256": "1893fff22001fa6baca47f2a61a6cc139f85da2b6d31c4ba52a0790d6acb6904",
+      "item_sha256": "fe9c3988f7969dddb2005cb081edbbfa3c17e5a70eba1e9e9ff867bde420e98d",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16284,10 +16410,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Inconsistent data require reconsideration rather than fitting evidence to one interpretation. No invented client diagnosis or causal certainty. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Test and revise/drop initial hypothesis when concrete new information does not fit. Retained exact reviewed target case_revise_hypothesis_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_079": {
       "item_sha256": "3477ecc4b18f32f4797c5eb557fc9c4934df633bb2b19a706bee5a6d0cfcea0b",
@@ -16335,10 +16464,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_081": {
-      "item_sha256": "e784800bc8a214d4da147db2f85b9ce1031aa8e8008b6849168956ccb561cfd3",
+      "item_sha256": "b746f30e297e4c2e3b2a828adf3178c1cd82ee08cac4acd87d88a5a7f37b755e",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16348,16 +16477,19 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Fictional loss example tests whether tool matches jointly discussed needs. No proof that cognitive tools are prohibited or inferior for bereavement, and no mandatory humanistic/existential approach. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Discuss method fit to agreed goal/context rather than familiar technique applied without discussion. Retained exact reviewed target case_goal_method_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_082": {
-      "item_sha256": "c56548f7ef34312e725fe3ddf47f75afe3f5c5bb188899e80a44eae41f82c3ae",
+      "item_sha256": "6d2d54a5af3f1763602a1fa86655c79d94e9afbf8f7c801287bcb343d5df31ab",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16367,10 +16499,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact agreed/concrete/feasible homework passages read; realistic workload errors replace secrecy/no-homework cues. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Explore comprehension/workload and adjust feasible agreed practice;noncompletion not automatic diagnosis or motivation failure. Retained exact reviewed target case_homework_barrier_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_083": {
       "item_sha256": "d6eff4506e4192b85a4ba73514ebca164d819e75bee7c17ce511de2e6f70287d",
@@ -16453,10 +16588,10 @@
       ]
     },
     "questions:m3_psychological_consulting_086": {
-      "item_sha256": "0f8afd92f7fd3d49e37c237e868580d9f4630162e2b2661f8f1ca65734c12504",
+      "item_sha256": "ffa00d11e42f5c0d54f2c233d75571db0fb4839c44879a06b3090a386f0b3595",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16466,9 +16601,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw lesson2 passages support orderly private setting, limited distractions, initial contact and discussing organizational conditions and confidentiality boundaries. _033 explicitly assumes the pre-agreed end time; 50/60 minutes are examples, not universal requirements. _085 removes unsubstantiated name-asking detail. Applied cases are educational adaptations, not verbatim transcript cases. No guarantee of safety, universal disclosure law, paid-cancellation mandate or diagnosis inferred from timing. All eight source holds preserved, no blanket source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Understandable format/roles/confidentiality discussion and questions before an informed decision;not exhaustive legal checklist. Retained exact reviewed target case_informed_start_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_64404c421f559925f008f3065aae298544e8a1dcbbf9a09f0422fb304d62c978",
@@ -16476,13 +16613,14 @@
           "snapshot_sha256": "2cab69fac7ac8508dab7d40b2de4108283d9abb835f45a2f58769f532cd584c5",
           "locator": "characters:55800:56555;characters:69584:69775"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_087": {
-      "item_sha256": "71a6e782f8c1cffbe396336e051e8cfc13dde63326876c7541e8e4b1a914bc58",
+      "item_sha256": "20361be13b8f452b0f969f1efe8d67ab055306e94e4d391b999e61688d93702d",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16492,9 +16630,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8,25. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Initial introduction/frame and open invitation to state reason for coming;no immediate safety threat stipulated. Retained exact reviewed target m3_psychological_consulting_085 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -16502,7 +16642,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:1227:1370;characters:4131:4286"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_088": {
       "item_sha256": "27c8a5477f1b62f07ae18e3e3cce6e5f3f0254880d5993c4b6e91aa68ee5e93c",
@@ -16639,10 +16780,10 @@
       ]
     },
     "questions:m3_psychological_consulting_093": {
-      "item_sha256": "5bdf23ee8d2accb7749eb3f32d603c5e98fda416d76421aa6a47085b84a69551",
+      "item_sha256": "c3a99baf29f4951e6ca0c6efbf1b98e11d83e443accf02d52f2b4af4a9d5c82e",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16652,9 +16793,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 8. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Complaint/request distinction using two actual utterances;definition-only variants add no distinct objective. Retained exact reviewed target m3_psychological_consulting_030 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -16662,13 +16805,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:1227:1370"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_094": {
-      "item_sha256": "131afcb3b2ae8cd77d334415a70600796bab832ef9783bbe47251ffe2519383b",
+      "item_sha256": "69aa7553205e653be09901219d337afc8f6a439e28a2c1ae7160ab56cad5ea56",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16678,9 +16822,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 9,46. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Feasible agreed goal in client actions/influence rather than guarantee changing absent person. Retained exact reviewed target case_goal_own_actions_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -16688,13 +16834,14 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:1370:1493;characters:7948:8144"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_095": {
-      "item_sha256": "745e097d1b809d9e357e85688cd61cfafffa6fb9adbe913d10a15f6ec4d726d2",
+      "item_sha256": "f75df6b575694c1dfbead07281a924fa8eda31d68e8c3c8802131d0247822b2e",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16704,9 +16851,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 18,46. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Concrete goal described as an agreed expected change in client actions;no arbitrary imposed count or change of otherperson. Retained exact reviewed target m3_psychological_consulting_055 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -16714,7 +16863,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:2855:3039;characters:7948:8144"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_096": {
       "item_sha256": "737cb2e7c661cc5fbe1efb963b4538bd060fa546b0275c77d1cb593990867bf5",
@@ -16762,10 +16912,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_098": {
-      "item_sha256": "b45e4c6c45a7e9ec388aa7efe12b907e6589f81d59ed661d06a1159ecb0e92d3",
+      "item_sha256": "fcc56f810229e619deeee902d180465d640fe0d687e82601d34339c9a9b77fa8",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16775,11 +16925,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "FIX: Replace dramatic-version/prove-client-wrong straw alternatives with plausible premature or untested hypothesis selection; exact information-test-revise cycle only. Exact selected current source-backed certificate; no whole-source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Compare alternative accounts against concrete contrasting situations instead of choosing familiar/detailedstory. Retained exact reviewed target case_compare_hypotheses_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [],
-      "disposition": "fix"
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_099": {
       "item_sha256": "0aaa243c1bf3bc4aacd614e8bbe6e550b7339c6ee6b10a6dd062ec9dc5a9ca02",
@@ -16853,10 +17005,10 @@
       "sources": []
     },
     "questions:m3_psychological_consulting_102": {
-      "item_sha256": "250ac20fb440a47809432bdab5a862a6b455e99e48bf27a6a82fbd11ca99fde6",
+      "item_sha256": "1645df0196256ae9ef209e1ef44c733f6a86b0ecce9fcfbef3b38a5b69899759",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16866,10 +17018,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Hypothesis tested through concrete sequences of circumstances/thoughts/feelings/actions. Client fear of rejection remains a conjecture, not a confirmed cause. Exact private receipt and topic binding verified; legacy broad references retained privately. Only general teaching passages selected; personal participant anecdotes, extraordinary therapist-memory requirement and transfer guarantees excluded.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Select relevant concrete episode information to test hypothesis rather than unfocused questioning;conceptualization purpose also remains in017. Retained exact reviewed target case_test_hypothesis_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_103": {
       "item_sha256": "ac863e90d3af1161c6dc15ec99ed6049183839ec5f79dcacfe60a3a39fc70334",
@@ -16956,10 +17111,10 @@
       ]
     },
     "questions:m3_psychological_consulting_106": {
-      "item_sha256": "2e197f72fd89642052ad154d80cf43a5034f8840677c0462875fea7071429859",
+      "item_sha256": "f617ce1fffa4f5882424f7df432140c2eafe746020085aef2610dfba47a674a4",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16969,9 +17124,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Активное слушание включает уточнение и отражение. Реплика описывает наблюдение и спрашивает о его значении, не утверждает ложь или диагноз по жесту. Не перенесено определение конгруэнтности консультанта на гарантированное чтение мыслей клиента.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Describe observed change and gently clarify its meaning;do not mindread rapport/motive from appearance. Retained exact reviewed target case_nonverbal_observation_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -16979,7 +17136,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:0:255"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_107": {
       "item_sha256": "4d7f98e8ee3827526aa0c8a870c7476c0a2a99ee29e5514b124db462002cadf3",
@@ -17478,10 +17636,10 @@
       "sources": []
     },
     "questions:m1_vnd_058": {
-      "item_sha256": "3c32f1570dd6b172a42987111e3a4b0cb194f649daac2cf75d70a94f8d3a63af",
+      "item_sha256": "37e0e9206a19a984b3c20f4789136beb7b9e671fef3e0f4abcf365ed90665bb1",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -17491,10 +17649,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact procedural/motor-memory definition; keyboard skill is an original teaching illustration. Excludes general cortical/hippocampal localization, REM/NREM consolidation, universal age rules, ECT/drug treatment and all other held claims. Exact private fragment receipt and primary teaching confirmation.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Procedural skill memory contrasted with declarative fact knowledge;no claim allskills necessarilyunconscious. Retained exact reviewed target m1_psyf_077 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m2_pd_001": {
       "item_sha256": "b4214de8c82add9cf5d7b36e51fda94fc575b740c40579abf65a5e2037b8ce6b",
@@ -18339,10 +18500,10 @@
       "sources": []
     },
     "questions:m5_clinical_013": {
-      "item_sha256": "450925b5ec2f45f3b2c3bc61765d80a62a426ccdca8c74ee63d0668eb8e9a45a",
+      "item_sha256": "8cbec339bfcb871d78a0026f926ab64cb7760507952f4e5b18b8c5e8ad1d7fb9",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18352,10 +18513,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Selected course termination-planning sequence only; scope outside all saved practice37 holds. Current455 questions searched and semantically compared: clinical001 assesses outcome evidence and consulting goal/method cases do not assess termination plan. No guaranteed success, universal eight-session outcome, mandatory therapy duration or reimbursement claim. ACA professional code only corroborates pretermination/support principle, not the exact course checklist.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Shared review of results/remainingdifficulties/resources and support plan at agreed ending;not compulsory completion or cure guarantee. Retained exact reviewed target case_ending_plan_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m5_clinical_014": {
       "item_sha256": "097468930eda85e232eafd76d7e2832f0fa1ad4924f16fea4053bed99bf77625",
@@ -20334,10 +20498,10 @@
       "disposition": "keep"
     },
     "questions:m3_psychological_consulting_113": {
-      "item_sha256": "965de4378611efa02d5ed82ba5e69ece44c78c05847f248876bfda27068b24cc",
+      "item_sha256": "9a9dc64ff05a23386177ac7e5f9c11fbb11721496426531b05adddf4aaae81b9",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20347,10 +20511,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact attributed CBT task-suitability account; universal defence/fear and later all-aggression transference claims excluded. Distinct from existing psychoanalytic interpretation and silence items.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Explore comprehension/workload and adjust feasible agreed practice;noncompletion not automatic diagnosis or motivation failure. Retained exact reviewed target case_homework_barrier_001 passed complete current425source and finalpublication checks. Old ID/content/edition/attempt history retained;only future issuance retired. This row does not approve the retired source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_114": {
       "item_sha256": "6cdab26fc869ecb6e6f9c1166746dcc72e7b5105b0ec750ded520f1e4cbc7d6e",
@@ -22106,6 +22273,126 @@
       "note": "RETIRE semantic duplicate of case_cbt_gradual_activation_001. Both select gradual meaningful feasible activity; retain authored leisure case with plausible adjacent alternatives. Full prior item and retained case reviewed; stable ID and immutable editions preserved. Current inactive edition is not represented as source-supported approval.",
       "sources": [],
       "disposition": "retire"
+    },
+    "questions:case_activity_personal_meaning_001": {
+      "item_sha256": "fa9dcd4bf3b2e95567e210c76089d089900d68f159c30e8fdeebed1c87e521ec",
+      "discipline_id": "cases",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "NEW: Client photography activity distinguishes personal meaning inquiry from assumed diagnosis or a prescribed goal. Conditions/key/three alternatives and contextual rationales checked. Exact current425private source dossier and source-free publication receipt bind this public fingerprint.",
+      "sources": [],
+      "disposition": "new"
+    },
+    "questions:case_social_role_expectation_001": {
+      "item_sha256": "665e4b46dc26b101908aa44cb0031430eacaeb40bfb395f5b4a7616dfd6b73c9",
+      "discipline_id": "cases",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "NEW: Book-club role expectation is distinguished from an obligation actually accepted by the client. Situational conditions and all alternatives checked. Exact current425private source dossier and source-free publication receipt bind this public fingerprint.",
+      "sources": [],
+      "disposition": "new"
+    },
+    "questions:case_social_observed_expected_sanction_001": {
+      "item_sha256": "7e353aae4d50328b655226ea78cffbf9969d2a7c1052b0ed904107426a538741",
+      "discipline_id": "cases",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "NEW: Temporary ensemble sanction already observed is distinguished from feared future exclusion. No prediction of other people or global personality inference. Exact current425private source dossier and source-free publication receipt bind this public fingerprint.",
+      "sources": [],
+      "disposition": "new"
+    },
+    "questions:psyl_check_reformulation_response": {
+      "item_sha256": "197a5d54cc5534c6380146605d7d5c58d0f54bbc6b8b3a397634646130cbc8b3",
+      "discipline_id": "psycholinguistics",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "NEW: Client feedback checks the consultant reformulation;distinct from identifying ambiguity in the original word or naming an emotion. Exact current425private source dossier and source-free publication receipt bind this public fingerprint.",
+      "sources": [],
+      "disposition": "new"
+    },
+    "questions:clinical_hypothesis_counterevidence": {
+      "item_sha256": "31116ddc89b011ac7c39247115966a5db4454d9fd0dab8da5cc3c985c2538370",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "NEW: Procrastination even for clear tasks limits the hypothesis that unclear tasks alone explain the pattern. No diagnosis or causal proof from one observation. Exact current425private source dossier and source-free publication receipt bind this public fingerprint.",
+      "sources": [],
+      "disposition": "new"
+    },
+    "questions:clinical_support_plan_specific": {
+      "item_sha256": "2359f4c493d67a7b26aa092f2f983e1a41cb717fe9710cea758c6af1f6d728fc",
+      "discipline_id": "klinicheskaya_psihologiya",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "NEW: Recognisable trigger and feasible agreed action distinguish a concrete support plan from a general intention. No crisis or treatment protocol claimed. Exact current425private source dossier and source-free publication receipt bind this public fingerprint.",
+      "sources": [],
+      "disposition": "new"
     }
   }
 }

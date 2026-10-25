@@ -53,16 +53,19 @@ def test_distinct_learning_objectives_are_not_deferred_as_duplicates():
 
 
 def test_request_concepts_separate_definition_unrealistic_goal_and_case_formulation():
+    # Consolidation keeps distinct objectives and retires duplicate future draws.
     assert diverse_first([
-        (1, "m3_psychological_consulting_005"),
-        (2, "m3_psychological_consulting_094"),
+        (1, "m3_psychological_consulting_030"),
+        (2, "case_goal_own_actions_001"),
         (3, "m3_psychological_consulting_096"),
     ], 3) == [1, 2, 3]
-    assert diverse_first([
-        (1, "m3_psychological_consulting_024"),
-        (2, "m3_psychological_consulting_040"),
-        (3, "m3_psychological_consulting_096"),
-    ], 2) == [1, 3]
+    import json
+    from pathlib import Path
+    items = json.loads(Path("content/questions/module3/psychological_consulting.json").read_text(encoding="utf-8"))
+    by_id = {item["id"]: item for item in items}
+    for retired in ("m3_psychological_consulting_024", "m3_psychological_consulting_040"):
+        assert by_id[retired]["status"] == "retired"
+        assert retired not in memberships()
 
 
 def test_selected_mix_keeps_a_topic_with_later_distinct_concepts(monkeypatch):

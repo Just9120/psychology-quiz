@@ -71,30 +71,8 @@
     {
       "discipline_id": "fiziologiya_vnd",
       "question_ids": [
-        "m1_vnd_031",
-        "m1_vnd_050"
-      ]
-    },
-    {
-      "discipline_id": "fiziologiya_vnd",
-      "question_ids": [
-        "m1_vnd_009",
         "m1_vnd_034",
         "m1_vnd_049"
-      ]
-    },
-    {
-      "discipline_id": "fiziologiya_vnd",
-      "question_ids": [
-        "m1_vnd_033",
-        "m1_vnd_056"
-      ]
-    },
-    {
-      "discipline_id": "psihofiziologiya",
-      "question_ids": [
-        "m1_psyf_011",
-        "m1_psyf_031"
       ]
     },
     {
@@ -107,46 +85,8 @@
     {
       "discipline_id": "psychological_consulting",
       "question_ids": [
-        "m3_psychological_consulting_004",
-        "m3_psychological_consulting_093"
-      ]
-    },
-    {
-      "discipline_id": "psychological_consulting",
-      "question_ids": [
-        "m3_psychological_consulting_005",
-        "m3_psychological_consulting_011"
-      ]
-    },
-    {
-      "discipline_id": "psychological_consulting",
-      "question_ids": [
-        "m3_psychological_consulting_024",
-        "m3_psychological_consulting_040",
-        "m3_psychological_consulting_094"
-      ]
-    },
-    {
-      "discipline_id": "psychological_consulting",
-      "question_ids": [
-        "m3_psychological_consulting_064",
-        "m3_psychological_consulting_096"
-      ]
-    },
-    {
-      "discipline_id": "psychological_consulting",
-      "question_ids": [
         "m3_psychological_consulting_008",
-        "m3_psychological_consulting_068",
-        "m3_psychological_consulting_086",
         "m3_psychological_consulting_089"
-      ]
-    },
-    {
-      "discipline_id": "psychological_consulting",
-      "question_ids": [
-        "m3_psychological_consulting_031",
-        "m3_psychological_consulting_032"
       ]
     },
     {
@@ -167,46 +107,8 @@
     {
       "discipline_id": "psychological_consulting",
       "question_ids": [
-        "m3_psychological_consulting_036",
-        "m3_psychological_consulting_085"
-      ]
-    },
-    {
-      "discipline_id": "psychological_consulting",
-      "question_ids": [
         "m3_psychological_consulting_044",
         "m3_psychological_consulting_052"
-      ]
-    },
-    {
-      "discipline_id": "psychological_consulting",
-      "question_ids": [
-        "m3_psychological_consulting_054",
-        "m3_psychological_consulting_078"
-      ]
-    },
-    {
-      "discipline_id": "psychological_consulting",
-      "question_ids": [
-        "m3_psychological_consulting_066",
-        "m3_psychological_consulting_095"
-      ]
-    },
-    {
-      "discipline_id": "psychological_consulting",
-      "question_ids": [
-        "m3_psychological_consulting_074",
-        "m3_psychological_consulting_107"
-      ]
-    },
-    {
-      "discipline_ids": [
-        "fiziologiya_cheloveka",
-        "psihofiziologiya"
-      ],
-      "question_ids": [
-        "m1_phys_002",
-        "m1_psyf_002"
       ]
     },
     {
