@@ -3506,8 +3506,8 @@
     "glossary:sensation": {
       "item_sha256": "559180485f995f44a4bb95dd94e876e9c2558410714d7aad3c495cfdb53cb81a",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -3519,13 +3519,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Individual sensory properties distinguished from whole percept; no diagnostic conclusion from sensory example. Complete current term/short definition/definition/examples/confusion links reviewed; exact existing source-backed edition reused, previous holds retained.",
+      "note": "Single sensory properties versus integrated-object introductory distinction;no hot-surface experiment,sole cortical/conditional-reflex mechanism or all-conscious-only claim.",
       "sources": [
         {
-          "source_id": "src_f2536be9cca9b8398df864586be3f7ad3ec2159cd28dddac6e50985f416183f1",
-          "modified_time": "2026-03-31T05:56:42.059Z",
-          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
-          "locator": "characters:777:985"
+          "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
+          "modified_time": "2026-03-20T14:49:22.978Z",
+          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
+          "locator": "characters:603:789"
         }
       ],
       "disposition": "keep"
@@ -3533,8 +3533,8 @@
     "glossary:perception": {
       "item_sha256": "fd686cced77eea66481688d090682bd9e1470df8595b0e6404261a3fc221e2f1",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -3546,13 +3546,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Whole organized object image distinguished from individual properties; example matches selected course definition. Complete current term/short definition/definition/examples/confusion links reviewed; exact existing source-backed edition reused, previous holds retained.",
+      "note": "Integration of sensory information into object image;not a passive copy,reverse process/result statement,all-world arbitrary or absence of memory/context involvement.",
       "sources": [
         {
-          "source_id": "src_f2536be9cca9b8398df864586be3f7ad3ec2159cd28dddac6e50985f416183f1",
-          "modified_time": "2026-03-31T05:56:42.059Z",
-          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
-          "locator": "characters:777:985"
+          "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
+          "modified_time": "2026-03-20T14:49:22.978Z",
+          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
+          "locator": "characters:603:789"
         }
       ],
       "disposition": "keep"
@@ -3589,10 +3589,10 @@
       ]
     },
     "glossary:memory": {
-      "item_sha256": "e21bd7af1f4742dd7507ac70ce13c548d8ced360f97d034d72a3008e32963006",
+      "item_sha256": "caac61f71c3cbacc042916ebad9d20a0687ba3d5ba19ce1bba76c0b6840a6daa",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -3604,22 +3604,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Encoding/storage/retrieval distinguished from new image construction; example does not assert perfect faithful reproduction. Complete current term/short definition/definition/examples/confusion links reviewed; exact existing source-backed edition reused, previous holds retained.",
+      "note": "Encoding/retaining/transforming/retrieving experience;distinguish deliberate new-scene task from report of recollection without assuming recollection is veridical replay. No recovered-memory method/forced imagery or diagnosis.",
       "sources": [
         {
-          "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "characters:1049:1220"
+          "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
+          "modified_time": "2026-03-20T14:49:22.978Z",
+          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
+          "locator": "characters:10827:10999;characters:20827:21003"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:thinking": {
       "item_sha256": "34f63fb749cc92f1925d6a4268de1ce2f746691c8d9808c5eeb6a2e7cbb0ba4d",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -3631,22 +3631,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Comparing grounds and inferring relationships distinguished from simple recognition/recall. Complete current term/short definition/definition/examples/confusion links reviewed; exact existing source-backed edition reused, previous holds retained.",
+      "note": "Relations/conditions/comparison/inference;example explicitly reasoning,not mere recognition. No all thought requires words or unique brain region.",
       "sources": [
         {
-          "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "characters:930:1047"
+          "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
+          "modified_time": "2026-03-20T14:49:22.978Z",
+          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
+          "locator": "characters:16900:17123"
         }
       ],
       "disposition": "keep"
     },
     "glossary:imagination": {
-      "item_sha256": "edfe69837bfd9bda90563378c6684a26cba7c82af3c3e045ca85aa79f49fb99f",
+      "item_sha256": "0f951959532fa4ddf1a00223c961d468b7e4a98aa4e88ea3cf90800036ceec05",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -3658,22 +3658,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: New image recombines prior material, distinct from remembering a past event; not a human-only or prediction guarantee. Complete current term/short definition/definition/examples/confusion links reviewed; exact existing source-backed edition reused, previous holds retained.",
+      "note": "Intentional new scene assembled from experience;memory may reconstruct/interact too. Avoid declaring every inaccurate recollection voluntary imagination or human-only/rigid creativity binary.",
       "sources": [
         {
-          "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "characters:3147:3267"
+          "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
+          "modified_time": "2026-03-20T14:49:22.978Z",
+          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
+          "locator": "characters:10827:10999;characters:20827:21003"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:attention_stability": {
       "item_sha256": "8c8e26ec60c64770d57db7728d8eeb493ff289c7ee13a404de656fafa64207ac",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -3685,22 +3685,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Duration of maintained focus, not attention overall or fixed numerical capacity; related7plusminus2hold retained. Complete current term/short definition/definition/examples/confusion links reviewed; exact existing source-backed edition reused, previous holds retained.",
+      "note": "Sustained focus on same task,not any fixed minute norm,limitless distribution,training or diagnostic score.",
       "sources": [
         {
-          "source_id": "src_651219709e64e47fb457967d5163017c0a0b36043470fa033c76ae7abe380bcb",
-          "modified_time": "2026-04-20T15:42:20.698Z",
-          "snapshot_sha256": "69d87f72192866c1929553a8c26711b6e992c3254e4870ea8c068ab51b16fb37",
-          "locator": "characters:563:923"
+          "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
+          "modified_time": "2026-03-20T14:49:22.978Z",
+          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
+          "locator": "characters:9481:9568"
         }
       ],
       "disposition": "keep"
     },
     "glossary:cognitive_processes": {
-      "item_sha256": "afe8b7f412985279fafd72ceffef2742a9e8aaca87551b94284966ff368fd1ee",
+      "item_sha256": "73cf0e88ee52c21e2a753ab03781d187ad7f54b6c051c727040c2554a76e601f",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -3712,16 +3712,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Illustrative members of cognitive-process class distinguished from states/properties, not an exhaustive universal taxonomy. Complete current term/short definition/definition/examples/confusion links reviewed; exact existing source-backed edition reused, previous holds retained.",
+      "note": "Inclusive introductory classification,not an exhaustive necessary serial causal chain;several processes can contribute to same task. No claim traits innate/unchangeable.",
       "sources": [
         {
-          "source_id": "src_f2536be9cca9b8398df864586be3f7ad3ec2159cd28dddac6e50985f416183f1",
-          "modified_time": "2026-03-31T05:56:42.059Z",
-          "snapshot_sha256": "273c62cbc69a5fd7b448fa8f5334831b0555f01550420b573a88afd8f4bb5718",
-          "locator": "characters:778:1418"
+          "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
+          "modified_time": "2026-03-20T14:49:22.978Z",
+          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
+          "locator": "characters:603:789;characters:10827:10999;characters:16900:17123"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_phys_001": {
       "item_sha256": "91b386ebbc342e2ad0c6fcc2a4d0a6602333ee5e7fc1531b5f754c6c3818d194",
@@ -6005,10 +6005,10 @@
       "sources": []
     },
     "questions:m1_vnd_019": {
-      "item_sha256": "6f12d5cb3214fd9c8c0d9d7749b7588d6f53462777d32b2dfc1fbde280bd9b93",
+      "item_sha256": "b948b17b5e5c838f19298d72ca8173829266c65bcb4407819b49ca205a4d09a0",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6020,15 +6020,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Direct exact course introduction instead of whole-glossary reference. Course introduction establishes topic/context, not an isolated brain centre or measured physiological mechanism. General emotion/physiological-response association independently supported by reused exact OpenStax10.4 opening review. _028 is a classification of an illustrative choice/self-regulation situation under the named course topics, not causal proof of a cortical model. All13 own and related-source holds unchanged.",
+      "note": "Preserve interdisciplinary research-aspect objective distinct from027classifying three given data kinds;all alternatives legitimate adjacent research questions,not arts-only/body-irrelevant caricatures. Exact independently authored body/key/all alternatives/explanation reviewed in full;the current course clauses support only the bounded concept/inference. Other current and inherited source assertions remain excluded;no efficacy,diagnostic,coercive,universal timing or legal-rule guarantee. A physiological research question concerns registered bodily variables;this is not an exhaustive theory of emotion or proof of subjective feeling from autonomicmeasure. Adjacent meaning,socialnorm and biography questions remain legitimate other research aspects. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
-          "source_id": "src_9f6f04cc0b808ea0340df0ae83928a72a9cb5d6b388c54f7dad37cc6d9f4a729",
-          "modified_time": "2026-04-07T09:58:03.450Z",
-          "snapshot_sha256": "267e1cf62d3d0008539e89694c8575a9c04f875151acb20a66f442a02a102c91",
-          "locator": "characters:0:315;characters:1038:1140"
+          "source_id": "src_361df51c6b840d0ea2a967d59a0d67ed1ceebfcf6fc710968a5472500ca8e7f6",
+          "snapshot_sha256": "a7d7c93c93752661390f85857ddd9b95bcb64cfc2311ee6011b9d337227579ee",
+          "modified_time": "2026-07-12T06:20:47.688Z",
+          "locator": "characters:40259:40401;characters:42357:42585"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_020": {
       "item_sha256": "ebf6878202b6ef73eb53c1a0c7fa0f1c0e38c5ce33c1a516f7e38b18f3edfeb6",
@@ -6217,10 +6218,10 @@
       ]
     },
     "questions:m1_vnd_027": {
-      "item_sha256": "3fa13e1455ea37c18ff27ed656259628c53f9c4e6030c62a570bfe002aec9334",
+      "item_sha256": "467a86541b9d8fa500f8eb5c3896f45d90ce69c31dc63270575717c480897804",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6232,15 +6233,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact broad introductory sentence establishes the emotion/mental-activity course topic only; OpenStax Psychology2e10.4 opening30-32 independently read for subjective experience/expression/cognitive appraisal and possible physiological responses. Concrete example does not diagnose a disorder or infer a single neural cause. No one-to-one centre/emotion mapping, stem/amygdala claim, mirror-neuron empathy, fixed-transmitter affect, fMRI blood-flow simplification, political/risk prediction or treatment-percentage statement approved. All thirteen emotion-course holds unchanged.",
+      "note": "Distinguish stated data types only: client reports subjective anxiety,heart-rate registration gives a bodily variable,and observed facial expression is expressive behaviour. No necessary/exhaustive three-component causal theory or proof anxiety from pulse/mimic alone. Course personal-experience and motor/autonomic clauses are selected excluding all-need reduction,human-monkey hierarchy,all-never control and mental-state decoding. Client example is independently authored; words are reported data,not externally certified internal state. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
-          "source_id": "src_9f6f04cc0b808ea0340df0ae83928a72a9cb5d6b388c54f7dad37cc6d9f4a729",
-          "modified_time": "2026-04-07T09:58:03.450Z",
-          "snapshot_sha256": "267e1cf62d3d0008539e89694c8575a9c04f875151acb20a66f442a02a102c91",
-          "locator": "characters:1038:1140"
+          "source_id": "src_361df51c6b840d0ea2a967d59a0d67ed1ceebfcf6fc710968a5472500ca8e7f6",
+          "snapshot_sha256": "a7d7c93c93752661390f85857ddd9b95bcb64cfc2311ee6011b9d337227579ee",
+          "modified_time": "2026-07-12T06:20:47.688Z",
+          "locator": "characters:31293:31363;characters:40259:40401;characters:42357:42585"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_028": {
       "item_sha256": "83bc926a9d5785c5b26180ccb5790da151a6d96bf3e37751fd3bd443eb163831",
@@ -18343,10 +18345,10 @@
       "sources": []
     },
     "questions:m5_clinical_003": {
-      "item_sha256": "1f36fb602600f9e325010f5a86feb6da753f4693c13d44e186de43636682cd70",
+      "item_sha256": "cac3aa102b3f4a934f086e728b8ceeda49a8afcd5914ecf00f8308d2c29783e2",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18358,8 +18360,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Explicitly course-framed three-block functional model terminology only. No anatomical one-to-one localization, diagnosis or universal mechanism. Exact short selected third-block statement plus surrounding context was read, anatomical claims are not approved.",
-      "sources": []
+      "note": "Explicit Luria three-functional-unit teaching model; third unit programming/regulation/control versus tone/waking and receiving/processing information. No claim of exactly three independent anatomical modules,all attention/memory exclusively second unit,all action solely frontal cortex,energy-budget localisation or diagnosis from a complaint. Selected course label only; original book catalogue confirms named model context,not full current neuroscientific acceptance. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_a9763161d11b6cf0600bf977fe17931c7c6c951e808e64e9de5a30e57156f547",
+          "snapshot_sha256": "9a8fcb11149b6a11d3c98ce2a9020b55b749f770b701ee9865a79781612d2865",
+          "modified_time": "2026-08-04T10:07:48.209Z",
+          "locator": "characters:21394:21478"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m5_clinical_004": {
       "item_sha256": "f6a572530c7a9a1f788da6a3523a9876dc297fce8d0b2ff8485ae8226539bd8e",
@@ -18381,10 +18391,10 @@
       "sources": []
     },
     "questions:m5_clinical_005": {
-      "item_sha256": "3048675dc4ab8f4f0c1195d84b286b65bdb7f574437a83319f799eb4b1b3a8a7",
+      "item_sha256": "3428010b8fb12f62faf4b356675ec8451413989beaea1405e4d11ef716a11817",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18396,8 +18406,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact object recognition versus naming distinction, independently supported by StatPearls publisher chapter hosted by NLM. No category-wide perceptual definition, facial/color misconceptions, lesion diagnosis or prevalence claims; current bank has no direct agnosia distinction.",
-      "sources": []
+      "note": "Exact object-recognition clause explicitly differs from inability to name an object already recognised. No colour naming/recognition conflation,anomic-aphasia abolition,face-perception-versus-recognition claim,or diagnosis from one error. Item/explanation require sensory/task context and alternatives; not a clinical test or current patient assessment. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_a9763161d11b6cf0600bf977fe17931c7c6c951e808e64e9de5a30e57156f547",
+          "snapshot_sha256": "9a8fcb11149b6a11d3c98ce2a9020b55b749f770b701ee9865a79781612d2865",
+          "modified_time": "2026-08-04T10:07:48.209Z",
+          "locator": "characters:32323:32530"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_ethics_001": {
       "item_sha256": "e0c79183986064e496bb8cce4f7c06a4e8efc32f109aa1f39c973be37f584bd7",
@@ -18575,10 +18593,10 @@
       "sources": []
     },
     "questions:m1_gp_061": {
-      "item_sha256": "4fdc3e21f147d7825a714be6be136c4389b34af0d388719ada2c8cc1e017b0a6",
+      "item_sha256": "44af4123f69882d5cab048de3f0bba9e8013713657a1b57bba1397f6fa3781a0",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18590,15 +18608,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Named activity-model action/operation distinction; current exact private edition and course revision reused, no empirical universal claim. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Authored safe digital-transfer example:goal explicitly unchanged,observable means changed;operation in named activity framework. No motive/need inferred from tool or automaticity assumption. Four real analytical dimensions replace personality/desire caricatures.",
+      "sources": [
+        {
+          "source_id": "src_89be90c376f13994183a8e0b4d6e9a4ea0bfe4d5e4dbb583c45b30d88abd4fbc",
+          "modified_time": "2026-04-11T09:58:58.192Z",
+          "snapshot_sha256": "1feab78209c2965e98d4f73fd4d2abf73336c0a15f813c6fdfbf70d23a460136",
+          "locator": "characters:15093:15151"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_gp_062": {
-      "item_sha256": "417491205c4e7278f3e86b08319de1e8138e8b8725117881ef1226d1be3f0c92",
+      "item_sha256": "26c9c03d365fed185c6dd16b8b5e4a65660ff458da9865f3012bac8443b4089c",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18610,9 +18635,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Named Ivannikov meaning-based regulation only; no guarantee that finding meaning solves any difficulty. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Chosen user-understanding goal changes meaning in attributed Ivannikov framework. Distinguish sense from procedure,automatic skill and external reward;no moral weakness,coercion,danger or guarantee meaning alone solves barriers.",
+      "sources": [
+        {
+          "source_id": "src_12444edc439d61d13d460c9fc3353ae10151abf33b60bc7aeaec778505140042",
+          "modified_time": "2026-04-09T10:54:34.671Z",
+          "snapshot_sha256": "50f9053ade1fe026af74a55c4b2a7dfd693151931b69d189f938167407691c8a",
+          "locator": "characters:31059:31162"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m4_dev_002": {
       "item_sha256": "bc87806e94afb7fbdc66123c20d6a40e4978e7721f10d09f153c5b04faf8cc55",
@@ -18675,10 +18707,10 @@
       "sources": []
     },
     "questions:m5_clinical_006": {
-      "item_sha256": "c1ba3d919f309825add7fef2a099948e741a18edcfe94444efc69a23a8c0c970",
+      "item_sha256": "460de6d30979146bcc1b903d94d5b21271757fd7e8229731578d0b445b230d80",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18690,8 +18722,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact lecture praxis/action example only. MedlinePlus provider definition independently checked for understood request, willingness, functional muscles and learned task. No clinical diagnosis, lesion localization, medication or universal subtype taxonomy. Current aphasia/agnosia definitions assess other functions; no current apraxia item.",
-      "sources": []
+      "note": "Only course praxis heading and familiar shoe-tying illustration are used. The incorrect blanket any-action-failure phrase remains held. MedlinePlus definition scientifically qualifies learned purposeful action with preserved relevant strength/comprehension; body explicitly requires excluding weakness,misunderstanding and unfamiliarity. No automatic ideomotor subtype from one failed command,all navigation failure as spatial apraxia,akinesia/motivation identity,child spelling-error lesion diagnosis or clinical procedure. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_a9763161d11b6cf0600bf977fe17931c7c6c951e808e64e9de5a30e57156f547",
+          "snapshot_sha256": "9a8fcb11149b6a11d3c98ce2a9020b55b749f770b701ee9865a79781612d2865",
+          "modified_time": "2026-08-04T10:07:48.209Z",
+          "locator": "characters:34693:34725;characters:34865:34932"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m5_clinical_007": {
       "item_sha256": "04d7bd794e27ce1480dd23677f17fc77ea4a75fd77446870b50886975b1280ec",
@@ -19348,10 +19388,10 @@
       "disposition": "fix"
     },
     "questions:m1_gp_063": {
-      "item_sha256": "a83571ff933586da7bc2ebb0af40d74f55f6c46ac31ec6b8b90b901441014625",
+      "item_sha256": "58ce65a0eb665601f2db471f493bec19dc6b310bbbec2d4e1f5391ae4f3bc7b2",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19363,9 +19403,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Named Leontiev motive-as-object-of-need terminology; not a motive diagnosis from movement. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Ask about motive in named activity framework,not decode motive from observed movement. Other choices concern operation,habit or one result;multiple motives/actual client meaning can require clarification.",
+      "sources": [
+        {
+          "source_id": "src_89be90c376f13994183a8e0b4d6e9a4ea0bfe4d5e4dbb583c45b30d88abd4fbc",
+          "modified_time": "2026-04-11T09:58:58.192Z",
+          "snapshot_sha256": "1feab78209c2965e98d4f73fd4d2abf73336c0a15f813c6fdfbf70d23a460136",
+          "locator": "characters:15919:16083"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_psyf_074": {
       "item_sha256": "fb4c03aa5b5a378f8c3d2d5ec411d7264c6ddbcfd1e2eb918c2b93198d769c95",
@@ -19560,10 +19607,10 @@
       "sources": []
     },
     "questions:m4_person_002": {
-      "item_sha256": "0ebe37ea35efa389f0f3ca5f016c3300907d3851459f1880dbc40382e61aca7f",
+      "item_sha256": "4cd6d97a71c3305a4a399adffc9b72c76e427c9aa18bec7f5d3d1247327e67fe",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19575,8 +19622,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact explicitly attributed Ananyev definition, before alternative social usage. No later PEN/temperament inference, universal maturity criterion, damaged author name or staged Platonov claim adopted. Compared with current basic character/state/trait items; distinction individual as natural human representative absent.",
-      "sources": []
+      "note": "See exact retained substantive decision. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_f19f5e39dbe0914155f51798ca83d488819ad54440d1d2bddbacd35000ff7dc3",
+          "snapshot_sha256": "9c931d20a85d21397f33b23a2dc0b9c7fa1328c8459274a5c00c73cea2025cd1",
+          "modified_time": "2026-07-12T06:12:40.142Z",
+          "locator": "characters:2269:2464"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_003": {
       "item_sha256": "092db4063b65659cf82a10117fed122cd9cde90433af6f97e749855f541d35a5",
@@ -19617,10 +19672,10 @@
       "sources": []
     },
     "questions:m4_person_005": {
-      "item_sha256": "57651491c71485f8d4cd1de0479991f6ba553a7b1e19514fde06f7c50043b07b",
+      "item_sha256": "27dbf5c752bfb1dfba5c2be19a27d8229e6ed400408b1abe327d579a8a815633",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19632,14 +19687,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact stabilising definition/neutral work example after held ambiguous external-distraction activation example4521:5228, before other function. Compared with gp062 Ivanников meaning regulation; this tests maintaining activity, not assigning new meaning. No health symptom, overexertion advice or universal success guarantee.",
-      "sources": []
+      "note": "The question isolates maintenance of an already selected ordinary report-writing activity in a teaching function scheme. It does not say all perseverance is good,resources never change,all goals should be achieved or that orienting to a distraction proves voluntary initiation. Functions may coexist; no moral or individual trait verdict. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_361df51c6b840d0ea2a967d59a0d67ed1ceebfcf6fc710968a5472500ca8e7f6",
+          "snapshot_sha256": "a7d7c93c93752661390f85857ddd9b95bcb64cfc2311ee6011b9d337227579ee",
+          "modified_time": "2026-07-12T06:20:47.688Z",
+          "locator": "characters:5228:5381"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_006": {
-      "item_sha256": "6b76314808331aa0d06d2248b9f3ed8b38385d5ff40ee5df6b33807e5814b4fb",
+      "item_sha256": "2d5752a2b5a6f1a740b0252251ee48b0bb8cfc53322e78b17e9511955ecf4302",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19651,8 +19714,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact complex-action conflicting-motives distinction, no full rigid stage prescription, health-overexertion claim or universal desire-versus-duty hierarchy. Distinct from stabilising-function application and existing meaning-regulation question.",
-      "sources": []
+      "note": "The question explicitly concerns a named instructional distinction and stated competing motives/decision,not objective diagnosis of a person from an outcome. The example does not impose health-risking work,all-stage obligatory deliberation,one universal volitional mechanism or a hierarchy of human worth. Alternative motive-as-object/meaning theories remain attributed rather than merged. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_361df51c6b840d0ea2a967d59a0d67ed1ceebfcf6fc710968a5472500ca8e7f6",
+          "snapshot_sha256": "a7d7c93c93752661390f85857ddd9b95bcb64cfc2311ee6011b9d337227579ee",
+          "modified_time": "2026-07-12T06:20:47.688Z",
+          "locator": "characters:18173:18282"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_007": {
       "item_sha256": "2ff89366ac65680d8aecaac5a034a20d3aeb020ced2bc340d58a58cf44a00475",
@@ -20646,10 +20717,10 @@
       "sources": []
     },
     "questions:m1_gp_065": {
-      "item_sha256": "eb6130a5b4cfcfc8811dee628d065553bef27423cf6cd8f33fb774570edf1a74",
+      "item_sha256": "db7dcce306477e541fc47bc96d70637a802fb594688146886e7406a9779d5baf",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20661,9 +20732,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Attributed approach considers consequences for others; no universal moral ranking of a person. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Authored generic client/work example:consider consequences for others alongside own pleasantness. No universal human-worth scale,mandatory self-sacrifice or third-party contact. Other questions concern own approval/habit/speed.",
+      "sources": [
+        {
+          "source_id": "src_c4961b954c48daaf4f859d4a73819c071e284e7025c1751b904290e2833e13c3",
+          "modified_time": "2026-04-09T10:59:21.828Z",
+          "snapshot_sha256": "b4aff38d390d8b6b23caaa28eecd5a4aa93ebfb51b01c66ac59c98f5512329d5",
+          "locator": "characters:28218:28316"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_family_005": {
       "item_sha256": "699d79676188573d40db30288a13007561134d561291db9229d7ac9814d3fdc9",
@@ -21452,10 +21530,10 @@
       "sources": []
     },
     "questions:m1_gp_066": {
-      "item_sha256": "dc41f628b0a2466755f370ad2e1bb80e5998ae9966fdc3e39b43a347d0699188",
+      "item_sha256": "1c779d3cfc7db3e70c173e86e36d2fb3c0f298a17a0e81baa83a558453a98c0a",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21467,9 +21545,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Change of analytical level in named activity theory; not determined just by repetition or appearance. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Explicit former selfstanding interest now only project step:activity-to-action possibility,not every practice automaticity,unchanged motive from outer form or human type. All alternatives are meaningful other transitions.",
+      "sources": [
+        {
+          "source_id": "src_89be90c376f13994183a8e0b4d6e9a4ea0bfe4d5e4dbb583c45b30d88abd4fbc",
+          "modified_time": "2026-04-11T09:58:58.192Z",
+          "snapshot_sha256": "1feab78209c2965e98d4f73fd4d2abf73336c0a15f813c6fdfbf70d23a460136",
+          "locator": "characters:23968:24071"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_psyf_082": {
       "item_sha256": "2763eac84a7e1daa32475648fb9ab43a80e8dfefd28f6e6a9f01ddafc646d58a",
@@ -21570,10 +21655,10 @@
       "sources": []
     },
     "questions:m4_person_025": {
-      "item_sha256": "5206a27c71e3a3ec1df8f60f3de1da2487b8034f781be31c7f1ce26fed06fa21",
+      "item_sha256": "f7aaebe29382b60cc886535599134ab64ba9fb335af784bffa1dce29aa0c4c99",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21585,14 +21670,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Specific-activity contrast completes existing general-ability definition; excludes blanket learnability split and unsupported exhaustive professional taxonomy.",
-      "sources": []
+      "note": "See exact retained substantive decision. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_221818edda7c59cfbbed81653e9a05e8d25bd5ecad5cbd231015a9375b36d411",
+          "snapshot_sha256": "08d9e0397c1b5c12f073dda287c8096da26bcf134df9060a678377dba6ae7bce",
+          "modified_time": "2026-07-12T06:14:41.121Z",
+          "locator": "characters:30706:31487"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_026": {
-      "item_sha256": "b385263622d511aabe6c180439356bde3e544ddb48fe8b3eef4eb52a1aa8675e",
+      "item_sha256": "c78ee17732dd9fc23cb3d0d61a16215321958414eafe41fd02b7146da6be5b2c",
       "discipline_id": "personality_psychology",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21604,8 +21697,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact change-as-signal passage read; adjacent functional labels replace unrelated measurement and character claims. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "The selected function is a descriptive question about reported experience and changes in situation/body; it does not establish a cause from temporal order,read affect from a face,diagnose poor adaptation,or make emotion intensity a productive-action rule. Other functions can coexist and physical/medical causes remain to assess. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_361df51c6b840d0ea2a967d59a0d67ed1ceebfcf6fc710968a5472500ca8e7f6",
+          "snapshot_sha256": "a7d7c93c93752661390f85857ddd9b95bcb64cfc2311ee6011b9d337227579ee",
+          "modified_time": "2026-07-12T06:20:47.688Z",
+          "locator": "characters:34295:34517"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_org_031": {
       "item_sha256": "31b5cb924296bcdebfbd93cad0e66e9792b289cd457d7261c5959e4cfc9a3be0",
