@@ -16890,6 +16890,214 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "literature:psf_danilova_psihofiziologiya": {
+      "schema_version": 1,
+      "item_sha256": "dc757c3c13c9eaefdc8bbb6f956aeb9176f8fc752251d6219dc41c17345f7166",
+      "review_sha256": "192c455d0a60e7b890d32e591022a52857111583af29f35c0f27f78037ef3349",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:psf_ilyin_psihofiziologiya_sostoyaniy": {
+      "schema_version": 1,
+      "item_sha256": "d7ba70f28fc5d3d696f2b7e91fbeeccb91799292cff813be4dd6fb0850e64e0a",
+      "review_sha256": "3dc937096da9f81a8e3a711911d6cd6ca1aabf7368c5d280edd7c80baf402222",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:psf_aleksandrov_psihofiziologiya": {
+      "schema_version": 1,
+      "item_sha256": "283e60d62dc0d972b557c292ffa5c62fb9937416dbb40e0eb6e123c09aaf374f",
+      "review_sha256": "7cc3cdd7303518f51aaf61ceec23e049677b32f37d3d0ac21331d8d2ae57ab60",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:psf_van_der_kolk_telo_pomnit_vse": {
+      "schema_version": 1,
+      "item_sha256": "9afa022e27a278d27caee74868295a0a98dacdd322651dc64bd46e3cf1f85cda",
+      "review_sha256": "e1c37397385482c1332dc9f243f632637d5d6b15c50886f4a8300a40352b02e5",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:psf_sapolsky_psihologiya_stressa": {
+      "schema_version": 1,
+      "item_sha256": "27e2a07834e4922ebc10d9c174208b1cc79a75bb5e531ec1589005a62a6cd456",
+      "review_sha256": "c543aba1e6c75b07c85ef51f2d8bd4728c632ef554e867daf3f1418cb990e1f5",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:psf_kabat_zinn_kuda_by_ty_ni_shel": {
+      "schema_version": 1,
+      "item_sha256": "31a8b00b2f425f34f11a902be870833e1489d0dc4df0be0e464f55bfa8520b22",
+      "review_sha256": "ef78f7ea4bc1810da1048469b3f1c3778111a12a181997437a729495e587e228",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_family_slide_05": {
+      "schema_version": 1,
+      "item_sha256": "070784f349349471f6a8a085c3d7e495133ac489bf4055ac85848194eaa32c87",
+      "review_sha256": "840d1895970f7094e449c1d97d8fab670ab5139b00cf4fe6905391469b32cafc",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_family_slide_06": {
+      "schema_version": 1,
+      "item_sha256": "bfc83d46b887a0263107ee33b805c02c2b0428479a7e6df9a833f25e630cd141",
+      "review_sha256": "7e60880473f91d792ea19ce323bb3a453270c009a6dcfe771e433bebadfb4e30",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_family_slide_07": {
+      "schema_version": 1,
+      "item_sha256": "510875e7c09ffe9052b2a4e40d0ccface75abbb686e15fbc5f9a105589a9f58a",
+      "review_sha256": "06153ecdba496f52ee79c81e81873c9d5ee334df988dedd15ac8936ad6b14bfb",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_family_slide_08": {
+      "schema_version": 1,
+      "item_sha256": "a0253734aa5e9e2ee58fc636d697fe8e92b3ee7a7b498888eeea8ea15d6aefe4",
+      "review_sha256": "68d10b54ea7ccfe80414b1315f8ce4da4e7a864564da44d2ca1ac286a5b0c560",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_family_slide_09": {
+      "schema_version": 1,
+      "item_sha256": "11d333e8fe1bcfac5b316500cdcb565d2ab93465b190acc925d688563cb030af",
+      "review_sha256": "e832ecd628ba68945dd372b943415015e05b4ae5293f45b66022d1d190c32157",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_family_slide_01": {
+      "schema_version": 1,
+      "item_sha256": "c5ec4ef3f247ee5e84f32e560592ebc4a09045767336c430edb115a503fbf705",
+      "review_sha256": "dc4b9aba3de3678e12674020735166cce10ecbd9a4751661cd7eedd531cc0412",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_family_slide_02": {
+      "schema_version": 1,
+      "item_sha256": "79b180fd4ad5f6d1345f9af30fe56d648aef5dc6b7477fce61f1da353625e395",
+      "review_sha256": "d577068c60fa46333546db8a066d89ec4ffb65df17958df7acff1e5f7b537845",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_family_slide_03": {
+      "schema_version": 1,
+      "item_sha256": "b63fe6ce5b69fba26df2b18ae9a3fec831ffeedf4d088b2cd723eeb133776c43",
+      "review_sha256": "fa0918e2f919f2f11b4ed5f3f39852aae326009152471dbabefa84d856624281",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_family_slide_04": {
+      "schema_version": 1,
+      "item_sha256": "bb23c5b222e23aad033c2587023b8853ce9d44a334af62eb6494ebf1aa4e0854",
+      "review_sha256": "bb56c349093776963a51b0cd50e05efb400c9d1cb79d74ecda3d8d4b6f66dd58",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_org_lecture_02": {
+      "schema_version": 1,
+      "item_sha256": "69e2814040942470c38714ae2564ccf095a959200f6859a7a8cda9eda292d46d",
+      "review_sha256": "f591080f3e288a96d0b996c899bacd1be7a397e0bb8264817216a272f7be70ee",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
