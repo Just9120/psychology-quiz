@@ -17404,8 +17404,8 @@
     "glossary:complaint": {
       "item_sha256": "8f501184b8b12786c1d46121447cbc9c54931dcc82f4c74e8787403d234d03ea",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -17417,7 +17417,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Course-framed initial complaint distinguished from agreed desired focus; example remains illustrative, no real history claimed. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Course-model initial expression of dissatisfaction distinguished from negotiated work request;emotional label scoped to this model,not every real client complaint or prerequisite to support.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17426,13 +17426,13 @@
           "locator": "characters:1227:1368"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:client_request": {
       "item_sha256": "34f2497a08e6884437d0326ce47ca7b6d9410dee9b07a838283fd8943ad61032",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -17444,7 +17444,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Agreed working result/participation distinguished from initial dissatisfaction; not a promise to change another person. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Jointly clarified desired work outcome and client participation,not a therapist-discovered true hidden problem or symptom-relief prohibition. Authored work-conflict example is checkable.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17453,13 +17453,13 @@
           "locator": "characters:1370:1491"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:reflective_listening": {
       "item_sha256": "e3b8020d37a88bd4b0fb41c2a487a73977dbf72760dcb0436d70cff0842614d1",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -17471,7 +17471,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Listening operations and client correction distinguish it from feeling reflection alone and open-question form. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Paraphrase/feeling reflection/clarification/summary with client correction. Source phrase real meaning is not privileged mindreading or therapist certainty;authored explicit confirmation preserves tentative understanding.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17485,8 +17485,8 @@
     "glossary:open_question": {
       "item_sha256": "4ba7d54373dd15a3fbafc00328c28a0561a218ff30022e5ca569a80b477775b7",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -17498,7 +17498,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Invitation to a developed answer, not a rigid first-word rule; independently authored example retained. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Invites expanded exploration;what/how are common openings,not necessary/sufficient grammatical tests or a coercive disclosure technique. Authored overload-day question seeks actual experience.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17507,13 +17507,13 @@
           "locator": "characters:4131:4284"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:therapeutic_contract": {
       "item_sha256": "065e4226b1f8310adac61171bf236c338aea2bbc1517f30cc6848a4390f69c12",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -17525,7 +17525,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Agreed roles/conditions/goals/methods/privacy, not a guarantee or trust quality itself. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Explicit shared work boundaries/goals/methods/roles/confidentiality limits;no legal absolutes or treating rapport as consent. Source implicit-contract shorthand is not permission to omit communication.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17534,13 +17534,13 @@
           "locator": "characters:2855:3037"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:rapport": {
       "item_sha256": "96525aa492c9c63e30b93949cd8392e21941e62ad1b9e0ba4caed92f512ee96b",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -17552,7 +17552,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Trust/contact quality distinguished from working agreement and full alliance model; source efficacy guarantees excluded. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Quality of trusting contact,not proof of outcome,contract,unrestricted disclosure or automatic absence of power/boundary risks. Authored client statement illustrates perceived trust only.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17561,7 +17561,7 @@
           "locator": "characters:6311:6489"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:metagoal": {
       "item_sha256": "dde8e9f4ca9ed700d1e151a06affc6a5201961e621819e3e12dc68652bdf1239",
@@ -17593,8 +17593,8 @@
     "glossary:reflection_of_feelings": {
       "item_sha256": "10be6c242eb04aca193053a6e167f07606ffd4c0dc33c8e888a5213090bd1f65",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -17606,7 +17606,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Tentative verbalization checked by client, not mind-reading or an established account of another person's intentions. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Tentative verbal reflection is checked with client;feeling abandoned is a proposed experience,not established external abandonment or inferred hidden cause. Distinct from whole active-listening process.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -17615,7 +17615,7 @@
           "locator": "characters:4428:4601"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:case_first_consultation_001": {
       "item_sha256": "5e9e0ac58b584762a72ea7a94ff66bc874b349808d4195d747911d576cd5f24a",
@@ -17639,8 +17639,8 @@
     "glossary:case_conceptualization": {
       "item_sha256": "8c874daf392fedecc150c895cfd889a326bbdbe1a8a40b7617b004bd80c8b080",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -17652,7 +17652,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Organized facts/hypotheses/strategy, distinct from a diagnosis or finalized explanation. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Organise reported facts,working hypotheses and plan;not a ready diagnosis,unique hidden cause or source-supported requirement to postpone support/request clarification.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -22516,6 +22516,303 @@
       "note": "NEW: Recognisable trigger and feasible agreed action distinguish a concrete support plan from a general intention. No crisis or treatment protocol claimed. Exact current425private source dossier and source-free publication receipt bind this public fingerprint.",
       "sources": [],
       "disposition": "new"
+    },
+    "glossary:supervision_professional_supervision": {
+      "discipline_id": "counseling_supervision",
+      "item_sha256": "96568392370251587ca6f9818745cfa37349463da635f536135d7e845a434d06",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
+          "modified_time": "2026-06-07T21:20:48.648Z",
+          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
+          "locator": "characters:7661:7839"
+        }
+      ],
+      "note": "Professional case/work support,not personality assessment,therapy substitute,guaranteed burnout prevention or universal supervisor credential claim. Authored consultation episode,not actual participant history.",
+      "disposition": "keep"
+    },
+    "glossary:social_role": {
+      "discipline_id": "social_psychology",
+      "item_sha256": "8c78de5fe9eb28b1ae08069ab60cd904b1bff20189aac274234b018bdaa4814e",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_dd911d9cb486f964c971f81a646716fee3d39f2459f53b53e67e93e51d1ef0ab",
+          "modified_time": "2026-09-08T12:06:43.015Z",
+          "snapshot_sha256": "580714deb1ce3a68c62e91caa846fdc78a2f30f7156365f34d923526a2ee67cd",
+          "locator": "characters:750:1073"
+        }
+      ],
+      "note": "Normative role pattern linked to position distinguished from expected and performed actions. Role example is a normative description,not report of actual meeting behaviour.",
+      "disposition": "keep"
+    },
+    "glossary:social_role_expectation": {
+      "discipline_id": "social_psychology",
+      "item_sha256": "a52139a7b4b1c37e40398a4ae8807562b4289b76ce9df907c0adfbf64a534415",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_dd911d9cb486f964c971f81a646716fee3d39f2459f53b53e67e93e51d1ef0ab",
+          "modified_time": "2026-09-08T12:06:43.015Z",
+          "snapshot_sha256": "580714deb1ce3a68c62e91caa846fdc78a2f30f7156365f34d923526a2ee67cd",
+          "locator": "characters:750:1073"
+        }
+      ],
+      "note": "Expected conduct is not proof it was carried out. Distinct from role as normative pattern and actual execution;no character diagnosis from a role.",
+      "disposition": "keep"
+    },
+    "glossary:social_role_performance": {
+      "discipline_id": "social_psychology",
+      "item_sha256": "c868ae87d3ad68ced265690718cdd2958d09a6b78aa10dc5c476f7e654adc4da",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_dd911d9cb486f964c971f81a646716fee3d39f2459f53b53e67e93e51d1ef0ab",
+          "modified_time": "2026-09-08T12:06:43.015Z",
+          "snapshot_sha256": "580714deb1ce3a68c62e91caa846fdc78a2f30f7156365f34d923526a2ee67cd",
+          "locator": "characters:1013:1072"
+        }
+      ],
+      "note": "Actual described actions compared with expectations;neither promise nor expectation alone establishes performance. Authored seminar timing action makes this distinction.",
+      "disposition": "keep"
+    },
+    "glossary:social_role_conflict": {
+      "discipline_id": "social_psychology",
+      "item_sha256": "8f6fd8e02534ba28f974cef22cc585d60925a0fc99d7b1fcc302599ca18fdf95",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_dd911d9cb486f964c971f81a646716fee3d39f2459f53b53e67e93e51d1ef0ab",
+          "modified_time": "2026-09-08T12:06:43.015Z",
+          "snapshot_sha256": "580714deb1ce3a68c62e91caa846fdc78a2f30f7156365f34d923526a2ee67cd",
+          "locator": "characters:1073:1151"
+        }
+      ],
+      "note": "Incompatible role requirements need clarification of requirements/context,not character blame. Organisational disclosure-versus-confidentiality example does not itself resolve legal duties.",
+      "disposition": "keep"
+    },
+    "glossary:social_causal_attribution": {
+      "discipline_id": "social_psychology",
+      "item_sha256": "9d630334da3afea1c68eb02e3dabecd31a14ea090cca13d7c27f3c4d647fc73c",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_dd911d9cb486f964c971f81a646716fee3d39f2459f53b53e67e93e51d1ef0ab",
+          "modified_time": "2026-09-08T12:06:43.015Z",
+          "snapshot_sha256": "580714deb1ce3a68c62e91caa846fdc78a2f30f7156365f34d923526a2ee67cd",
+          "locator": "characters:2165:2307"
+        }
+      ],
+      "note": "Attributing explanations to behaviour is interpretation,not a proven causal law. Lack of information/credible narrative does not verify a colleague cause.",
+      "disposition": "keep"
+    },
+    "glossary:social_fundamental_attribution_error": {
+      "discipline_id": "social_psychology",
+      "item_sha256": "47b342cbd2ad2890f4e9a33c034e93eba7565940af5b9f007fbfb1a14d2cf454",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_dd911d9cb486f964c971f81a646716fee3d39f2459f53b53e67e93e51d1ef0ab",
+          "modified_time": "2026-09-08T12:06:43.015Z",
+          "snapshot_sha256": "580714deb1ce3a68c62e91caa846fdc78a2f30f7156365f34d923526a2ee67cd",
+          "locator": "characters:2308:2456"
+        }
+      ],
+      "note": "Tendency to overweigh dispositional/underweigh contextual accounts,not every personality explanation wrong or universal culture-free individual mechanism. Road-closure hypothesis remains checkable.",
+      "disposition": "keep"
+    },
+    "glossary:social_self_serving_attribution": {
+      "discipline_id": "social_psychology",
+      "item_sha256": "0017b964f5eaff1273a83f2535e0957770201e5570b22bbf7dce155e8bbe026d",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_dd911d9cb486f964c971f81a646716fee3d39f2459f53b53e67e93e51d1ef0ab",
+          "modified_time": "2026-09-08T12:06:43.015Z",
+          "snapshot_sha256": "580714deb1ce3a68c62e91caa846fdc78a2f30f7156365f34d923526a2ee67cd",
+          "locator": "characters:2457:2556"
+        }
+      ],
+      "note": "Success-self/failure-circumstance attribution tendency;not proof of conscious lying,objective causes or a stable personality diagnosis from one event.",
+      "disposition": "keep"
+    },
+    "glossary:social_informational_influence": {
+      "discipline_id": "social_psychology",
+      "item_sha256": "ace90013ab72e2f5138eff796e2b2729c45dfffdf7c5ee7d78ceba40a7770367",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_dd911d9cb486f964c971f81a646716fee3d39f2459f53b53e67e93e51d1ef0ab",
+          "modified_time": "2026-09-08T12:06:43.015Z",
+          "snapshot_sha256": "580714deb1ce3a68c62e91caa846fdc78a2f30f7156365f34d923526a2ee67cd",
+          "locator": "characters:3590:3728"
+        }
+      ],
+      "note": "Accept group judgment as more accurate under uncertainty,distinguished from seeking approval. Added reciprocal confusable link without changing correct definition/example.",
+      "disposition": "fix"
+    },
+    "glossary:social_normative_influence": {
+      "discipline_id": "social_psychology",
+      "item_sha256": "08e0c43bba2e5588eb5ca63a5cf11ffbd1b7afda5fda7dbb2732e98482ea2d76",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_dd911d9cb486f964c971f81a646716fee3d39f2459f53b53e67e93e51d1ef0ab",
+          "modified_time": "2026-09-08T12:06:43.015Z",
+          "snapshot_sha256": "580714deb1ce3a68c62e91caa846fdc78a2f30f7156365f34d923526a2ee67cd",
+          "locator": "characters:3729:3859"
+        }
+      ],
+      "note": "Seek group approval/avoid rejection;new explicit example keeps private disagreement while publicly agreeing. This removes ambiguity with informational acceptance;neither is a universal mindreading diagnosis.",
+      "disposition": "fix"
+    },
+    "glossary:social_compliance": {
+      "discipline_id": "social_psychology",
+      "item_sha256": "119852a6a49a6bb307982a51ebe623a090fb75e01e653fdd82d6ed027c2dbcad",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_dd911d9cb486f964c971f81a646716fee3d39f2459f53b53e67e93e51d1ef0ab",
+          "modified_time": "2026-09-08T12:06:43.015Z",
+          "snapshot_sha256": "580714deb1ce3a68c62e91caa846fdc78a2f30f7156365f34d923526a2ee67cd",
+          "locator": "characters:4587:4651"
+        }
+      ],
+      "note": "Behaviour changed after a direct request,not necessarily changed belief or stable compliant personality. No coercion or blanket obedience claim.",
+      "disposition": "keep"
     }
   }
 }

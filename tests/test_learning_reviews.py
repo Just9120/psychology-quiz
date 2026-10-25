@@ -94,6 +94,7 @@ def test_repository_reviews_cover_exact_current_learning_inventory():
         "personality_psychology", "developmental_psychology", "klinicheskaya_psihologiya",
         "family_psychology", "organizational_psychology", "professional_legal_ethics",
         "psycholinguistics", "social_psychology", "bonus_lessons", "personal_brand", "turning_point",
+        "cases", "cognitive_behavioral_therapy", "counseling_supervision",
     }
     # Known unresolved ambiguity must remain visible; approval labels are not evidence.
     for key in ("questions:m1_gp_034", "questions:m2_qual_045", "glossary:qual_methods_focus_group"):
