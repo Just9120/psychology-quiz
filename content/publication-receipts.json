@@ -9629,7 +9629,7 @@
     "questions:m5_clinical_011": {
       "schema_version": 1,
       "item_sha256": "95deafb7a682da2a8ff2991ce907adf4ad427889a9c86d72217879aec1bca41d",
-      "review_sha256": "d91930edcd6d4d42765e2d5105d5b8be2ad2b01aa1901a7fa1ae8d0a18394cd8",
+      "review_sha256": "5ed8585b86e137f1c3a8d0937e20a6c7301b47382c6a318994cfb2244534b778",
       "topic_id": "t_75f56fc4df73",
       "decision": "approved",
       "purpose": "learning_content",
@@ -9648,7 +9648,7 @@
     "questions:m5_clinical_012": {
       "schema_version": 1,
       "item_sha256": "95be55e91192fec0ca490469e51d441d56ef56cd8821e18631fa64a4bf6d884c",
-      "review_sha256": "10eab923d4d13f431f735bb8ec8157d957adffb0c6418b98c504d2c54a68c125",
+      "review_sha256": "1d659e31446003f35f1f24f1a6a86fd86b1f7978503a193da03f5e6df8c6d786",
       "topic_id": "t_75f56fc4df73",
       "decision": "approved",
       "purpose": "learning_content",
@@ -9743,7 +9743,7 @@
     "questions:m6_org_009": {
       "schema_version": 1,
       "item_sha256": "f7f9067e6f208c5bdc4e0931cd9e19ba0cf96b3fb9d03df256fb7294cb80e839",
-      "review_sha256": "37b6d40da16cd898cea206eda9d2486c232b9c90178bc5890e6488e11747f958",
+      "review_sha256": "f6633c0c755c48ddbbb62e3f145347cb18bf4bb8056c780d00ac9b6a6f64b1ab",
       "topic_id": "t_368865518bf8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10009,7 +10009,7 @@
     "questions:m6_org_023": {
       "schema_version": 1,
       "item_sha256": "127c6f7a85eeb76fa1ebe0006035612af49d8541d065f7b2b6d0b100aa917983",
-      "review_sha256": "57f87613b945afe5fd306847c9168a04aa40edc9341db91ef13a4166b85eb8bc",
+      "review_sha256": "b4130af72d5cc12c05c1fb6ff519101e21d50159d69c0dc2d2b1a3df6b3fb9e5",
       "topic_id": "t_368865518bf8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10028,7 +10028,7 @@
     "questions:m6_org_024": {
       "schema_version": 1,
       "item_sha256": "84131fd20a198a6397fceeb6d60fe580d7a35fbb1f69c47cc3fe5e412ae39279",
-      "review_sha256": "90b94e2701cdaf9bcaf6afd20414ae5d363c7103cfa25c92be0172e57498d321",
+      "review_sha256": "f56eec83d9bb05bd60fb5fdc9cff2d9bd30bbcd71a8c15fe5bb1647c2af8c087",
       "topic_id": "t_368865518bf8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -10047,7 +10047,7 @@
     "questions:m6_org_025": {
       "schema_version": 1,
       "item_sha256": "bc9ad445b41f471945735d72bbc0e99014474da08d0215a0ea1bf64abf2c8cfd",
-      "review_sha256": "b1affa2ec8c6b8caa374cff7f517ad00e945a5cba556d2f6547e89daedcc85a2",
+      "review_sha256": "acbc6d3188c642199ec840aed79a1b948094fd8b9413996f4ee491796750b468",
       "topic_id": "t_368865518bf8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12327,7 +12327,7 @@
     "questions:m6_org_032": {
       "schema_version": 1,
       "item_sha256": "d33f72d304ba320550d988883f13c49e5cb224a4ab3dd527b3612f283ae59fe5",
-      "review_sha256": "d53ceb16f075e0da7ad7085f7dd05c7c8a542b5222448b16c61f8bfda1b05d1e",
+      "review_sha256": "a535a049643c195dfcd6f9cd504f92da09757512dd1d8dae8a16f21e7e5b5f3e",
       "topic_id": "t_368865518bf8",
       "decision": "approved",
       "purpose": "learning_content",
@@ -12479,7 +12479,7 @@
     "questions:m6_org_036": {
       "schema_version": 1,
       "item_sha256": "b6465d785071954784e1be15ca48f12caabf5db30b2be5d67f329f0db1978e9f",
-      "review_sha256": "41f9f4029b9e4a43299b7144ac32a9e328a68d467c16805a1822925aa4760dad",
+      "review_sha256": "35f39379b914db08bcef100e66c1cae3d2db6345fa44deae4992400ce461a1b9",
       "topic_id": "t_368865518bf8",
       "decision": "approved",
       "purpose": "learning_content",
