@@ -9327,8 +9327,8 @@
     "questions:m2_exp_004": {
       "item_sha256": "9804bd1ca91b617500e87d9daa6e0a724dc2887a4c4abd3097b8bfa25118174b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9340,22 +9340,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace procedure-detail claims with supported critical-analysis aim; actual historical/bibliographical alternatives. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "Authored critical-reading organisation,not a transcription of the six unreturned slide questions. Course explicitly asks one of four studies/selected Hock account,not all40books or reenactment. Link research question/procedure/observation/limits rather than biography/citation/school;historical and participant narratives excluded.",
       "sources": [
         {
           "source_id": "src_26ba73611f35e832c2613ed23f5f83e4f9394f0ce92cf49ca695815cd23cf0a4",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "characters:4020:4196;characters:7300:7732"
+          "locator": "characters:1652:2230"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_005": {
-      "item_sha256": "a563e6179ed21406a438dc840fca5fb739b5dd923cc780a7a5252dce1bc07d1e",
+      "item_sha256": "f941bb38ca693761db7d5e6befce487478a517106b3c1f146713cf9bc92a4f9e",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9367,13 +9367,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Match the course account to Watson/Rayner1920 original conditioning question; no universal phobia/therapy claim. Primary verification https://psychclassics.yorku.ca/Watson/emotion.htm . Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "Primary Watson/Rayner1920procedure checked directly:initial rat/noise observations and paired presentations;wording now explicitly historical report. No universal learning claim,adult fate,known absence of harm or reenactment permission. Competing options distinguish reinforcement,observational and latent learning.",
       "sources": [
         {
           "source_id": "src_26ba73611f35e832c2613ed23f5f83e4f9394f0ce92cf49ca695815cd23cf0a4",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "characters:4700:5650"
+          "locator": "characters:4750:5358"
         }
       ],
       "disposition": "fix"
@@ -9430,7 +9430,7 @@
           "locator": "characters:17000:17110"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_008": {
       "item_sha256": "2e518d4cc94efd2693ac7393d66116be41d5b39eb409512de308f90d3a5ed566",
@@ -9896,8 +9896,8 @@
     "questions:m2_exp_025": {
       "item_sha256": "b541a69d16bb415491b35b485acda8b0e889ed15b46d677cf40a6040dcd7c878",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9909,9 +9909,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Contextual demand-characteristics task with real competing threats; preserve informed-consent limits, retire068/103 duplicate assessments. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Authored participant deliberately changes answers to inferred hypothesis:demand characteristics,not test familiarity,instrument drift or group selection. Narrow source anticipatory-reactivity clause only;no unconditional deception,posthoc exclusion or consent-only ethics permission.",
+      "sources": [
+        {
+          "source_id": "src_e586ecb128812bbda3a319af464cac1ac8b9ac7310db612820c779954f6c1ec3",
+          "modified_time": "2026-04-22T20:18:51.271Z",
+          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
+          "locator": "characters:26715:26799"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_026": {
       "item_sha256": "8c4c77f11f37436e9ed068f4bbad1f9def759d9bd80686653438da19f7775848",
@@ -9995,8 +10002,8 @@
     "questions:m2_exp_029": {
       "item_sha256": "1d64712ec6c810b3918d20fe56385d9e0109cf843af91310363f6f3beec915e0",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10008,22 +10015,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use fully specified equal-mean/different-spread numerical data instead of unsupported claims that cognitive traits hardly vary; retire038. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "Fully specified independent teaching arithmetic:both4people/sum8/mean2,onlyspread differs. No inference every person responds to therapy,cognitive homogeneity,stable subtypes or average as causal evidence. Numeric calculation independently verified.",
       "sources": [
         {
           "source_id": "src_e586ecb128812bbda3a319af464cac1ac8b9ac7310db612820c779954f6c1ec3",
           "modified_time": "2026-04-22T20:18:51.271Z",
           "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "characters:16367:16870"
+          "locator": "characters:21833:22159"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_030": {
       "item_sha256": "c377227a2dfb8968c1c87316097a0dc0b634522d5ac67691b92290877ff076dd",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10035,22 +10042,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Keep distinct subgroup-effect objective; distinguish prespecified/exploratory and direct interaction comparison from separate p-values. Scientific reporting check CONSORT2025 https://www.bmj.com/content/389/bmj-2024-081124 . Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "Prespecified subgroup-effect difference requires direct contrast with uncertainty;not significance in one group versus nonsignificance in another or automatic personalised treatment. Source subgroup-comparison question only,not its always-second-stage/posthoc recommendations. Cochrane10.11.3clarification checked.",
       "sources": [
         {
           "source_id": "src_e586ecb128812bbda3a319af464cac1ac8b9ac7310db612820c779954f6c1ec3",
           "modified_time": "2026-04-22T20:18:51.271Z",
           "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
-          "locator": "characters:22643:23353"
+          "locator": "characters:22980:23125"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_031": {
       "item_sha256": "7c97e47d220338358e9f6b7509c221c01c914f2fd84002a6b0ad4b1224b28204",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10062,9 +10069,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Differentiate temporal trajectory from uncollected qualitative/control/context data, not claim measurements establish cause. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Extra within-course measurements describe time trajectory only;they do not collect personal meanings,untreated outcomes or external events. Explicit source caveat that more measurements do not eliminate alternatives retained.",
+      "sources": [
+        {
+          "source_id": "src_e586ecb128812bbda3a319af464cac1ac8b9ac7310db612820c779954f6c1ec3",
+          "modified_time": "2026-04-22T20:18:51.271Z",
+          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
+          "locator": "characters:11200:11920"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_032": {
       "item_sha256": "917b1d2036fa256c4636be3fbb5190e317c744a9eaffcaac6369e21e8da93d5d",
@@ -10123,10 +10137,10 @@
       ]
     },
     "questions:m2_exp_034": {
-      "item_sha256": "0d22b1bd3e0fec4c2313318ac95639aa20992c74682ae75e43702a0bc9b7189b",
+      "item_sha256": "5fc809ff4f78ac2798957ffe4503c58aade1b2bbc8557545167caa7255904e52",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10138,15 +10152,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Delayed intervention distinguishes waitlist without treating measurement as intervention or every scheme as ethically acceptable. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Apply waitlist definition to an explicit timing scenario,with comparable-length neighbouring control types. Deferred access is planned;neither every untreated participant must receive the method nor a waitlist automatically ethical or clinically suitable. Knowledge only,not a care-withholding instruction.",
+      "sources": [
+        {
+          "source_id": "src_e586ecb128812bbda3a319af464cac1ac8b9ac7310db612820c779954f6c1ec3",
+          "modified_time": "2026-04-22T20:18:51.271Z",
+          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
+          "locator": "characters:19282:19512"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m2_exp_035": {
       "item_sha256": "11f98afe1d009458e1a7d9e8bd306d410aecdb3dfacc059f2f2d2a6935c437ae",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10158,15 +10179,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace tautological answer and three implausible guarantee distractors; active comparator may itself act, no instruction to give ineffective care. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Authored equal-contact active comparator examines organised participation/contact;comparator itself can have effects and contact comparability needs evidence. Course alternative-activity example only,no creativity/anxiety independence or obsolete-method permission.",
+      "sources": [
+        {
+          "source_id": "src_e586ecb128812bbda3a319af464cac1ac8b9ac7310db612820c779954f6c1ec3",
+          "modified_time": "2026-04-22T20:18:51.271Z",
+          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
+          "locator": "characters:20870:20972"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_036": {
       "item_sha256": "4ec98b92469135552db53a9d4e7678c7ff2ed77ac047124734ea281f513bc8c5",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10178,9 +10206,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use actual research-quality contrasts rather than claims replication is strongest design or guarantees truth. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Independent replication on new participants checks repeatability,distinct from item consistency,content coverage and coder agreement. Neither outcome alone explains discrepancy or certifies causality.",
+      "sources": [
+        {
+          "source_id": "src_e586ecb128812bbda3a319af464cac1ac8b9ac7310db612820c779954f6c1ec3",
+          "modified_time": "2026-04-22T20:18:51.271Z",
+          "snapshot_sha256": "df956a721a80b4735f179cc968690055b198d7cf6bc63f75b88846bfde776170",
+          "locator": "characters:12557:12850"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_037": {
       "item_sha256": "4625900aa7b1b9655f01c692e75e6e2cd41c9573cfa2c779820a487c0484d05b",
@@ -10263,8 +10298,8 @@
     "questions:m2_exp_040": {
       "item_sha256": "bc0a7d8d4d7a753b3773862fa9f39272edc84f9b44f75b0c49ae7621124f0b8e",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10276,20 +10311,20 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Separate generalization from the false equation one participant=no experiment; preserve controlled single-case designs distinction. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "N1historical observation limits transfer,but N1does not categorically exclude controlled experimentation/statistics. Course literal one-case description checked against Watson/Rayner1920;ideographic equals one-person and all-behaviour extrapolations remain held.",
       "sources": [
         {
           "source_id": "src_26ba73611f35e832c2613ed23f5f83e4f9394f0ce92cf49ca695815cd23cf0a4",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "characters:8100:8300"
+          "locator": "characters:8114:8177"
         }
       ],
       "resolution": {
         "action": "FIX",
         "previous_item_sha256": "06b2f9e4d7f02c9c2d0feef9e6a25d165cecf724d0a3322b8065351d862dbce3"
       },
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_041": {
       "item_sha256": "ba007b60f8993ce323c4f04aa8b3bf0a2d014c81da9eec1283a07bb7a7c85a1a",
@@ -10807,8 +10842,8 @@
     "questions:m2_exp_060": {
       "item_sha256": "08917120da1c2b13adef87971b11417689edf53384a10341da86c2eb1610081c",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10820,22 +10855,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Specify observed learning without conflating it with direct reward; primary 1961 report checked https://psychclassics.yorku.ca/Bandura/bobo.htm . Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "Course names learning by observing;primary Bandura/Ross/Ross1961directly checked model absent in later test. Do not adopt course mistaken group count,universal gender/parent/violence predictions or study reenactment. Other options name different learning mechanisms.",
       "sources": [
         {
           "source_id": "src_26ba73611f35e832c2613ed23f5f83e4f9394f0ce92cf49ca695815cd23cf0a4",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "characters:27100:27280"
+          "locator": "characters:25697:25877"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_061": {
       "item_sha256": "f4f6e1745fe66b8b75071911fe0b5cc86a97283e934fb27e7b21c94abcca0218",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -10847,16 +10882,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Separate acquisition/performance and avoid literal brain-map or universal reward claims. Primary historical synthesis https://psychclassics.yorku.ca/Tolman/Maps/maps.htm checked; first latent-learning work was Blodgett, not uniquely Tolman. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
+      "note": "Course cognitive-map topic only;procedure/interpretation checked against Tolman1948latent-learning section,which explicitly cites Blodgett and Honzik. Acquisition versus performance,not discovery attribution,exact day,superiority over continuously rewarded group,global starvation or literal imaged brain map.",
       "sources": [
         {
           "source_id": "src_26ba73611f35e832c2613ed23f5f83e4f9394f0ce92cf49ca695815cd23cf0a4",
           "modified_time": "2026-04-22T20:12:28.380Z",
           "snapshot_sha256": "7e281805eddfaa92adc0e12d08541c0ea171319daf97c9611056e42906d601be",
-          "locator": "characters:36580:36980"
+          "locator": "characters:36613:36635"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_062": {
       "item_sha256": "08ab847d5c860e47ec766a0f1bb03e21336a3bcf51321a53e124ece859fb5643",
@@ -10910,7 +10945,7 @@
           "locator": "characters:1683:1811"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_064": {
       "item_sha256": "e55a6311322961aa392392969bccb5e19b4a2648920b3caba767576d59954592",
@@ -11126,7 +11161,7 @@
           "locator": "characters:9742:9853;characters:9853:10021;characters:10123:10222"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_072": {
       "item_sha256": "870eeaf87c544d5ed181ed96c54b8efb30f899fab5b3097f14e0593ba4757492",
@@ -11207,7 +11242,7 @@
           "locator": "characters:15003:15553"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_075": {
       "item_sha256": "7acca0b3b561bde434bd4882f210fef91613bd515976b4f71f682133f685eea5",
@@ -11342,7 +11377,7 @@
           "locator": "characters:23972:24483"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_exp_080": {
       "item_sha256": "35a717b3f37d39dd9c1d719ca52e8ddf5b6661d0d8b550cfedafac6869061722",
@@ -11467,8 +11502,8 @@
     "questions:m2_exp_085": {
       "item_sha256": "f3d86b8305c4580fa44451ab0b71d3da6513add0701aec6da8a42260d8a60130",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -11480,9 +11515,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use a hypothetical time-of-measurement task based on the course pre/post design, without certifying dolphin/VR treatment efficacy or recommending discontinuation. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Authored followup question grounded in course pre/post measurement timing. To assess one-month persistence,measure at that time;no certification of dolphin/VR efficacy,drug withdrawal,replacement care or later selfreport as validated clinical cure. Causal comparison/attrition limitations explicit.",
+      "sources": [
+        {
+          "source_id": "src_c3855dd7f3343f1fdc4a5f641d9628c8d2aed5691b3402d6acf753a683f6eb5d",
+          "modified_time": "2026-05-14T11:25:02.862Z",
+          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
+          "locator": "characters:11419:11488"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_086": {
       "item_sha256": "1ab6c08ed2b3da2d343066b3aa60325e52a27c8e3e001f9190d20580b4dac4ad",
@@ -11581,8 +11623,8 @@
     "questions:m2_exp_090": {
       "item_sha256": "2ea8f0e76ce1a9f43197c603daf0f22d45f156b0b8132f64ffdd65bcc6d3835c",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -11594,15 +11636,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Repeated testing risk is distinguished from history/instrument/attrition, not presumed automatically present. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
+      "note": "Use only the source possibility of repeating earlier answers;correct distinction is testing exposure,not instrument drift. No guaranteed magnitude/direction or assertion all selfreport dishonest;history,changed instrument and attrition are separate.",
+      "sources": [
+        {
+          "source_id": "src_c3855dd7f3343f1fdc4a5f641d9628c8d2aed5691b3402d6acf753a683f6eb5d",
+          "modified_time": "2026-05-14T11:25:02.862Z",
+          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
+          "locator": "characters:29264:29510"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m2_exp_091": {
       "item_sha256": "514bfc1d8042adbf1e9b3a9a46b565169a0b6fa7101bbe11c9e388470a14cd7d",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -11614,15 +11663,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Distinguish assigned instructional manipulation from unverified latent activation; remove implicit effectiveness premise. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Authored instructions are the assigned condition;actual latent threat/ability difference is not guaranteed. Only the source neutral-instruction condition used;no stereotype truth,all-group inferiority,universal replication or exact study result.",
+      "sources": [
+        {
+          "source_id": "src_c3855dd7f3343f1fdc4a5f641d9628c8d2aed5691b3402d6acf753a683f6eb5d",
+          "modified_time": "2026-05-14T11:25:02.862Z",
+          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
+          "locator": "characters:80793:80878"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_092": {
       "item_sha256": "a6673d1590ddbb7140d0a3c028e92b2aca18b43652c3af2014df4110edead418",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -11634,9 +11690,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Make perfect confounding explicit and offer a crossed-factor remedy; questionnaires/repetition cannot identify perfectly aliased effects. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Course explicitly raises who gives the instruction as a research question. Authored perfect-confounding task uses crossed text-by-presenter comparisons;fourcell logic separates assigned factors,not a universal authority effect. Personal classroom disclosure/Milgram variant history/child always-influence remain excluded.",
+      "sources": [
+        {
+          "source_id": "src_c3855dd7f3343f1fdc4a5f641d9628c8d2aed5691b3402d6acf753a683f6eb5d",
+          "modified_time": "2026-05-14T11:25:02.862Z",
+          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
+          "locator": "characters:91827:91893"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_093": {
       "item_sha256": "54ae40a6a65536b7e90357a31777e1b4a73d25b434e44dbcbee7014fda8fede4",
@@ -11690,8 +11753,8 @@
     "questions:m2_exp_095": {
       "item_sha256": "48174b0cb95b521a4001917a90ecc641a3d8c325cfc8cd939700c41fa86aa741",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -11703,9 +11766,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Apply course age/context transfer limitation without endorsing therapy efficacy or unsupported age mechanism. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Authored pilot-to-other-age/work-context transfer requires assessing target differences;course age incomparability concern only. No claim older people fear technology,age causes measured efficacy,or pilot proves all-population response.",
+      "sources": [
+        {
+          "source_id": "src_c3855dd7f3343f1fdc4a5f641d9628c8d2aed5691b3402d6acf753a683f6eb5d",
+          "modified_time": "2026-05-14T11:25:02.862Z",
+          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
+          "locator": "characters:23530:23627"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_exp_096": {
       "item_sha256": "165ffbe8a344f2cf283661f59e7f63d73c6c7f2ca3b5c6e8e62f835054d8f9ee",
@@ -12065,10 +12135,10 @@
       "disposition": "consolidate"
     },
     "questions:m2_exp_109": {
-      "item_sha256": "d0f4c3849c4657232e7ae2c98435f16c9b444fe9d7390e1be64ba4b3b82eb00b",
+      "item_sha256": "822adb48b9ddaa6ca27d2527e50ff32830e8283d33a6b42f138578eb802d194b",
       "discipline_id": "osnovy_eksperimentalnoy_psihologii",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -12080,9 +12150,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Measured attention score is explicitly stated and distinguishes DV from intervention/group descriptors. Current full item individually reviewed; unchanged exact prior certificates reused for kept/historical items; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Authored school-break example now names pupil test score as measured outcome,distinguished from intervention,allocation rule and sample size. Explain all alternatives and no automatic causal inference from posttest contrast;course corrected measured-variable clause only,not groups themselves as IV.",
+      "sources": [
+        {
+          "source_id": "src_c3855dd7f3343f1fdc4a5f641d9628c8d2aed5691b3402d6acf753a683f6eb5d",
+          "modified_time": "2026-05-14T11:25:02.862Z",
+          "snapshot_sha256": "11633763e1e94792ac78fe143bfe8a87bb19d3173edc2937feb2a42d6f7e323c",
+          "locator": "characters:45059:45148"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m2_exp_110": {
       "item_sha256": "55f217e3fd13f5bf53ea7e48ea2c8a2c7c9875fdd177080e341d4fbde016ec67",
