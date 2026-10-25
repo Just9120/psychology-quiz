@@ -15427,6 +15427,84 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "literature:gippenreiter_vvedenie_v_obschuyu_psihologiyu": {
+      "schema_version": 1,
+      "item_sha256": "e45ed3dddcacacb2bc6ca2a1feb49cd8e382bc7c34569d6de63eb39f284b1586",
+      "review_sha256": "d860f713d4c133f8f0c8323f9cf24761abf78ba1619a51759a5cd2cf83394a10",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:nurkova_berezanskaya_obschaya_psihologiya": {
+      "schema_version": 1,
+      "item_sha256": "5f9a54684824dccd048ef498418d4f47c7b4f4fa4a0cf7f66e2c6f1c92eafca2",
+      "review_sha256": "0e7b324229bc52d65d40f244c0554c9fca15ee759cd1d0285696f9fa6a3b16a8",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:vygotsky_myshlenie_i_rech": {
+      "schema_version": 1,
+      "item_sha256": "382953035ff831bedb9d2acefbe9598ea9cd4f2e555f992bca47a8dc497ffb28",
+      "review_sha256": "f06f55c83ca6199eb68a8fcecb785cb75491927299d0f79dc1249a8f8cd2008c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:zhdan_istoriya_psihologii": {
+      "schema_version": 1,
+      "item_sha256": "7beb51ca52c0a309475131a5fa91632a110091d05dc3dc28c831450c1650588f",
+      "review_sha256": "b85665412643edbddeb275d731ce45322dd2540121886b85ec29f992554cae3c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:myers_psihologiya": {
+      "schema_version": 1,
+      "item_sha256": "182d35b0c11e5d8898b23bfa7f3e88c4e71ab3a6aaf9b511a54ee4d4e08cf7af",
+      "review_sha256": "329129fd918e0e7a52c5893d18bdfac1a45d8af7e248b1434d0738fc932a5050",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:rubinstein_osnovy_obschey_psihologii": {
+      "schema_version": 1,
+      "item_sha256": "49a9b2c76d3fd7cbb4fd92fd5467dcc6293b6fe112d7d619b90a1f6d1113e5d7",
+      "review_sha256": "2e1888fd0793718c9e045bfdeb02c4ef1e412b34a09fc5b330d820d8f88fadd9",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
