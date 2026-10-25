@@ -886,3 +886,52 @@ test('return from a recommended material preserves the open stage and source foc
   await expect(first).toBeFocused()
   expect(Math.abs(await page.evaluate(() => window.scrollY) - previous)).toBeLessThan(80)
 })
+
+
+test('canonical new topics and ABC homework work with durable case feedback', async ({ page, request }, testInfo) => {
+  expect((await request.post(backend + '/__test/reset', { data: { canonical_bank: true } })).ok()).toBeTruthy()
+  await fresh(page)
+  for (const name of ['Когнитивно-поведенческая терапия', 'Супервизия психологического консультирования']) {
+    await expect(page.getByRole('radio', { name, exact: true })).toBeVisible()
+  }
+  await page.screenshot({ path: `test-results/bank-quality-${testInfo.project.name}-new-topics.png`, fullPage: true })
+  await navigate(page, 'Глоссарий')
+  const topic = page.getByLabel('Тема глоссария')
+  for (const id of ['cognitive_behavioral_therapy', 'counseling_supervision']) {
+    await topic.selectOption(id)
+    await expect(page.getByRole('button', { name: 'Начать тест по терминам' })).toBeEnabled()
+  }
+  await navigate(page, 'Домашние задания')
+  const card = page.locator('.homework-card').filter({ has: page.getByRole('heading', { name: 'ABC-разбор и дневник наблюдений', exact: true }) })
+  await expect(card).toContainText('не подтверждает выполнение самонаблюдения')
+  await card.getByRole('button', { name: 'Начать тест · 5 вопросов', exact: true }).click()
+  const choices = [1, 1, 1, 0, 3] // One wrong answer, then four correct in this single attempt.
+  for (let index = 0; index < choices.length; index++) {
+    if (index === 4) {
+      await expect(page.locator('.question-heading')).toContainText('Клиент записал в дневнике')
+      await expect(page.locator('.question-heading')).not.toContainText(/вымышленн|выдуманн/i)
+      await page.screenshot({ path: `test-results/bank-quality-${testInfo.project.name}-homework-case.png`, fullPage: true })
+    }
+    await page.getByRole('radio').nth(choices[index]).check()
+    await page.getByRole('button', { name: 'Проверить ответ', exact: true }).click()
+    if (index === 4) {
+      await expect(page.getByRole('heading', { name: 'Разбор кейса', exact: true })).toBeVisible()
+      await expect(page.getByText('Уточняет поведение — действие или отказ от него.', { exact: true })).toBeVisible()
+    }
+    await page.getByRole('button', { name: index === 4 ? 'Посмотреть результат' : 'Следующий вопрос', exact: true }).click()
+  }
+  await expect(page.getByRole('heading', { name: '80% верных ответов', exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'К заданиям', exact: true }).click()
+  await page.reload()
+  await navigate(page, 'Домашние задания')
+  await expect(card.locator('.homework-status')).toContainText('Выполнено · лучший результат 4 из 5')
+  const catalog = await (await page.request.get('/web/homework/catalog')).json()
+  expect(catalog.assignments.find((item: { id: string }) => item.id === 'cbt_abc_observation')).toMatchObject({ completed: true, finished_attempts: 1, best_score: 4, best_total: 5 })
+  await navigate(page, 'Литература')
+  const search = page.getByRole('searchbox', { name: 'Поиск по названию или автору', exact: true })
+  for (const title of ['Когнитивно-поведенческая терапия. От основ к направлениям', 'История комфортного консультанта']) {
+    await search.fill(title)
+    await expect(page.locator('.literature-title').filter({ hasText: title })).toBeVisible()
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+})

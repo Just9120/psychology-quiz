@@ -273,3 +273,44 @@ def test_random_selectors_keep_full_filtered_bank_without_database_sort(bank):
             assert selector(*args, limit=None, difficulty_mode="hard") == []
         assert statements
         assert all("ORDER BY RANDOM()" not in statement.upper() for statement in statements)
+
+
+def test_withheld_course_books_keep_both_actors_reading_history_after_reseed(bank, monkeypatch):
+    import json
+
+    withheld = {
+        "lit_tereshonok_levina_psychology_pedagogy_part1",
+        "lit_meshcheryakov_zinchenko_big_dictionary",
+        "lit_leonhard_accentuated_personalities",
+        "lit_course_mention_unspecified_psychology_basics",
+    }
+    stored = {item["id"]: item for path in Path("content/literature").glob("*.json")
+              for item in json.loads(path.read_text(encoding="utf-8"))}
+    published = {item["id"] for item in load_literature_items()}
+    assert withheld.isdisjoint(published)
+    assert all(stored[item]["status"] == "review" and stored[item]["work_id"] == item
+               and stored[item]["metadata_warnings"] for item in withheld)
+    monkeypatch.setenv("DB_PATH", str(bank))
+    assert init_db.main() == 0
+    with closing(get_connection(str(bank))) as conn, conn:
+        migrate_auth_schema(conn)
+        create_or_load_user(conn, 99, None, "Other user", None)
+        actors = [row[0] for row in conn.execute("SELECT id FROM users ORDER BY id")]
+        assert len(actors) == 2
+        for actor, status in zip(actors, ("read", "in_progress")):
+            for item in withheld:
+                conn.execute("INSERT INTO user_literature_progress "
+                             "(user_id,literature_id,reading_status,updated_at,private_note) "
+                             "VALUES (?,?,?,'2026-01-01',?)",
+                             (actor, item, status, "Actor " + str(actor)))
+                conn.execute("INSERT INTO user_literature_work_progress "
+                             "(user_id,work_id,reading_status,updated_at,source_literature_id) "
+                             "VALUES (?,?,?,'2026-01-01',?)", (actor, item, status, item))
+        before = user_state(conn)
+    monkeypatch.setenv("DB_PATH", str(bank))
+    for _ in range(2):
+        assert init_db.main() == 0
+        with closing(get_connection(str(bank))) as conn, conn:
+            upsert_approved_questions(conn, [NEW, OTHER], authoritative=True)
+            assert user_state(conn) == before
+            assert conn.execute("SELECT COUNT(*) FROM user_literature_work_progress").fetchone()[0] == 8

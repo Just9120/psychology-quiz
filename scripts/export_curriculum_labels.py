@@ -24,7 +24,7 @@ def project_labels(curriculum, private, registry, snapshot):
     by_id = {source["id"]: source for source in registry["sources"]}
     for topic in combined["topics"].values():
         path = by_id[topic["source"]["source_id"]]["corpus_path"]
-        match = re.match(r"Модуль ([1-6])(?:[. /]|$)", path)
+        match = re.match(r"Модуль ([1-9][0-9]*)(?:[. /]|$)", path)
         if match:
             modules.setdefault(topic["discipline_id"], set()).add("module" + match[1])
     labels = {"schema_version": 1, "disciplines": {}, "topics": {}}

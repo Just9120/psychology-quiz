@@ -18,8 +18,8 @@ def test_quality_audit_controlled_calculations() -> None:
 def test_global_canonical_quality_thresholds_and_rapport_resolution() -> None:
     report=build_report()
     g=report["global"]
-    assert g["approved_question_count"] == 645
-    assert g["unique_longest_correct_count"] == 327
+    assert g["approved_question_count"] == 582
+    assert g["unique_longest_correct_count"] == 169
     assert g["high_severity_length_cue_count"] == 0
     assert g["duplicate_normalized_stems"] == {}
     inv,_=load_canonical_inventory(); by_id={r["external_id"]:r for r in inv}
@@ -57,13 +57,19 @@ def test_question_options_do_not_contain_artificial_padding_phrases() -> None:
                 offending.append((row["external_id"], option))
     assert offending == []
 
-def test_changelog_references_active_canonical_question_ids() -> None:
+def test_historical_changelog_keeps_canonical_ids_and_retired_history() -> None:
     inv,_=load_canonical_inventory(); active={r["external_id"] for r in inv if r["status"]=="approved"}
     changelog=json.loads((REPO_ROOT/"docs/audits/question_bank_calibration_changelog.json").read_text())
     ids=[i["question_id"] for i in changelog["items"]]
     assert changelog["metadata"]["changed_question_count"] == len(ids)
     assert len(ids)==len(set(ids))
-    assert set(ids) <= active
+    stored = {row["external_id"]: row for row in inv}
+    assert set(ids) <= set(stored)
+    from app.curriculum import load_catalog
+    historical = {edition["external_id"] for edition in load_catalog()["editions"].values()}
+    for identity in set(ids) - active:
+        assert stored[identity]["status"] == "retired"
+        assert identity in historical
     for item in changelog["items"]:
         assert {"question_id","topic_id","issue_type","change_summary","source_ref","validation_basis"} <= set(item)
 

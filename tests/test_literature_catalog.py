@@ -21,9 +21,9 @@ def test_topic_module_membership_requires_primary_module_and_unique_course_modul
 
 def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     items = load_literature_items()
-    assert len(items) == 319
-    assert len({item['work_id'] for item in items}) == 281
-    assert len({item['topic_id'] for item in items}) == 18
+    assert len(items) == 322
+    assert len({item['work_id'] for item in items}) == 284
+    assert len({item['topic_id'] for item in items}) == 20
     for work in ('lit_anna_freud_ego_defence', 'lit_frankl_man_search_meaning'):
         entries = [item for item in items if item['work_id'] == work]
         expected = 3 if work == 'lit_frankl_man_search_meaning' else 2
@@ -186,10 +186,15 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'lit_org_lecture_02', 'lit_b76317a4d7bec59d',
         'lit_newton_principia_1989', 'lit_cefdc62fe30c6d9d', 'fch_dubynin_mozg_i_ego_potrebnosti',
         'lit_vasilyuk_understanding_psychotherapy_system', 'psf_aleksandrov_psihofiziologiya',
+        'judith_beck_cbt_basics_beyond', 'lit_nosov_mishkina_kasha',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
-    assert {link['format'] for link in links['fch_gazzaniga_kto_za_glavnogo']} == {'text', 'audio'}
+    # Both original offers are now explicitly unavailable; a search hit does not restore them.
+    assert links['fch_gazzaniga_kto_za_glavnogo'] == []
+    assert links['fch_kandel_v_poiskah_pamyati'] == []
+    assert {link['format'] for link in links['judith_beck_cbt_basics_beyond']} == {'text'}
+    assert {link['format'] for link in links['lit_nosov_mishkina_kasha']} == {'audio'}
     assert {link['format'] for link in links['fch_yakutenko_volya_i_samokontrol']} == {'text', 'audio'}
     assert {link['provider'] for link in links['fch_martynov_mozg']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     # An identically titled work by another author must never be offered as Carter's book.
@@ -328,12 +333,22 @@ def test_history_books_preserve_shared_work_and_do_not_recommend_uncertain_ident
     continuation = reading_next_step([uncertain], started, all_items)
     assert continuation['kind'] == 'continue'
     assert continuation['item']['id'] == uncertain['id']
-    for item_id in ('lit_social_history02_wundt', 'lit_social_history02_freud',
+    # The ten-volume mention does not select a concrete readable volume.
+    wundt = by_id['lit_social_history02_wundt']
+    assert reading_next_step([wundt], {}, all_items) is None
+    continuation = reading_next_step(
+        [wundt], {wundt['id']: {'reading_status': 'in_progress'}}, all_items)
+    assert continuation['kind'] == 'continue'
+    assert continuation['item']['id'] == wundt['id']
+    for item_id in ('lit_social_history02_freud',
                     'lit_social_history02_miller_dollard', 'lit_social_history02_sighele'):
         item = by_id[item_id]
-        assert reading_next_step([item], {}, all_items) is None
-        prerequisites = {entry['id']: {'reading_status': 'read'} for entry in all_items
-                         if entry['work_id'] == by_id['lit_caa8d94a943aae0d']['work_id']}
-        recommended = reading_next_step([item], prerequisites, all_items)
+        # A known work can be suggested without an unsupported requirement
+        # to complete one specific contemporary textbook first.
+        assert item['prerequisites'] == []
+        recommended = reading_next_step([item], {}, all_items)
         assert recommended['kind'] == 'start' and recommended['basis'] == 'agent'
         assert recommended['item']['id'] == item_id
+        completed_background = {entry['id']: {'reading_status': 'read'} for entry in all_items
+                                if entry['work_id'] == by_id['lit_caa8d94a943aae0d']['work_id']}
+        assert reading_next_step([item], completed_background, all_items) == recommended

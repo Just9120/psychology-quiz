@@ -142,6 +142,20 @@
       "title": "Точка поворота. 5 шагов",
       "module": null,
       "modules": []
+    },
+    "cognitive_behavioral_therapy": {
+      "title": "Когнитивно-поведенческая терапия",
+      "module": "module7",
+      "modules": [
+        "module7"
+      ]
+    },
+    "counseling_supervision": {
+      "title": "Супервизия психологического консультирования",
+      "module": "module6",
+      "modules": [
+        "module6"
+      ]
     }
   },
   "topics": {
@@ -648,6 +662,30 @@
     "t_fded5a914d5a": {
       "title": "Психология горя и утраты. Часть 2",
       "discipline_id": "klinicheskaya_psihologiya"
+    },
+    "t_b7c2c2b3b5e0": {
+      "title": "Базовые понятия и когнитивная модель",
+      "discipline_id": "cognitive_behavioral_therapy"
+    },
+    "t_5dd8e85bda51": {
+      "title": "Коллегиальная поддержка и профессиональные роли",
+      "discipline_id": "counseling_supervision"
+    },
+    "t_ff4f6a25db3e": {
+      "title": "Практика: выявление, оценка и изменение убеждений",
+      "discipline_id": "cognitive_behavioral_therapy"
+    },
+    "t_c33c5a419b76": {
+      "title": "Домашняя работа: профессиональные позиции в разборе случая",
+      "discipline_id": "counseling_supervision"
+    },
+    "t_9426fbda74e1": {
+      "title": "Учебная презентация по истории социально-психологических идей",
+      "discipline_id": "social_psychology"
+    },
+    "t_42733136bf34": {
+      "title": "Практика №53. От концептуализации к программе консультирования",
+      "discipline_id": "cognitive_behavioral_therapy"
     }
   }
 }

@@ -66,7 +66,7 @@ def main():
                                EMAIL, "synthetic-only", EMAIL, False)
         app = create_app(db_path=postgres_path or path, bot_token="123:synthetic-e2e", web_settings=settings, web_mailer=mailbox)
 
-        def reset(seed=True, mixed=False, with_homework=False):
+        def reset(seed=True, mixed=False, with_homework=False, canonical_bank=False):
             nonlocal path
             path = str(Path(directory) / "synthetic.sqlite3")
             Path(path).unlink(missing_ok=True)
@@ -84,6 +84,11 @@ def main():
                      "options": ["Осмысленное повторение", "Только скорость", "Случайный выбор", "Отсутствие практики"],
                      "correct_option_index": 0} for i in range(7)
                 ], authoritative=True)
+                if canonical_bank:
+                    questions = [item for source in (ROOT / "content/questions").rglob("*.json")
+                                 for item in json.loads(source.read_text(encoding="utf-8"))
+                                 if item["status"] == "approved"]
+                    upsert_approved_questions(conn, questions, authoritative=True)
             with closing(get_connection(path)) as conn:
                 migrate_auth_schema(conn)
                 with conn:
@@ -97,12 +102,16 @@ def main():
                         "disciplines": {"basics": {"title": "Основы психологии"}, "development": {"title": "Психология развития"}},
                         "topics": {"t_111111111111": {"title": "Память и повторение", "discipline_id": "basics"},
                                    "t_222222222222": {"title": "Учебная практика", "discipline_id": "development"}}, "editions": {}}
-                for row in conn.execute('SELECT id,external_id FROM questions'):
-                    _, digest = capture_question(conn, row['id'])
-                    index = int(row['external_id'].split('-')[1])
-                    if index != 4:  # One deliberate source gap, visible in UI.
-                        data['editions'][digest] = {'topic_id': 't_111111111111' if index < 5 else 't_222222222222'}
-                curriculum.load_catalog = lambda: data
+                if canonical_bank:
+                    curriculum.load_catalog = REAL_HOMEWORK_CURRICULUM
+                    data = REAL_HOMEWORK_CURRICULUM()
+                else:
+                    for row in conn.execute('SELECT id,external_id FROM questions'):
+                        _, digest = capture_question(conn, row['id'])
+                        index = int(row['external_id'].split('-')[1])
+                        if index != 4:  # One deliberate source gap, visible in UI.
+                            data['editions'][digest] = {'topic_id': 't_111111111111' if index < 5 else 't_222222222222'}
+                    curriculum.load_catalog = lambda: data
                 homework.load_catalog = REAL_HOMEWORK_CATALOG
                 homework.load_curriculum = REAL_HOMEWORK_CURRICULUM
                 if with_homework:
@@ -150,7 +159,8 @@ def main():
         @app.post("/__test/reset")
         async def reset_fixture(request: Request):
             payload = await request.json()
-            reset(payload.get("seed", True), payload.get("mixed", False), payload.get("homework", False))
+            reset(payload.get("seed", True), payload.get("mixed", False), payload.get("homework", False),
+                  payload.get("canonical_bank", False))
             return {"ok": True}
 
         @app.get("/__test/mail")

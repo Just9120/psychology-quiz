@@ -369,7 +369,9 @@ class MiniAppApiTests(unittest.TestCase):
             payload["setup_options"]["categories"],
         )
         titles = [topic["title"] for topic in payload["setup_options"]["glossary"]["topics"]]
-        self.assertEqual(8, len(titles))
+        self.assertEqual(11, len(titles))
+        self.assertIn("Когнитивно-поведенческая терапия", titles)
+        self.assertIn("Супервизия психологического консультирования", titles)
         self.assertIn("Качественные методы исследования", titles)
         self.assertIn("Основы экспериментальной психологии", titles)
         self.assertEqual(payload["setup_options"]["glossary"], payload["glossary"])

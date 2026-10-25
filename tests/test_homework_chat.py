@@ -90,3 +90,46 @@ def test_navigation_callback_does_not_start_attempt_and_refuses_group(monkeypatc
     asyncio.run(homework_chat.homework_callback(update, context))
     assert query.edit_message_text.call_args.args[0] == "Домашние задания доступны в личном чате."
     assert opened == ["synthetic"]
+
+
+def test_real_new_topics_are_reachable_in_classic_quiz_glossary_homework_and_literature(tmp_path):
+    from contextlib import closing
+    from app.classic_quiz_view import build_category_keyboard
+    from app.db import get_active_categories, get_connection
+    from app.glossary import build_glossary_topics_keyboard, callback_token_to_topic_id
+    from app.literature import load_literature_items, load_topic_registry
+    from tests.test_homework import _bank
+
+    path = tmp_path / "canonical-chat-topics.sqlite3"
+    actor, _ = _bank(path)
+    expected = {
+        "cognitive_behavioral_therapy": ("Когнитивно-поведенческая терапия", {"cbt_belief_practice", "cbt_abc_observation"}),
+        "counseling_supervision": ("Супервизия психологического консультирования", {"supervision_reflective_positions"}),
+    }
+    glossary = {button.text: button.callback_data for row in build_glossary_topics_keyboard().inline_keyboard for button in row}
+    registry = load_topic_registry()
+    with closing(get_connection(str(path))) as conn:
+        quiz = {button.text for row in build_category_keyboard(get_active_categories(conn)).inline_keyboard for button in row}
+        catalog = homework_chat.catalog_for_actor(conn, actor)["assignments"]
+        disciplines = homework_chat._children(catalog, ())
+        for identity, (title, expected_assignments) in expected.items():
+            assert registry[identity]["title"] == title and title in quiz
+            assert callback_token_to_topic_id(glossary[title].split(":")[-1]) == identity
+            root_page = disciplines.index((title,)) // homework_chat.PAGE_SIZE
+            text, buttons = homework_chat._list(conn, actor, page=root_page)
+            assert title in text and "Модуль" not in text
+            token = homework_chat._path_token((title,))
+            assert any(b.callback_data == "hw:nav:" + token for row in buttons.inline_keyboard for b in row)
+            children = homework_chat._children(catalog, (title,))
+            for entry in (v for v in catalog if v["id"] in expected_assignments):
+                leaf = (title, entry["topic"])
+                text, _ = homework_chat._list(conn, actor, navigation=token,
+                                              page=children.index(leaf) // homework_chat.PAGE_SIZE)
+                assert entry["topic"] in text and "Модуль" not in text
+                text, actions = homework_chat._list(conn, actor, navigation=homework_chat._path_token(leaf))
+                assert entry["title"] in text
+                callbacks = [b.callback_data for row in actions.inline_keyboard for b in row]
+                assert "hw:start:" + entry["id"] in callbacks
+                assert all(len(value.encode()) <= 64 for value in callbacks)
+            assert expected_assignments <= {v["id"] for v in catalog}
+            assert load_literature_items(identity)

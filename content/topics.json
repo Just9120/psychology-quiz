@@ -170,7 +170,8 @@
     "order": 610,
     "available_contours": [
       "questions",
-      "literature"
+      "literature",
+      "glossary"
     ],
     "source_notes": "Existing discipline: exact fragment-reviewed definition question; literature retained. No whole-course scientific approval or universal intervention outcome."
   },
@@ -292,5 +293,39 @@
       "questions"
     ],
     "source_notes": "Exact fragment-reviewed introductory question. Broader source claims remain held; no whole-course certification."
+  },
+  {
+    "id": "cognitive_behavioral_therapy",
+    "title": "Когнитивно-поведенческая терапия",
+    "module": "module7",
+    "modules": [
+      "module7"
+    ],
+    "question_file": "content/questions/module7/cognitive_behavioral_therapy.json",
+    "status": "active",
+    "order": 710,
+    "available_contours": [
+      "questions",
+      "glossary",
+      "literature"
+    ],
+    "source_notes": "Source-backed current private fragment review; raw sources and publication dossiers remain local."
+  },
+  {
+    "id": "counseling_supervision",
+    "title": "Супервизия психологического консультирования",
+    "module": "module6",
+    "modules": [
+      "module6"
+    ],
+    "question_file": "content/questions/module6/counseling_supervision.json",
+    "status": "active",
+    "order": 690,
+    "available_contours": [
+      "questions",
+      "glossary",
+      "literature"
+    ],
+    "source_notes": "Source-backed current private fragment review; raw sources and publication dossiers remain local."
   }
 ]

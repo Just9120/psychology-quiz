@@ -6,6 +6,8 @@ from app.quiz_service import build_answer_feedback, prepare_quiz, quiz_setup_opt
 from app.quiz_runner import get_current_question_snapshot
 from contextlib import closing
 import json
+import re
+import pytest
 from pathlib import Path
 from types import SimpleNamespace
 from tests.test_attempt_content import bank
@@ -50,7 +52,7 @@ def test_approved_case_has_its_own_topic_and_participates_in_mixed_quiz(bank):
     topic = next(topic for topic in registry if topic["id"] == "cases")
     assert topic["title"] == item["category"] == "Кейс"
     assert topic["question_file"] == "content/questions/module3/cases.json"
-    assert len(items) == 16
+    assert len(items) == 53
     assert all(candidate["kind"] == "case" for candidate in items)
     with closing(get_connection(str(bank))) as conn, conn:
         upsert_approved_questions(conn, items)
@@ -103,7 +105,8 @@ def test_case_context_is_immutable_with_each_attempt_edition(bank):
         assert CASE["question"] in shown.question_text
         review = build_answer_feedback(conn, first, question_id, 0, True)["case_review"]
         assert review["option_rationales"] == CASE["case"]["option_rationales"]
-        revised = {**CASE, "case": {**CASE["case"], "conditions": ["Изменённое условие"]}}
+        revised = {**CASE, "case": {**CASE["case"], "situation": "Клиент описывает неопределённый запрос.",
+                                              "conditions": ["Изменённое условие"]}}
         upsert_approved_questions(conn, [revised])
         second = start_quiz_session(conn, 1, None)
         store_session_questions(conn, second, [question_id])
@@ -127,3 +130,38 @@ def test_classic_quiz_returns_case_alternative_rationales_without_source_refs(ba
     assert "Неоднозначность" in html and "synthetic-private-id" not in html
     assert "&lt;script&gt;" in format_case_review_html({**CASE["case"],
         "ambiguity": "<script>"}, "normal")
+
+
+def test_current_bank_uses_plain_client_wording_without_rewriting_historical_editions():
+    from scripts.audit_question_quality import iter_questions
+
+    # Authored provenance stays private; historical fixtures above intentionally retain it.
+    unexpected = []
+    for _, item in iter_questions():
+        if item.get("status") != "approved":
+            continue
+        visible = {key: item.get(key) for key in ("question", "options", "explanation", "case")}
+        if re.search(r"вымышлен|выдуман", json.dumps(visible, ensure_ascii=False), re.IGNORECASE):
+            unexpected.append(item["id"])
+    assert unexpected == []
+
+
+@pytest.mark.parametrize(("external_id", "expected"), [
+    ("case_supervision_process_roles_001", ("замена имени", "узнаваемым")),
+    ("case_cbt_activity_mastery_pleasure_001", ("от 0 до 5", "Чем выше оценка")),
+])
+def test_real_case_material_context_is_visible_before_answer(bank, external_id, expected):
+    items = json.loads(Path("content/questions/module3/cases.json").read_text(encoding="utf-8"))
+    item = next(item for item in items if item["id"] == external_id)
+    with closing(get_connection(str(bank))) as conn, conn:
+        upsert_approved_questions(conn, [item])
+        question_id = conn.execute(
+            "SELECT id FROM questions WHERE external_id=?", (external_id,)
+        ).fetchone()[0]
+        session = start_quiz_session(conn, 1, None)
+        store_session_questions(conn, session, [question_id])
+        shown = get_current_question_snapshot(conn, actor_user_id=1, session_id=session)
+        assert shown.status == "ok"
+        # These facts must be present before answer feedback reveals case metadata.
+        for fact in expected:
+            assert fact in shown.question_text

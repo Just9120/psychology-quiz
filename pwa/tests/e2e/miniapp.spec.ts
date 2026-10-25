@@ -392,3 +392,57 @@ test('Mini App navigation marks the current section and integrates Telegram Back
   await expect.poll(() => page.evaluate(() => (window as any).__backButton.shown)).toBe(false)
   await expect(quiz).toHaveAttribute('aria-current', 'page')
 })
+
+
+test('canonical new bank reaches Mini App topics and structured homework cases', async ({ page, request }, testInfo) => {
+  const backend = 'http://127.0.0.1:8085'
+  expect((await request.post(backend + '/__test/reset', { data: { canonical_bank: true } })).ok()).toBeTruthy()
+  const proof = new URLSearchParams({ auth_date: String(Math.floor(Date.now() / 1000)), user: JSON.stringify({ id: 4242, first_name: 'Synthetic learner' }) })
+  const secret = createHmac('sha256', 'WebAppData').update('123:synthetic-e2e').digest()
+  proof.set('hash', createHmac('sha256', secret).update([...proof.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => `${k}=${v}`).join('\n')).digest('hex'))
+  await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
+  await page.addInitScript(initData => { window.Telegram = { WebApp: { initData, ready() {}, expand() {} } } }, proof.toString())
+  await page.route('https://quiz-api.librechat.online/miniapp/**', async route => {
+    if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': site.slice(0, -1), 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Authorization, Content-Type' } })
+    const url = new URL(route.request().url())
+    const response = await route.fetch({ url: backend + url.pathname + url.search })
+    await route.fulfill({ response, headers: { ...response.headers(), 'Access-Control-Allow-Origin': site.slice(0, -1) } })
+  })
+  await page.goto(site)
+  await expect(page.getByRole('heading', { name: 'Что изучим сегодня?', exact: true })).toBeVisible()
+  for (const name of ['Когнитивно-поведенческая терапия', 'Супервизия психологического консультирования']) {
+    await expect(page.getByRole('radio', { name, exact: true })).toBeVisible()
+  }
+  await navigateMini(page, 'Глоссарий')
+  for (const id of ['cognitive_behavioral_therapy', 'counseling_supervision']) {
+    await page.getByLabel('Тема глоссария').selectOption(id)
+    await expect(page.getByRole('button', { name: 'Начать тест по терминам' })).toBeEnabled()
+  }
+  await navigateMini(page, 'Домашние задания')
+  const card = page.locator('.homework-card').filter({ has: page.getByRole('heading', { name: 'ABC-разбор и дневник наблюдений', exact: true }) })
+  await card.getByRole('button', { name: 'Начать тест · 5 вопросов', exact: true }).click()
+  const choices = [1, 1, 1, 0, 3]
+  for (let index = 0; index < choices.length; index++) {
+    if (index === 4) {
+      await expect(page.locator('.question-heading')).toContainText('Клиент записал в дневнике')
+      await expect(page.locator('.question-heading')).not.toContainText(/вымышленн|выдуманн/i)
+      await page.screenshot({ path: `test-results/bank-quality-miniapp-${testInfo.project.name}-homework-case.png`, fullPage: true })
+    }
+    await page.getByRole('radio').nth(choices[index]).check()
+    await page.getByRole('button', { name: 'Проверить ответ', exact: true }).click()
+    if (index === 4) await expect(page.getByRole('heading', { name: 'Разбор кейса', exact: true })).toBeVisible()
+    await page.getByRole('button', { name: index === 4 ? 'Посмотреть результат' : 'Следующий вопрос', exact: true }).click()
+  }
+  await expect(page.getByRole('heading', { name: '80% верных ответов', exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'К заданиям', exact: true }).click()
+  await page.reload()
+  await navigateMini(page, 'Домашние задания')
+  await expect(card.locator('.homework-status')).toContainText('Выполнено · лучший результат 4 из 5')
+  await navigateMini(page, 'Литература')
+  const search = page.getByRole('searchbox', { name: 'Поиск по названию или автору', exact: true })
+  for (const title of ['Когнитивно-поведенческая терапия. От основ к направлениям', 'История комфортного консультанта']) {
+    await search.fill(title)
+    await expect(page.locator('.literature-title').filter({ hasText: title })).toBeVisible()
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+})

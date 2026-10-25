@@ -25,7 +25,7 @@ def test_finite_quiz_defers_reviewed_concept_overlap_without_losing_count():
 def test_reviewed_question_pairs_share_overlap_without_removing_all_mode():
     groups = memberships()
     for first, second in (
-        ("m1_gp_032", "m1_gp_045"),
+        ("m1_gp_032", "m1_gp_050"),
         ("m1_intro_008", "m1_intro_019"),
     ):
         assert groups[first] & groups[second]
@@ -36,33 +36,44 @@ def test_reviewed_question_pairs_share_overlap_without_removing_all_mode():
 def test_distinct_learning_objectives_are_not_deferred_as_duplicates():
     distinct_pairs = (
         ("m2_exp_022", "m2_exp_023"),  # internal versus external validity
-        ("m2_exp_023", "m2_exp_048"),  # definition versus tradeoff
-        ("m2_qual_015", "m2_qual_047"),  # consent versus de-identification
+        ("m2_exp_023", "m2_exp_094"),  # transfer definition versus balancing design goals
+        ("m2_qual_008", "m2_qual_034"),  # observation versus researcher reflexivity
         ("m3_psychological_consulting_009", "m3_psychological_consulting_045"),
         ("m3_psychological_consulting_055", "m3_psychological_consulting_066"),
-        ("m1_gp_048", "m1_gp_056"),  # one observation versus testable hypothesis
-        ("m2_exp_020", "m2_exp_098"),  # confound example versus control-variable distinction
+        ("m1_gp_048", "m1_gp_047"),  # one observation versus testing contrary evidence
+        ("m2_exp_015", "m2_exp_098"),  # manipulated/outcome roles versus control/confounding
         ("m3_psychological_consulting_009", "m3_psychological_consulting_031"),
         ("m3_psychological_consulting_008", "m3_psychological_consulting_027"),
     )
     for first, second in distinct_pairs:
         assert diverse_first([(1, first), (2, second)], 2) == [1, 2]
-    assert diverse_first([
-        (1, "m2_exp_048"), (2, "m2_exp_100"), (3, "m2_exp_023")
-    ], 2) == [1, 3]
+    assert diverse_first([(1, "m2_exp_098"), (3, "m2_exp_023")], 2) == [1, 3]
+    # The richer control/confounding task replaces the identification-only duplicate.
+    import json
+    from pathlib import Path
+    from app.content_publication import load_policy
+    items = json.loads(Path("content/questions/module2/osnovy_eksperimentalnoy_psihologii.json").read_text(encoding="utf-8"))
+    by_id = {item["id"]: item for item in items}
+    assert load_policy().can_publish("questions", by_id["m2_exp_098"])
+    assert by_id["m2_exp_110"]["status"] == "retired"
+    assert not load_policy().can_publish("questions", by_id["m2_exp_110"])
+    assert "m2_exp_110" not in memberships()
 
 
 def test_request_concepts_separate_definition_unrealistic_goal_and_case_formulation():
+    # Consolidation keeps distinct objectives and retires duplicate future draws.
     assert diverse_first([
-        (1, "m3_psychological_consulting_005"),
-        (2, "m3_psychological_consulting_094"),
+        (1, "m3_psychological_consulting_030"),
+        (2, "case_goal_own_actions_001"),
         (3, "m3_psychological_consulting_096"),
     ], 3) == [1, 2, 3]
-    assert diverse_first([
-        (1, "m3_psychological_consulting_024"),
-        (2, "m3_psychological_consulting_040"),
-        (3, "m3_psychological_consulting_096"),
-    ], 2) == [1, 3]
+    import json
+    from pathlib import Path
+    items = json.loads(Path("content/questions/module3/psychological_consulting.json").read_text(encoding="utf-8"))
+    by_id = {item["id"]: item for item in items}
+    for retired in ("m3_psychological_consulting_024", "m3_psychological_consulting_040"):
+        assert by_id[retired]["status"] == "retired"
+        assert retired not in memberships()
 
 
 def test_selected_mix_keeps_a_topic_with_later_distinct_concepts(monkeypatch):

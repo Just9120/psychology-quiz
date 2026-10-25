@@ -178,3 +178,114 @@ def test_all_published_tasks_start_with_reviewed_questions_and_preserve_old_cred
             assert outcome_for_session(conn, actor_user_id=other, session_id=session_id) is None
         assert outcome_for_session(conn, actor_user_id=actor, session_id=old_session)['passed']
         assert not any(item['completed'] for item in catalog_for_actor(conn, other)['assignments'])
+
+
+def test_revised_assignment_and_repeated_seed_preserve_finished_and_active_attempts(tmp_path, monkeypatch):
+    import copy
+    import app.homework as homework
+
+    path = tmp_path / 'homework-content-update.sqlite3'
+    actor, other = _bank(path)
+    current_catalog = copy.deepcopy(load_catalog())
+    earlier_catalog = copy.deepcopy(current_catalog)
+    earlier_ids = ['m1_intro_004', 'm1_intro_015', 'm1_intro_016', 'm1_intro_025', 'm1_intro_033']
+    next(item for item in earlier_catalog if item['id'] == 'professional_diary')['question_ids'] = earlier_ids
+    monkeypatch.setattr(homework, 'load_catalog', lambda: earlier_catalog)
+    with closing(get_connection(str(path))) as conn, conn:
+        finished = start_homework(conn, actor_user_id=actor, assignment_id='professional_diary',
+                                  payload={'replace_active': False})
+        finished_id = _finish(conn, actor, finished['runner_state'], 4)
+        active = start_homework(conn, actor_user_id=other, assignment_id='professional_diary',
+                                payload={'replace_active': False})
+        active_id = active['runner_state']['session']['session_id']
+        first = conn.execute('''SELECT question_id,content_snapshot FROM quiz_session_questions
+            WHERE session_id=? ORDER BY order_index LIMIT 1''', (active_id,)).fetchone()
+        captured = json.loads(first[1])
+        correct = next(option['option_index'] for option in captured['options'] if option['is_correct'])
+        assert answer_quiz(conn, actor_user_id=other, session_id=active_id,
+                           question_id=first[0], selected_option_index=correct)['submission_status'] == 'accepted'
+        snapshots = [tuple(row) for row in conn.execute('''SELECT session_id,question_id,content_snapshot
+            FROM quiz_session_questions ORDER BY session_id,order_index''')]
+        answers = [tuple(row) for row in conn.execute('SELECT * FROM quiz_answers ORDER BY id')]
+        finished_outcome = outcome_for_session(conn, actor_user_id=actor, session_id=finished_id)
+
+        revised = []
+        for source in Path('content/questions').rglob('*.json'):
+            revised.extend(item for item in json.loads(source.read_text(encoding='utf-8'))
+                           if item['status'] == 'approved')
+        for question in revised:
+            if question['id'] in earlier_ids:
+                question['question'] = 'Обновлённая учебная редакция: ' + question['question']
+                question['options'] = list(reversed(question['options']))
+                question['correct_option_index'] = 3 - question['correct_option_index']
+        monkeypatch.setattr(homework, 'load_catalog', lambda: current_catalog)
+        for _ in range(2):
+            upsert_approved_questions(conn, revised, authoritative=True)
+        assert snapshots == [tuple(row) for row in conn.execute('''SELECT session_id,question_id,content_snapshot
+            FROM quiz_session_questions ORDER BY session_id,order_index''')]
+        assert answers == [tuple(row) for row in conn.execute('SELECT * FROM quiz_answers ORDER BY id')]
+        assert outcome_for_session(conn, actor_user_id=actor, session_id=finished_id) == finished_outcome
+        assert _entry(conn, actor, 'professional_diary')['completed']
+        assert _entry(conn, other, 'professional_diary')['active_session_id'] == active_id
+        assert not _entry(conn, other, 'professional_diary')['completed']
+        for row in conn.execute('''SELECT question_id,content_snapshot FROM quiz_session_questions
+                WHERE session_id=? ORDER BY order_index''', (active_id,)).fetchall()[1:]:
+            captured = json.loads(row[1])
+            correct = next(option['option_index'] for option in captured['options'] if option['is_correct'])
+            assert answer_quiz(conn, actor_user_id=other, session_id=active_id,
+                               question_id=row[0], selected_option_index=correct)['submission_status'] == 'accepted'
+        assert outcome_for_session(conn, actor_user_id=other, session_id=active_id)['passed']
+        assert outcome_for_session(conn, actor_user_id=actor, session_id=active_id) is None
+        fresh = start_homework(conn, actor_user_id=actor, assignment_id='professional_diary',
+                              payload={'replace_active': False})
+        fresh_id = fresh['runner_state']['session']['session_id']
+        selected = {row[0] for row in conn.execute('''SELECT q.external_id FROM quiz_session_questions sq
+            JOIN questions q ON q.id=sq.question_id WHERE sq.session_id=?''', (fresh_id,))}
+        current_ids = next(item['question_ids'] for item in current_catalog if item['id'] == 'professional_diary')
+        assert selected == set(current_ids) and selected.isdisjoint(earlier_ids)
+        assert _entry(conn, actor, 'professional_diary')['completed']
+
+
+def test_cbt_preparation_homework_keeps_structured_case_and_single_attempt_credit(tmp_path):
+    from app.attempt_content import get_attempt_content
+    from app.quiz_runner import get_current_question_snapshot
+
+    path = tmp_path / "cbt-case-homework.sqlite3"
+    actor, other = _bank(path)
+    with closing(get_connection(str(path))) as conn, conn:
+        started = start_homework(conn, actor_user_id=actor, assignment_id="cbt_abc_observation",
+                                 payload={"replace_active": False})
+        sid = int(started["runner_state"]["session"]["session_id"])
+        rows = conn.execute("""SELECT q.id,q.external_id FROM quiz_session_questions sq
+            JOIN questions q ON q.id=sq.question_id WHERE sq.session_id=? ORDER BY sq.order_index""",
+                            (sid,)).fetchall()
+        assert len(rows) == 5 and rows[-1]["external_id"] == "case_cbt_diary_action_001"
+        for row in rows[:-1]:
+            right = conn.execute("SELECT option_index FROM question_options WHERE question_id=? AND is_correct=1",
+                                 (row["id"],)).fetchone()[0]
+            assert answer_quiz(conn, actor_user_id=actor, session_id=sid, question_id=row["id"],
+                               selected_option_index=right)["submission_status"] == "accepted"
+        qid = int(rows[-1]["id"])
+        captured = get_attempt_content(conn, sid, qid)
+        assert captured["kind"] == "case"
+        assert len(captured["case"]["option_rationales"]) == 4
+        shown = get_current_question_snapshot(conn, actor_user_id=actor, session_id=sid)
+        assert captured["case"]["situation"] in shown.question_text
+        assert not _entry(conn, actor, "cbt_abc_observation")["completed"]
+        bank = [q for source in Path("content/questions").rglob("*.json")
+                for q in json.loads(source.read_text(encoding="utf-8")) if q["status"] == "approved"]
+        upsert_approved_questions(conn, bank, authoritative=True)
+        upsert_approved_questions(conn, bank, authoritative=True)
+        assert get_attempt_content(conn, sid, qid) == captured
+        wrong = next(o["option_index"] for o in captured["options"] if not o["is_correct"])
+        result = answer_quiz(conn, actor_user_id=actor, session_id=sid, question_id=qid,
+                             selected_option_index=wrong)
+        assert result["submission_status"] == "accepted"
+        outcome = outcome_for_session(conn, actor_user_id=actor, session_id=sid)
+        assert outcome["passed"] and outcome["attempt_finished"]
+        assert _entry(conn, actor, "cbt_abc_observation")["best_score"] == 4
+        assert not _entry(conn, actor, "first_consultation")["completed"]
+        assert outcome_for_session(conn, actor_user_id=other, session_id=sid) is None
+    with closing(get_connection(str(path))) as conn:
+        assert _entry(conn, actor, "cbt_abc_observation")["completed"]
+        assert not _entry(conn, other, "cbt_abc_observation")["completed"]
