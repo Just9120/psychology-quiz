@@ -63,9 +63,7 @@
     "tags": [],
     "why_read": "После знакомства с измерением благополучия разобрать пример большого международного исследования: показатели школьной среды и их связи с благополучием учащихся. Начать с описания выборки и измерений; наблюдаемые связи не следует автоматически считать причинными. Порядок и значимость предложены агентом; обязательный приоритет преподавателя не установлен.",
     "learning_outcomes": [],
-    "prerequisites": [
-      "lit_oecd_subjective_wellbeing_guidelines"
-    ],
+    "prerequisites": [],
     "curriculum_topic_ids": [],
     "source": {
       "citation": "OECD. PISA 2018 Results (Volume III): What School Life Means for Students’ Lives. OECD Publishing, 2019. DOI: 10.1787/acd78851-en."
@@ -1517,9 +1515,7 @@
     "tags": [],
     "why_read": "После знакомства с измерениями PISA разобрать адресованные учителям вопросы о самостоятельности учащихся, отношениях и преподавании математики. Рекомендации сопоставлять с условиями конкретного обучения. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
     "learning_outcomes": [],
-    "prerequisites": [
-      "lit_course_mention_db2ba3e8c2e1dcc9"
-    ],
+    "prerequisites": [],
     "curriculum_topic_ids": [],
     "source": {
       "citation": "OECD. Ten Questions for Mathematics Teachers… and How PISA Can Help Answer Them. 2016 (библиографическое упоминание)."
@@ -1719,9 +1715,7 @@
     "tags": [],
     "why_read": "После изучения рамки оценивания PISA разобрать результаты чтения, математики и естественных наук. Сравнивать показатели с учётом измерений и выборки; том служит эмпирическим примером. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
     "learning_outcomes": [],
-    "prerequisites": [
-      "lit_course_mention_db2ba3e8c2e1dcc9"
-    ],
+    "prerequisites": [],
     "curriculum_topic_ids": [],
     "source": {
       "citation": "OECD. PISA 2018 Results (Volume I): What Students Know and Can Do (библиографическое упоминание)."
@@ -1754,9 +1748,7 @@
     "tags": [],
     "why_read": "После изучения рамки PISA разобрать отдельное оценивание финансовой грамотности пятнадцатилетних учащихся. Учитывать ограниченный состав участвовавших стран; это пример исследования, а не совет по личным финансам. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
     "learning_outcomes": [],
-    "prerequisites": [
-      "lit_course_mention_db2ba3e8c2e1dcc9"
-    ],
+    "prerequisites": [],
     "curriculum_topic_ids": [],
     "source": {
       "citation": "OECD. PISA 2018 Results (Volume IV): Are Students Smart about Money? (библиографическое упоминание)."
@@ -1789,9 +1781,7 @@
     "tags": [],
     "why_read": "После рамки PISA и знакомства с результатами обучения изучить данные о школьных практиках и образовательной политике. Сопоставлять контексты и не трактовать статистические связи как доказательство универсальной эффективности. Этап и дополнительная значимость предложены агентом; приоритет преподавателя не установлен.",
     "learning_outcomes": [],
-    "prerequisites": [
-      "lit_course_mention_db2ba3e8c2e1dcc9"
-    ],
+    "prerequisites": [],
     "curriculum_topic_ids": [],
     "source": {
       "citation": "OECD. PISA 2018 Results (Volume V): Effective Policies, Successful Schools (библиографическое упоминание)."
@@ -1813,16 +1803,16 @@
     ],
     "year": null,
     "type": "other",
-    "reading_level": null,
+    "reading_level": "deepening",
     "status": "approved",
     "priority": null,
-    "importance": null,
-    "importance_source": null,
+    "importance": "additional",
+    "importance_source": "agent",
     "topic_order": 62,
     "global_order": 912116,
     "estimated_minutes": null,
     "tags": [],
-    "why_read": "Произведение упомянуто в библиографии или обзоре исследовательских отчётов. Конкретное издание, порядок чтения и значимость для курса пока не определены.",
+    "why_read": "Дополнительный исследовательский контекст глобальной и межкультурной компетентности учащихся. Сопоставляйте определения и выборку с задачей исследования; упоминание отчёта не задаёт обязательный порядок чтения. Значимость и этап предложены агентом.",
     "learning_outcomes": [],
     "prerequisites": [],
     "curriculum_topic_ids": [],
