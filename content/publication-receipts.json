@@ -436,11 +436,11 @@
     "glossary:here_and_now_focus": {
       "schema_version": 1,
       "item_sha256": "8390f413f2651f95cf0228f229bf6fe1c6e568256fb2e6bd8f5087b2f479e729",
-      "review_sha256": "faba3f818474fc97dbe04259ce56687f9157b9fa70e07c8e076cc0898fba2291",
+      "review_sha256": "48f9f45e10d20605e7f0d41d0b4de6d7df19d896a52cc8e3356913310e12b0bb",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "definition",
@@ -454,7 +454,7 @@
     "glossary:client_responsibility": {
       "schema_version": 1,
       "item_sha256": "b54621b9668cba380234ed95147950244b38fd231898d8c1bce4194be2c596bc",
-      "review_sha256": "f24571085c5d61f6222ba7f6495a2f1578f2962bd5624b303b3cf8be39e867f3",
+      "review_sha256": "de24579d5260613f25834bf24fa9ce40493836f1b256cf25d8b00c649d81e2c0",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -472,7 +472,7 @@
     "glossary:metagoal": {
       "schema_version": 1,
       "item_sha256": "dde8e9f4ca9ed700d1e151a06affc6a5201961e621819e3e12dc68652bdf1239",
-      "review_sha256": "b7d68ff3a8282197ee95aee2b063976b7e0492704914aadff9da490cf8c5c338",
+      "review_sha256": "cc55a0349819c874ef553d349f059b96de2c49e4c69c6c4e80e4ccc614324147",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -834,7 +834,7 @@
     "questions:m3_psychological_consulting_039": {
       "schema_version": 1,
       "item_sha256": "8a70af74bb23ba056b13457098fca7a31f27dca565f2f6c3d2f4950392309320",
-      "review_sha256": "9e095c855989b1b65bbb3381a788cdbb85543a31b146606ec7d0e1220579c38e",
+      "review_sha256": "2ceb642ec3f735c2caf4c2af77fbdd3bd04158b9c3403119d2002f274e246369",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -852,7 +852,7 @@
     "questions:m3_psychological_consulting_096": {
       "schema_version": 1,
       "item_sha256": "9405ad7f7f6dec8f3b8d634576b0eb547fecdad2e1252c463a9a23baa8801912",
-      "review_sha256": "0849f9473e7a10938a7f82d7f83a60bf27789f667cc6d8ab8002cfe039216199",
+      "review_sha256": "54f1e0ec940bc76a51523c2b6987a44a39a7c542705c31228dfba8973873bd80",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -2564,12 +2564,13 @@
     },
     "questions:m3_psychological_consulting_006": {
       "schema_version": 1,
-      "item_sha256": "ada31eeee05b587f219c2be18769f6a8a148c0687e7f4c3e18a95e8e085c816d",
-      "review_sha256": "b385c1fea05f6c5031fd6994890e65ea368425162f19476dcf6d0aa08bc8c08b",
+      "item_sha256": "4318b6fa930aa46f9b338956de940723fb5b34ddffebc53858458a29e332b37c",
+      "review_sha256": "b9a270e66bcda0e9684d46b8f8acbf31edb93099a82b4b833efa5cf4ac672f9a",
+      "topic_id": "t_89b592be8732",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -2726,12 +2727,13 @@
     },
     "questions:m3_psychological_consulting_017": {
       "schema_version": 1,
-      "item_sha256": "69278c66a43117804e971cacda62b034a7f834a95fb41554ef563fcf333b6f9a",
-      "review_sha256": "be4aadb2e61b339b60e7e34cecbfe0405109429d20c270622aec88e77a7a0b78",
+      "item_sha256": "a427a0300d6c2d29b11077c6040b3c64c6fcdc37f23aaec04d4fd6e3d51672ff",
+      "review_sha256": "ea44b2a68a88893e3f4ce3cbc95f6110778becc7186cfe81efcd9f9d8a82aff2",
+      "topic_id": "t_34b2eed9d99a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -2798,12 +2800,13 @@
     },
     "questions:m3_psychological_consulting_025": {
       "schema_version": 1,
-      "item_sha256": "67b30aed7d4766def0462898d2d2f78362af8daf74726f241d66e0349e0bc798",
-      "review_sha256": "7b5d3f51ab9654ca45ffe58e2a561d060951c374fde44c62e1cb364480e39b48",
+      "item_sha256": "eb61e65052977ddc7e311f694ef6f4af6f802c36c314dd2f5c9b4895eabbc60d",
+      "review_sha256": "f317cf804571b33487e0439165367a6629802f88bd8795496283930f7eae4b90",
+      "topic_id": "t_7246705017fc",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -3032,12 +3035,13 @@
     },
     "questions:m3_psychological_consulting_088": {
       "schema_version": 1,
-      "item_sha256": "27c8a5477f1b62f07ae18e3e3cce6e5f3f0254880d5993c4b6e91aa68ee5e93c",
-      "review_sha256": "4a0a6e046d1a07afb011a46b9661de8688d5c0ac12ac344113089bed4ac86692",
+      "item_sha256": "b7b1ee554aec597eb3603442ea40e2f505fe96cdd5bdbd1390d66251d28acc30",
+      "review_sha256": "0fff90a7768e71e77570380c103b1148cd7f83f09ab21ba54ad492c9bfe959bc",
+      "topic_id": "t_89b592be8732",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -4958,7 +4962,7 @@
     "questions:m3_psychological_consulting_085": {
       "schema_version": 1,
       "item_sha256": "cb4ef70c67c963f7cd39f3331ceb77de53df6c1634d23943ecbc5e70089bc817",
-      "review_sha256": "d586875bf5a06b928f6cced6d90d76c3f0a6822db13e816e6cbc14f9fdea374f",
+      "review_sha256": "775c877a39fbbc4934db55b6048850b064ca5d9d658368edf7e1785e3abbd9e2",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -4994,11 +4998,12 @@
     "questions:m3_psychological_consulting_089": {
       "schema_version": 1,
       "item_sha256": "1162ed8c048316a3dd83c7f72fc7cf3a7209c1336a66f77406c27f02c485b629",
-      "review_sha256": "52957ef842f6235ad03a39a09adcfc10880b02a50258cfe30c06ae52341bee2d",
+      "review_sha256": "d1842d3a4018cb9d682511a88018aa2b2e84d82ecc34667d9fd1a9c7258c9597",
+      "topic_id": "t_7246705017fc",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -5012,7 +5017,7 @@
     "questions:m3_psychological_consulting_029": {
       "schema_version": 1,
       "item_sha256": "13316af335a27508d1bfe0044b84c137ea5b85793ed47dc8f1b774afe3564dd0",
-      "review_sha256": "81dad2f1a228bdb85c833ffa87b0031adfbd333089702f7846100b7a68b95ebe",
+      "review_sha256": "80033a698beb7331d6082d1d2c6932fd555d6d65fcfdd7b370ab60d4b3cbb6da",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -5030,7 +5035,7 @@
     "questions:m3_psychological_consulting_037": {
       "schema_version": 1,
       "item_sha256": "182e54133a466bab534fd77edf2e0f174d10921b83a98973a42cc32fb3f426bc",
-      "review_sha256": "abbd6201aa72bbbb3110b3ceb3c230308b246c9bd2ff2111e77991392c6edb79",
+      "review_sha256": "c29be9e37083fa2846d4fbbef7e7cd2f5e1dc838f3d2ec329b38ceb0b013c3e9",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -5102,7 +5107,7 @@
     "questions:m3_psychological_consulting_042": {
       "schema_version": 1,
       "item_sha256": "f05bc339bdf51c31420c87c344f6af397badde7db108d5f9b19f248bcc67e7fa",
-      "review_sha256": "01f73627eeee386cae34d2a2dc957c24075868849473ada964ad01bd7d90afba",
+      "review_sha256": "f3034927f04a522190a231f7b42d5d901a60292d3896f2483d2b2ea2b97b8578",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
@@ -5156,11 +5161,12 @@
     "questions:m3_psychological_consulting_052": {
       "schema_version": 1,
       "item_sha256": "90769460f797750452a03bd921ad4c568a257cf7b8617f7a8c2486bf2cc85719",
-      "review_sha256": "02b30a877476d56ba051f995b1c71829c625609489b86d0c2f673b3d222c106a",
+      "review_sha256": "e4e3db2186aba32e4b004df8f42212ce17c2b2109a347d2932e4c72679fa9a5c",
+      "topic_id": "t_89b592be8732",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -5264,11 +5270,12 @@
     "questions:m3_psychological_consulting_049": {
       "schema_version": 1,
       "item_sha256": "e15547ba0763490c91b3344a98b61f4368d5d61ffb556e3e86d914330913b72e",
-      "review_sha256": "f4fde784ee1160d1a3f4468db44de8d0c0b5cc09fe06902ddd8dfe0200b2f7ef",
+      "review_sha256": "71cf4b818d0c856ad3eb014a2c260f6a046e1df10b732adf68f060baff6248f6",
+      "topic_id": "t_84bd9f531980",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -7132,7 +7139,7 @@
     "questions:m3_psychological_consulting_010": {
       "schema_version": 1,
       "item_sha256": "a06d878c725562e0a14c5681f9f4a79358d8aec78fc49798b5975f64e6ffad9c",
-      "review_sha256": "3ef38b97ea60b0c582cbb76bed4d24f462e2ba6e690b250dcf029de6e98fc9c7",
+      "review_sha256": "23fa94cd523318d0107405e9e1a77348e069a27966cbc51ced2f5303a55eaaed",
       "topic_id": "t_09efb9aedb46",
       "decision": "approved",
       "purpose": "learning_content",
@@ -7189,7 +7196,7 @@
     "questions:m3_psychological_consulting_021": {
       "schema_version": 1,
       "item_sha256": "b47ffe077a14d258913706849068a13237ca26f3761a952e289d25b8787f6515",
-      "review_sha256": "f3cdea6619e30eea77878f1774525f1e00a8a9ee3f99c3fa5f9a20b8724b1b4c",
+      "review_sha256": "08b83f739f6e02f6a844925a119db071117de2a4add64452975742b1f9a517df",
       "topic_id": "t_09efb9aedb46",
       "decision": "approved",
       "purpose": "learning_content",
@@ -7341,12 +7348,12 @@
     "questions:m3_psychological_consulting_063": {
       "schema_version": 1,
       "item_sha256": "3356dab856d4efc4be5a9d543b502d4dbeca3aed4f8509fd357a67141740a38a",
-      "review_sha256": "9b89c6a2d99c2b815fe037725edd23ace115d5f8f06379eee54088984e63d8c6",
+      "review_sha256": "a4043e66b79d587fbce94df682262c812a4f31118b08aec6bea4340fc6801e80",
       "topic_id": "t_34b2eed9d99a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -7435,13 +7442,13 @@
     },
     "questions:m3_psychological_consulting_101": {
       "schema_version": 1,
-      "item_sha256": "f6a8170134a7ab093dcad1ec41813635ba8ac718bbc88c2327e5d70404daafee",
-      "review_sha256": "0df7b6d88db96f5f294156881b8e367575eaa68de3fcd77803ffc02130898eef",
+      "item_sha256": "febcf3783d6948d5edf1c36f6aa65fbd11c8b5b29924967fa8fe1665c8507860",
+      "review_sha256": "e41370bc37fd887e77f00d9c3892be50fa47e19b11df02daace78c218e488724",
       "topic_id": "t_34b2eed9d99a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -10318,13 +10325,13 @@
     },
     "questions:m3_psychological_consulting_109": {
       "schema_version": 1,
-      "item_sha256": "b9ee967ebcec111d0537850a9cb73d043823e774b2991538a92d9a56a8b7ec45",
-      "review_sha256": "ac3865af8b635969518d423ab51bab20fc41848a2025f0afeb11760a89907026",
+      "item_sha256": "004dab9c8d83de853d301d5a86b81b57e47caa09de0a79b22a984fc7573c059c",
+      "review_sha256": "5884e6d84b3a1ddf996f0d003a8cfafe58fa0d860d25b6ffac237fa2630673ab",
       "topic_id": "t_cb4906154e12",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -10337,13 +10344,13 @@
     },
     "questions:m3_psychological_consulting_110": {
       "schema_version": 1,
-      "item_sha256": "74074a7596a7fdc6779796531f0d11276ca4dded93f4564b7c5518fd73c26a09",
-      "review_sha256": "32b8a68d4d60dc2d2f7c30762de6b7c05374a5ce06e22171ea6fa1c0224d6d3e",
+      "item_sha256": "fcd7e4e5c13b7746911ac7f996e18630b2388d086b83952517523d8abfbb32f5",
+      "review_sha256": "37ec46412ad6dc7f4dd1d160a2a4bd90f96bd9b910cb313a27f7f8414b9bbd68",
       "topic_id": "t_3d6b038c413a",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-08",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -12200,12 +12207,12 @@
     "questions:m3_psychological_consulting_116": {
       "schema_version": 1,
       "item_sha256": "d225698d187084ee4adc7f58e9abae1130d0f599752abbb953ad660fa1600faa",
-      "review_sha256": "56002a91db421af26bccfd012cf0c1341a2803b2500db558e562a763ea5f1bcc",
+      "review_sha256": "855965cc259febbbd459a01c306973cc2821d2f9a161b5c48e3fc5a165bacfd1",
       "topic_id": "t_bd934f61e018",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "answer",
@@ -12827,7 +12834,7 @@
     "questions:m5_clin_022": {
       "schema_version": 1,
       "item_sha256": "948505735f9d457a006a7a12298a368e1038271a3466a12b74fec8a273ebaadf",
-      "review_sha256": "d389621177e3399d8bfb10f4c06bb33dc15a85f2332bd23f0cc324a9c462a91d",
+      "review_sha256": "2dc8ec45f042d502c86dc9bbc2b59a480737f9d12aef4bafdc7e14af54cc20d8",
       "topic_id": "t_0faeaab9c732",
       "decision": "approved",
       "purpose": "learning_content",
@@ -13158,7 +13165,7 @@
     "questions:case_realistic_forecast_001": {
       "schema_version": 1,
       "item_sha256": "b60fe07598e7824efe1e7398ec0f92464f7e3d8f7c87a7f19911e182a4c92aa3",
-      "review_sha256": "d6cc18d29c2d05c779138788f4a207ef49f9beb30522707f6512cc6f82e0fee7",
+      "review_sha256": "a7b08b3ebfce5585b3719fb6919f762c4bb5a207fcce6ad87902306d4b3a3d46",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",

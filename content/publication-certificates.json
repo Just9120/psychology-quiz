@@ -1781,9 +1781,9 @@
     "questions:case_realistic_forecast_001": {
       "schema_version": 1,
       "item_sha256": "b60fe07598e7824efe1e7398ec0f92464f7e3d8f7c87a7f19911e182a4c92aa3",
-      "review_sha256": "d6cc18d29c2d05c779138788f4a207ef49f9beb30522707f6512cc6f82e0fee7",
+      "review_sha256": "a7b08b3ebfce5585b3719fb6919f762c4bb5a207fcce6ad87902306d4b3a3d46",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "3a2NrVSdhARNvdxUmG7qfneWOeTixzH64pK5SWDGs1g3P2yR70H7tRx5udQlWouTCGx6mFbws8HtyEGZt+uSBg=="
+      "signature": "MdOzV1nM2JmidK1Om/tHp9CSIjspWeaF23HvK6yC74AEFuPHiX93mEAoMqrLV4HbTz0id/UzYUtu6j4DXOgnBQ=="
     },
     "questions:case_cbt_exposure_plan_001": {
       "schema_version": 1,
@@ -2145,10 +2145,10 @@
     },
     "questions:m3_psychological_consulting_110": {
       "schema_version": 2,
-      "item_sha256": "ee87a15a5f4fd146f35d21561219e2f11a3369e55e2027e738cf66cdc64bc100",
-      "review_sha256": "2befe17ba9af3adb4b9dc59096e80274e9e41afa5909112b37c5b84c8469b0bb",
+      "item_sha256": "fcd7e4e5c13b7746911ac7f996e18630b2388d086b83952517523d8abfbb32f5",
+      "review_sha256": "37ec46412ad6dc7f4dd1d160a2a4bd90f96bd9b910cb313a27f7f8414b9bbd68",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "ptw1j/CGo93PbWqwPnrpS4hF48iRr6zkAKK/NKWUDvbpO4PHz4NzIHEIEk3+nOi+1VctfdAFM8fEwcCUWbg+BQ==",
+      "signature": "3YM1BjRKjkVFt/6fQeCCbUOJXyIM9y9+m5f/YnlF6q6tmf27xTy7H0ixGGFVUSo5d3KSJR3Vx7yP09iOVDzcCA==",
       "topic_id": "t_3d6b038c413a"
     },
     "questions:m4_person_021": {
@@ -2178,9 +2178,9 @@
     "questions:m5_clin_022": {
       "schema_version": 2,
       "item_sha256": "948505735f9d457a006a7a12298a368e1038271a3466a12b74fec8a273ebaadf",
-      "review_sha256": "d389621177e3399d8bfb10f4c06bb33dc15a85f2332bd23f0cc324a9c462a91d",
+      "review_sha256": "2dc8ec45f042d502c86dc9bbc2b59a480737f9d12aef4bafdc7e14af54cc20d8",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "e9DYLzJT6B8EtxCpszHAEuguvm2Y9hzRr1I185bQqCFgKWZzsiMa/rI0W1TwO3QppER5bLK8JJVKEekILec1AA==",
+      "signature": "XpbjfTFwyjikCcnS6lSHDUlk+MKR2xWlcrgMiJ/tQRXtaMEDvTwK44gvVbLCmoSefOQjyrt/gDYfBvseCUuGAg==",
       "topic_id": "t_0faeaab9c732"
     },
     "questions:m5_clin_024": {
@@ -3132,9 +3132,9 @@
     "questions:m3_psychological_consulting_109": {
       "schema_version": 2,
       "item_sha256": "004dab9c8d83de853d301d5a86b81b57e47caa09de0a79b22a984fc7573c059c",
-      "review_sha256": "f9e823fec7b7e75a5b903000244aef3f57a40cd3c365da9aebaba355a2b8b2b2",
+      "review_sha256": "5884e6d84b3a1ddf996f0d003a8cfafe58fa0d860d25b6ffac237fa2630673ab",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "UsS+xRvR0kR9F1VzNUh1A3xNEXXsxcnwJjAeh2TSAq7Ed7EljftTUjVZ21QUiPEKzlDYb7XvY5YBLzAsxobSAg==",
+      "signature": "Nr2bZIcTrmzgvB1YqZhedHrcgVYhPQZ99XdP0U8rDOwo7iCSUW56JKlSHiybIaHVnn8oGsWZ4dVtoBIPVW5BAw==",
       "topic_id": "t_cb4906154e12"
     },
     "questions:m6_psyl_002": {
@@ -4229,16 +4229,16 @@
     "glossary:client_responsibility": {
       "schema_version": 1,
       "item_sha256": "b54621b9668cba380234ed95147950244b38fd231898d8c1bce4194be2c596bc",
-      "review_sha256": "f24571085c5d61f6222ba7f6495a2f1578f2962bd5624b303b3cf8be39e867f3",
+      "review_sha256": "de24579d5260613f25834bf24fa9ce40493836f1b256cf25d8b00c649d81e2c0",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "Bvt8etfuA6tPBUtKbbgXUl8qrVE69A/PjKmHqyR2L3rNkVOYFwhN3sepBTBdifxTQ2JqmSsMMDvcCtPIYCbCAg=="
+      "signature": "7gcAeiGc8JJcFdSU6SUfv4pCGMbW3UUsnhsOMkX6VqQKbY6rR8ZZajIK1VU8zTz4IXTgf0ZD1NWHFHIcHEUCCg=="
     },
     "glossary:metagoal": {
       "schema_version": 1,
       "item_sha256": "dde8e9f4ca9ed700d1e151a06affc6a5201961e621819e3e12dc68652bdf1239",
-      "review_sha256": "b7d68ff3a8282197ee95aee2b063976b7e0492704914aadff9da490cf8c5c338",
+      "review_sha256": "cc55a0349819c874ef553d349f059b96de2c49e4c69c6c4e80e4ccc614324147",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "RQexjtecUdHK7Y5za0NxjUCGY4gpwUzLYc+yzFnqMyXZVzn32HihwhoQp85DjBtlifuN0h2jPYfZXQlBnOJ8CQ=="
+      "signature": "yPmRD4r3Q3LMoqgKraXpe9u40M9+3dx5X7yDvY4WdK6G43P5mH/Fa4Q39oVf/0MSyBEyDOAa3oBLrxu5fn3sDQ=="
     },
     "questions:m1_gp_005": {
       "schema_version": 2,
@@ -4712,6 +4712,30 @@
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "MC8EWYneVDAdn6aLvAG849E7VrBTi7f9byERNOTJDXiaFJSaXAdSliaHQ2gS9iXV6B7m/VZsgG4eYom71WZBDA==",
       "topic_id": "t_6be3cecd6596"
+    },
+    "questions:m3_psychological_consulting_049": {
+      "schema_version": 2,
+      "item_sha256": "e15547ba0763490c91b3344a98b61f4368d5d61ffb556e3e86d914330913b72e",
+      "review_sha256": "71cf4b818d0c856ad3eb014a2c260f6a046e1df10b732adf68f060baff6248f6",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "VxLknKccU4K3K1lbRiU5ZnhkEJGQuZ+SNRSKsMnrYsiFyl+fnlk48EoYsPbOQvL9hTUFBd7scQis27IuHT8HBg==",
+      "topic_id": "t_84bd9f531980"
+    },
+    "questions:m3_psychological_consulting_052": {
+      "schema_version": 2,
+      "item_sha256": "90769460f797750452a03bd921ad4c568a257cf7b8617f7a8c2486bf2cc85719",
+      "review_sha256": "e4e3db2186aba32e4b004df8f42212ce17c2b2109a347d2932e4c72679fa9a5c",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "YEaUYuDKZPXbeKO+UUTX9UEHNJ6a52s6QuAxJYhnvel/wCBzmDE12qq84jp/oWldqxZbnqFRSypBT/POCo0JBw==",
+      "topic_id": "t_89b592be8732"
+    },
+    "questions:m3_psychological_consulting_089": {
+      "schema_version": 2,
+      "item_sha256": "1162ed8c048316a3dd83c7f72fc7cf3a7209c1336a66f77406c27f02c485b629",
+      "review_sha256": "d1842d3a4018cb9d682511a88018aa2b2e84d82ecc34667d9fd1a9c7258c9597",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "8DR85TFbIhpnnbiF78fi4k/JwKBTC+ChJnn8+twISMm5nU+ob4ShclxdeTY5lF4DBSoK/8FCHUrtlQngWVTYBg==",
+      "topic_id": "t_7246705017fc"
     }
   }
 }

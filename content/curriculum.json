@@ -9243,6 +9243,42 @@
       "topic_id": "t_6be3cecd6596",
       "item_sha256": "b666f5c3dc3a23b905d08c47b7d6943f53ec6651d7d8a7208d1bc6977452bcfe",
       "locator": "private certificate:questions:m2_qual_042"
+    },
+    "bf8c09806905ab1f8d0e5d67961a150e56fefaa3b7b97020be6b804d1cf81f0f": {
+      "external_id": "m3_psychological_consulting_006",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "4318b6fa930aa46f9b338956de940723fb5b34ddffebc53858458a29e332b37c",
+      "locator": "private review:questions:m3_psychological_consulting_006"
+    },
+    "04913596a292600e90497a5c60ac77a7f33ee1c4fb5d2d2c00e23c2397fea61f": {
+      "external_id": "m3_psychological_consulting_017",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "a427a0300d6c2d29b11077c6040b3c64c6fcdc37f23aaec04d4fd6e3d51672ff",
+      "locator": "private review:questions:m3_psychological_consulting_017"
+    },
+    "38fd1b1a8e8617b93afdb3f64a33d3399b7987b9aa40001b6885ce8509555400": {
+      "external_id": "m3_psychological_consulting_025",
+      "topic_id": "t_7246705017fc",
+      "item_sha256": "eb61e65052977ddc7e311f694ef6f4af6f802c36c314dd2f5c9b4895eabbc60d",
+      "locator": "private review:questions:m3_psychological_consulting_025"
+    },
+    "906e2471f6685f6bd0cab22e248a62b035f6b71dff53b1865d0c7a04ae8023df": {
+      "external_id": "m3_psychological_consulting_088",
+      "topic_id": "t_89b592be8732",
+      "item_sha256": "b7b1ee554aec597eb3603442ea40e2f505fe96cdd5bdbd1390d66251d28acc30",
+      "locator": "private review:questions:m3_psychological_consulting_088"
+    },
+    "0f172aefd904897a83f508d6104b8b244c162fe69d4541209b66236ca8bdcdc7": {
+      "external_id": "m3_psychological_consulting_101",
+      "topic_id": "t_34b2eed9d99a",
+      "item_sha256": "febcf3783d6948d5edf1c36f6aa65fbd11c8b5b29924967fa8fe1665c8507860",
+      "locator": "private review:questions:m3_psychological_consulting_101"
+    },
+    "0366a142d209697b443fdba384544cca0d7bb0d6ac54c5581f8b4a01d7df097d": {
+      "external_id": "m3_psychological_consulting_110",
+      "topic_id": "t_3d6b038c413a",
+      "item_sha256": "fcd7e4e5c13b7746911ac7f996e18630b2388d086b83952517523d8abfbb32f5",
+      "locator": "private certificate:questions:m3_psychological_consulting_110"
     }
   }
 }

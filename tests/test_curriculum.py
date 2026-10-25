@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1467
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1473
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 23 and len(catalog['topics']) == 174
@@ -198,6 +198,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
         assert historical == ((((({
+                              'm3_psychological_consulting_101',
                               'm4_person_001', 'm4_person_004', 'm4_person_007',
                               'm4_person_010', 'm4_person_014', 'm4_person_017',
                               'm4_person_018', 'm4_person_019', 'm4_person_021', 'm4_person_022',
@@ -426,7 +427,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             'm3_psychological_consulting_086',
             'm3_psychological_consulting_098',
             'm3_psychological_consulting_102',
-        }) - {'m2_exp_108', 'm2_exp_110', 'm1_gp_043', 'm1_phys_025'} | {'m1_intro_058', 'intro_diary_observation', 'm1_gp_039', 'm1_gp_061', 'm1_gp_062', 'm1_gp_063', 'm1_gp_065', 'm1_gp_066'} | {'m1_vnd_003', 'm1_vnd_008', 'm1_vnd_010', 'm1_vnd_023', 'm1_vnd_024', 'm1_vnd_041', 'm1_vnd_044', 'm1_vnd_045'} | {'m1_phys_010', 'm1_phys_014', 'm1_phys_015', 'm1_phys_026', 'm1_phys_032', 'm1_phys_044'}) - {'m1_vnd_007', 'm3_psychological_consulting_076', 'm5_clinical_007', 'm1_vnd_035', 'm1_vnd_048', 'm1_vnd_021', 'm1_vnd_013', 'm1_vnd_014', 'm1_vnd_006', 'm1_vnd_004'}
+        }) - {'m2_exp_108', 'm2_exp_110', 'm1_gp_043', 'm1_phys_025'} | {'m1_intro_058', 'intro_diary_observation', 'm1_gp_039', 'm1_gp_061', 'm1_gp_062', 'm1_gp_063', 'm1_gp_065', 'm1_gp_066'} | {'m1_vnd_003', 'm1_vnd_008', 'm1_vnd_010', 'm1_vnd_023', 'm1_vnd_024', 'm1_vnd_041', 'm1_vnd_044', 'm1_vnd_045'} | {'m1_phys_010', 'm1_phys_014', 'm1_phys_015', 'm1_phys_026', 'm1_phys_032', 'm1_phys_044'}) - {'m1_vnd_007', 'm3_psychological_consulting_076', 'm5_clinical_007', 'm1_vnd_035', 'm1_vnd_048', 'm1_vnd_021', 'm1_vnd_013', 'm1_vnd_014', 'm1_vnd_006', 'm1_vnd_004'} - {f'm3_psychological_consulting_{n:03}' for n in (26, 35, 38, 44, 62, 80, 111)}
         assert retired == ((({'m2_qual_009', 'm2_qual_013', 'm6_ethics_001', 'm4_dev_002'} | {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} | {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)} | {f'm2_exp_{n:03}' for n in (20, 21, 24, 26, 38, 41, 43, 45, 46, 47, 48, 65, 68, 76, 81, 82, 83, 84, 86, 87, 89, 93, 100, 103, 104, 106, 113)} | {'m2_pd_003'} | {f'm2_qual_{n:03}' for n in (1, 2, 3, 4, 6, 14, 17, 24, 25, 29, 43, 53)} | {'cbt_abc_separation', 'cbt_experiment_function', 'cbt_activation_principle'}) | {
             'm1_psyf_002',
             'm1_psyf_013',
@@ -467,7 +468,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             'm3_psychological_consulting_102',
             'm3_psychological_consulting_113',
             'm5_clinical_013',
-        }) | {'m2_exp_108', 'm2_exp_110', 'm1_gp_043', 'm1_phys_025'}) | {'m1_vnd_007', 'm5_clinical_007', 'm1_vnd_035', 'm1_vnd_048', 'm1_vnd_021', 'm1_vnd_013', 'm1_vnd_014', 'm1_vnd_006', 'm1_vnd_004'}
+        }) | {'m2_exp_108', 'm2_exp_110', 'm1_gp_043', 'm1_phys_025'}) | {'m1_vnd_007', 'm5_clinical_007', 'm1_vnd_035', 'm1_vnd_048', 'm1_vnd_021', 'm1_vnd_013', 'm1_vnd_014', 'm1_vnd_006', 'm1_vnd_004'} | {f'm3_psychological_consulting_{n:03}' for n in (26, 35, 38, 44, 62, 80, 111)}
 
 
 def test_catalog_rejects_orphan_and_ambiguous_identities(mapped):
