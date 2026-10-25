@@ -13916,6 +13916,747 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "literature:fch_gazzaniga_kto_za_glavnogo": {
+      "schema_version": 1,
+      "item_sha256": "9d98785e5fd822ba17577245729f0317c633204aa50980e5026ff211e73f6541",
+      "review_sha256": "43774be106b9ed80f1287f47b4884d857b192dfb9a6ad1657c6450ff840d09af",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_martynov_mozg": {
+      "schema_version": 1,
+      "item_sha256": "f43a3a7a6ae0b251fcb66bcee5f9a1efecd2f41a4d864ad64c7adcc0fb07733b",
+      "review_sha256": "ea5d8575031b465e557fa45a98b94535f888198c4840621b94819bf0bee32193",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_ramachandran_mozg_rasskazyvaet": {
+      "schema_version": 1,
+      "item_sha256": "c769dc43c268cbfe261986c43b1cc184a7c9e51b14e3c590023a2b73d4c58714",
+      "review_sha256": "e45f359f28b713411bc4853a741b7d64558f4d24bb2b83520938d8346b7b5c23",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_gazzaniga_kto_za_glavnogo": {
+      "schema_version": 1,
+      "item_sha256": "63868e21b363bef98271899bf12c4132ab078e7edb75016298e82a385ed6b76a",
+      "review_sha256": "1d3e23709c730ead8817b14a4f52e26068562d1d090a3f936c9f89062267b30c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_martynov_mozg": {
+      "schema_version": 1,
+      "item_sha256": "249f3a61fe27290cf2722f5368f4c9404c16869eca3da5196cc0cc3489d1c396",
+      "review_sha256": "c4777cc160810efa9740c5bbc597bac67e14d014a57b7a9ae75245ce6132bc5d",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_ramachandran_mozg_rasskazyvaet": {
+      "schema_version": 1,
+      "item_sha256": "0f85d4098fddc82d99ce7c0f75d6fe6a068576ff0442b1e6b358c08f83949bc4",
+      "review_sha256": "d059d1c42cf8bdcf76f53aaa7ef736fea5518f9f23ee238d447050885dc497ab",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_8c4dd1a3c39ecbcf": {
+      "schema_version": 1,
+      "item_sha256": "4123526825fc9470d248f05d3556836bb141421ee97f3c582829e73cfdc5a7b6",
+      "review_sha256": "fbc62cdf204d8375abb532b33170db0f7614113ae4ea015a12a2f234f094a3e5",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_09470e6d0794b19a": {
+      "schema_version": 1,
+      "item_sha256": "e11b4d95fbe808a02d4408532131e10c5d664775b807ee4f26a69a91989dd288",
+      "review_sha256": "f65190778e62b3226b410ca7937240784f64d6fd70c28afb7e8a3734cd1529f9",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_dweck_mindset": {
+      "schema_version": 1,
+      "item_sha256": "0162851db84b6244c8e5881b6eddca1d5277c1b9040cca6471c7db3cb03aab97",
+      "review_sha256": "eeee46dead3a3651ed56e47df7245ebcb3c5c408a77eaa2b669f67c1a8fcef78",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_freiberg_school_climate": {
+      "schema_version": 1,
+      "item_sha256": "10ea53811c9a864e8aee56927c37777e1792113ea40804ccc2a38e7a7b75adae",
+      "review_sha256": "d524d795852ab88d6ade2c98fd5f78aa85c35011710b9b7407fe8de7a5c3732f",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_rath_harter_wellbeing": {
+      "schema_version": 1,
+      "item_sha256": "161be3d34170bbb95c5edc19e9a9576202e90c342600d9af716fc9c771f9e2a9",
+      "review_sha256": "d09fd9d496c2b3cd8ebc91ca76a1ee65c152843231515ccf509a2d268e889ddc",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_olweus_bullying_at_school": {
+      "schema_version": 1,
+      "item_sha256": "1f84b041ba2147fa6df51943bbd9f6b38b4eac1815df432a38f2a1121e0cf4b6",
+      "review_sha256": "5b782d87df314e46d5d2ad89981840da3d64df2b207e232472919a68bec89f5b",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_oecd_subjective_wellbeing_guidelines": {
+      "schema_version": 1,
+      "item_sha256": "1744fc22066107cfa31b503e289e8e559802faf4bcdae035629c32c99ce088bd",
+      "review_sha256": "f69034feb8533b4babd5ef50fc53624e950b39b44915325c2306dd1377f3fa87",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_burns_gottschalk_21st_century_children": {
+      "schema_version": 1,
+      "item_sha256": "e7e1515b963f0a3b01273540b456c5a8fe6581b0d80e1f6ad9a40372373cf3d7",
+      "review_sha256": "91b6302e93796587d61018c30fa810f1ea42de618737cf16d6eb5ecce91363f5",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_christenson_student_engagement": {
+      "schema_version": 1,
+      "item_sha256": "68e347158678e514231fe368b2777b75fc4ef3558383f52c9c5816a2d8ea5a08",
+      "review_sha256": "ca247cbeb1d7b50c061e3fa45ac85d344e33443dc6d9b7b6ba00808733fba478",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_buck_akerson_science_teacher_self_study": {
+      "schema_version": 1,
+      "item_sha256": "88b77d7d3304c4b6bd793560f9dbfaa2bc55c9bd80d3fb0b3d4f95865059a043",
+      "review_sha256": "5f84fc4ca2d043d8039b1e608d32890bdac8b05c3876fdcf5b2bf9532097eec1",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_hattie_anderman_student_achievement": {
+      "schema_version": 1,
+      "item_sha256": "999fb58b0124cbb2d2e5ac047a09e77aad03e107328e32e8c31e69ee67d362d6",
+      "review_sha256": "c3b09a61f9da33237b5f5acb63c19bee03cbaf0376e80bbe409710c2d9840982",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_kunter_coactiv_teacher_competence": {
+      "schema_version": 1,
+      "item_sha256": "7ef139886521ae4af2605fcecb905821f6fd21264ded54e142da0c14b0b62af2",
+      "review_sha256": "39babfc3fd838fb5475ad051d6a41c0d789aa7e666926f95006afc302f489bcb",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_oecd_pisa2015_volume3": {
+      "schema_version": 1,
+      "item_sha256": "63a725e953c0464c5fb7681ca108ed1916ead032888a88c914bdddd8cf2def1b",
+      "review_sha256": "0f10009b08598bcc00847489d11b06d92cb6ae4d642dc5745f5cc9dca017d0b3",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_oecd_pisa2015_volume2": {
+      "schema_version": 1,
+      "item_sha256": "6372b51e493df27468b1adf4b4c92396503f5b7f6a433a0b7dd425025068e01d",
+      "review_sha256": "77b2a624521c064791767e2d9ca5bdc5dc0ffda931f383588763d0f9aba7a167",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_rees_main_childrens_worlds2015": {
+      "schema_version": 1,
+      "item_sha256": "7afc45fced31ac2ad8267b32e61cdb2b1584bdb7734b1b53ed04c50341d06f43",
+      "review_sha256": "1269be0ce72ee53067ec99017c8f00cf628c419c5ea27e1bd986928d26bb33ef",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_good_childhood_report2015": {
+      "schema_version": 1,
+      "item_sha256": "fa1e04edc21704a203ca4497e543cc7333eb395da0b4c7c71dbd6b81853b6c5d",
+      "review_sha256": "71b463e6fc17175e73ee9f4124018f5b867fc22d856a3b4bc5700657d1106348",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_unesco_ending_school_violence": {
+      "schema_version": 1,
+      "item_sha256": "a577d00e599348a1fd414e629654f1050dfd51a89ee99555355faa1a9ae2ae91",
+      "review_sha256": "72f89b8984bc0888975b896679783464f89159e86e6f55f8bf7e7105b2cd6c7f",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_oecd_talis2018_volume1": {
+      "schema_version": 1,
+      "item_sha256": "74305307cbd67429c99acfcb8ce94783ae8166452ac7c0cd00724a8c5b7588af",
+      "review_sha256": "becc1750d9e78b365dd703ad41d2d3d909f6ae32f6fd64662f48fae9adf67317",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_oecd_gender_equality_education": {
+      "schema_version": 1,
+      "item_sha256": "2d086c47dc4241c8f1895862f990a1b672e42bab25409536ebf0a14eb2205e2c",
+      "review_sha256": "68e84b7875b303fbb64ea80d666f1cb64634270db31286fb4688fb2ccd7f6f49",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_oecd_pisa2012_volume4": {
+      "schema_version": 1,
+      "item_sha256": "4cb6c653afb888a554190482d7319ec1367d9e05a0dad19eb05bdaf48785b7a2",
+      "review_sha256": "79aba01f4fd523f2a981ee2a3749e79e9a183c8460a09107bba0aec648665e71",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_european_commission_early_school_leaving": {
+      "schema_version": 1,
+      "item_sha256": "e0df1c84f89b6b9f0ffad0363ed3e76544f69071dd7efcdbf02738181cb30bc5",
+      "review_sha256": "0f1798dafc045604c44ae8295c3300c6233a4b586a453c15c78c49f138aa0406",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_d0925c1eabd1814f": {
+      "schema_version": 1,
+      "item_sha256": "7bcd6c35d01caa1d01046352b4ee11353efcd63ea9fd7cf14381a0a725628bf0",
+      "review_sha256": "5633edec167945c06ab3c89c043a5d4de1999172b31a563dc65de6ffd8d01541",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_6a0411db5000673f": {
+      "schema_version": 1,
+      "item_sha256": "7aed4f046d8af35977078ae9de41a9b3c5805629dc82ab67563e7a1708111558",
+      "review_sha256": "53b274cc58c47b6ed49da35d45aa1441a01db5594d15868c2170799f5e2e2b80",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_bcb1d48d8219a2de": {
+      "schema_version": 1,
+      "item_sha256": "a3e50bb73b9150950c828bce929e20ff7084edb11ffe9fceae75f18e7f33766a",
+      "review_sha256": "7e3d4ac2575238f46c2dc2e9d134222ab2869934bab5fbd8f229921d97a675dd",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_e50e0babc4a8e1ac": {
+      "schema_version": 1,
+      "item_sha256": "b360a6e586f8a346854f93d8d3e6fd1d86bb77cd40fb33d6440e89c42ad92794",
+      "review_sha256": "925902e9c9cb42f281825e14d8c38f0a5617d99fbe4040e0d20837fee43cb0e4",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_52ee0cc6d8328928": {
+      "schema_version": 1,
+      "item_sha256": "abfaf6e03e6f52db6237759a0e335e4b4d502ccef0b1bd10c8b906316a9225b7",
+      "review_sha256": "1bdd66f174b583893122ecbe537427e91a61e3abd2db0bc3185c9a3e44360050",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_6989ce1295898678": {
+      "schema_version": 1,
+      "item_sha256": "a4f4658ee30c1b843761462326821507e9fb5ccf262cd77a5c01059c8363e889",
+      "review_sha256": "0da32d0e86f4512d8470bd0cb42896df1f1fb53e979e3e44a963263670354526",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_57f33726ed4ac65d": {
+      "schema_version": 1,
+      "item_sha256": "a0cafcfed86314ddb5e3dc19877a1f2b208b2773e19e0aaff4ad2767fe23b119",
+      "review_sha256": "d17686a8b73315b309f8168f8689fd799ef47a0bf51d2c8dc0ca8e12fffcb40d",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_893a89421300f678": {
+      "schema_version": 1,
+      "item_sha256": "1fda3daa67fce1a6fce515a4b27ffd4fed9ea32215d34876a9b850b0cbdfacce",
+      "review_sha256": "229c5963c6ef376f4622be8c08cfc1d9f97e42021053164af89a2b7deaa0be7e",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_1e33b87d4c9cedbc": {
+      "schema_version": 1,
+      "item_sha256": "0dce42eb27a68f5629c86fca7683cb5ded9a18fdb4b6835c3c4162487319edae",
+      "review_sha256": "33cf45dcbaf671497e2ca49e4ed6b3bc21f87b5d6272681ee25a9caca5f69c90",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_b976cc7351d9e31f": {
+      "schema_version": 1,
+      "item_sha256": "39e5a5b74fa9a85f6ccbe6b695a198eca060436275cdf574f4a850a6f889ebc8",
+      "review_sha256": "50e2fbd19985197854015bd9a79a43768763d97e97e4dc41849bb6376966625c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_4072b2a06746eb8e": {
+      "schema_version": 1,
+      "item_sha256": "45c85f4e50136914fde3dbd11f01957a1815e5ffc73e720a93cf2251774c056b",
+      "review_sha256": "649e4c5e30e2dcb38e1a7bddc8f0c602debc36ed854bc2181e07755dccfe1293",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_e63d19e97ba91e8d": {
+      "schema_version": 1,
+      "item_sha256": "9c875c3be037094639711c0c9a932110ecc1c8d4e0b4be74919b2e878c9379e2",
+      "review_sha256": "f324e9f38712cad000cc94d11fe476cd5d8c70b035cf9a465544cf8206b942f2",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_62bd57a7137c573f": {
+      "schema_version": 1,
+      "item_sha256": "07c27f3a75d378a427f5ec9b00f196ca64d0eda9df9cbcf75c3a7aa2c0bb848e",
+      "review_sha256": "5822ee5ffba6c812f81bf3cd6e3e31f15d92195cf2fe0d338ada5ba9364b0f12",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_f3a45bec2566afc2": {
+      "schema_version": 1,
+      "item_sha256": "a2f13b3fc734bc4228f99d01d97fe7bac82281c05e923c02a3b866e9b6cbeada",
+      "review_sha256": "75802bac7c95774572f2b7ec82cdd17d6831c49be1e1b40f47ba25483d12f079",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_be2b1c9d425fc832": {
+      "schema_version": 1,
+      "item_sha256": "0e2a2cfbb98413bf23ec7f64242a735650b3efcd20971097a4fcec26d7c503cc",
+      "review_sha256": "86a0f7751f420844e2ba04c70f84e8f6ea84d07f0227722970949d2b7853da00",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_d7e88c1d4f888bb6": {
+      "schema_version": 1,
+      "item_sha256": "c48e9d4fb67ad8048aab8fd3c181675c99d1f25b59af8d114b345b7e9319a782",
+      "review_sha256": "b494f60143d1eaebaa7826300d5a32e47ebf6cc523872173636e8d2e0fdd14f9",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_a00c9150bcfd7966": {
+      "schema_version": 1,
+      "item_sha256": "ae916977dee36c1d8804fdbf5c0f02e32b9a1a74a81cf208b36f5d85a7638dbd",
+      "review_sha256": "76e38d153c9329164b317d4267ab18d93056b436776880b5d4de5ee0f1d1de0d",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_db2ba3e8c2e1dcc9": {
+      "schema_version": 1,
+      "item_sha256": "0683238f27b180bce0ba0a680bc4c6a7adbdb1c87cc24abbbd7323ea68ae9bb0",
+      "review_sha256": "1cf9f2d105f922343f109ad81e432c253a1a19711d44cc39ed3fcd790472e238",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_a1f851d16e687949": {
+      "schema_version": 1,
+      "item_sha256": "c07b7e0f68d5a60e3d582dd63e4361b531cb6f3de7402960dd80ff673835928e",
+      "review_sha256": "e1168dd41fd895f1d15fe533761f81ee1fbc476ffcaef28dfbc730e7f46f557e",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_277405e34a8fefe0": {
+      "schema_version": 1,
+      "item_sha256": "73539fc09783c3c5c2f38bcaebf03e8763122840466edbeda2fc03e3fe83427f",
+      "review_sha256": "b50ef833d425606903b4d36903e2d4c07f662339405b872977c1262afbf9ec55",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_680648f4cff86e93": {
+      "schema_version": 1,
+      "item_sha256": "70f67095ea9ac5a58d01b40ee5cd911479cd4cfd9e8bf6dc24ad888b44356b28",
+      "review_sha256": "0267862a46a4b82f92384f362f9c1fdaf024eca33c387b14da1c930a1976c862",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_5471070945426f93": {
+      "schema_version": 1,
+      "item_sha256": "b11211b49186e30f1530fc4e4ddee26319f7548840a7496e734ed40ab88d6afd",
+      "review_sha256": "e18fdeffa40747f25e60afa14703c14e2a42120c243948620dbea4c020dde635",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_e51d58eb24bcf8a2": {
+      "schema_version": 1,
+      "item_sha256": "43af26821ef921c43e14bc57a2ae1d18481359ee78cfffe36a22918ac49c384f",
+      "review_sha256": "82de0d24089319dee7337caa445f80debaa02eb2a622d7ec03384d2821814f22",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_course_mention_e809609920ac0938": {
+      "schema_version": 1,
+      "item_sha256": "e537abf78e9203c4a292d8fbc8a9c57157102347eeaf833fdcf12f7e26d02539",
+      "review_sha256": "7d404dffb95e8836e416e25b228727644d2b9810e645df179bbcb7ce8d359eff",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_rybina_muradyan_coach_turning_point": {
+      "schema_version": 1,
+      "item_sha256": "1705a11e7ef75ddbe566a99b5c89c4e58861122982ad67123d5584c7c14c7abf",
+      "review_sha256": "95de631cd897d338763835dddb448ecd520eaa8ce45c0124dbe9203a9d7f66a8",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fch_shulgovsky_neirofiziologiya": {
+      "schema_version": 1,
+      "item_sha256": "cb628353e37592029eceb3df7f948231774f4948c45048db50d6e6666cd47c4a",
+      "review_sha256": "07ff54ff988fee0f590f615f241c6f9b4ea323f02e4bc7bbe8045871466fe829",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:fvnd_shulgovsky_neirofiziologiya": {
+      "schema_version": 1,
+      "item_sha256": "c758fb10ce19b0983e15caecf0ce67d75f2c14dac994f1ba85850c7b4dcf01fb",
+      "review_sha256": "dea0c40f524ea9a1d01956067af73f692d59799358293117155b1f3826950a6b",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:lit_40f4eacd15ed570b": {
+      "schema_version": 1,
+      "item_sha256": "bf355e0e92584049d3288e84d115d8b043f0f4494ca2c2c4e34690ece14ce629",
+      "review_sha256": "d6588df95a4cf56b8e21cb7989f2d38bed107fc5ea8955449d2a1d77d534eeb1",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:marcinkovskaya_history_psychology": {
+      "schema_version": 1,
+      "item_sha256": "87bd0132b3b412b93b5e98138311d0c7f85ff5e654ee0c5653f6f2903991fd81",
+      "review_sha256": "bf719978b5c78f6a1d09770829957829553cc7fcbde87e5008c796df490f56df",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:khovansky_comfortable_consultant": {
+      "schema_version": 1,
+      "item_sha256": "7a28530eedc177a60f307cbbcaa1a252b46f43bcff4459de97724308c4a34d12",
+      "review_sha256": "45046dcf97120eee39f85105dbbe9111b1d1cec689b5674ca74db6d63fb6ad38",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
