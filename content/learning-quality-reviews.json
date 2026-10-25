@@ -1995,8 +1995,8 @@
     "questions:m1_gp_005": {
       "item_sha256": "51a521bb68c67c21a5ca4af6583e5e1fe931b8495200983c575be1e3a7db21d8",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2008,7 +2008,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Individual stimulus properties vs holistic perception; no actual sensory diagnosis. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Single-property versus integrated-object introductory distinction;tea temperature/odour example not forced hot-stove experiment,clinical diagnosis or account of all consciousness. Distinct component-identification goal from006concept mapping.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2020,10 +2020,10 @@
       "disposition": "keep"
     },
     "questions:m1_gp_006": {
-      "item_sha256": "eb9d762e6a241d57684550a0323c0c47e9a944f5397e5036741c67708e3fe6f0",
+      "item_sha256": "ffaef2d9ecb4ce18abf48a2fe1b6a383f0aeccc49a10d92637edd6bee7ea7824",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2035,22 +2035,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Conceptual whole/part distinction; unlike005 asks relationship rather than classifying a sensory example. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Replace synonym/past-only caricatures with parallel adjacent process-role alternatives. Correct basic sensation/perception role;not reversed later lecture summary or mandatory serial pipeline. Integration distinction not claim all perception is conscious/solely cortical.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "characters:603:789;characters:3174:3706"
+          "locator": "characters:603:789"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_gp_007": {
-      "item_sha256": "2450d98365fa652eb71dc24567b1abf585d2d19de795fb9e8014f7e338199ad9",
+      "item_sha256": "66cbe878f2985d95ff769d496b011509d4ac0a10e445f2fb134d8ba95040deb4",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2062,7 +2062,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Distraction and focus, distinct from intentional selection021 and property duration011. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Notifications and loss of focus specify attention;replace temperament with adjacent mental process and explain alternatives. No memory-deficit diagnosis from rereading;distinct from035causal-uncertainty judgment.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2071,13 +2071,13 @@
           "locator": "characters:6391:6554;characters:9147:9655"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_gp_008": {
-      "item_sha256": "c7957041aeb18fcc668c18e9e81d3b651c33c354945133e428a59aacc32659a0",
+      "item_sha256": "9b243c22ac5273db82469339fad6aef4568d40da2293d48072303823062e1a51",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2089,7 +2089,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Memory includes later reproduction, distinct from retrieval-specific application023. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Encoding/retaining/reproducing experience identifies memory;all alternatives now cognitive processes with contextual role explanation,not unrelated affect/set. No fixed storage duration or guarantee of faithful replay.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2098,13 +2098,13 @@
           "locator": "characters:10827:10999"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_gp_009": {
-      "item_sha256": "48eb1f86ad624a85a4e5c2a2ebefa75437ca69ff69f1cb2bd22e20a606755d1c",
+      "item_sha256": "26bb2a48ba30eec4149c3f7444d51b8921de105e2aa4bc2c8ed3cd1eb4e24e2a",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2116,7 +2116,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Comparing alternatives and grounds, distinct from inductive generalization024. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Compare alternatives and justify choice:thinking. Adjacent sensation/memory/imagination roles explained;not claim only one process active or valid choice guaranteed. Distinct from024generalisation.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2125,13 +2125,13 @@
           "locator": "characters:16900:17123"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_gp_010": {
       "item_sha256": "2ad7eb98b0a0cde844ac421ddc9111039e900e7371f4bc1a48ba5544a71bdf9f",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2143,7 +2143,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Creating a new scenario vs reproducing prior material; no new example needed for this objective. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "New project scenario from known material versus memory/reception/focus. Course imagination definition only;not human-only comparative claim or rigid creativity/imagination boundary.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2157,8 +2157,8 @@
     "questions:m1_gp_011": {
       "item_sha256": "ea809df2797af3852060dd1e7018de22dd28140d8da14a0b7dc14cd191817c02",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2170,7 +2170,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Duration and continuity specify stability, not switching or distributing attention. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Duration/staying with same task identifies sustained attention versus shifting/dividing/selecting;30minutes scenario description,not prescribed norm or dose. Distribution not unlimited parallel processing.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2184,8 +2184,8 @@
     "questions:m1_gp_012": {
       "item_sha256": "404c5246ca42ead2ec5fce624fa0859630c5c9b7320a8f4abe5f7cf301241a46",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2197,7 +2197,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Complete cognitive-process set contrasted with properties/states/attitudes; bounded classification. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Introductory class of sensation/perception/memory/thinking versus traits/states/attitudes. Source list is not exhaustive universal taxonomy or sequence;no reduction to sensation-only physiology.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2418,10 +2418,10 @@
       ]
     },
     "questions:m1_gp_021": {
-      "item_sha256": "b0ecb4705c3a51ce6f4884a809ed6225d16412d9a7b08a8be2041f644c38bbf4",
+      "item_sha256": "bbcc2e683dd5092c0a0627de730608a08d3e78f59b49724c415716cc524dd7cf",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2433,7 +2433,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Selecting a wanted object among alternatives, distinct from distraction007. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Change broad process identification into property discrimination:selection among competing list items. Four attention-property alternatives;distinguish duration/shifting/dividing from selection. Separates assessed objective from007and011.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2442,7 +2442,7 @@
           "locator": "characters:6391:6554;characters:9147:9655"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_gp_022": {
       "item_sha256": "0b79c38688f9e42c34d52f04a6387c2da0f71cf045fa663b9643ab8b74cb7456",
@@ -2475,8 +2475,8 @@
     "questions:m1_gp_023": {
       "item_sha256": "fdb10bb6cfe22e8b280cd123d9088a08dc93f1c72cce14ae81bb59e7ff7ee17d",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2488,7 +2488,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Retrieval operation explicitly isolated; cannot infer reason for forgetting from example. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Previously learned material retrieval identifies memory operation;not cause of difficulty or lack of stored trace. All four processes can participate;explicit retrieval focus is unique key.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2500,10 +2500,10 @@
       "disposition": "keep"
     },
     "questions:m1_gp_024": {
-      "item_sha256": "40e1bd5b88093b6c771c23853259185fb0510c3bb962aa15c16d4a26b8ecc806",
+      "item_sha256": "a6abac06078e4b5d49fb666ebe69debf730e5b222144d5eb421725557331791c",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2515,7 +2515,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Inductive generalization rather than simply choosing between alternatives; named process scope. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "General rule across cases tests generalising thought,not repeat choice-comparison wording. Replace mood/adaptation distractors with adjacent processes;remove editorial comparison to other item. Induction not proof universal rule.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2524,13 +2524,13 @@
           "locator": "characters:16900:17123"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_gp_025": {
       "item_sha256": "9fec1672f263780214950d391b49e675e619071e1ffba70dc026d53a9e21e440",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2542,7 +2542,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Transforming objects into an imagined scene with other contributing processes acknowledged; distinct childhood symbolic use from imagining a future project. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Authored generic boxes-as-spaceship image transformation;memory/perception/construction may contribute,creation aspect explicitly focal. No developmental-age diagnosis or original student/client story reused.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2782,10 +2782,10 @@
       ]
     },
     "questions:m1_gp_035": {
-      "item_sha256": "e6b1c55928ee706b13d2a6d947f89e36a6219830e0f92703adbccd12cf0a78ad",
+      "item_sha256": "766c5b5a0d74d0530cf64155efe624a7d3c818b4be90ba3fcd017dae177dde18",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2797,7 +2797,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced always/no-dependence claims with common but invalid indicators of learning. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Rewrite into bounded inference from distractions plus weak recall. Four plausible explanatory directions;no premature deficit/low-motivation/text-only conclusion. Checks possible attention involvement and need for information,not generic cause of all memory complaints.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2838,8 +2838,8 @@
     "questions:m1_gp_037": {
       "item_sha256": "d406936bfb24d7dca247d1be4e6c7be7d7b7c06516051473614f141204ce2b85",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2851,7 +2851,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Source-defined process function versus plausible neighboring functions; no universal speech mechanism. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Exact language-mediated communication definition only. Adjacent memory/thought/perception alternatives;no claim all thought or consciousness needs speech,no age deadline or denial of nonspeaking persons abilities.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -2860,13 +2860,13 @@
           "locator": "characters:24680:24789"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_gp_038": {
       "item_sha256": "188788221aebd71bd0f82afe4ebe7e28fe008c21d9ded19b1c19e59134c3aee9",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2878,16 +2878,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Functional applied distinction replaces a generic interdependence slogan; no single mechanism of all cognition. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Joint task separates retaining/accessing text from comparing relations/reasons;all alternatives plausible swapped roles. Remove irrelevant/held attention/sensation passages from proof. No mandatory order or verbatim-memory guarantee.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
           "modified_time": "2026-03-20T14:49:22.978Z",
           "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "characters:603:789;characters:6740:7214;characters:10827:10999;characters:16900:17123"
+          "locator": "characters:10827:10999;characters:16900:17123"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_gp_039": {
       "item_sha256": "b5e981e8414dfb8d9687c1c74486b6079228ffa5e69c1bbd07fda157f0f6f110",
@@ -6171,10 +6171,10 @@
       ]
     },
     "questions:m1_vnd_028": {
-      "item_sha256": "57ac45fbaae423ddbf60f45766bf3353e10c467c0854275c337d3a642a19b762",
+      "item_sha256": "83bc926a9d5785c5b26180ccb5790da151a6d96bf3e37751fd3bd443eb163831",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6186,15 +6186,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Direct exact course introduction instead of whole-glossary reference. Course introduction establishes topic/context, not an isolated brain centre or measured physiological mechanism. General emotion/physiological-response association independently supported by reused exact OpenStax10.4 opening review. _028 is a classification of an illustrative choice/self-regulation situation under the named course topics, not causal proof of a cortical model. All13 own and related-source holds unchanged.",
+      "note": "Distinct feedback-correction objective after the decision has already been taken; compare interim observed results with the adopted goal and revise the next action. Earlier private draft duplicated motive-choice006and mixed maintaining005; explicit original-objective comparison retained in vnd-volition-objective-followup425.json. The course neutral functional assessment/change clauses are used,not literal cingulate emotion generation,three-zone completeness,uniquelyhuman planning,will-muscle,moralhierarchy or one fixed sequence. No client neural/trait diagnosis or public source vignette. Shared context with connected mental-process and validation-practice lectures is not empirical support for a sole causal or therapeutic mechanism. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
           "source_id": "src_9f6f04cc0b808ea0340df0ae83928a72a9cb5d6b388c54f7dad37cc6d9f4a729",
-          "modified_time": "2026-04-07T09:58:03.450Z",
           "snapshot_sha256": "267e1cf62d3d0008539e89694c8575a9c04f875151acb20a66f442a02a102c91",
-          "locator": "characters:0:315"
+          "modified_time": "2026-04-07T09:58:03.450Z",
+          "locator": "characters:30226:30299;characters:31039:31098"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_029": {
       "item_sha256": "f1fc58c9b9e4395f13c4b91bd32e11856d907a80c816cbd35abd3daa8a74865b",
