@@ -1886,8 +1886,8 @@
     "questions:m1_gp_001": {
       "item_sha256": "ddbf8241548fa3a7ad3431975431a97fcca3f8e79c19dcf190766e426e74d9fc",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -1899,22 +1899,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced only-neuroanatomy/children/diagnosis distractors with neighboring psychology subject areas. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Broad field versus developmental/social/physiological subfields,not sole metaphysical consensus;literal course subject clause only.",
       "sources": [
         {
           "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "characters:8000:8500;characters:11000:11300;characters:11400:12100"
+          "locator": "characters:7605:8043"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_gp_002": {
-      "item_sha256": "e38eae68477bad09e152fd39ccb1a95258970f4d8c868fba1efa95fa5d900bcb",
+      "item_sha256": "ccfaa2b4f8c08ea794b144e7fafedc91aef9e92eee80feb8854311a25e396f49",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -1926,7 +1926,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Operational hypothesis and data vs authority/intuition; stigmatizing opinion is explicitly rejected, not taught as burnout cause. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Operational meaning/evidence rather than anecdote,consensus or theory fit alone. Weakness label not diagnosis/scientific indicator;no sole burnout cause established.",
       "sources": [
         {
           "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
@@ -1935,7 +1935,7 @@
           "locator": "characters:36700:37180"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_gp_003": {
       "item_sha256": "6da30e2826976e987ac9205002b74157ee879fe723a75c87908054b2314448a8",
@@ -1968,8 +1968,8 @@
     "questions:m1_gp_004": {
       "item_sha256": "f6dd433f1c9fbef93a1abb1ed0a7b75d30caa2b8efe07c62b799e649ad70db53",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -1981,16 +1981,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Four legitimate research activities distinguish description from explanatory mechanism, no advice/story caricatures. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Description versus explanatory hypothesis/mechanism checked against data;not every study must manipulate or find one neural cause.",
       "sources": [
         {
           "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "characters:8000:8500;characters:36700:37180"
+          "locator": "characters:8043:8209"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_gp_005": {
       "item_sha256": "51a521bb68c67c21a5ca4af6583e5e1fe931b8495200983c575be1e3a7db21d8",
@@ -2237,10 +2237,10 @@
       ]
     },
     "questions:m1_gp_014": {
-      "item_sha256": "cabd4eb739f0cd850e05535ecdbf56a77d501c465b01e1ccbbd17a8afc1f6c83",
+      "item_sha256": "731b45eb0ef0b711ee2a4cda8c32b754762cc767d791df4b194dbc7383592978",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2252,9 +2252,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Temporary/situative vs relatively stable; explanation guards against time-only or self-report-only inference. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Current state/background versus relatively stable pattern;avoid fixed duration criterion,one-episode inference,all traits innate,or confusing long anxiety with GAD/personality.",
+      "sources": [
+        {
+          "source_id": "src_c2c90d58789d9c7c79f84bd540fef66a88b5957dba6170635d01a804ce4404cf",
+          "modified_time": "2026-03-20T16:06:27.409Z",
+          "snapshot_sha256": "9740f8a0589cda84653431f26175887d93a448aacc4c0709c3ad3fc08648db91",
+          "locator": "characters:1341:1489;characters:24462:24744"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_gp_015": {
       "item_sha256": "8ada1b91699b19e1efc57c6758d97f6acf1e52173b9fa40c0f582803da0f45a4",
@@ -2287,8 +2294,8 @@
     "questions:m1_gp_016": {
       "item_sha256": "3783a5324c98a00f58b2b231951acd7477ac16c6c1ff753846b350cb1be7594a",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2300,9 +2307,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Plausible neighboring character/temperament/state/ability definitions. Exact passage outside preserved GAD/genetic holds. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Character as stable relations/behaviour in typical circumstances;not mislabeled transient state or temperament/ability diagnosis.",
+      "sources": [
+        {
+          "source_id": "src_c2c90d58789d9c7c79f84bd540fef66a88b5957dba6170635d01a804ce4404cf",
+          "modified_time": "2026-03-20T16:06:27.409Z",
+          "snapshot_sha256": "9740f8a0589cda84653431f26175887d93a448aacc4c0709c3ad3fc08648db91",
+          "locator": "characters:24462:24744"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_gp_017": {
       "item_sha256": "b59f3e556775fb0d26b5de18ff91c6319ad8cbed6490cf0aadf9fab50b7fb5d0",
@@ -2612,8 +2626,8 @@
     "questions:m1_gp_028": {
       "item_sha256": "7a40300c3588ed824791ff2c2d4d0d1b8a5dd77475371b072c82c12273d0e26d",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2625,9 +2639,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Comparable psychological characteristics replace sensations/perception/random-reaction options. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Authored generic repeated work pattern illustrates character concept;no assessment of a real person,moral type/immutable capacity or single-episode diagnosis.",
+      "sources": [
+        {
+          "source_id": "src_c2c90d58789d9c7c79f84bd540fef66a88b5957dba6170635d01a804ce4404cf",
+          "modified_time": "2026-03-20T16:06:27.409Z",
+          "snapshot_sha256": "9740f8a0589cda84653431f26175887d93a448aacc4c0709c3ad3fc08648db91",
+          "locator": "characters:24462:24744"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_gp_029": {
       "item_sha256": "ef5ffd1f1da792a57673ef5c9ac4612dc225fd3e5d4e0f03827686b5eaad021f",
@@ -2686,10 +2707,10 @@
       ]
     },
     "questions:m1_gp_031": {
-      "item_sha256": "53a153535afde0cfaf4a76f47f867928b88d2febffff0e93cefbce8d0e81db21",
+      "item_sha256": "5321c47334d7be246cee10bbb9db010851a58f330b0d0995a205cd05baf9b7bf",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2701,53 +2722,67 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Object area vs subject selected relationships, with plurality of psychology approaches acknowledged. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
-    },
-    "questions:m1_gp_032": {
-      "item_sha256": "d550b5eecd0272d10b89b30a8b86b1838f20c49b46c888228e72b7a6c8a74aa9",
-      "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "FIX: Replaced duplicate fact-selection item with verification against an available primary observation record; original exercise identity preserved. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "fix"
-    },
-    "questions:m1_gp_033": {
-      "item_sha256": "fc4d76885560470ab5321aa29543441afecf0f1153ebf750f0b7ea70b7a2d9b7",
-      "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "KEEP: Personal experience may generate but cannot itself validate a hypothesis; no claim experience is always wrong. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Apply object/subject distinction to two actual research questions;parallel methodological components replace emotions-only/synonym caricatures. Scope is stated teaching scheme.",
       "sources": [
         {
           "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "characters:4938:5660;characters:36700:37180"
+          "locator": "characters:9448:9671"
+        }
+      ],
+      "disposition": "fix"
+    },
+    "questions:m1_gp_032": {
+      "item_sha256": "d550b5eecd0272d10b89b30a8b86b1838f20c49b46c888228e72b7a6c8a74aa9",
+      "discipline_id": "obschaya_psihologiya",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Already supplied educational recording permits checking literal words;not proposal for covert real-client recording or belief that memory confidence guarantees accuracy.",
+      "sources": [
+        {
+          "source_id": "src_deaddf3fda6a14e03fad61ef771e8f7db91afc5d6f312259623e2dbdb411272d",
+          "modified_time": "2026-04-08T10:01:12.380Z",
+          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
+          "locator": "characters:16512:16660;characters:17578:17618"
+        }
+      ],
+      "disposition": "keep"
+    },
+    "questions:m1_gp_033": {
+      "item_sha256": "fc4d76885560470ab5321aa29543441afecf0f1153ebf750f0b7ea70b7a2d9b7",
+      "discipline_id": "obschaya_psihologiya",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Personal experience helps hypotheses but cannot by itself verify another clients explanation. No always-biased practitioner/automatically objective scientist contrast.",
+      "sources": [
+        {
+          "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
+          "modified_time": "2026-03-20T13:55:22.021Z",
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "characters:36700:37180"
         }
       ],
       "disposition": "keep"
@@ -2890,10 +2925,10 @@
       "disposition": "keep"
     },
     "questions:m1_gp_039": {
-      "item_sha256": "b5e981e8414dfb8d9687c1c74486b6079228ffa5e69c1bbd07fda157f0f6f110",
+      "item_sha256": "019bc5ae274fb0ae7a82f45020d13e8c0b87f63691579d04b2eeb47de4996ed5",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2905,9 +2940,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Situative emotional state identified without diagnosing disorder or inferring trait; held GAD transition remains excluded. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Only current reported anxiety before specific event known;parallel state/trait/character/ability descriptions. No disorder excluded or inferred.",
+      "sources": [
+        {
+          "source_id": "src_c2c90d58789d9c7c79f84bd540fef66a88b5957dba6170635d01a804ce4404cf",
+          "modified_time": "2026-03-20T16:06:27.409Z",
+          "snapshot_sha256": "9740f8a0589cda84653431f26175887d93a448aacc4c0709c3ad3fc08648db91",
+          "locator": "characters:1341:1489;characters:24462:24744"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_gp_040": {
       "item_sha256": "94801240ce93a8a2dc4c34b3afd7a0f91f5dc5ef9ace801b6ff1176e26be0309",
@@ -2932,10 +2974,10 @@
       "disposition": "retire"
     },
     "questions:m1_gp_041": {
-      "item_sha256": "6064cae9465f0562c5fc799409be6617e5d0e9243434e521d58a57197250ab89",
+      "item_sha256": "14271f18e64cb5290ec9e42e8db46924e6ac11869e6bc6a7d2dae3890eea69dc",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2947,7 +2989,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Comparable classification sets replace only-reflexes/only-nervous-system/only-emotions; taxonomy bounded to this course. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Acquired learning results versus processes/states/dynamics. Remove teacher-wording recall framing;no immutable innate-trait hierarchy or qualification from course completion.",
       "sources": [
         {
           "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
@@ -2979,10 +3021,10 @@
       "disposition": "fix"
     },
     "questions:m1_gp_043": {
-      "item_sha256": "8e036e46e25994a0f72df86c69f52fb84e30b86dd091e9f3886020ae3a5fbe7b",
+      "item_sha256": "4367694f0f8b38ea4097b4d70ef6cd9caee89e7001b1b8613771f1f520c3a0c9",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -2992,9 +3034,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "FIX: All four options are attention properties, context specifies selection; no nonexistent-memory/client-temperament caricatures. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "Both complete questions043and021test selection of information versus sustained/shifting/dividing attention. Client-context dressing adds no separate inference or next-step objective. Retire043only after current-source acceptance of021;both five-question homework subsets replace it one-for-one. Old043body/editions/attempts retained;this withdrawal ledger does not approve new scientific claims.",
       "sources": [
         {
           "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
@@ -3003,13 +3047,13 @@
           "locator": "characters:6391:6554;characters:9147:9655"
         }
       ],
-      "disposition": "fix"
+      "disposition": "consolidate"
     },
     "questions:m1_gp_044": {
-      "item_sha256": "42f642d6f16f9a500ee9bd3f992c41c6446eafdf6b8f4f6c87281d61149627bc",
+      "item_sha256": "55d47e207e869c8cc268231d0b2e87ca84548f9a8173aa06974eec8cc787ce59",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3021,8 +3065,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Comparable confidence/familiarity inference errors; no extraordinary therapist memory or universal training guarantee. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
+      "note": "Past experience may shape interpretation;verify understanding,not all perception subjective/no external facts/uniform stress-memory mechanism.",
+      "sources": [
+        {
+          "source_id": "src_deaddf3fda6a14e03fad61ef771e8f7db91afc5d6f312259623e2dbdb411272d",
+          "modified_time": "2026-04-08T10:01:12.380Z",
+          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
+          "locator": "characters:16512:16660;characters:19749:19987"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m1_gp_045": {
@@ -3078,8 +3129,8 @@
     "questions:m1_gp_047": {
       "item_sha256": "dc0be8d116047e5a82c3fdbdcbeb680fe693f1610e5ddd8b31b1cc43183d61c8",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3091,15 +3142,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaces generic fact/hypothesis advice with checking a particular version and contrary evidence. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Seek event circumstances including contrary information;avoid question presupposing avoidance. No guarantee tested hypothesis is correct and no hidden motive established.",
+      "sources": [
+        {
+          "source_id": "src_deaddf3fda6a14e03fad61ef771e8f7db91afc5d6f312259623e2dbdb411272d",
+          "modified_time": "2026-04-08T10:01:12.380Z",
+          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
+          "locator": "characters:16512:16660;characters:17578:17618"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_gp_048": {
       "item_sha256": "403ace53c9dbc2120a08d3a7981e577f449e9ef2f6d27e225ca5b2e46494322e",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3111,7 +3169,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Plausible inference shortcuts replace always/never/absence-of-psychological-causes alternatives. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "One tardiness observation not stable irresponsibility/type;distinct objective from047testing contrary information about an avoidance hypothesis.",
       "sources": [
         {
           "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
@@ -3120,7 +3178,7 @@
           "locator": "characters:36700:37180"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_gp_049": {
       "item_sha256": "b94323e33ad9dbcbae6780dcbe21ab955b8e7ed7463d229b1b6edd986060a162",
@@ -3171,10 +3229,10 @@
       "disposition": "keep"
     },
     "questions:m1_gp_051": {
-      "item_sha256": "c8c704ac66fec8627dfaa0821561045c50c9d2cf8f3ba5a1d8bffa65d4f6b09c",
+      "item_sha256": "b102e9b2eee4396f97900efdf3283347286682ec4c21a03f0058909e97241a19",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3186,42 +3244,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Post-hoc explanation vs prior predictive accuracy; not any plausible explanation proves a forecast. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "keep"
-    },
-    "questions:m1_gp_052": {
-      "item_sha256": "33de7ca481ff0774fa2b0dbfddb52222a2ea6677e58b8b25bf925b0c3a004c04",
-      "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "FIX: Distinct perception/experience objective with comparable confirmation shortcuts instead of unrelated absolute claims. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
+      "note": "Hindsight/posthoc account versus prospectively recorded prediction;parallel plausible evaluation errors,not lecturer phrase recall.",
       "sources": [
         {
-          "source_id": "src_059031875bb5b4e622ff1bb38a721d6e49a8410234975b5f83f4b85c3937d2d2",
-          "modified_time": "2026-03-20T14:49:22.978Z",
-          "snapshot_sha256": "e9980b5d24b32862c5800eda13d3670cbdfda3f3f02fa43e66bf7904a2429bca",
-          "locator": "characters:3174:3706;characters:5800:6053"
+          "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
+          "modified_time": "2026-03-20T13:55:22.021Z",
+          "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
+          "locator": "characters:2650:3530"
         }
       ],
       "disposition": "fix"
     },
-    "questions:m1_gp_053": {
-      "item_sha256": "9f7e578998b1babb038edcea37d519cbd93402a3d062f5388ab793b7e7d9c10b",
+    "questions:m1_gp_052": {
+      "item_sha256": "33de7ca481ff0774fa2b0dbfddb52222a2ea6677e58b8b25bf925b0c3a004c04",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3233,9 +3271,43 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced forgetting-only-children/identical-memory caricatures with common invalid inference shortcuts; no diagnosis or advice. Current full wording/options/key/explanation reviewed; exact previous edition evidence reused only when unchanged, previous scientific holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Past-experience influence is possible,not proof actual meaning or a reason to project practitioner story onto client. Source example not copied as a real case.",
+      "sources": [
+        {
+          "source_id": "src_deaddf3fda6a14e03fad61ef771e8f7db91afc5d6f312259623e2dbdb411272d",
+          "modified_time": "2026-04-08T10:01:12.380Z",
+          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
+          "locator": "characters:16512:16660;characters:17578:17618"
+        }
+      ],
+      "disposition": "keep"
+    },
+    "questions:m1_gp_053": {
+      "item_sha256": "9f7e578998b1babb038edcea37d519cbd93402a3d062f5388ab793b7e7d9c10b",
+      "discipline_id": "obschaya_psihologiya",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Memory complaint requires specific events/context;no causal diagnosis,responsibility/moral inference or generic far-transfer training claim.",
+      "sources": [
+        {
+          "source_id": "src_deaddf3fda6a14e03fad61ef771e8f7db91afc5d6f312259623e2dbdb411272d",
+          "modified_time": "2026-04-08T10:01:12.380Z",
+          "snapshot_sha256": "f4460a04b1a53fd03d10221943b9471467ebcf0f947b9782ee7a48bcd6cdef24",
+          "locator": "characters:19309:19379;characters:19749:19987"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_gp_054": {
       "item_sha256": "ed2f41052566f4562a861094c4ce55fef7f60932cf26b445aa6bb96af8ccc833",
@@ -3321,10 +3393,10 @@
       "disposition": "retire"
     },
     "glossary:subject_general_psychology": {
-      "item_sha256": "a2a59921d4ce55b62598e0c955e1bff761329b59092ac151cdeb1558021725c8",
+      "item_sha256": "fcf64fd6f56a5c45a6e65c025602ac989956566e9898777c4dfb3cbac0467175",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -3336,16 +3408,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Broad mental-process/state/property field, not a single specialism; neutral independent example. Complete current term/short definition/definition/examples/confusion links reviewed; exact existing source-backed edition reused, previous holds retained.",
+      "note": "Broad processes/states/properties/behaviour/activity field;example spans several mental functions without arbitrary fixed causal pyramid.",
       "sources": [
         {
           "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "characters:11001:11275"
+          "locator": "characters:7605:8043"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:scientific_hypothesis": {
       "item_sha256": "b95db9b642eca6ea781ccc690bdf7fcc0c91127ace5a52907e9942bb8e44476e",
@@ -3405,10 +3477,10 @@
       ]
     },
     "glossary:explanation_mechanism": {
-      "item_sha256": "986172fed4d495585fd98db13087f6537a84dceb8dbca61d0aac9263be13cc28",
+      "item_sha256": "eee7c2c1aace63b2ec7c70974432b763fc176eada0201eb654fbd44cb1e0b35d",
       "discipline_id": "obschaya_psihologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -3420,16 +3492,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Mechanism to be tested distinguished from descriptive event, not a claim a story alone establishes causation. Complete current term/short definition/definition/examples/confusion links reviewed; exact existing source-backed edition reused, previous holds retained.",
+      "note": "Bound explanation as a teaching function:check mechanisms/relations,not only description or mandatory hidden brain cause.",
       "sources": [
         {
           "source_id": "src_2c6ac95ef29b558f2a5d22763bb2d495c2c68078cf030ccee478c55bc2e17193",
           "modified_time": "2026-03-20T13:55:22.021Z",
           "snapshot_sha256": "07b20f5276aa9ae74a1e686e9dabcb3d78c090697e2903cfaa00f60ed2a96b58",
-          "locator": "characters:8000:8350"
+          "locator": "characters:8043:8209"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:sensation": {
       "item_sha256": "559180485f995f44a4bb95dd94e876e9c2558410714d7aad3c495cfdb53cb81a",
