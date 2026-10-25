@@ -333,12 +333,22 @@ def test_history_books_preserve_shared_work_and_do_not_recommend_uncertain_ident
     continuation = reading_next_step([uncertain], started, all_items)
     assert continuation['kind'] == 'continue'
     assert continuation['item']['id'] == uncertain['id']
-    for item_id in ('lit_social_history02_wundt', 'lit_social_history02_freud',
+    # The ten-volume mention does not select a concrete readable volume.
+    wundt = by_id['lit_social_history02_wundt']
+    assert reading_next_step([wundt], {}, all_items) is None
+    continuation = reading_next_step(
+        [wundt], {wundt['id']: {'reading_status': 'in_progress'}}, all_items)
+    assert continuation['kind'] == 'continue'
+    assert continuation['item']['id'] == wundt['id']
+    for item_id in ('lit_social_history02_freud',
                     'lit_social_history02_miller_dollard', 'lit_social_history02_sighele'):
         item = by_id[item_id]
-        assert reading_next_step([item], {}, all_items) is None
-        prerequisites = {entry['id']: {'reading_status': 'read'} for entry in all_items
-                         if entry['work_id'] == by_id['lit_caa8d94a943aae0d']['work_id']}
-        recommended = reading_next_step([item], prerequisites, all_items)
+        # A known work can be suggested without an unsupported requirement
+        # to complete one specific contemporary textbook first.
+        assert item['prerequisites'] == []
+        recommended = reading_next_step([item], {}, all_items)
         assert recommended['kind'] == 'start' and recommended['basis'] == 'agent'
         assert recommended['item']['id'] == item_id
+        completed_background = {entry['id']: {'reading_status': 'read'} for entry in all_items
+                                if entry['work_id'] == by_id['lit_caa8d94a943aae0d']['work_id']}
+        assert reading_next_step([item], completed_background, all_items) == recommended
