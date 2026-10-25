@@ -3752,10 +3752,10 @@
       ]
     },
     "questions:m1_phys_002": {
-      "item_sha256": "17a722b40c9f7766e7cf98d0d229fc6295a42c233f73e82f3d279426a9d168cd",
+      "item_sha256": "bae8206daa192faad9dc94b39924a9167431bfac32637bcbd6bb0e2fdc88f467",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3767,21 +3767,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Приём входящего сигнала дендритами. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
+      "note": "Explicit basic typical-neuron scheme only: dendritic input/combination distinguished from axonal conduction,terminal transmitter release and axonal initiation. No every dendrite short/all cells only neurons excitable/all neuronal morphology universal,brain-maturity/old-age global loss,or fetal-half-brain/pruning-neuron-death story. Scientific anatomical clarification preserves exceptions. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
-          "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:4973:5393"
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:5204:5362"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_003": {
-      "item_sha256": "72479ffa544ea9814961c61a1ed3d6ea8f4e93c7aa4f497bce937ae3c14ce59b",
+      "item_sha256": "2291222b988938bb4335bf7e1d4b4eb447d288f3a34483ae19db6c36fb798c23",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3793,15 +3794,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Аксон проводит импульс от тела клетки; OpenStax12.2 отдельно подтверждает роли глии и дендритов. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
+      "note": "Typical axonal potential conduction toward terminals is contrasted with receiving input,protein synthesis and dendrite/soma integration. Not every-signal unidirectionality,all-neuron morphology,absolute fixed dendrite/axon sizes or all axons learned-new-connection claims. NIH reverse-signal report supports keeping this specifically typical/qualified,not an all-physiology universal. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
-          "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:4973:5393"
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:5204:5362"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_004": {
       "item_sha256": "f11c165a9d3a9e8eb0ab8ca300ccef2a0961687afa550230d484bbb921b8109b",
@@ -3914,8 +3916,8 @@
     "questions:m1_phys_008": {
       "item_sha256": "19e51508048303d367d7fa4ef4923141771c2d6d5c9bac500de29cc2cbf98d7e",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3927,21 +3929,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact nerve-classification passage explicitly separates innervated organ from cranial/spinal origin. Alternatives are different classification axes, not irrelevant age/profession exclusions. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP organ-based somatic skeletal-muscle/autonomic internal-organ distinction versus other classification bases. Exact literal course clauses only;not all movement conscious,one nerve path compulsory interneuron,four exhaustive neuron kinds or autonomic activity separate from CNS.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:13600:14300"
+          "locator": "characters:13666:13824;characters:13923:14060"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_009": {
-      "item_sha256": "31f8f2ca431ae5013446a7e275a3458696064d341d791488faab6df18377b478",
+      "item_sha256": "1d27016171f3b4cedcba91c7786667e83c6e6aa7b901a3c593303e003fba124f",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3953,21 +3956,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Точный анатомический состав ЦНС, без соседних клинических обобщений. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
+      "note": "Only the literal anatomical CNSbrain-and-spinal-cord clause is used. Peripheral structures are distinct,not an incomplete nervous-system taxonomy or anatomical-versus-functional axis mixing. No metasympathetic-only cardiac pacemaking,all movement voluntary,autonomic-system wholly independent of CNSor diagnosis of a patient. Earlier held classification diagram is not used or released. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
-          "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:32003:32483"
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:32084:32164"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_010": {
-      "item_sha256": "630c9ab6d36adff638603a72660d83ba9ea504ecfefff5259fa818a5651538cd",
+      "item_sha256": "14d7fec9af1ff6e8f5eef3694a66eaeb5df3f1adcd80bd459994810f6736145e",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3979,15 +3983,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Точный анатомический состав ПНС, без соседних клинических обобщений. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
+      "note": "FIX comparable neural-structure pairs replace CSF foil and conspicuously expanded key. PNS spinal nerves/sensory ganglia versus CNS structures;not all cranial structures equivalent or function equal location. No transfer of myogenic cardiac autonomy to ganglion-only explanation.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:32003:32483"
+          "locator": "characters:32331:32452"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_011": {
       "item_sha256": "e75ba4bb3a0f63aa61b1e220012bb1721e336e66ef07f277791e745c4ae254b5",
@@ -4072,10 +4077,10 @@
       ]
     },
     "questions:m1_phys_014": {
-      "item_sha256": "aad83b555d428b0677a4ea750dc7842e8a341cfffa03af3e5bc4596c0845f282",
+      "item_sha256": "de51fd226b57e3ba905b956a23169409215cdd05efff4bae5334806f98b2bc03",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4087,21 +4092,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Мобилизационная симпатическая регуляция при стрессе, без утверждений о диабете или фиксированных медицинских порогах. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
+      "note": "FIX contextual explanation of common sympathetic mobilisation role and all alternatives;no every-organ excitation,stress insulin/diabetes/IBS single cause,presumed hormone level or global autonomic tone diagnosis.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:59058:59929"
+          "locator": "characters:59236:59388"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_015": {
-      "item_sha256": "79cf090d9cdf87140dfb610a85861ee82bc4da5c7917d5ad55026e07b0c8fd29",
+      "item_sha256": "ceece7aa0925ea52ce4ae15aeb3fcf51c75bfe4a5170e50c2fb8bdf7bc69637b",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4113,7 +4119,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Парасимпатический отдел: восстановление/расслабление и пищеварение; без universal food advice. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
+      "note": "FIX distinguish general parasympathetic rest/digestion role without binary off-switch scheme,universal branch antagonism,post-meal sleep prescription or diagnosis of every organ from reported calm.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
@@ -4121,7 +4127,8 @@
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
           "locator": "characters:62708:62834"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_016": {
       "item_sha256": "0b90ce55002e0c5e2cb69e8a9013589fcc205f48c8d23f5bbda0c464f2e753ed",
@@ -4355,10 +4362,10 @@
       ]
     },
     "questions:m1_phys_025": {
-      "item_sha256": "9fbf17c5aed3ebbed7bbef7ffa20ced401f7c98cb482912aedbb4b972fd4a69e",
+      "item_sha256": "6be64733fe407e4fd0eff140d13c7314a82b1eeeea3a2763ebdfff14dd8e152c",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4368,9 +4375,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Учебная интерпретация кратковременной мобилизации перед нагрузкой, не диагноз по симптомам. Уточнена только source binding; question/options/answer/explanation и исторические попытки сохранены.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated"
+      ],
+      "note": "Retired from new issuance after exact current-source approval of032;both ask stress-compatible mobilisation from one performance vignette.032keeps bounded interpretation;044is a distinct two-phase sequence. All45currentHWalready exclude025;old body/editions/history retained.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
@@ -4378,13 +4387,14 @@
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
           "locator": "characters:59058:59929"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_phys_026": {
-      "item_sha256": "b378cbeaac100fbe4527c29798d5711d18fb74da8f612dc646038411adfa3ed3",
+      "item_sha256": "f1157743f5471b31161291a69a17b2fa23ece9c81c82e8c1776b36544bc6bcbe",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4396,7 +4406,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Read bounded autonomic recovery fragment; narrowed inference to measured indicator, not a pulse-based diagnosis. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX four equally short same-form parameter observations eliminate absolute all-systems foils. Only heart rate recorded:pressure,digestion and cortisol unknown. Distinct epistemic single-measurement objective from044temporal functional sequence. No inferred physiological mechanism or safe-ruleout.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
@@ -4404,7 +4414,8 @@
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
           "locator": "characters:62708:62834"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_027": {
       "item_sha256": "9e1ce2c7a1f7189cb019f505634bde2d0813c395a2bd797ca676f46b96c95658",
@@ -4541,10 +4552,10 @@
       ]
     },
     "questions:m1_phys_032": {
-      "item_sha256": "ad0ea767a006dd486a7201b8bf2cbcf1d8eebf11604d60a952d0da42cc98b7e4",
+      "item_sha256": "5eef2cd355153da4d8c611273b333a12ecd24be1f804204f06644499399b2157",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4556,15 +4567,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact sympathetic mobilisation passage read; avoids diagnosing autonomic cause from nonspecific symptoms. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX parallel plausible functional/biochemical/voluntary-regulation interpretations remove exact-hormone/exclude-all distractor caricatures and correct-only long caution cue. Mobilisation compatibility is unique bounded key;no measured cortisol,exclusive psychological explanation or disease diagnosis.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:59058:59929"
+          "locator": "characters:59236:59388"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_033": {
       "item_sha256": "7e5a6349b7121fdb8b2523669a1798dc4850aefc078643cf394fe4b04252fff4",
@@ -4872,10 +4884,10 @@
       ]
     },
     "questions:m1_phys_044": {
-      "item_sha256": "839e92d8b87d37ae3ae71d5cb161256c5f9bc89eddca9280c5d71377fdded8f2",
+      "item_sha256": "8d8e50806c0037b1b7ecec68a95f04cb10bd44e04e0bff4a9b86fd9025eba076",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4887,15 +4899,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Both exact mobilisation and recovery fragments read; contrasts sequence interpretation with unwarranted exclusion or diagnosis. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX all alternatives are comparable two-phase functional sequences;medium difficulty. Assesses temporal mobilisation then recovery rather than three absurd diagnostic conclusions. Different objective from026single-variable extrapolation and014/015single function. No causal proof,full physiological safety or inevitable no-loss stress recovery.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:59058:59929;characters:62708:62834"
+          "locator": "characters:59236:59388;characters:62708:62834"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_045": {
       "item_sha256": "5033f38ac4d32fce1a00ee2f40830995a2bd52987a1256b90c8a07de92a3c0fe",
@@ -5233,8 +5246,8 @@
     "glossary:dendrites": {
       "item_sha256": "778c6d41d8db2c5d4cac8398cec9444478cb1b0a07019ecfb222312cae34892b",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -5246,22 +5259,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Predominantly receiving/integrating processes, distinct from output axon; illustrative diagram not a universal morphology claim. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "KEEP typical diagram receiving branches and input role. Exact already qualified dendrite/axon clause;not always-short morphology,neurons only excitable cells or age/sex capacity stereotype.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:4973:5393"
+          "locator": "characters:5204:5362"
         }
       ],
       "disposition": "keep"
     },
     "glossary:axon": {
-      "item_sha256": "9caf468e764cd5945328087da9cdae26d1208e3b974dabd20fece05d141de86a",
+      "item_sha256": "366bc939f6b5fb236f8248c3b672441ebd4f7cc1a94a93342f15bc9fd6d3106d",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -5273,16 +5286,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Output-conduction process vs dendritic reception; bounded introductory description. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX distinguish usual signalling function toward axon endings from absolute origin/direction/morphology. Existing authored typical diagram retained;no every axon myelinated,fixed speed,one exclusive neuron shape or clinical interpretation.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:4973:5393"
+          "locator": "characters:5204:5362"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:myelin": {
       "item_sha256": "a4dabcd227a2e99674eab86e8ec50a13ee7f66ea7ddc4c077aeafaad17a051c7",
@@ -5425,8 +5438,8 @@
     "glossary:central_nervous_system": {
       "item_sha256": "03dc3726ee2a1cc3c2d48d0e9bb9fc3a94b95a917d94b4c866864c08b46f3e04",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -5438,13 +5451,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Brain and spinal cord, contrasted with peripheral nerves/ganglia; diagram is an example rather than clinical guidance. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "KEEP literal brain/spinal-cord anatomical definition and authored atlas example. Not tissue volume/intelligence,only fully mature cortex,conscious-only movement or central/peripheral functional confusion.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:32003:32483"
+          "locator": "characters:32084:32164"
         }
       ],
       "disposition": "keep"
@@ -5452,8 +5465,8 @@
     "glossary:peripheral_nervous_system": {
       "item_sha256": "023d35f6451ecfec8c0b4aae2cf97024e3189bfd28c8ac2694d883574dd92dd8",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -5465,13 +5478,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Structures outside brain/spinal cord in this introductory classification; no diagnostic or treatment inference. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "KEEP nerves/ganglia outside CNS;source also lists endings,not an exhaustive assertion excluding them. Authored schematic example,no original unseen visual used. Not nerve uniform myelin state or ganglion-only cardiac pacemaker.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:32003:32483"
+          "locator": "characters:32331:32452"
         }
       ],
       "disposition": "keep"
@@ -7494,10 +7507,10 @@
       "sources": []
     },
     "questions:m1_psyf_005": {
-      "item_sha256": "6cfb92463af87a60ef7ee800f24f206216809de04a59c3d0e359438a3cd974b8",
+      "item_sha256": "7556297214f797e67e90fb7399d1fc6ddfc86d3503cf7ebefeba95c88f816f26",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7509,8 +7522,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact original lecture section, captured programme relationship, primary qualification and question reviewed in private dossier; source-free receipt and parent-lesson binding supplied. Previous glossary record preserved privately.",
-      "sources": []
+      "note": "Under the stated matched excitatory input,the specified decrease in target-cell firing likelihood is an inhibitory influence. The course names inhibitory transmission and GABA;the draft restricts discussion to mature nervous-system context and does not claim every GABA receptor or chloride gradient gives the same outcome. It separates axonal conduction and structural contacts from a described cellular effect;no behavioral self-control,global brainbalance,percent-of-brain count,energy expenditure or chloride-pool clinical inference. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:26740:26827;characters:27045:27133"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_006": {
       "item_sha256": "519bd7ff084e09f2d520d19413a4a788e3fa1bd27eec65d72e0dd0c76863da05",
@@ -8021,10 +8042,10 @@
       "sources": []
     },
     "questions:m1_psyf_027": {
-      "item_sha256": "d4205844ab2d04ac3bfa811161d79b7a5514e53c9de68f0fb4aba3afaddf2feb",
+      "item_sha256": "b4c2d11ceddf2179eeb30fe699146080363a98a9c1f98546805e8659acc1f0b9",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -8036,15 +8057,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact raw introductory perception/attention context and attributed three-network statement reviewed outside all eight existing holds. Independently read OpenStax Psychology2e5.1 perception definition, bottom-up/top-down processing, goal-directed search and experience/context paragraphs; original Petersen/Posner2012 introduction78-81 explicitly describes anatomical network and different functions. Course snippets alone do not establish all definition details; independent support is explicit. No beverage-experiment rates, subconscious universal thresholds, what/where-attention conflation, exact region/transmitter assignments, anxiety diagnosis or medical imaging advice approved. Eight holds unchanged.",
+      "note": "Author-created teaching illustration states the same ambiguous physical figure and controlled light/duration but different surrounding alphabetic/numeric contexts and interpretations. The question now asks the perceptual-context principle,rather than a generic manipulated-variable label. Exact course sensory-system and externally received/prior-information integration clauses support general interpretive processing;not an actual inspected B/13source figure,new empirical study or exclusive cortical mechanism. Adjacent adaptation,iconic trace and perceptual-training constructs are real alternatives but their required conditions are not described. No claim all cognitive distortions arise from cortex falsifying input,all omissions are memory correction,all perception is conscious cortical processing or fatiguehallucination/clinicaldiagnosis. Known original/current scientific restrictions remain. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
-          "source_id": "src_db85647c78a44e33101b8b932b09235b6d3ee30b18b730d65698d8094bafc35e",
-          "modified_time": "2026-04-20T15:34:30.028Z",
-          "snapshot_sha256": "1bb4c8763e0f951dde7821e0d34e17ffdb4d0b0faa55623d463dc197cd985aa3",
-          "locator": "characters:180:480"
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:80644:80752;characters:81964:82184"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_028": {
       "item_sha256": "3b4e7f70ccf120831146757ea87fbefba0ea4f99d0a560819cc4533b70571900",
@@ -9173,8 +9195,8 @@
     "glossary:psyf_dendrites": {
       "item_sha256": "f25ecfe5dba95b4a2c63d261bc0d4c9461587920428500dd1ec6ff8b7956daa6",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -9186,13 +9208,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Receiving processes distinguished from the whole neuron, axon and synapse; topical foundation reuse, no clinical inference. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "KEEP psychophysiology-course projection of input-receiving branches distinct from neuron as whole/synapse contact;not a new unique anatomical entity or always-short universal morphology. Cross-course term identity intentionally stable,not duplicate new question inflation.",
       "sources": [
         {
           "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
           "modified_time": "2026-04-06T14:46:17.530Z",
           "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:4973:5393"
+          "locator": "characters:5204:5362"
         }
       ],
       "disposition": "keep"
@@ -19431,10 +19453,10 @@
       "disposition": "fix"
     },
     "questions:m1_psyf_074": {
-      "item_sha256": "fb4c03aa5b5a378f8c3d2d5ec411d7264c6ddbcfd1e2eb918c2b93198d769c95",
+      "item_sha256": "0a26737e4b494b12ef1f73939c1d925ed378922c35cd206ca020af6eb18ebf12",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19446,8 +19468,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact2949:3034 generic glia existence/support, no demeaning universal neuron-servant or nonparticipation claim. Precise functional scope checked against official SfN86-88; no glia/neuron ratio, disease diagnosis or treatment.",
-      "sources": []
+      "note": "Exact course clause identifies myelin sheaths as formed by specific neuroglial cells. Only that bounded anatomical function is tested;not all glia myelinate,not a passive glia theory or claim that glia do not participate in cognition. Neuronal AP conduction,vesicle release and dendritic receiving are adjacent described neuron processes rather than glia identities. Sex-based connection counts,mammoth narratives,universal myelin speed and age/cognitive diagnoses from adjacent broad parent are excluded. Existing exact historical exclusions and all other current coordinates remain. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:9077:9193"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_075": {
       "item_sha256": "64f70adcd504cdcb11db9ccda12552d0fe8861e1cd7c07606a91470915563ddb",
@@ -20695,10 +20725,10 @@
       "sources": []
     },
     "questions:m1_psyf_079": {
-      "item_sha256": "0627c6aa9dac01df2a3ce89b380029682b5644230810957b403bbb102760194e",
+      "item_sha256": "09261c696f880760596d1640c59dcb813a814ea7782fb012029437501e912dd6",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20710,8 +20740,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact muscle-sensation/proprioception equivalence only, before therapeutic application claims. Own fictional arm example; indexed primary position-sense definition supports body-position/movement wording. No uniform spinal layering, anatomy exclusivity or treatment claim.",
-      "sources": []
+      "note": "A described sense of finger position with eyes closed is primarily proprioceptive in the selected teaching distinction. Course muscle/tendon/joint receptors and postural/movement information support the example,not exclusive mapping of every receptor/pathway or guaranteed injury avoidance. Interactions with skin/vestibular/internal-organ signals acknowledged,not denied. No pain-history priority,allclinicalpainpsychogenic or symptom diagnosis. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:85634:85926"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_080": {
       "item_sha256": "1a91df33a65812caade77c2705d4321931935ba658960425cb9c0011b71db067",
@@ -21938,10 +21976,10 @@
       "sources": []
     },
     "questions:m1_psyf_085": {
-      "item_sha256": "d306357283c2188cd034cb89ea457c3a994a3409316dd2a59292e4b25aa39a96",
+      "item_sha256": "93d1a9e354164922844adb031476363ad9931d11b258f47f5942dca308d8c621",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21953,8 +21991,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact internal-body signal clause only, excluding surrounding hypersensitivity/yoga recommendation. Terminology independently checked in2018 Khalsa coauthor manuscript abstract; no exclusivity to viscera, organ diagnosis or muscle-to-organ treatment claim.",
-      "sources": []
+      "note": "Course visceral/internal-organ signaling supplies the bounded internal-body-signal distinction used here as interoception,not a medical diagnosis from sensations. Neighboring proprioceptive,cutaneous and vestibular categories are compared within this chosen teaching distinction,not a claim all broad theories define interoception identically or restrict it to conscious reporting. No allnociception=pain,soleorganismcause/therapy or historical receptor-discovery claim. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:85926:86154"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_dev_010": {
       "item_sha256": "0001296850cb047d32c95f048e9686a11b7eee3f14a3ac77ee5f9b235d3b9ec4",
@@ -22615,10 +22661,10 @@
       "sources": []
     },
     "questions:m1_psyf_087": {
-      "item_sha256": "d421052a3a057ea9fd59c42f41d28aafb1d28f3ec8fecb83f42b15c3599f64fb",
+      "item_sha256": "eee78cdab11c2a5d28899ac989be3e9e9001c467ae921753608eafef5b3d678f",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22630,8 +22676,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "New termination-of-signal operation, absent from reviewed serving questions in this discipline. OpenStax12.5 transmitter elimination/reuptake paragraphs read separately; course transmitter/receptor definition supplies local topic. No pharmacological advice or universal removal mechanism. Every alternative and explanation individually checked; saved exact course edition plus bounded independent primary mechanism review. No live Drive freshness, whole-source approval or clinical certification.",
-      "sources": []
+      "note": "The described contact specifically removes previously released transmitter by uptake;the question tests limitation of further receptor interaction,not presynaptic calcium entry,vesicle fusion or preparing stock. The exact course uptake clause is used as a bounded example,not all transmitters are intact-reuptaken/reusable or all clearance is uptake. The revised stem names the described chemical contact and removes the unnecessary universal removal/degradation assumption. No local-anesthetic-receptor blockade or all-channels-open-sodium mechanism is used. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:26319:26414"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:cbt_abc_separation": {
       "item_sha256": "0410dcf6600ff4d39dcf6652ea68227fbfc9dcb5ba668abf42390b2692ed468a",
