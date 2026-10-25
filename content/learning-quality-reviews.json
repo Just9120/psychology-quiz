@@ -209,8 +209,8 @@
     "questions:m1_intro_007": {
       "item_sha256": "134719e8207d1756caa321e3ed3e43ecf0cdbcda28c913018307e4fcfb87542d",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -222,9 +222,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "REPLACE: Replaced empathy slogan duplicate with preparation/self-regulation objective; assignment identity retained. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "replace"
+      "note": "Notice own irritation and prepare,not disclose/transfer burden or assume client interest fixes mood. Reflexivity and self-regulation definitions only,no universal breathing/grounding protocol or emotional absence requirement.",
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:3706:3822;characters:6894:7024"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_008": {
       "item_sha256": "29430131eb56dd845c5e6250b90da77483fb1d05d06c9977ead068dc52f624fd",
@@ -278,8 +285,8 @@
     "questions:m1_intro_010": {
       "item_sha256": "283769d6466bcf610df1e70f9d7bb318d93621a7768e9039458767019207ba47",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -291,9 +298,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Four comparable emotion-understanding alternatives; distinct from preparation item007. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Empathy as-if preserves self/other distinction and checkability. Own reaction or similar biography is not exact access to client feelings;no mindreading/guaranteed effective contact.",
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:6076:6210"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_011": {
       "item_sha256": "87f10055ba139a81d708b0fd8f825d7817378a9aa5d185e287434ce838e9fc07",
@@ -399,8 +413,8 @@
     "questions:m1_intro_015": {
       "item_sha256": "2c43b08f582e1a1b58c5bc53aebb3da552d11061409b1e71c349e3b701daea4b",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -412,9 +426,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replaced education replacement/mandatory rights caricatures with discrimination among support functions. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Professional-action/reaction question suits supervision;course choice,personal loss therapy and administration have different aims. Support formats can combine;not supervisor qualification or guaranteed outcome.",
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:5000:5700"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_016": {
       "item_sha256": "05c00b83680d39ac54852fe18da6479773f63a7504f6858d9e4423aeb160fa17",
@@ -635,8 +656,8 @@
     "questions:m1_intro_025": {
       "item_sha256": "805e9b542930ab44e9db0ecd066bef51f3f0760174631a5c533a1f2e706f9ed2",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -648,9 +669,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Plausible intellectualization/avoidance alternatives; no overt coercion. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Clinician urge to prove right is own material for reflection,not evidence client wrong. Return to client meaning rather than win argument,poll persuasiveness or suppress the rupture.",
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:3706:3822;characters:6894:7024"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_intro_026": {
       "item_sha256": "5f2e9fadce666717c8616056afb655e03fab7942fee8d5355e8989b87081206f",
@@ -908,10 +936,10 @@
       "disposition": "keep"
     },
     "questions:m1_intro_035": {
-      "item_sha256": "cf5be720221b0e4735f2c981b3623e439db20a788c1b157a6c374e123e295113",
+      "item_sha256": "2266e0ea10482b182d1ee5a2497d27c9d9b522463332dc980f99c4cdee67f6e4",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -923,16 +951,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Comparable phrased responses distinguish validation from untested interpretation, normalization-as-dismissal and promise. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "New explicit initial-message clarification task;four plausible clinician responses distinguish open exploration from premature cause,normalisation-to-plan,and confidence intervention. No presumed diagnosis,client blame or guaranteed cure.",
       "sources": [
         {
           "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
           "modified_time": "2026-04-05T22:13:17.690Z",
           "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "characters:5877:6313"
+          "locator": "characters:6076:6210"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_intro_036": {
       "item_sha256": "6f2a9c8d8430cbcab739f57b73dd0c8b6d85fdcbe03761edfef4116c69b31d2f",
@@ -1217,10 +1245,10 @@
       "disposition": "fix"
     },
     "questions:m1_intro_047": {
-      "item_sha256": "4b2a146775c4fc6c00aaff2120c157b3ef6e6e2357bb1e67aa62cda0ef0d70fc",
+      "item_sha256": "09c01f1d381b38faf3a3018e82f8404c08f26763e3b397f06bd2be1a0ecaa78e",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -1232,9 +1260,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "REPLACE: Replaced rescue-impulse duplicate of item025 with support-function distinction explicitly present in course. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [],
-      "disposition": "replace"
+      "note": "Authored two-task support selection distinguishes professional action review and own grief exploration;not arbitrary intensity or compulsory therapy-first sequence. More plausible alternatives replace qualification/course/family pseudo-definitions. Material may overlap without format equivalence;neither support mandatory for every individual. Language refinement explicitly names the persuading action,not an ambiguous noun for convictions.",
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:5000:5700"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_intro_048": {
       "item_sha256": "01aaf4f5d7fec2097a460516f4d6febbd7a37631fbe9f429165311e261c20134",
@@ -1607,10 +1642,10 @@
       "disposition": "fix"
     },
     "glossary:professional_position": {
-      "item_sha256": "a3c9558b8dcd17665e6de8874cb54d004e5d075efb769ad099dadf7c97c4dda3",
+      "item_sha256": "1d105a3b96aef5d58cef7b3f8d75fd7f8a362c084ee794b64c21ba3f2697e930",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1622,13 +1657,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Removed fictional label and distinguished professional role/ethics/goals from empathy, listening and client-centered attention. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Clarified working role as boundaries,reflection and focus on client,without ambiguous emotional neutrality ideal. Authored disagreement example illustrates professional handling,not a universal personality template.",
       "sources": [
         {
-          "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
-          "modified_time": "2026-06-07T21:20:48.648Z",
-          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "characters:8485:8779"
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:3706:3822;characters:6076:6210;characters:6361:6543;characters:6894:7024"
         }
       ],
       "disposition": "fix"
@@ -1663,8 +1698,8 @@
     "glossary:client_centeredness": {
       "item_sha256": "9c090e3cbc22ac86b713f35efe862998bf77a97442b63756c7fa0b7d3567bf2f",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1676,13 +1711,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Focus on subjective meaning is explicit; does not claim complete coverage of a named therapeutic school, and differs from who makes the choice. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Attention to client perspective with professional frame;clinician evaluation not equated to client experience. As-if empathy/role boundaries only,not unconditionally comply or know hidden needs.",
       "sources": [
         {
           "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
           "modified_time": "2026-04-05T22:13:17.690Z",
           "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
-          "locator": "characters:5877:6773"
+          "locator": "characters:6076:6210;characters:6361:6543"
         }
       ],
       "disposition": "keep"
@@ -1690,8 +1725,8 @@
     "glossary:empathy": {
       "item_sha256": "5b4a232debd4415de00dfc5463662919cb4673277eff0fbd1582bae4fcc1679d",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1703,16 +1738,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Removed fictional label; retained understanding-as-if and checking with the client, not guessing or emotional fusion. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Tentative perspective-taking with client verification and boundaries;no exact feeling copy,universal authenticity detection,contact cure or inference from clinician body reaction.",
       "sources": [
         {
-          "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
-          "modified_time": "2026-06-07T21:20:48.648Z",
-          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "characters:8781:8975"
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:6076:6210"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:active_listening": {
       "item_sha256": "61e5269200e14d72d8ec54872506a7188c315cf797145169692ba1d20bc85b10",
@@ -22840,6 +22875,276 @@
       ],
       "note": "Authored study-load planning case;test a realistic block/break rhythm,not fixed universal interval,guaranteed concentration/burnout prevention or clinical protocol. Source coordinate diagnostic explicitly reconciled from exact embedded snapshot;all actual impostor/breathing/prevention/stage prohibitions retained.",
       "disposition": "fix"
+    },
+    "questions:intro_reflection_motive": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "fbf6d1bf0ebb3cc2797ccac7f3a9b569bf379f998d6422d923ea7d01febcfc85",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:11148:13600"
+        }
+      ],
+      "note": "Acknowledged recognition motive is material to examine influence on actions,not unsuitability,client approval as care quality,or socially desired selfpresentation. Start after held noble/nonfinancial true-motive assertion.",
+      "disposition": "keep"
+    },
+    "questions:intro_reflection_resources": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "5a417a339be321a88bb37f4c9519f07aa58016154845adb21670cceea8079067",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:11148:13600"
+        }
+      ],
+      "note": "Concrete observed skill/difficulty informs learning. General empathy confidence,one anxious moment or teacher resemblance does not establish competence or unsuitability.",
+      "disposition": "keep"
+    },
+    "questions:intro_reflection_family": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "9f803de0413693f8bda8fa7a8f4c8aa2aace483e8d25a06002531661c53e1b97",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:11148:13600"
+        }
+      ],
+      "note": "Possible family-role influence is jointly/exploratorily considered,not full causal biography,competence proof or condemnation of past support. No actual student family history copied.",
+      "disposition": "keep"
+    },
+    "questions:intro_reflection_private_answers": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "9dfb0737bd8fc05518e5781d41fe85b742cd29ad1d9f6ed70f76e1a2e0d66c49",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:11148:13600"
+        }
+      ],
+      "note": "Actual course explicitly allows personal answers to remain private. Quiz checks task understanding,not a suitability certificate,forced group disclosure,correct biography or collection of those answers.",
+      "disposition": "keep"
+    },
+    "questions:intro_reflection_future_learning": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "967bacdf6cc1ed586407d407d15dea0904c4fca073497e81827fffb0064ef425",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:14900:16200"
+        }
+      ],
+      "note": "Monthly reflection yields a specific trainable clarification skill and later behavioural review;no zero-doubt competence criterion,fixed-characteristic professional exclusion or stronger untested explanation as progress.",
+      "disposition": "keep"
+    },
+    "questions:intro_diary_observation": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "02f58243a00ac2d71b05b7f6468a59b52f9fe2f85df350e14a17be5f67b1c0ac",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:13600:14900"
+        }
+      ],
+      "note": "Corrected an actual key/explanation mismatch:correct index2observation was wrongly called first. New explanation names the minute-long silence/look-away phrase,so reordering cannot change its referent. Observable behaviour distinct from inferred motive/readiness/global trust.",
+      "disposition": "fix"
+    },
+    "questions:intro_diary_own_response": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "c8c95afaacd46b5728e9f3fed4f935a70a2067add0af51bd953c9d8adbf9709a",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:13600:14900"
+        }
+      ],
+      "note": "Own bodily/emotional response belongs in own-response section,not proof client hidden material,client feelings or external cause. No physiological diagnosis/treatment claim.",
+      "disposition": "keep"
+    },
+    "questions:intro_diary_supervision_question": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "68ae5d3a09dfbe62614516c762ef464fc7f8101df6f5cc02ab9c3bdf12ebddc6",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:13600:14900"
+        }
+      ],
+      "note": "Specific own interruption and its possible conversational effect creates a work-review question. No demand to confirm blame,evaluate whole person or choose instead of client.",
+      "disposition": "keep"
+    },
+    "questions:intro_diary_privacy": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "f721d1e2199cf5696320cab536ef354b6e9eeb0b109e50c841f2acf2cfc79b92",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:13600:14900"
+        }
+      ],
+      "note": "Actual task says do not identify client;remove recognisable details,not just name. Pseudonyms alone plus address/workplace/rawmessages do not anonymise. Educational purpose not blanket disclosure licence;no personal diaries sent to quiz.",
+      "disposition": "keep"
+    },
+    "questions:intro_diary_weekly_pattern": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "8bc80c7f3c73f83a9f35eadb3c11b1b0422f870ce980b3b8d244b4b053b48865",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_b27d320de51d4a928e2f417a0b84b2da552ce829e942f356efd56ab95e6fce9a",
+          "modified_time": "2026-04-05T22:13:17.690Z",
+          "snapshot_sha256": "84fce41327df8ef8860b94f26ff6204ab99c2044daf4a4e139b986473ee92017",
+          "locator": "characters:14900:16200"
+        }
+      ],
+      "note": "Review recurring situations,reactions,resources and change;page count,initial-theory confirmation or absence of doubt not professional growth. Not a clinical progress/competence guarantee.",
+      "disposition": "keep"
     }
   }
 }

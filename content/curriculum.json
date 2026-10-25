@@ -8859,6 +8859,24 @@
       "topic_id": "t_ae68a82010f9",
       "item_sha256": "6ea1c8d71de92d1bc3d538a6492903bb8487c2489875e863e7049160b81eaade",
       "locator": "private certificate:questions:m1_intro_058"
+    },
+    "53873acb53b543f67b10195734fa7ea0fbea143b422204427c6ef79ed1b65b9c": {
+      "external_id": "m1_intro_035",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "2266e0ea10482b182d1ee5a2497d27c9d9b522463332dc980f99c4cdee67f6e4",
+      "locator": "private certificate:questions:m1_intro_035"
+    },
+    "150351eb7e40896f17a5ca2168fd7e06c2de3fbaebf91827ade55522b6e5318f": {
+      "external_id": "intro_diary_observation",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "02f58243a00ac2d71b05b7f6468a59b52f9fe2f85df350e14a17be5f67b1c0ac",
+      "locator": "private certificate:questions:intro_diary_observation"
+    },
+    "1a9c0e32c787ec4376f4644be6fc72d7b287994eb9c66b3b06ff5795d5e49a4e": {
+      "external_id": "m1_intro_047",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "09c01f1d381b38faf3a3018e82f8404c08f26763e3b397f06bd2be1a0ecaa78e",
+      "locator": "private certificate:questions:m1_intro_047"
     }
   }
 }
