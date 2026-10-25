@@ -292,13 +292,13 @@
       "module": "Модуль 4",
       "discipline_id": "personality_psychology",
       "topic_id": "t_4e0186fe70c1",
-      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "description": "Тест проверяет понимание понятий разных подходов, исследование смысла деятельности и осторожное применение гипотез. Он не подтверждает полный сравнительный разбор и не определяет тип личности клиента.",
       "question_ids": [
-        "m4_person_001",
         "m4_person_007",
-        "m4_person_008",
-        "m4_person_009",
-        "m4_person_020"
+        "m4_person_024",
+        "case_activity_personal_meaning_001",
+        "case_compare_hypotheses_001",
+        "m3_psychological_consulting_101"
       ]
     },
     {
@@ -382,13 +382,13 @@
       "module": "Модуль 5",
       "discipline_id": "klinicheskaya_psihologiya",
       "topic_id": "t_d49d050505ff",
-      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "description": "Тест проверяет предварительный характер гипотез, поиск проверяющих и противоречащих данных и пересмотр объяснения. Он не подтверждает составление карты гипотез и не предлагает диагноз по краткому рассказу.",
       "question_ids": [
-        "m3_psychological_consulting_054",
-        "m3_psychological_consulting_078",
-        "m3_psychological_consulting_098",
-        "m3_psychological_consulting_102",
-        "m1_gp_042"
+        "m1_gp_050",
+        "case_test_hypothesis_001",
+        "case_compare_hypotheses_001",
+        "clinical_hypothesis_counterevidence",
+        "case_revise_hypothesis_001"
       ]
     },
     {
@@ -397,13 +397,13 @@
       "module": "Модуль 5",
       "discipline_id": "klinicheskaya_psihologiya",
       "topic_id": "t_2ef6a1c72d17",
-      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "description": "Тест проверяет учёт страдания, повседневных трудностей и контекста, сопоставление версий и ограничений вывода. Он не заменяет оценку состояния специалистом и не подтверждает заполнение таблицы или разбор учебного случая.",
       "question_ids": [
         "m5_clinical_017",
         "m5_clin_018",
         "m5_clin_026",
-        "m3_psychological_consulting_098",
-        "m3_psychological_consulting_110"
+        "case_compare_hypotheses_001",
+        "clinical_hypothesis_counterevidence"
       ]
     },
     {
@@ -457,13 +457,13 @@
       "module": "Модуль 5",
       "discipline_id": "klinicheskaya_psihologiya",
       "topic_id": "t_7b4fc82d0ccb",
-      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "description": "Тест проверяет совместную оценку продвижения, обсуждение завершения и понятный план самоподдержки. Он не подтверждает подготовку полного разбора, таблицы «было — стало» или карты завершения; прохождение не означает завершение реальной помощи.",
       "question_ids": [
-        "m5_clinical_001",
-        "m5_clinical_013",
+        "case_ending_plan_001",
+        "case_progress_criteria_001",
         "m5_clinical_014",
-        "m5_clin_024",
-        "m3_psychological_consulting_101"
+        "m3_psychological_consulting_109",
+        "clinical_support_plan_specific"
       ]
     },
     {
@@ -487,13 +487,13 @@
       "module": "Модуль 6",
       "discipline_id": "social_psychology",
       "topic_id": "t_bb5cc6935105",
-      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "description": "Тест проверяет различение данных и объяснений, ролевых ожиданий, описанных и предполагаемых последствий и зоны влияния. Он не подтверждает письменный анализ, рефлексию или изменение социальной ситуации.",
       "question_ids": [
+        "m1_gp_050",
         "m6_social_010",
-        "m6_social_011",
-        "m6_social_021",
-        "m6_social_023",
-        "m3_psychological_consulting_078"
+        "case_social_role_expectation_001",
+        "case_social_observed_expected_sanction_001",
+        "case_goal_own_actions_001"
       ]
     },
     {
@@ -562,13 +562,13 @@
       "module": "Модуль 6",
       "discipline_id": "psycholinguistics",
       "topic_id": "t_803856ff9688",
-      "description": "Тест проверяет знания для подготовки и разбора задания. Письменная работа, упражнение и личные сведения не оцениваются и не сохраняются.",
+      "description": "Тест проверяет уточнение смысла, проверку понимания и отклика клиента на новую формулировку. Он не подтверждает письменный разбор, проведение интервенции или её эффективность.",
       "question_ids": [
         "m6_psyl_005",
         "m6_psyl_007",
-        "m6_psyl_008",
-        "m6_psyl_011",
-        "m3_psychological_consulting_100"
+        "case_clarify_meaning_001",
+        "case_check_emotion_001",
+        "psyl_check_reformulation_response"
       ]
     },
     {
