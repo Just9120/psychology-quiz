@@ -3849,49 +3849,49 @@
     "questions:m2_qual_010": {
       "schema_version": 2,
       "item_sha256": "6259d92fc994ba9159d6d03c507acf14f8306cc2064c79bf46c065aea98cfd5f",
-      "review_sha256": "fffb03f68a0726ba004183db5a1d725d1986aff83669b7ba85124d5b0cb568d3",
+      "review_sha256": "7741078b5ff32dbdcbab7239a30e086ff1893fb240075bbf038e5cb46cdb735c",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "yA/gpo/Kf7es4qDFBttazgXc020tXpVDThMRHrz/HO5qCdGaaAXnq5kzwIWWMUmlLQhyXCsSueXvuzWYrHtlAw==",
+      "signature": "1BHyvPa8g8722BEZ9TQsOIhpoPps9/vDNqPmA6EyVG7j75D25u3Yc9Fpdbnl1VEKdW/bM/PGxwCLZsMY1mX5AA==",
       "topic_id": "t_5238b79de120"
     },
     "questions:m2_qual_018": {
       "schema_version": 2,
       "item_sha256": "a6a014965c62dacf5b6b6c8cd301c98a2bfb760e388f3368d7c8193f86d56c87",
-      "review_sha256": "455a08357361c33e87761e3efd7eba94adc5e59a23ea764f9c5f4d1b692ff1db",
+      "review_sha256": "85de34cd25ed00a0bc4b9817b648b176a073543897ed9010582783f29ff7b5bb",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "EF54M3itlPVRPpgSrcP1uJfQLWVpzi2Fj+NXoitJp75TGisCPJ3gwEx8CeDKd0dExmGwGuDk4eMQKuhqKYq6DQ==",
+      "signature": "37JGEoVM28bw2oIIOUGmZ7nHLgUbJM27f59oXCqxy8jOmgTkbuKiMNDz+aaNOCZ9aXdpEPUmAMoY0kNJZeIyBQ==",
       "topic_id": "t_6be3cecd6596"
     },
     "questions:m2_qual_026": {
       "schema_version": 2,
       "item_sha256": "efc54da7d87c76ab88e9c3f7d9617e4b5cf49af8738da0b985f6a5c1efd391d8",
-      "review_sha256": "2d213b5025f11ac67392afe81460e2fff17b95526df4b6c38b72f96b0b60ccc9",
+      "review_sha256": "1dacdf43fc08c7acf6f2144056488ca26148f44c5e5454520f47467ae5c134af",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "09RNtOwslWNcqFYYCgrFoqNiNbzW8BUzbQDTsqmdOE9DD0fiU5ack+c1b93kdXkqOp/hA5Ezrw99n0wf3l8kAw==",
+      "signature": "iFN9pmR/KfHsdRkxvBECaFkXbzoljpsNeFJ2k35E+kUT9XDqz6wXZ2g7xtAy79DftRaFZQpqIUQVxFGAqfxLCA==",
       "topic_id": "t_6be3cecd6596"
     },
     "questions:m2_qual_028": {
       "schema_version": 2,
-      "item_sha256": "f5b337f710f0afe73033ac416d82124c5e88ea49ddd0893c2a0fb1ae1c0cdd96",
-      "review_sha256": "0e987523bdd22b83889cf266da70b922713e3fc2f2b848be121740a0d715ca3d",
+      "item_sha256": "9fbafb6b96d81be1cf62eb1aa03fba42a907f9336dec596015cfe8063e0e48ab",
+      "review_sha256": "810d4765105fad80209e37b56f260c7cbc679ab22a773bc5a28788b76000f78b",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "hZEqXyO2W97mKUhT/zx7nkl1D9dxvuY8Rs4G5WGvME0YyNLX+6PonTM33Nj84KbxZoPEBe+l3nvZtUZwLIxZBA==",
+      "signature": "BRb9gB4kJXQhQ2Xs9w15PNYEVkAmN3rUv9FPM8f/0wv2VYILa8js7GqITmItxBKy3x+6sPLWFddrfbBB9hXVBA==",
       "topic_id": "t_6be3cecd6596"
     },
     "questions:m2_qual_034": {
       "schema_version": 2,
-      "item_sha256": "838dc932f64f79287866ae01fbd2f431eb5e86ad042fabc2dc5b60c1edd66330",
-      "review_sha256": "7510c5349ff2d7cc595f33f911940c4e862055a36316fa3cdb0ee354ea67e214",
+      "item_sha256": "b2f108f232a439f30f754b6bb8a81191f82373f484c7e36a226176009e1ef91e",
+      "review_sha256": "acc6c932d064442efc194fb98b3f81686386ef27e97c39ffb8b977bc1b68b660",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "h9+G3AD4qYnBY+o5d8NJQkqX7slRzepVJsHQVVJ9R5aJPCc1d8U+sIBQOBXqQC1Ib7p17Or82PUFr1RfNQXmAw==",
+      "signature": "z8GoS0amSPB8HDl7RoJwloJCl/VvL/cYnfhS8bayywpdElFIWgNg2SyXEePetbO2PEJXnKfOzBgEB77p1HTFBg==",
       "topic_id": "t_03a33ddcf539"
     },
     "questions:m2_qual_042": {
       "schema_version": 2,
-      "item_sha256": "2c398d62c21edd78d1979306479e9d3adc1bda1522f88430fddb230139e2b8bd",
-      "review_sha256": "f3111f2aa2857fbdaa9859a943f4a27c2c770510c4c0a438f35c9d4e9fdeec64",
+      "item_sha256": "b666f5c3dc3a23b905d08c47b7d6943f53ec6651d7d8a7208d1bc6977452bcfe",
+      "review_sha256": "3070380eaba01fbf380a1abd7c65a6eab60b12789e76eb4fb239d69d3f297475",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "63jE6sUHTxGl8FViYOb28dToInn7hF8CVtam1bAzg0+artRsU9yprhhJWFZiTto7tcpOtB4YAtKcgAUCV0aRBQ==",
+      "signature": "b5+yzOEmAajgYcPZMGqUKYsJJ/+QMedRYAADAz01+wmcXHLXo+/jrqKYTsTQPfmGQ3Rj2jxmujJcrtTbLDfqDg==",
       "topic_id": "t_6be3cecd6596"
     },
     "glossary:cbt_mind_reading": {
@@ -4704,6 +4704,14 @@
       "review_sha256": "bea0a8b8b1ec6d22164e4a4704b83a65c394e4e2406ff662ffd9ffaedba1387d",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "zZrDHoekYcKY95JhF5aKNjV5JR0nC2nF9wbpNbr6AY4u/IZhZD5tk+GDSWp4Um/F1jtfoAN7ZJfzTz8U+acvDA=="
+    },
+    "questions:m2_qual_008": {
+      "schema_version": 2,
+      "item_sha256": "f780665dbd6c5bf867ce3b242394b545c243bc0f702345a7165d35835629955b",
+      "review_sha256": "a2ae6cba50ad94cd1e66bdc8317e32471207e9cf6a67bcfb7f80c52c419b86fe",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "24EIMgH9y5mSozkqvpmEvOANAmDJq73Qnrw3hqzwhcpnMHE1f56nuWOnWNYu8ryJc/zpUI/4xTPqR8P9ZPDODA==",
+      "topic_id": "t_6be3cecd6596"
     }
   }
 }

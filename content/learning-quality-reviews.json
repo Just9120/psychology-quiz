@@ -13124,10 +13124,10 @@
       ]
     },
     "questions:m2_qual_008": {
-      "item_sha256": "67dbc67cec1bb4510137a7a61ec7189cc478142a1e71fe08fb5980f384068718",
+      "item_sha256": "f780665dbd6c5bf867ce3b242394b545c243bc0f702345a7165d35835629955b",
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -13139,16 +13139,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Observation contrasts actual measurement/experiment/document approaches; context/interaction objective retained. No universal non-reactivity or ethnographic historical claim. Full current item reviewed; exact original certificates/editions retained for history; no whole-source approval.",
+      "note": "Authored consent-based workplace observation tests practices/interactions in naturalcontext versus standardtesting/manipulation/documents;not copied Mead history/geography or covert access/mindreading. Contextual explanation now distinguishes alternatives and observer influence. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "sources": [
         {
           "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "characters:35200:36175"
+          "locator": "characters:35345:35379;characters:35881:36055"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m2_qual_009": {
       "item_sha256": "3d7da697913be0ea052f2d3d0655c0493eafaf768953c720707409142fd97b98",
@@ -13181,8 +13181,8 @@
     "questions:m2_qual_010": {
       "item_sha256": "6259d92fc994ba9159d6d03c507acf14f8306cc2064c79bf46c065aea98cfd5f",
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -13194,16 +13194,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace absurd one-number-only distractors by actual designs; directly support revised scope with current native Practice10, not missing prior PDF OCR. Authored team situation, no real history. Full current item reviewed; exact original certificates/editions retained for history; no whole-source approval.",
+      "note": "Bounded team/time/process with interviews-observations-documents fits holistic case inquiry;not onlyoneperson/oneindicator,automatic statistical population generalisation or proof of clinical narrative. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "sources": [
         {
-          "source_id": "src_3a1fe1ba577dea8a84d0019f27eaf39a4da43a4cad37aa593890dde365723836",
-          "modified_time": "2026-05-16T13:55:50.170Z",
-          "snapshot_sha256": "4de1b2fb6be9cb414c95e6abe6dd56f2270931e8eed9a944b136ea2baf4c741a",
-          "locator": "characters:4161:4193"
+          "source_id": "src_c79d53eb9ab81d6c5d0764d4b352d1ad74b4f6fed54b5b11d3e9e186fbfa2344",
+          "modified_time": "2026-05-14T11:35:59.882Z",
+          "snapshot_sha256": "bf5e5736bfb347bc627d7bace9e1a1d9aa422e5324a83d9b08f2d8a88c854bf5",
+          "locator": "characters:86534:86680"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_qual_011": {
       "item_sha256": "8efa79feda9e0b5cb8db9d92ee921e9593a3ccb74649a546558ca39459b7406e",
@@ -13397,8 +13397,8 @@
     "questions:m2_qual_018": {
       "item_sha256": "a6a014965c62dacf5b6b6c8cd301c98a2bfb760e388f3368d7c8193f86d56c87",
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -13410,16 +13410,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use an explicit interview purpose and real alternative research questions; current native Practice12 directly discusses deep engagement with lived experience. Full current item reviewed; exact original certificates/editions retained for history; no whole-source approval.",
+      "note": "Open question about participant experience/meaning versus prevalence/means/prediction;not mandated researcher/participant sharedfeeling,therapy or focusgroupconsensus. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "sources": [
         {
-          "source_id": "src_3a1fe1ba577dea8a84d0019f27eaf39a4da43a4cad37aa593890dde365723836",
-          "modified_time": "2026-05-16T13:55:50.170Z",
-          "snapshot_sha256": "4de1b2fb6be9cb414c95e6abe6dd56f2270931e8eed9a944b136ea2baf4c741a",
-          "locator": "characters:3943:4193"
+          "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
+          "modified_time": "2026-05-16T14:38:37.594Z",
+          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
+          "locator": "characters:12882:13052"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_qual_019": {
       "item_sha256": "e7b135fca69ebbf65b01db1b9bcf008a29d141d4dc51e642541b41c334032a53",
@@ -13618,8 +13618,8 @@
     "questions:m2_qual_026": {
       "item_sha256": "efc54da7d87c76ab88e9c3f7d9617e4b5cf49af8738da0b985f6a5c1efd391d8",
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -13631,16 +13631,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Separate exploratory category formation from premature prevalence/norm/scale comparison; verify against native course discussion of insufficiently understood links/tools. Full current item reviewed; exact original certificates/editions retained for history; no whole-source approval.",
+      "note": "Unclear experiential categories justify exploratory clarification before fixed prevalence/norm/mean objectives;not everyunknownphenomenon onlyqualitative or noquantitative continuation. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "sources": [
         {
-          "source_id": "src_99ff06081a8797d5c3f3b57bfba040f269460c93d93c31fb407f6340adcf09e3",
-          "modified_time": "2026-05-16T13:58:40.660Z",
-          "snapshot_sha256": "50c21d41d08f270d94eb95628db1eab7aa97256883ce21a14ea63635981acd59",
-          "locator": "characters:2334:2992"
+          "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
+          "modified_time": "2026-05-16T14:38:37.594Z",
+          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
+          "locator": "characters:12423:12629"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m2_qual_027": {
       "item_sha256": "80b4c2a3329f5fc196663815d5a3900793154f078d34e0a954b98f4cf217fa22",
@@ -13671,10 +13671,10 @@
       ]
     },
     "questions:m2_qual_028": {
-      "item_sha256": "f5b337f710f0afe73033ac416d82124c5e88ea49ddd0893c2a0fb1ae1c0cdd96",
+      "item_sha256": "9fbafb6b96d81be1cf62eb1aa03fba42a907f9336dec596015cfe8063e0e48ab",
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -13686,8 +13686,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Consolidate014/028/053 into one applied transfer assessment; no automatic generalization from thick description. Full current item reviewed; exact original certificates/editions retained for history; no whole-source approval.",
-      "sources": [],
+      "note": "Transfer requires comparing context/participants/analytictrace rather than confusing it with codingagreement,retest or response stability. Three legitimate quality practices replace omission/negative wording clues;no guaranteed generalisability. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
+      "sources": [
+        {
+          "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
+          "modified_time": "2026-05-16T14:38:37.594Z",
+          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
+          "locator": "characters:95313:95650;characters:95650:96008"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m2_qual_029": {
@@ -13830,10 +13837,10 @@
       ]
     },
     "questions:m2_qual_034": {
-      "item_sha256": "838dc932f64f79287866ae01fbd2f431eb5e86ad042fabc2dc5b60c1edd66330",
+      "item_sha256": "b2f108f232a439f30f754b6bb8a81191f82373f484c7e36a226176009e1ef91e",
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -13845,8 +13852,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace generic ignore-or-stop straw choices by actual but insufficient collection/analysis operations; consolidate004/043 into explicit applied reflexivity. Full current item reviewed; exact original certificates/editions retained for history; no whole-source approval.",
-      "sources": [],
+      "note": "Explicit reflection on own questions/values versus samplediversity/groupcomparison/quotechecking. Three legitimate research tasks replace only-confirmation caricatures;neither reflexivity nor memberagreement ensures truth. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
+      "sources": [
+        {
+          "source_id": "src_e4c6d12c804540583039cc642cf858479e9e5fa8dfdeafb954606f55d45a4c11",
+          "modified_time": "2026-05-14T11:45:40.351Z",
+          "snapshot_sha256": "aed38a7670816fad41e34ded2bcff7176064679935c0173c7c27cc81ab70958e",
+          "locator": "characters:6883:7051"
+        }
+      ],
       "disposition": "fix"
     },
     "questions:m2_qual_035": {
@@ -13992,8 +14006,8 @@
     "questions:m2_qual_040": {
       "item_sha256": "7c3552c881a73e425462401dad5c310c128309851a46724c8d9070ebff433ea3",
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14005,8 +14019,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Transcription preserves task-relevant pauses/restarts; wording explicitly conditional, no diagnosis from one speech marker. Alternatives are actual data handling choices. Full current item reviewed; exact original certificates/editions retained for history; no whole-source approval.",
-      "sources": [],
+      "note": "Transcription may retain pauses/restarts/slips according to analytic purpose;literary smoothing,summarycoding and laternumeric data do not preserve original expressive detail. No singlepause emotion/deception diagnosis. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
+      "sources": [
+        {
+          "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
+          "modified_time": "2026-05-16T14:38:37.594Z",
+          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
+          "locator": "characters:36589:36823"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m2_qual_041": {
@@ -14038,10 +14059,10 @@
       ]
     },
     "questions:m2_qual_042": {
-      "item_sha256": "2c398d62c21edd78d1979306479e9d3adc1bda1522f88430fddb230139e2b8bd",
+      "item_sha256": "b666f5c3dc3a23b905d08c47b7d6943f53ec6651d7d8a7208d1bc6977452bcfe",
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -14053,13 +14074,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Apply negative/deviant-case checking to contradictory material; no approval of course normal-curve rarity or historical anecdotes. Use actual native Practice12 critical-check passages, not unrecovered OCR. Full current item reviewed; exact original certificates/editions retained for history; no whole-source approval.",
+      "note": "Disconfirming cases prompt checking conditions/interpretations,distinctfrom frequencies,moredata and coderagreement;plausible quality procedures replace selectiveconfirmation/voting foils. Not allanomaly Gaussianoutlier or automatic globalfalsification. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "sources": [
         {
-          "source_id": "src_99ff06081a8797d5c3f3b57bfba040f269460c93d93c31fb407f6340adcf09e3",
-          "modified_time": "2026-05-16T13:58:40.660Z",
-          "snapshot_sha256": "50c21d41d08f270d94eb95628db1eab7aa97256883ce21a14ea63635981acd59",
-          "locator": "characters:4359:4654"
+          "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
+          "modified_time": "2026-05-16T14:38:37.594Z",
+          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
+          "locator": "characters:13337:13544;characters:13651:13891"
         }
       ],
       "disposition": "fix"
@@ -14368,17 +14389,17 @@
     },
     "glossary:qual_methods_qualitative_methods": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
       "sources": [
         {
-          "source_id": "src_3a1fe1ba577dea8a84d0019f27eaf39a4da43a4cad37aa593890dde365723836",
-          "modified_time": "2026-05-16T13:55:50.170Z",
-          "snapshot_sha256": "4de1b2fb6be9cb414c95e6abe6dd56f2270931e8eed9a944b136ea2baf4c741a",
-          "locator": "characters:2997:3138"
+          "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
+          "modified_time": "2026-05-16T14:38:37.594Z",
+          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
+          "locator": "characters:12882:13052;characters:35881:36055"
         }
       ],
       "item_sha256": "2697e95980becbb98e10c3422dde4288c3860ecf307ee4df3c7cecce97b5fd91",
@@ -14390,7 +14411,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Meaning/context/experience studied; qualitative and quantitative approaches not declared mutually exclusive. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Course experience/context aims with ordinary authored firstyear interviewexample. Methods may complement quantitative designs:independent primary NIH methodological definition directly checked as secondary verification,not course replacement or allqualitativework inductive/clinical efficacy. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "disposition": "keep"
     },
     "glossary:qual_methods_semistructured_interview": {
@@ -14479,8 +14500,8 @@
     },
     "glossary:qual_methods_transcription": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14489,10 +14510,10 @@
           "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "characters:36170:36840"
+          "locator": "characters:36139:36589;characters:36589:36823"
         }
       ],
-      "item_sha256": "142a65a7c8d87f43a69498ff833b62260f32e9a1e4f1f622466a901fcc263027",
+      "item_sha256": "7bd18f2cbfec21ef0d9746cda358346bde730ec45385123a8845a86b8784609d",
       "checks": [
         "meaning",
         "definition",
@@ -14501,22 +14522,22 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Audio-to-text procedure, not the expressive properties of the resulting text; meaningful detail choice contextualized. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
-      "disposition": "keep"
+      "note": "Purpose-dependent transcription rules replace implicit everydetail/everypublication obligation;audio-to-text distinctfrom expressive texttexture. No permission to publish private recordings or infer hiddenstates from pauses. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
+      "disposition": "fix"
     },
     "glossary:qual_methods_case_study": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
       "sources": [
         {
-          "source_id": "src_3a1fe1ba577dea8a84d0019f27eaf39a4da43a4cad37aa593890dde365723836",
-          "modified_time": "2026-05-16T13:55:50.170Z",
-          "snapshot_sha256": "4de1b2fb6be9cb414c95e6abe6dd56f2270931e8eed9a944b136ea2baf4c741a",
-          "locator": "characters:4161:4193"
+          "source_id": "src_c79d53eb9ab81d6c5d0764d4b352d1ad74b4f6fed54b5b11d3e9e186fbfa2344",
+          "modified_time": "2026-05-14T11:35:59.882Z",
+          "snapshot_sha256": "bf5e5736bfb347bc627d7bace9e1a1d9aa422e5324a83d9b08f2d8a88c854bf5",
+          "locator": "characters:86534:86680"
         }
       ],
       "item_sha256": "e82cf290511a77f24aa02cc98fc9eab1d4a80b1cc94853af0ce20b11d7560fe6",
@@ -14528,22 +14549,22 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Bounded case/context and multiple appropriate sources, not necessarily one interview or a clinical anecdote. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Holistic bounded-case design in realcontext with suitable multiple sources;one/multiplecases allowed,not eachcase automatically populationrepresentative,clinicalhistory copied or oneperson only. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "disposition": "keep"
     },
     "glossary:qual_methods_phenomenological_openness": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
       "sources": [
         {
-          "source_id": "src_5d2968f14fee456de4e250e6bf21234ff66acfc690597cbdc9a5a25fa06709c3",
-          "modified_time": "2026-05-16T13:59:25.372Z",
-          "snapshot_sha256": "307f0c1d865da7f97c2284748167b4281e14c2c43855a66aeb9d7427f0464fad",
-          "locator": "characters:8792:9392"
+          "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
+          "modified_time": "2026-05-16T14:38:37.594Z",
+          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
+          "locator": "characters:132207:132387"
         }
       ],
       "item_sha256": "67706f76f5df4f9430533960fb3ee863fd88350c98bcf1b3f02b696eae05b130",
@@ -14555,7 +14576,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Course-framed openness to participant experience; retained card already includes not-knowing stance, no expertise rejection. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Attributed openness/position of notknowing;do not replace participantaccount with prematuretheory. Not suspension of evidence criteria,universaltruthreading or mandatory boundarylessimmersion. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "disposition": "keep"
     },
     "glossary:qual_methods_methodological_reflection": {
@@ -14587,17 +14608,17 @@
     },
     "glossary:qual_methods_subject_approach": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
       "sources": [
         {
-          "source_id": "src_5d2968f14fee456de4e250e6bf21234ff66acfc690597cbdc9a5a25fa06709c3",
-          "modified_time": "2026-05-16T13:59:25.372Z",
-          "snapshot_sha256": "307f0c1d865da7f97c2284748167b4281e14c2c43855a66aeb9d7427f0464fad",
-          "locator": "characters:8792:9392"
+          "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
+          "modified_time": "2026-05-16T14:38:37.594Z",
+          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
+          "locator": "characters:132387:132484"
         }
       ],
       "item_sha256": "676531c325541016fe127c2906dd523654b2a38d7ee02a5029f4edb4c1eba110",
@@ -14609,7 +14630,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Participant agency/position distinguished from epistemic uncertainty and procedural control, explicitly course-framed. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Attributed participantagency/experience/position and respect,not prohibition on studying/explaining evidence or assumption research participants are passiveobjects. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "disposition": "keep"
     },
     "glossary:qual_methods_position_of_not_knowing": {
@@ -14641,8 +14662,8 @@
     },
     "glossary:qual_methods_double_attention": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14651,7 +14672,7 @@
           "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "characters:132150:133100"
+          "locator": "characters:128174:128299;characters:128380:128448;characters:132600:132643"
         }
       ],
       "item_sha256": "0d6a1b0d7d1b5f8cfb04e90f67bebbc1f7e6860b71d4b5ff551cb13217bf27e9",
@@ -14663,22 +14684,22 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Concurrent attention to method/process and participant contact, distinct from introspective analysis of bias. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Course doubleattention label interpreted with explicit structure-method/live-dialogue distinction;not divided-attention performance test or validated efficacy guarantee. Ordinary example has no real participantdetails. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "disposition": "keep"
     },
     "glossary:qual_methods_researcher_bias": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
       "sources": [
         {
-          "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
-          "modified_time": "2026-05-16T14:38:37.594Z",
-          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "characters:130940:131250"
+          "source_id": "src_e4c6d12c804540583039cc642cf858479e9e5fa8dfdeafb954606f55d45a4c11",
+          "modified_time": "2026-05-14T11:45:40.351Z",
+          "snapshot_sha256": "aed38a7670816fad41e34ded2bcff7176064679935c0173c7c27cc81ab70958e",
+          "locator": "characters:6883:7051"
         }
       ],
       "item_sha256": "59811c5ab24ba6469e26c55a863dee6618d3d84d80ebf1dd47fcb005366af52f",
@@ -14690,13 +14711,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Assumptions/position that can influence data, distinct from the reflexive activity of examining that influence. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Possible influence of investigatorposition/values on framing/data interpretation,not alltheories equallytrue or everyparticipant gives desiredanswer;distinctfrom reflexive response to that influence. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "disposition": "keep"
     },
     "glossary:qual_methods_text_texture": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14705,7 +14726,7 @@
           "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "characters:36170:36840;characters:130940:131250"
+          "locator": "characters:36589:36823;characters:131131:131171"
         }
       ],
       "item_sha256": "6e019a9533fe3e1070068e632a6f371b5cb55965524d78932efedbebf665ddd9",
@@ -14717,25 +14738,25 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Expressive properties of material distinguished from the act of transcription; no fixed transcription convention for every approach. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Expressive wording/pauses/repetitions relevant to analysis,distinctfrom transcription operation and thick contextual account;not automatic hiddenemotionaltruth or maximal detail alwaysbest. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "disposition": "keep"
     },
     "glossary:qual_methods_method_as_instrument": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
       "sources": [
         {
-          "source_id": "src_5d2968f14fee456de4e250e6bf21234ff66acfc690597cbdc9a5a25fa06709c3",
-          "modified_time": "2026-05-16T13:59:25.372Z",
-          "snapshot_sha256": "307f0c1d865da7f97c2284748167b4281e14c2c43855a66aeb9d7427f0464fad",
-          "locator": "characters:5088:5383"
+          "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
+          "modified_time": "2026-05-16T14:38:37.594Z",
+          "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
+          "locator": "characters:128174:128299;characters:128299:128331;characters:128380:128448"
         }
       ],
-      "item_sha256": "b95cb183db7c140618d42f88f61acf1206fdb534e12976d06a74bf827049cfdc",
+      "item_sha256": "9ba716e4ba250cfb9957df70c2514835c6956c4115c6f5194be31b5d675ba99f",
       "checks": [
         "meaning",
         "definition",
@@ -14744,13 +14765,13 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Course-framed method as support/structure, not a guarantee or replacement of method by personality. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
-      "disposition": "keep"
+      "note": "Explicit course metaphor for supportive method/structure/dialogue,not psychometric method-versus-specificinstrument definition and not rejection of scientific evidence or universalprocedure. Terminology clarified against quantitative-methods item. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
+      "disposition": "fix"
     },
     "glossary:qual_methods_researcher_reflexivity": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14759,7 +14780,7 @@
           "source_id": "src_e4c6d12c804540583039cc642cf858479e9e5fa8dfdeafb954606f55d45a4c11",
           "modified_time": "2026-05-14T11:45:40.351Z",
           "snapshot_sha256": "aed38a7670816fad41e34ded2bcff7176064679935c0173c7c27cc81ab70958e",
-          "locator": "characters:6763:7063"
+          "locator": "characters:6883:7051"
         }
       ],
       "item_sha256": "6ea190097d0261ae01aab200a71ddc11ca322073521cd9425185c68da2acccbd",
@@ -14771,7 +14792,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Analysis of own influence on knowledge production; covers the duplicated methodological-reflection assessment. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Explicit reflection on author assumptions/values/position and knowledgeproduction,distinctfrom merely having a bias and from proceduralmethodologicalreflection;not infallibility. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "disposition": "keep"
     },
     "glossary:qual_methods_thick_description": {
@@ -14804,8 +14825,8 @@
     },
     "glossary:qual_methods_transferability": {
       "discipline_id": "kachestvennye_metody_issledovaniya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -14814,7 +14835,7 @@
           "source_id": "src_bbfb182a3f15d234fc9e2899db6702ba1062165542dc48daad02a073c96850ee",
           "modified_time": "2026-05-16T14:38:37.594Z",
           "snapshot_sha256": "8eae578d1e0ee1c71930647007fcfdeb76a3fea8c65e1fee52637ad03b5787a2",
-          "locator": "characters:95123:96002"
+          "locator": "characters:95313:95650;characters:95650:96008"
         }
       ],
       "item_sha256": "5f8a99dcaa05cfef3ad44e0f242a633d4b80af4cafa740a5585d37baa34ab984",
@@ -14826,7 +14847,7 @@
         "duplicates",
         "sources"
       ],
-      "note": "KEEP: Context-sensitive applicability distinguished from statistical population representativeness; no universal transfer guarantee. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Contextual applicability assessment distinctfrom statistical representativeness and from richdescription itself;authored similarcontext example not guaranteed transfer or ban on all generalising case inquiry. Complete current body/key/alternatives/explanation or term/definition/aliases/example/confusable distinctions checked with exact course clauses. Saved complete425source reads reused;all scientific/privacy restrictions remain.",
       "disposition": "keep"
     },
     "questions:m3_psychological_consulting_001": {
