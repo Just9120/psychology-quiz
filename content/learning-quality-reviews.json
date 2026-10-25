@@ -9322,9 +9322,9 @@
       ]
     },
     "glossary:psyf_neuron": {
-      "item_sha256": "0a5466c9a0186e30362cb487d9cc03815a1e3085be135a6dbe1966440787408a",
+      "item_sha256": "37bfc49b1d13ff32766ad2bb5fe88215a711735fc5f84b27c66dfe4646fa9621",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261025",
+      "reviewer": "bank-quality-sensory-terms-independent-20261025",
       "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
@@ -9335,23 +9335,18 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "KEEP cell as signal-processing network element;existing foundational concept reused across two disciplines,not a new duplicate card or count-driven addition. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
-      "sources": [
-        {
-          "source_id": "src_dafa01e9e76eeef4adba13c24482ea3f834dbf96b5df8f858c14349887df488a",
-          "modified_time": "2026-04-16T15:30:03.438Z",
-          "snapshot_sha256": "ecc78a6d292fa511dfacce527326864a6e0f70e2d7d9bf8db9f20b60d63f7589",
-          "locator": "characters:771:849;characters:1167:1217;characters:1711:1911"
-        }
+      "source_support": "partial",
+      "issues": [
+        "cross_topic_semantic_duplicate_consolidated"
       ],
-      "disposition": "keep"
+      "note": "CONSOLIDATE: Same generic term and definition objective across topics repeats in mixed/all glossary. Discipline context does not make a separate concept. Definition objective retained in physiology term. Old ID/body/definition/example retained;status only controls new issuance. Not new source approval.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "glossary:psyf_dendrites": {
-      "item_sha256": "f25ecfe5dba95b4a2c63d261bc0d4c9461587920428500dd1ec6ff8b7956daa6",
+      "item_sha256": "49480e860c78cb134cb659d5935979dca44d29461b54cea34a8156b8b7cbba23",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261025",
+      "reviewer": "bank-quality-sensory-terms-independent-20261025",
       "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
@@ -9362,23 +9357,18 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "KEEP psychophysiology-course projection of input-receiving branches distinct from neuron as whole/synapse contact;not a new unique anatomical entity or always-short universal morphology. Cross-course term identity intentionally stable,not duplicate new question inflation.",
-      "sources": [
-        {
-          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
-          "modified_time": "2026-04-06T14:46:17.530Z",
-          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:5204:5362"
-        }
+      "source_support": "partial",
+      "issues": [
+        "cross_topic_semantic_duplicate_consolidated"
       ],
-      "disposition": "keep"
+      "note": "CONSOLIDATE: Same generic term and definition objective across topics repeats in mixed/all glossary. Discipline context does not make a separate concept. Definition objective retained in physiology term. Old ID/body/definition/example retained;status only controls new issuance. Not new source approval.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "glossary:psyf_synapse": {
-      "item_sha256": "8234f0e4a4024fa8dcbdecc7c251c191253e430ab4cf53005de8bd053b2b1e80",
+      "item_sha256": "420dae9d82a8095fee21d311992b7597ee34ce81b806a0ee57cab6e4d18112c8",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261025",
+      "reviewer": "bank-quality-sensory-terms-independent-20261025",
       "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
@@ -9389,18 +9379,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "FIX distinguish existence of contact from variable transmission efficacy,actual learning-dependent connection passage;not every repeated stimulation guarantees sustained strengthening. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
-      "sources": [
-        {
-          "source_id": "src_cf558bf515114551ff5ce00f816226f1cbde6015b711f26dbd01588299a88cba",
-          "modified_time": "2026-04-07T09:57:49.509Z",
-          "snapshot_sha256": "a9c5335d6c21ba59f2aea2fc4d565ea777c854b96cb768333bd6791ab0e46dc3",
-          "locator": "characters:975:1098;characters:1099:1196"
-        }
+      "source_support": "partial",
+      "issues": [
+        "cross_topic_semantic_duplicate_consolidated"
       ],
-      "disposition": "fix"
+      "note": "CONSOLIDATE: Same generic term and definition objective across topics repeats in mixed/all glossary. Discipline context does not make a separate concept. Unique efficacy/plasticity content retained in neuroplasticity and010question. Old ID/body/definition/example retained;status only controls new issuance. Not new source approval.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "glossary:chemical_synapse": {
       "item_sha256": "20c48d4741dc81e90ca84034e3d3a8b1d6376c294336431937ab71cdecb089da",
@@ -25144,6 +25129,110 @@
       ],
       "note": "Exact reviewed authored team situation retained:interpretations require specific text evidence and explicit uncertainty. Agreement,expert seniority andcoherent portrait are not proof;none warrants clinical feedback ordisclosed-risk dismissal. No actual source protocols,distinct personal bundles or suicidal example published.",
       "disposition": "keep"
+    },
+    "questions:m1_psyf_071": {
+      "item_sha256": "d360bb46539f6e4133f7bfa49d64faf198a06bff019f74aa81fc98aa6c4c59e6",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "partial",
+      "issues": [
+        "teacher_attribution_recall_deprecated",
+        "not_approval_of_general_veto_mechanism"
+      ],
+      "note": "DEPRECATE: Original asks attribution of an interpretation,whereas070tests observed timing. These are not duplicates. Deprecate low-value teacher-attribution recall and unsupported promotion of a possible veto into demonstrated freewill mechanism;retain historical edition.070continues to cover observed timing and inferential limits. Existing named certificate-only edition had no standalone public quality row. Retirement now has an explicit audit disposition;this partial row grants no publication approval. Current070timing edition independently audited with exact unchanged approved source/body. Old071ID/body/editions/results preserved;no homework reference.",
+      "sources": [],
+      "disposition": "deprecate"
+    },
+    "glossary:electrical_synapse": {
+      "item_sha256": "d48bb8ed687bf17f8e859115f4eb1f9ce98e6792298c4d77ff2417cd376395c6",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "bank-quality-electrical-term-independent-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "ADD distinct electrical-synapse glossary concept:direct intercellular ion channels versus transmitter/receptor chemical contact. Actual current nerve lecture exact qualified electrical-name/channel clauses already independently substantively checked for064. New complete term/definition/shortdefinition/example and confusion relation checked;no allsynapses dendritic,chlorinatedpool inhibition,sodium-only,pain/treatment/diagnostic claim. Not a paraphrased duplicate:electrical contact was absent from glossary and contrasts with retained chemical contact/process concepts. Three generic neuron/dendrite/synapse repetitions are separately consolidated;topic minimum gate unchanged.",
+      "sources": [
+        {
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "locator": "characters:27261:27307;characters:27655:27864"
+        }
+      ],
+      "disposition": "add"
+    },
+    "glossary:proprioception": {
+      "item_sha256": "34333b388afc5d8ac971e1992d2a8bb00b933ff05a78c5ac06c7d73a110f2913",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "bank-quality-sensory-terms-independent-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "ADD distinct body-position/movement sensitivity supported by muscle/tendon/joint receptor and posture/movement course passage;closed-eyes finger example authored. Does not claim exclusive sensory contribution or injury protection. Full short/long definition/example/confusion pair independently checked. Excludes adjacent allsomatic=conscious,hallucination prevalence,allpain psychogenic and universal neuroanatomical claims;all original holds retained.",
+      "sources": [
+        {
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:85634:85926"
+        }
+      ],
+      "disposition": "add"
+    },
+    "glossary:interoception": {
+      "item_sha256": "55b35de90c7a6d44c7fefd34027b48acc82f1f84b771b9385b1ab0bf3885fda3",
+      "discipline_id": "psihofiziologiya",
+      "reviewer": "bank-quality-sensory-terms-independent-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "ADD distinct internal-organ signal sensitivity supported by visceral receptor heart/vessel/bronchi course passage;heartbeat noticing example authored. No symptom diagnosis,all definitions of interoception identical,or restriction to conscious reporting. Full short/long definition/example/confusion pair independently checked. Excludes adjacent allsomatic=conscious,hallucination prevalence,allpain psychogenic and universal neuroanatomical claims;all original holds retained.",
+      "sources": [
+        {
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "locator": "characters:85926:86154"
+        }
+      ],
+      "disposition": "add"
     }
   }
 }

@@ -17566,6 +17566,60 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "glossary:electrical_synapse": {
+      "schema_version": 1,
+      "item_sha256": "d48bb8ed687bf17f8e859115f4eb1f9ce98e6792298c4d77ff2417cd376395c6",
+      "review_sha256": "11a119573b3e998aecd5d6a98bc517378c21fa13088c0dd7a37b52d8ac273d9f",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:proprioception": {
+      "schema_version": 1,
+      "item_sha256": "34333b388afc5d8ac971e1992d2a8bb00b933ff05a78c5ac06c7d73a110f2913",
+      "review_sha256": "d3e96a478111305d2d08243eb31478dfa61f68cd5ea3fd48cb5a1e694a6b7e2c",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:interoception": {
+      "schema_version": 1,
+      "item_sha256": "55b35de90c7a6d44c7fefd34027b48acc82f1f84b771b9385b1ab0bf3885fda3",
+      "review_sha256": "3267b8a155292aaefa368f42bead19e10af52d9747329b1147f2143f799a5c5f",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }
