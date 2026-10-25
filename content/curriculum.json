@@ -9423,6 +9423,36 @@
       "topic_id": "t_033b84e9a10e",
       "item_sha256": "6e49bdae51f9d4708d36da77362e62cb182fdffddbdff8ee8a14a18a1170af76",
       "locator": "private review:questions:m1_phys_061"
+    },
+    "d3e9d9fb6d6cce73d56c332a35f156a7f0d8d81a15122b244770e535c8411a86": {
+      "external_id": "m1_psyf_008",
+      "topic_id": "t_082cd47dd86a",
+      "item_sha256": "ac3c041d44de4b5c97c2d9688fcd250c1fd784f3965c5267e6c3fb4c45081c3e",
+      "locator": "private review:questions:m1_psyf_008"
+    },
+    "6735a4d57bd3aaaf4f6751f8e96205506c3f2924f7449b4737cd9770300057cd": {
+      "external_id": "m1_psyf_010",
+      "topic_id": "t_1a8edcb4d16c",
+      "item_sha256": "749b350446082b01fe8a85482d6174c6e78d356bc0eee50d1adbafa16ca59607",
+      "locator": "private review:questions:m1_psyf_010"
+    },
+    "84013dd39b5470cd09894e9a2d4d23ae60f8d26dc99a896a45a0484ba9782bfb": {
+      "external_id": "m1_psyf_025",
+      "topic_id": "t_6f9edd8074a3",
+      "item_sha256": "b3c122210c010dddf22dc06d1e652311845c6b92d07cb8b968bf5a9ee682f3ba",
+      "locator": "private review:questions:m1_psyf_025"
+    },
+    "6bb069e41ce24afdcbe6b8bd1ed9229ad7b39c8206cbf0c322c15e5796af48e6": {
+      "external_id": "m1_psyf_026",
+      "topic_id": "t_a5bd6646dc05",
+      "item_sha256": "0493bcde8f60c96a3d90adbac004c8ca4950e6d1330b268f8238f712c86e28b9",
+      "locator": "private review:questions:m1_psyf_026"
+    },
+    "7593e782810b53529135e061a5017298eedc89a3e3a5a80668ee99eacddbe2ef": {
+      "external_id": "m1_psyf_086",
+      "topic_id": "t_082cd47dd86a",
+      "item_sha256": "d06e7bfada2e398c9eed887aeba601f76ec51a49c733de37f599fd0b66d397d9",
+      "locator": "private review:questions:m1_psyf_086"
     }
   }
 }

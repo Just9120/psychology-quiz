@@ -7494,8 +7494,8 @@
     "questions:m1_psyf_001": {
       "item_sha256": "29b087565e1e680b1b4c5d25ec43594dd879099d836163b100cd9fa07bf165ed",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7507,8 +7507,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact500:1900 neuron/input/output passage compared; alternatives distinguish supporting tissue functions, not oxygen transport or all hormones. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP signalling neuron versus glial homeostasis/myelin/barrier roles;actual same-named psychophysiology native lecture supplies cellular/network basis,not age/sex/cell-count stereotypes. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_dafa01e9e76eeef4adba13c24482ea3f834dbf96b5df8f858c14349887df488a",
+          "modified_time": "2026-04-16T15:30:03.438Z",
+          "snapshot_sha256": "ecc78a6d292fa511dfacce527326864a6e0f70e2d7d9bf8db9f20b60d63f7589",
+          "locator": "characters:771:849;characters:1167:1217;characters:1711:1911"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_002": {
       "item_sha256": "1c291c21db170eb822dfba79e744fefe580a7bc8a10787557fc04d6dbb926986",
@@ -7535,8 +7543,8 @@
     "questions:m1_psyf_003": {
       "item_sha256": "31dd775f4008355c3d11f46666e1227f6e95cbfa31238e04e277a26ef0729879",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7548,8 +7556,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact transmitter/receptor fragments and OpenStax12.5 lines57-75 establish cell-target contact; now distinguishes structural concepts without synapse-as-process claim. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP intercellular contact versus dendrite/axon/soma;actual already qualified generic contact and chemical mechanism,not all contacts axodendritic. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "locator": "characters:23294:23337;characters:24593:24821"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_004": {
       "item_sha256": "f577350c227ed46f2d49206683e8fd84a2b56202af47da23c1ce3bbb4655f623",
@@ -7655,10 +7671,10 @@
       ]
     },
     "questions:m1_psyf_008": {
-      "item_sha256": "be9b4a5209b05f994adad56ccdb9e7b804f7fcccce6c085b62474c3bf7cbd789",
+      "item_sha256": "ac3c041d44de4b5c97c2d9688fcd250c1fd784f3965c5267e6c3fb4c45081c3e",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7670,14 +7686,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact nighttime melatonin lecture section, separate primary circadian qualification and captured parent-lesson relationship reviewed privately; source-free receipt/binding verified. Earlier glossary record preserved.",
-      "sources": []
+      "note": "FIX parallel real endocrine roles instead of heterogeneous absurd foils;circadian timing signal,not melatonin deficiency/prescription or sole sleep mechanism. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_f176d4f0ffc1edaf6718ab60e652df89e35dc30c5c8e308c042b33d30491d3c0",
+          "modified_time": "2026-04-06T14:47:58.092Z",
+          "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6",
+          "locator": "characters:11744:11832"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_psyf_009": {
       "item_sha256": "767eeac6a32b457adb12af7ddce992237b249ecad4c1bfc4e85947f453453b0d",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7689,14 +7713,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact18724:18789 exclusion/focus and retained Diamond abstract support interference-control distinction; no molecular equivalence. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP functional interference control in goal-directed attention;not neurotransmitter measurement or every inhibition a single brain system. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_2a27bed573506cf4215873a8ac0c9cfb85e7fa29ed8ce9e08ffc94261278596e",
+          "modified_time": "2026-04-20T15:41:29.261Z",
+          "snapshot_sha256": "6c50272639ce0d17542d2e75b0bbb10112c728b58b2e37edd3c2102d42c9b05b",
+          "locator": "characters:18724:18897"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_010": {
-      "item_sha256": "239784097705fab4dda7983ce85074c9d9ce32b57ca4646dffe17862d45f057b",
+      "item_sha256": "749b350446082b01fe8a85482d6174c6e78d356bc0eee50d1adbafa16ca59607",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7708,14 +7740,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact memory structural-change introduction and OpenStax5.4 lines29-34 reviewed; alternatives distinguish current function from experience-dependent reorganization. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "FIX include functional efficacy plasticity,remove potentially ambiguous transient-activity foil and reject requirement that all plasticity grows new architecture. Actual allowed learning/memory native passage,not wrong glossary claim every long-term memory requires new endings. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_cf558bf515114551ff5ce00f816226f1cbde6015b711f26dbd01588299a88cba",
+          "modified_time": "2026-04-07T09:57:49.509Z",
+          "snapshot_sha256": "a9c5335d6c21ba59f2aea2fc4d565ea777c854b96cb768333bd6791ab0e46dc3",
+          "locator": "characters:975:1098;characters:1099:1196"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_psyf_011": {
       "item_sha256": "74f21361745cd6c693cb29e493ae743f3a9100573a1318a3d08d1d9f7d72ed83",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7727,14 +7767,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact9330:10465 allocation/priorities read; plausible alternative allocation rules distinguished. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP resource-model limitation and priorities explicitly attributed to model,not literal universal measured brain-energy reservoir. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_b54fbf4a13563dcab7a16d4443460cfe6f3fc9fcf36d8caedad41f76607f5713",
+          "modified_time": "2026-04-20T15:33:01.800Z",
+          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
+          "locator": "characters:9649:9676;characters:10172:10290"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_012": {
-      "item_sha256": "d209bfa254b0e3b980cc8d92beb55f69808e23c81b3cbda31157f3674a600f45",
+      "item_sha256": "5d551bac3fd2e547485c6769c74e6e0ac4fdcb988b81b4f445ea2b498197524e",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7744,10 +7792,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Reviewed exact dictionary definitions of selection, neuroeconomics and conformity. Evolutionary superiority of groups, Milgram voltage/mortality and readiness-potential/free-will inference excluded. No glossary-to-lecture curriculum identity invented. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Selection of relevant signal among competition;not approval of one universal early/late filtering locus. Exact current retained edition source/publication approved;complete duplicate and retained bodies compared in this block. No homework references retired ID. Preserve old ID/body/snapshots/results. No approval of obsolete source claims.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m1_psyf_013": {
       "item_sha256": "2a1a0517ebec20a803a3121ffdd6d7fb62556eb2f16d556010007cfcc0b590fb",
@@ -8071,10 +8122,10 @@
       ]
     },
     "questions:m1_psyf_025": {
-      "item_sha256": "2f4d11e80fd4bc5fed7fa65b4406e36f40b1f0fac0d0f1d6acfcdbb9061a9f97",
+      "item_sha256": "b3c122210c010dddf22dc06d1e652311845c6b92d07cb8b968bf5a9ee682f3ba",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -8086,14 +8137,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact early-filter/resource fragments reviewed; neighboring attention properties replace impossible sleep/emotion alternatives. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "FIX applied course-type letter/word selection question,distinct from shifting/sustaining/dividing;old unmapped prior edition remains unmapped,new changed edition gets actual property lesson. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_651219709e64e47fb457967d5163017c0a0b36043470fa033c76ae7abe380bcb",
+          "modified_time": "2026-04-20T15:42:20.698Z",
+          "snapshot_sha256": "69d87f72192866c1929553a8c26711b6e992c3254e4870ea8c068ab51b16fb37",
+          "locator": "characters:10319:10449"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_psyf_026": {
-      "item_sha256": "51eec3df22eed1384c44f78435845210cd24798f6c4d392e211c55f25d698cac",
+      "item_sha256": "0493bcde8f60c96a3d90adbac004c8ca4950e6d1330b268f8238f712c86e28b9",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -8105,8 +8164,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact9330:10465 limited-capacity/priorities; removed automatic-memory/permanent-sleep consequences. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "FIX plausible rival explanations and conditional interpretation of added dual-task load;one observation does not establish mechanism or fixed capacity. Difficulty medium matches conceptual task;old unmapped prior edition stays unmapped. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_b54fbf4a13563dcab7a16d4443460cfe6f3fc9fcf36d8caedad41f76607f5713",
+          "modified_time": "2026-04-20T15:33:01.800Z",
+          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
+          "locator": "characters:9649:9676;characters:10172:10290;characters:10306:10408"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_psyf_027": {
       "item_sha256": "b4c2d11ceddf2179eeb30fe699146080363a98a9c1f98546805e8659acc1f0b9",
@@ -8164,10 +8231,10 @@
       ]
     },
     "questions:m1_psyf_029": {
-      "item_sha256": "8b4a0f965afd77c8ac3c1a1a2a5c50b9b826ce73c8fb1202658e89761f00bf36",
+      "item_sha256": "4e08a753d300fdc734f04516dfa685e57b9751ef4f0ff5eb06abc0835e075a76",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -8177,10 +8244,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact original memory lecture section and supplemental primary plasticity review supplied privately; source-free current receipt and parent-lesson binding verified. Earlier glossary evidence preserved privately.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Experience-dependent neural organization/change;practice is one experience,not guaranteed training outcome/recovery. Exact current retained edition source/publication approved;complete duplicate and retained bodies compared in this block. No homework references retired ID. Preserve old ID/body/snapshots/results. No approval of obsolete source claims.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m1_psyf_030": {
       "item_sha256": "f07ad1f912094db06d1fb5d3a3a2ff392745cb2c46b43fc0c759a7b689b717e8",
@@ -8579,8 +8649,8 @@
     "questions:m1_psyf_045": {
       "item_sha256": "88ab8a8fc6f0c40afd605e17d9e745a6c7ab935c588ce3909c5c4bc93c243caf",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -8592,8 +8662,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact9330:10465 priority law supports distinct prediction operation instead of duplicated scheduling advice. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP conditional priority distribution,distinct objective from model definition011 and load-interpretation026;not guarantee identical accuracy or clinical diagnosis. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_b54fbf4a13563dcab7a16d4443460cfe6f3fc9fcf36d8caedad41f76607f5713",
+          "modified_time": "2026-04-20T15:33:01.800Z",
+          "snapshot_sha256": "08befa8cb35d4871df2d442e0b9ebdeb0ad224179b92d89b5787200334d9987e",
+          "locator": "characters:9649:9676;characters:10172:10290;characters:10306:10408"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_046": {
       "item_sha256": "af355e1fbf22e06aacdc2311247baaae4410d4417b7db03633c78762347e3480",
@@ -8839,10 +8917,10 @@
       "sources": []
     },
     "questions:m1_psyf_055": {
-      "item_sha256": "bd9844bc8180d90f42dae90162e4bfcd164209a3d4cf7fc64a886cebd0d540eb",
+      "item_sha256": "ad707b0aedcf21971eec7a104e6e9b3098405cdd6e2935a05b23de1af72c8630",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -8852,10 +8930,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Reviewed limited-capacity allocation and priorities as a resource model. Applied scenarios are explicitly hypotheses or conditional task examples; no literal energy reservoir, notification diagnosis, guaranteed recovery, universal noise benefit or psychosis causality is approved. Supplementary primary textbook reviewed only for allocation/selection, not clinical advice. Exact private fragment receipt verified; historical editions retained. Scope is this item, not whole-source scientific approval.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Model-based processing overload risk without inevitable errors in every person. Exact current retained edition source/publication approved;complete duplicate and retained bodies compared in this block. No homework references retired ID. Preserve old ID/body/snapshots/results. No approval of obsolete source claims.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m1_psyf_056": {
       "item_sha256": "4726567a7efb48ffe39df22d46211e2f42d6ca7ef75ae29c18519d1fe7a320e4",
@@ -9075,8 +9156,8 @@
     "questions:m1_psyf_064": {
       "item_sha256": "3caca3bff250ae9f54a5b20fd7ad375d389d41d12504fb1608bc3f1c1475899b",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -9088,8 +9169,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact550:849 sustained focus; educational dimension instead of diagnosing impairment from one self-report. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP sustained focus property,distinct duration from range/shifting/distribution;no causal or diagnostic conclusion. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_651219709e64e47fb457967d5163017c0a0b36043470fa033c76ae7abe380bcb",
+          "modified_time": "2026-04-20T15:42:20.698Z",
+          "snapshot_sha256": "69d87f72192866c1929553a8c26711b6e992c3254e4870ea8c068ab51b16fb37",
+          "locator": "characters:563:705"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_065": {
       "item_sha256": "e90baa1c47f92195f03216570532a4126597de84606c18348d261c93e986ba3b",
@@ -9235,8 +9324,8 @@
     "glossary:psyf_neuron": {
       "item_sha256": "0a5466c9a0186e30362cb487d9cc03815a1e3085be135a6dbe1966440787408a",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -9248,13 +9337,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Cell as information-processing unit in network, not dendrite/contact; foundation reused in a distinct discipline without adding new duplicate cards. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "KEEP cell as signal-processing network element;existing foundational concept reused across two disciplines,not a new duplicate card or count-driven addition. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
       "sources": [
         {
-          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
-          "modified_time": "2026-03-31T06:13:48.046Z",
-          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "characters:21:153"
+          "source_id": "src_dafa01e9e76eeef4adba13c24482ea3f834dbf96b5df8f858c14349887df488a",
+          "modified_time": "2026-04-16T15:30:03.438Z",
+          "snapshot_sha256": "ecc78a6d292fa511dfacce527326864a6e0f70e2d7d9bf8db9f20b60d63f7589",
+          "locator": "characters:771:849;characters:1167:1217;characters:1711:1911"
         }
       ],
       "disposition": "keep"
@@ -9287,10 +9376,10 @@
       "disposition": "keep"
     },
     "glossary:psyf_synapse": {
-      "item_sha256": "546fc56d9c5fb0ca507ec414aa5b129b320ba5a7cb590372e9c7ab0271e69cc7",
+      "item_sha256": "8234f0e4a4024fa8dcbdecc7c251c191253e430ab4cf53005de8bd053b2b1e80",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -9302,22 +9391,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Contact efficacy can change in an experimental example; not every repeated input guarantees lasting strengthening. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX distinguish existence of contact from variable transmission efficacy,actual learning-dependent connection passage;not every repeated stimulation guarantees sustained strengthening. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
       "sources": [
         {
-          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
-          "modified_time": "2026-03-31T06:13:48.046Z",
-          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "characters:155:311"
+          "source_id": "src_cf558bf515114551ff5ce00f816226f1cbde6015b711f26dbd01588299a88cba",
+          "modified_time": "2026-04-07T09:57:49.509Z",
+          "snapshot_sha256": "a9c5335d6c21ba59f2aea2fc4d565ea777c854b96cb768333bd6791ab0e46dc3",
+          "locator": "characters:975:1098;characters:1099:1196"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:chemical_synapse": {
-      "item_sha256": "db4fd3a022972fe55e8235eeddb2e9490dfe7bf30cf487847fd90edc9b1bd6e3",
+      "item_sha256": "20c48d4741dc81e90ca84034e3d3a8b1d6376c294336431937ab71cdecb089da",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -9329,22 +9418,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Chemical contact uses release and receptors; distinct from the broader regulated-connection concept. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX structural contact components versus chemical transfer process;generic synapse/contact and exact mediator-receptor clause,not all contacts dendritic/sodiumonly. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
       "sources": [
         {
-          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
-          "modified_time": "2026-03-31T06:13:48.046Z",
-          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "characters:155:311"
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "locator": "characters:23294:23337;characters:24593:24821"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:gaba_inhibition": {
-      "item_sha256": "2933bee757c3143a0a394aa7b0fecc0f6830a9a9c32dad0eda4d2aebbf923099",
+      "item_sha256": "eea0a7befbe87019fcc989f8e8d8b48666f26aa7dde321d3153011e1abd8c0e2",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -9356,7 +9445,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Adult inhibitory example explicitly conditional on receptor/cell state; no universal GABA-always-inhibitory claim across development. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX mature typical inhibitory action explicitly conditional on receptor/cellstate;not always inhibitory across development/states or clinical mediator marker. Counts40percent and permanent glutamate competition excluded. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
       "sources": [
         {
           "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
@@ -9365,13 +9454,13 @@
           "locator": "characters:572:646"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:noradrenaline": {
-      "item_sha256": "f4f11badf2a83aefbf60dad483d7faa4cd015259d8921d85a542be93aa7ec736",
+      "item_sha256": "2c186dd5d7888b6b554509c544d6293c07eb00fd0f990cfb4826f327d137432f",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -9383,22 +9472,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Arousal/vigilance modulation rather than diagnosing mediator level from distraction; no medicine advice. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX bounded vigilance/warning-cue modulation;avoid uniform elevation or inferring transmitter level from distraction. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
       "sources": [
         {
-          "source_id": "src_ed9a5f5d35585ee3e75c6ed84016659e9e4e7b469c4928a60cf88a30f13ee1be",
-          "modified_time": "2026-04-20T11:05:23.167Z",
-          "snapshot_sha256": "f82465d6e4251478355b68e45cbc5dece6c261c42ab7db63b7ddde49c409aeb8",
-          "locator": "characters:6995:7196"
+          "source_id": "src_db85647c78a44e33101b8b932b09235b6d3ee30b18b730d65698d8094bafc35e",
+          "modified_time": "2026-04-20T15:34:30.028Z",
+          "snapshot_sha256": "1bb4c8763e0f951dde7821e0d34e17ffdb4d0b0faa55623d463dc197cd985aa3",
+          "locator": "characters:19816:19832;characters:20004:20084;characters:20309:20340"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:melatonin": {
-      "item_sha256": "25adc60e0467826debacead30738b64a74bd177e0ed9bedc99ab0ef190710f7a",
+      "item_sha256": "e670ec71cfacb247eb429516aae1fc95b481f9c8dda418a2c47ff65f64439027",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -9410,22 +9499,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Biological-night timing signal, not a universal sleep-duration rule or supplementation recommendation. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX circadian participation versus sole normal-sleep guarantee;no fixed personal duration or supplement recommendation. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
       "sources": [
         {
-          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
-          "modified_time": "2026-03-31T06:13:48.046Z",
-          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "characters:2222:2296"
+          "source_id": "src_f176d4f0ffc1edaf6718ab60e652df89e35dc30c5c8e308c042b33d30491d3c0",
+          "modified_time": "2026-04-06T14:47:58.092Z",
+          "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6",
+          "locator": "characters:11744:11832"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:inhibition_attention": {
-      "item_sha256": "2dd0cf55f7ed89b9c4d64adaa5bde20f673cc90d4b66f4e33c9694bc6cbcf950",
+      "item_sha256": "bb35157aaf962e4cbad14fab554a70c2144c6930890e3ae9c075e2366c69ce9d",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -9437,22 +9526,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Task-specific interference control illustrated by Stroop-like conflict; not proof of neurotransmitter level or a unitary mechanism. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX functional task interference control versus unitary mechanism/mediator inference;authored Stroop example retained,not clinical test. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
       "sources": [
         {
-          "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "characters:5876:6016"
+          "source_id": "src_2a27bed573506cf4215873a8ac0c9cfb85e7fa29ed8ce9e08ffc94261278596e",
+          "modified_time": "2026-04-20T15:41:29.261Z",
+          "snapshot_sha256": "6c50272639ce0d17542d2e75b0bbb10112c728b58b2e37edd3c2102d42c9b05b",
+          "locator": "characters:18724:18897"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:neuroplasticity": {
-      "item_sha256": "99dbf7059b541a3c5eafa5f288d926f61657d9108745a6ca8b0c351432a960c1",
+      "item_sha256": "59ba5d2b04565123f5d1567dde9d3f5c23862f83233a8d9b425097730e53c291",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -9464,16 +9553,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Experience-dependent reorganization possible; example explicitly rejects guaranteed full recovery. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX full functional/structural distinction and no guaranteed recovery;course exact strength/contact plasticity rather than inaccurate mandatory new architecture definition. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
       "sources": [
         {
-          "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
-          "modified_time": "2026-04-20T11:05:12.145Z",
-          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "characters:1220:1300"
+          "source_id": "src_cf558bf515114551ff5ce00f816226f1cbde6015b711f26dbd01588299a88cba",
+          "modified_time": "2026-04-07T09:57:49.509Z",
+          "snapshot_sha256": "a9c5335d6c21ba59f2aea2fc4d565ea777c854b96cb768333bd6791ab0e46dc3",
+          "locator": "characters:975:1098;characters:1099:1196"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:limited_attention_resource": {
       "item_sha256": "5114f6e83cd930ded32dfdf84587e25b709f0c5fce83b313874d13d2192c2354",
@@ -19044,8 +19133,8 @@
     "questions:m1_psyf_072": {
       "item_sha256": "c98ac8a2d3b56d4de974da4b070be85ad76fa4507d6e16c8237c481abb15b8e7",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19057,14 +19146,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Bounded orienting-response decrement only, terminology corroborated by Rankin et al.2009. Compared current446 items: m1_vnd006 tests conditioned extinction, m1_vnd021 acquisition; neither tests habituation. No historical priority, universal autonomic pattern, synaptic decay, ERP localisation or treatment claim. Exact12353:12955 outside retained holds.",
-      "sources": []
+      "note": "KEEP actual native attention lecture describes waning orienting response to repeated stimulus. Literal habituation label not claimed verbatim in course;Rankin2009actual author-held primary PDF definition independently checks supplied sensory/motor exclusion conditions and avoids confusing conditional extinction. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_2a27bed573506cf4215873a8ac0c9cfb85e7fa29ed8ce9e08ffc94261278596e",
+          "modified_time": "2026-04-20T15:41:29.261Z",
+          "snapshot_sha256": "6c50272639ce0d17542d2e75b0bbb10112c728b58b2e37edd3c2102d42c9b05b",
+          "locator": "characters:12544:12646"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_073": {
       "item_sha256": "4d6888e05d6bc8035a59ed4cd8b483567aa7a57faa084952676ef2b424de4322",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19076,8 +19173,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course functional-system expected-outcome model definition only32036:32235. No lecture-specific12steps as universalbrainmodel, emotionalsign determinism, epigenetics, gender, imprinting or survival-protocol claim. Compared current446 question+85terms: generaldecision/network items do not test this model term.",
-      "sources": []
+      "note": "KEEP attributed Anokhin expected-result construct versus execution plan,actual feedback and external trigger;actual native decision lecture,not universal choice/determinism theory. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_b7d98cd582208f8d6acc68c26bf7154ec2f7b4b9a44bfb7165a323bbe8e7cbfe",
+          "modified_time": "2026-04-20T15:36:43.735Z",
+          "snapshot_sha256": "871a460b7221efe11e48c7097f11b3b061ae646667b25be67f96fdd1023e5ccd",
+          "locator": "characters:32036:32135"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m5_clinical_006": {
       "item_sha256": "460de6d30979146bcc1b903d94d5b21271757fd7e8229731578d0b445b230d80",
@@ -19848,8 +19953,8 @@
     "questions:m1_psyf_075": {
       "item_sha256": "64f70adcd504cdcb11db9ccda12552d0fe8861e1cd7c07606a91470915563ddb",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -19861,8 +19966,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact9405:9560 ion passage and preserved SfN mechanism; alternatives now compare channel, pump, vesicle and messenger mechanisms, no numerical ratios. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP ion-channel path versus ATPpump,vesicles and metabotropic mechanisms;actual native pore description,not allneurons samecharge/speed. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_dafa01e9e76eeef4adba13c24482ea3f834dbf96b5df8f858c14349887df488a",
+          "modified_time": "2026-04-16T15:30:03.438Z",
+          "snapshot_sha256": "ecc78a6d292fa511dfacce527326864a6e0f70e2d7d9bf8db9f20b60d63f7589",
+          "locator": "characters:9328:9404"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_076": {
       "item_sha256": "67e6553edc3a125bbfcb13f9896e87a2a9a14079e3d3bc0abe6e1352e2888faa",
@@ -22986,8 +23099,8 @@
     "questions:m1_psyf_084": {
       "item_sha256": "d7f1015754dc305eaccba6a4ca140ade692f093ff87da69ec55e1340aacc3515",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22999,8 +23112,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Lecture introduction identifies frontal-lobe topic only; precise anatomical answer separately supported by publisherdefinition66–67 plus distributed-interaction30. Held percentages, deterministic brainstories and meditation/neural prognoses excluded.",
-      "sources": []
+      "note": "KEEP prefrontal location in frontal lobe from actual course teaching slide;adjacent evolution-young/superior,spindle-neuron,hemisphere personality claims remain held. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_16ea17fdd8f8a5da0f0708de8a6b8eb83c5875e9b41643389a276180d50d7030",
+          "modified_time": "2026-04-18T10:55:23.842Z",
+          "snapshot_sha256": "6e9280abc63d3c6a06152de51caf14c9cf22eef7682a7cd1af0aeeceb2d98746",
+          "locator": "characters:3345:3407"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_085": {
       "item_sha256": "93d1a9e354164922844adb031476363ad9931d11b258f47f5942dca308d8c621",
@@ -23786,10 +23907,10 @@
       "disposition": "keep"
     },
     "questions:m1_psyf_086": {
-      "item_sha256": "812e67b222843dc40ebd6a69af3f6fd58ccd3a6070c5c5070d65201bc1c88b7f",
+      "item_sha256": "d06e7bfada2e398c9eed887aeba601f76ec51a49c733de37f599fd0b66d397d9",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -23801,8 +23922,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "New operation rejects one-transmitter-one-effect inference. Exact transmitter/receptor lecture fragment and OpenStax12.5 receptor-dependent effect/nicotinic-muscarinic contrast individually reviewed. No universal GABA/excitatory claim, behavior diagnosis or clinical prescription. Every alternative and explanation individually checked; saved exact course edition plus bounded independent primary mechanism review. No live Drive freshness, whole-source approval or clinical certification.",
-      "sources": []
+      "note": "FIX remove ambiguous primary-description phrasing;course channel/receptor diversity grounds authored comparison,independent direct OpenStax12.5 89-94corroborates AChnicotinic/muscarinic example. Not allmediators always excitatory or sodium-only. Full current question/key/fouralternatives/explanation or term/definition/examples independently compared with exact selected course clauses and previous exact whole-body review. Prior425full read reused,not corpus repeat.",
+      "sources": [
+        {
+          "source_id": "src_dafa01e9e76eeef4adba13c24482ea3f834dbf96b5df8f858c14349887df488a",
+          "modified_time": "2026-04-16T15:30:03.438Z",
+          "snapshot_sha256": "ecc78a6d292fa511dfacce527326864a6e0f70e2d7d9bf8db9f20b60d63f7589",
+          "locator": "characters:12370:12489"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_psyf_087": {
       "item_sha256": "eee78cdab11c2a5d28899ac989be3e9e9001c467ae921753608eafef5b3d678f",
