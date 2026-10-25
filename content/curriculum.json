@@ -9387,6 +9387,42 @@
       "topic_id": "t_09efb9aedb46",
       "item_sha256": "205201b22d523292b91b6d90bb6c028095db87416e00611cba1c724ef9823dc2",
       "locator": "private review:questions:m3_psychological_consulting_020"
+    },
+    "17a242954ebeb97bcaf897190243c48f56f3a6d3d0753c35f2488a3e6f84bc66": {
+      "external_id": "m1_phys_027",
+      "topic_id": "t_3ec476ff48e7",
+      "item_sha256": "98452c6f32960791286ad1dcc1bbeea21f33b3ebcfe559577d4c552f19f6a29a",
+      "locator": "private certificate:questions:m1_phys_027"
+    },
+    "ebdb3e05de420f12f1c4e2d9ddff46bab7be40649a3ad8098ed29343a9f02336": {
+      "external_id": "m1_phys_031",
+      "topic_id": "t_c8fdaba2064a",
+      "item_sha256": "db0c1ba7d5df7320f4517befbaff8334f67ce9307df2d2af215f8c225007fc9f",
+      "locator": "private certificate:questions:m1_phys_031"
+    },
+    "6289df3a950fecd5c8befe8b3dc6576881b57844bb02e77686f6820979a87057": {
+      "external_id": "m1_phys_038",
+      "topic_id": "t_c8fdaba2064a",
+      "item_sha256": "fba7f1f0e1241353d2e156cc9441bd8c2689b4dec7dc7803e86327bad4edddd5",
+      "locator": "private certificate:questions:m1_phys_038"
+    },
+    "e0179285c1fe667710329463d34491e0efd1eb7e18705c52178585adc178cc1f": {
+      "external_id": "m1_phys_050",
+      "topic_id": "t_033b84e9a10e",
+      "item_sha256": "eb92a29314b947de297ef3d0b5ea11d7c26cf08f2d48d632699c1e997b2cb1e5",
+      "locator": "private certificate:questions:m1_phys_050"
+    },
+    "7893f1b9f3504c5e3a1bd3672fc10d52aeb44b89729b3040e6ce74d14eb337bb": {
+      "external_id": "m1_phys_057",
+      "topic_id": "t_f2b92ac4b2ef",
+      "item_sha256": "79a177a9db94ed4fe67655e5aca39ece66ab40ad6b71e834789ce357409f1158",
+      "locator": "private certificate:questions:m1_phys_057"
+    },
+    "fe71598983da4f456cc596a1a417b2fcb0b63785f047bba7ef2bd5377878e15c": {
+      "external_id": "m1_phys_061",
+      "topic_id": "t_033b84e9a10e",
+      "item_sha256": "6e49bdae51f9d4708d36da77362e62cb182fdffddbdff8ee8a14a18a1170af76",
+      "locator": "private review:questions:m1_phys_061"
     }
   }
 }

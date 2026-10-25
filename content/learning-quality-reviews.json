@@ -3806,10 +3806,10 @@
       "disposition": "keep"
     },
     "questions:m1_phys_004": {
-      "item_sha256": "f11c165a9d3a9e8eb0ab8ca300ccef2a0961687afa550230d484bbb921b8109b",
+      "item_sha256": "7e94108868cb24d85187e5ab8f59a30a0ac06a5438f1d50fa1f9c4e04f619b4e",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3819,9 +3819,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Read exact saltatory-conduction glossary fragment and OpenStax12.2 insulation plus12.4 propagation subsection. Narrowed broad cognitive-efficiency claim to the directly supported axonal mechanism; no numerical multiplier or medical inference. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Saltatory versus continuous axonal conduction with diameter controlled;mechanism/limits preserved in contextual question. Actual retained current edition source/publication approved;complete source and target bodies compared. No current homework uses retired ID. Preserve old ID/body/attempt editions/results. Retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
@@ -3829,7 +3831,8 @@
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
           "locator": "characters:5121:5261"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_phys_005": {
       "item_sha256": "5307c83e95cd2ed3308030c8aaf9057c5336cbd2eaae1d3f1975046ce38d5ba8",
@@ -3862,8 +3865,8 @@
     "questions:m1_phys_006": {
       "item_sha256": "330c6dcfb86adb5cd97c3045508e3e267d8337d4485e05da63b2583739ee2702",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -3875,15 +3878,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course synapse definition and individually read OpenStax12.5 chemical/electrical synapse and release/receptor section support the contrast. No universal excitatory or sodium-channel claim. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "KEEP discriminate receptor-mediated chemical transfer,connected electrical channels,endocrine transport and one-axon propagation;not sodium-only or vesicle-bursting universal mechanism. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
       "sources": [
         {
-          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
-          "modified_time": "2026-03-31T06:13:48.046Z",
-          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "characters:155:311"
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "locator": "characters:24593:24821"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_007": {
       "item_sha256": "f29526820717141a0a3fe10e4d6511aec146a6f8697af41d25f840c119af5c5f",
@@ -3992,7 +3996,7 @@
           "locator": "characters:32331:32452"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_phys_011": {
       "item_sha256": "e75ba4bb3a0f63aa61b1e220012bb1721e336e66ef07f277791e745c4ae254b5",
@@ -4023,10 +4027,10 @@
       ]
     },
     "questions:m1_phys_012": {
-      "item_sha256": "13072b6a449b32b7f4470b4b69b175cd6ba505be2afd53711fa6b2ac2419375e",
+      "item_sha256": "e4fa83e3c95fd7f8eadb436d7f8184cea891e6c2a70d1547480674b5914a7be0",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4038,15 +4042,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact saved lecture fragment supplies this basic concept and its existing programme lesson. Previous glossary certification retained in private backup; no whole lecture approval, held claims remain prohibited. _008 keeps the independently checked distinction between skeletal-muscle control and exclusively conscious control; no nervous-system diagnosis or clinical inference.",
+      "note": "Reflex versus direct tissue response: the neural path, not mere energy use or muscular activity. The CNS-based basic course arc is not asserted to exhaust all local/enteric pathways or every response. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
-          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
-          "modified_time": "2026-04-06T14:46:17.530Z",
-          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:68440:68620"
+          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "locator": "characters:450:702"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_013": {
       "item_sha256": "38580f2b6ded1483b66e365db518f05cd015ae86aa063b6759c48c6cb563dbaf",
@@ -4101,7 +4106,7 @@
           "locator": "characters:59236:59388"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_phys_015": {
       "item_sha256": "ceece7aa0925ea52ce4ae15aeb3fcf51c75bfe4a5170e50c2fb8bdf7bc69637b",
@@ -4128,13 +4133,13 @@
           "locator": "characters:62708:62834"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_phys_016": {
-      "item_sha256": "0b90ce55002e0c5e2cb69e8a9013589fcc205f48c8d23f5bbda0c464f2e753ed",
+      "item_sha256": "4e68c36d53ebb997e40e8efca111d22b206732e989eb5f555e722d2273aa4f08",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4146,21 +4151,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact saved lecture fragment supplies this basic concept and its existing programme lesson. Previous glossary certification retained in private backup; no whole lecture approval, held claims remain prohibited. _008 keeps the independently checked distinction between skeletal-muscle control and exclusively conscious control; no nervous-system diagnosis or clinical inference.",
+      "note": "Dynamic maintenance within ranges, not growth, learned skill, reproduction or literally fixed unchanging parameters. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
-          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
-          "modified_time": "2026-04-06T14:46:17.530Z",
-          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
-          "locator": "characters:1120:1500"
+          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "locator": "characters:702:834"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_017": {
-      "item_sha256": "01082b77f6ece0851e9076a3afa6f751079993b6f41ce9ba373d5005f62dfb5b",
+      "item_sha256": "981c19598571a555b54a932fb82e41b397ecb7da09116b48095b3255132954d8",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4172,15 +4178,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact endocrine-lecture introduction defines glands/hormones/functions. Parallel systems replace artificial only-system qualifiers; no inference that hormones have no relationship to other systems. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "The question gives one particular hormone delivered by blood to distant receptor-bearing target cells and asks which signaling MODE this is. Only literal native blood-to-target clause used; no every hormone distant-only/rapid degradation,one somatostatin exception,uniform kinetics,all endocrine innervation,melatonin anticancer/immunity/anti-ageing outcome,oxytocin trust/regeneration,calcitonin phosphate/glucagon cortisol mechanism or diabetes/medication inference. Adjacent alternatives distinguish neighbor,self and specialized-contact signaling,not a new gland-disease classifier. Related PDF all21pages previously visually read and exact original bytes verified here; all5visual holds preserved verbatim and additionally project to whole9673character origin exclusion,not waived or mapped to selected native text. Every listed text assertion and all5named visual assertions are excluded from this concrete conditional mode claim. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
           "source_id": "src_f176d4f0ffc1edaf6718ab60e652df89e35dc30c5c8e308c042b33d30491d3c0",
-          "modified_time": "2026-04-06T14:47:58.092Z",
           "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6",
-          "locator": "characters:100:660"
+          "modified_time": "2026-04-06T14:47:58.092Z",
+          "locator": "characters:6954:7096"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_018": {
       "item_sha256": "25736215df53a32e2ccb3233588eb4ab9680695eacdab71b7841d8ff5ca6ce48",
@@ -4212,11 +4219,18 @@
     },
     "questions:m1_phys_019": {
       "purpose": "learning_content",
-      "item_sha256": "99ed3e48f092dfb47384cff23e746c018516ffac50a7eaf9b1467e92507d403a",
+      "item_sha256": "254b790936e5fb338851c9b53053067f752a8e88913180a603415c3b83d46015",
       "decision": "approved",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
-      "sources": [],
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "sources": [
+        {
+          "source_id": "src_56639aeff206bdd66dac25cdf2937e537b14f1697022e84ff9532ca3c760f460",
+          "snapshot_sha256": "dba8cc929d3e30e7393ccd09904fc8401315ac8a6a671b076b0690853872271a",
+          "modified_time": "2026-04-06T14:48:45.485Z",
+          "locator": "characters:563:877;characters:17046:17156"
+        }
+      ],
       "checks": [
         "meaning",
         "answer",
@@ -4228,14 +4242,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact course stress-immunity fragment and qualified primary abstract reviewed privately. Every related slide hold compared against the selected claim and retained; no clinical mechanism, diagnosis or treatment inferred.",
-      "discipline_id": "fiziologiya_cheloveka"
+      "note": "Course teaches immune system multiple cells/organs/mediators and asks about stress,explicitly qualifying that initial changes need not constitute global immunity reduction. This bounded conceptual qualifier is used;the surrounding IgA/cortisol/cancer/illness-frequency causal assertions and every inherited exact range remain prohibited. Original Segerstrom/Miller2004meta-analysis selected abstract,duration/endpoint categorization and clinical-outcome limits scientifically clarify this same course connection,not a replacement topic or medical prognosis. Correct choice considers duration and measured endpoint;subjective strength alone,all markers same direction and unconditional short-to-long extrapolation fail that bounded comparison. No diagnosis,cortisol/IgAassay,clinical risk or treatment from stress. Related9pagePDFall5currentvisualholds and all historical table/text records preserved;its older extracted-text SHA differs from current capture,so no historical-text coordinate equivalence is claimed. Whole current origin text is additionally excluded,with originalvisual/history retained;not ownPDFapproval. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "discipline_id": "fiziologiya_cheloveka",
+      "disposition": "keep"
     },
     "questions:m1_phys_020": {
       "item_sha256": "bb5bc73fd8876c841f911d56f7e918f7f8535c8fb4765bd8a860c9aef4e0c801",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4247,8 +4262,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact blood/internal environment fragment read; plausible fluid sets distinguish internal environment from secretions and excretion. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP conventional internal milieu components;not every bodily secretion/excretion or all body water identical. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
+      "sources": [
+        {
+          "source_id": "src_a97554926f8297edefbc3a1d1fb807574e511d0daf4703800609201d3496d455",
+          "modified_time": "2026-04-06T14:49:49.208Z",
+          "snapshot_sha256": "0d32a19d40d64b597fc7358576de26ff8ffc1aaea9c0785727bcd3d4175c49ee",
+          "locator": "characters:774:875"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_021": {
       "item_sha256": "0f6d8323a1214481df6acd9bb1501b33cd1b3caf749f173415a9881d5744923e",
@@ -4279,10 +4302,10 @@
       ]
     },
     "questions:m1_phys_022": {
-      "item_sha256": "1fb43d19c0b623711d2b91d3f9b263eb9a14227660ac85894ade4dfcb393d746",
+      "item_sha256": "bea54ae1327013f1fec56b3eb12ed45875767f4cfc1a924c5260cbe7b2f30d21",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4292,9 +4315,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw course passages selected only for gas transport and voluntary/automatic breathing control; independent OpenStax22.3 respiratory-rate/control paragraphs and table confirm medullary rhythm and cortical voluntary control, and22.4 intro/external/internal respiration confirms gas exchange between lung/blood/tissue. Three control questions distinguish basic property, applied conscious rhythm change and limits; no universal somatic=conscious rule, guaranteed anxiety reduction, disease prognosis, hyperventilation advice or CO2-performance claim. All ten source hold groups retained, no whole-source approval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Coexistence of voluntary breathing influence and continuing automatic regulation;no treatment efficacy claim. Actual retained current edition source/publication approved;complete source and target bodies compared. No current homework uses retired ID. Preserve old ID/body/attempt editions/results. Retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_7f7a18302054659937236d7e21642867a20ffeb9824dabbc3584e4d7e46ae7cd",
@@ -4302,7 +4327,8 @@
           "snapshot_sha256": "7e6f839615cfe7ad8fa4a7be9403635741a8782ef466aa59062bb9b382be6002",
           "locator": "characters:23482:23687"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_phys_023": {
       "item_sha256": "d7d9c036c0a6ce2eb24124ed10395532cf70740ccf24415d9f7c58f8dafbfbce",
@@ -4415,13 +4441,13 @@
           "locator": "characters:62708:62834"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_phys_027": {
-      "item_sha256": "9e1ce2c7a1f7189cb019f505634bde2d0813c395a2bd797ca676f46b96c95658",
+      "item_sha256": "98452c6f32960791286ad1dcc1bbeea21f33b3ebcfe559577d4c552f19f6a29a",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4433,21 +4459,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact gastrointestinal fragment and bounded brain-gut review abstract support possible influence; alternatives are unjustified causal/diagnostic conclusions. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX comparable plausible assessment alternatives and stress as concurrent hypothesis,not sufficient diagnosis/treatment cause;NIDDKscientific cross-check does not diagnose IBS in this authored generic observation. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
       "sources": [
         {
           "source_id": "src_6b9af2ad77d48ce20240fbd70408cd663708be3b3c3516b3bc50d6bcb9c87567",
           "modified_time": "2026-04-06T14:53:23.072Z",
           "snapshot_sha256": "e8f1a58a7c959fb5721f020f6d51734e649fe5c43b7fd92145b6a85b31c9ee39",
-          "locator": "characters:32764:32990"
+          "locator": "characters:32989:33068"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_028": {
-      "item_sha256": "920f0b4998726043ede01d4df751cbd919d964e3cb84e172a7680cb0fd6d3735",
+      "item_sha256": "9e2355c4b01cd0be9503dad7e499ac55d92d3a0fb4e471e980e01aa07b2f8c9c",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4459,15 +4486,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Курс: совместная регуляция внутренней среды. Независимая адресная проверка OpenStax 17.6 подтверждает участие нервной и эндокринной систем в стрессовом ответе; ответ обозначает возможный механизм, не диагноз. Прежние соседние held fragments исключены из привязки; options/answer/explanation не изменены.",
+      "note": "Distinguish explicitly named neural conduction and blood-borne hormonal signals, without concluding a client symptom has a known individual hormonal cause, fixed stress response or exhaustive two-system control. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
       "sources": [
         {
-          "source_id": "src_f176d4f0ffc1edaf6718ab60e652df89e35dc30c5c8e308c042b33d30491d3c0",
-          "modified_time": "2026-04-06T14:47:58.092Z",
-          "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6",
-          "locator": "characters:6243:6923"
+          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "locator": "characters:313:450;characters:1614:2052"
         }
-      ]
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_029": {
       "item_sha256": "de3e121c01b0e72eca311225177c071176a2cd386654dd86f26a512f67614fea",
@@ -4526,10 +4554,10 @@
       ]
     },
     "questions:m1_phys_031": {
-      "item_sha256": "512a611e0bf845087431e8363d3da31cd1d090f8b793c56d38adae0ccd761042",
+      "item_sha256": "db0c1ba7d5df7320f4517befbaff8334f67ce9307df2d2af215f8c225007fc9f",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4541,15 +4569,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Respiratory transport fragment and OpenStax22.4 gas-exchange passage read; all alternatives confuse exchange and transport rather than unrelated organs. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX stage-specific applied oxygen-delivery question with four real respiratory processes,not absurd direct air-to-all-tissues foils. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
       "sources": [
         {
           "source_id": "src_7f7a18302054659937236d7e21642867a20ffeb9824dabbc3584e4d7e46ae7cd",
           "modified_time": "2026-04-06T14:52:00.573Z",
           "snapshot_sha256": "7e6f839615cfe7ad8fa4a7be9403635741a8782ef466aa59062bb9b382be6002",
-          "locator": "characters:755:1634"
+          "locator": "characters:958:1127"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_032": {
       "item_sha256": "5eef2cd355153da4d8c611273b333a12ecd24be1f804204f06644499399b2157",
@@ -4576,7 +4605,7 @@
           "locator": "characters:59236:59388"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_phys_033": {
       "item_sha256": "7e5a6349b7121fdb8b2523669a1798dc4850aefc078643cf394fe4b04252fff4",
@@ -4720,10 +4749,10 @@
       ]
     },
     "questions:m1_phys_038": {
-      "item_sha256": "3bb3a7768a24262d559fb62f10e8e9e4c1b74463faacbcd22dca21bdd2e07bca",
+      "item_sha256": "fba7f1f0e1241353d2e156cc9441bd8c2689b4dec7dc7803e86327bad4edddd5",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4735,21 +4764,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Read exact limited conscious influence and automatic regulation passage; concrete transition operation, not treatment efficacy. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX comparable regulatory alternatives without categorical only/always distractors;temporary conscious influence and automatic continuation,not anxiety treatment claim. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
       "sources": [
         {
           "source_id": "src_7f7a18302054659937236d7e21642867a20ffeb9824dabbc3584e4d7e46ae7cd",
           "modified_time": "2026-04-06T14:52:00.573Z",
           "snapshot_sha256": "7e6f839615cfe7ad8fa4a7be9403635741a8782ef466aa59062bb9b382be6002",
-          "locator": "characters:23482:23687"
+          "locator": "characters:23482:23530;characters:23612:23686"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_039": {
-      "item_sha256": "ef373c6b7d122e279ae4f6b7366afc424fa69b8cb534e2fb5b62cb0e468f5dd8",
+      "item_sha256": "32ff452e4844e66cba58837f0daa14bb05d84539297c1067bf9bfbead46a5dcc",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -4759,9 +4789,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw concluding appetite/bowel-symptom passage32764:32990 reviewed, independently corroborated by original Konturek/Brzozowski/Konturek2011 PubMed abstract only for possible stress-related changes in gastrointestinal motility and visceral perception. No diagnostic attribution of every symptom to stress, universal blood-flow percentage, gut-as-first-stress-indicator, anatomical shortcut or treatment advice. Course aggregate overlapping held intervals normalized to their exact union, retaining all twelve issue records and unchanged held coverage. Prior non-character-hold classification was caused by overlap in aggregate, not an unknown original source.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Possible stress/GI relationship without sole cause or exclusion of other explanations. Actual retained current edition source/publication approved;complete source and target bodies compared. No current homework uses retired ID. Preserve old ID/body/attempt editions/results. Retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_6b9af2ad77d48ce20240fbd70408cd663708be3b3c3516b3bc50d6bcb9c87567",
@@ -4769,7 +4801,8 @@
           "snapshot_sha256": "e8f1a58a7c959fb5721f020f6d51734e649fe5c43b7fd92145b6a85b31c9ee39",
           "locator": "characters:32764:32990"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_phys_040": {
       "item_sha256": "bb8b90b1f2c074fff36a347324eb0f7bbdee963e00309c771e21e0d9c887f9ac",
@@ -4908,7 +4941,7 @@
           "locator": "characters:59236:59388;characters:62708:62834"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_phys_045": {
       "item_sha256": "5033f38ac4d32fce1a00ee2f40830995a2bd52987a1256b90c8a07de92a3c0fe",
@@ -5054,10 +5087,10 @@
       ]
     },
     "questions:m1_phys_050": {
-      "item_sha256": "fcc7cda9d7cc98782d49ff3efa8c3ebac923c962670cdfe40fdd6141c4c2412b",
+      "item_sha256": "eb92a29314b947de297ef3d0b5ea11d7c26cf08f2d48d632699c1e997b2cb1e5",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5069,15 +5102,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact melatonin/circadian fragment and bounded Endotext source support regulation; removed immediate endocrine diagnosis and false exclusive psychological cause. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "note": "FIX applied circadian clarification question;other plausible sleep questions are acknowledged relevant to different hypotheses. No melatonin deficiency inference,prescription,diagnostic threshold or personal sleep advice. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused. Editorial clarification before application:removed light-exposure distractor because lighting can itself affect circadian timing. Four alternatives now compare comfort,night awakenings,breathing and actual sleep timing;only timing directly answers stated circadian objective.",
       "sources": [
         {
           "source_id": "src_f176d4f0ffc1edaf6718ab60e652df89e35dc30c5c8e308c042b33d30491d3c0",
           "modified_time": "2026-04-06T14:47:58.092Z",
           "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6",
-          "locator": "characters:11618:11832"
+          "locator": "characters:11744:11832"
         }
-      ]
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_051": {
       "item_sha256": "74f5b88640f91a3fcd8ef29e1578b7b58e5dab29b318b3f5292c675d3fd82176",
@@ -5137,10 +5171,10 @@
       ]
     },
     "questions:m1_phys_053": {
-      "item_sha256": "ffc269c0eda72885763b3863e8b21771684633d259a2f6e6d8fad1dc2bbf99c6",
+      "item_sha256": "023eaea401d1f4f6fc0384a73081cb726a4b31d330c7d40984135c4713e62923",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5150,9 +5184,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact breathing-control boundary read; parallel assertions remove grammatical cue and distinguish exclusive-control errors. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Coexistence of voluntary breathing influence and continuing automatic regulation;no treatment efficacy claim. Actual retained current edition source/publication approved;complete source and target bodies compared. No current homework uses retired ID. Preserve old ID/body/attempt editions/results. Retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_7f7a18302054659937236d7e21642867a20ffeb9824dabbc3584e4d7e46ae7cd",
@@ -5160,13 +5196,14 @@
           "snapshot_sha256": "7e6f839615cfe7ad8fa4a7be9403635741a8782ef466aa59062bb9b382be6002",
           "locator": "characters:23482:23687"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_phys_054": {
-      "item_sha256": "c0bf5caaf92c2ce2ebdb93575873fc47620a6697230034a97831729b97d1d5ff",
+      "item_sha256": "6aa075b4f7061a80e40d07a225a77412dbd09daeb80c69c50fce6d3d1268bd13",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5176,9 +5213,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw concluding appetite/bowel-symptom passage32764:32990 reviewed, independently corroborated by original Konturek/Brzozowski/Konturek2011 PubMed abstract only for possible stress-related changes in gastrointestinal motility and visceral perception. No diagnostic attribution of every symptom to stress, universal blood-flow percentage, gut-as-first-stress-indicator, anatomical shortcut or treatment advice. Course aggregate overlapping held intervals normalized to their exact union, retaining all twelve issue records and unchanged held coverage. Prior non-character-hold classification was caused by overlap in aggregate, not an unknown original source.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Possible stress/GI relationship without sole cause or exclusion of other explanations. Actual retained current edition source/publication approved;complete source and target bodies compared. No current homework uses retired ID. Preserve old ID/body/attempt editions/results. Retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_6b9af2ad77d48ce20240fbd70408cd663708be3b3c3516b3bc50d6bcb9c87567",
@@ -5186,7 +5225,8 @@
           "snapshot_sha256": "e8f1a58a7c959fb5721f020f6d51734e649fe5c43b7fd92145b6a85b31c9ee39",
           "locator": "characters:32764:32990"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_phys_055": {
       "item_sha256": "c3270ec3cc03b3fdf65d46dadce2e4b64a1737b5a4fbd49eb75da6572360dd25",
@@ -5219,8 +5259,8 @@
     "glossary:neuron": {
       "item_sha256": "d3b476545d03d22748e66cb6495c7b72483246765a74487e8952e14ef8be927c",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -5232,13 +5272,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Nervous-system cell vs its parts/contact; neutral basic functional example, not a clinical inference. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "KEEP basic cellular receiving/processing/transmission concept;not claim all signalling must spike or IQ/capacity/cell-number inference. Generic topic definition distinguished from network-level psychophysiology presentation during overall duplicate review. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
           "modified_time": "2026-03-31T06:13:48.046Z",
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
+          "locator": "characters:21:153"
         }
       ],
       "disposition": "keep"
@@ -5295,13 +5335,13 @@
           "locator": "characters:5204:5362"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:myelin": {
-      "item_sha256": "a4dabcd227a2e99674eab86e8ec50a13ee7f66ea7ddc4c077aeafaad17a051c7",
+      "item_sha256": "d3f8d43170970097a84d99d600db29991d06bf6c6b048b0ec3e2891c29dae97e",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -5313,22 +5353,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Saltatory-conduction example distinguishes sheath from cell/axon; no guarantee of perfect reliability or recovery. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX substantial explanatory definition:insulation,segments,nodes and conditional fast conduction rather than unsupported general reliability. Actual course glossary is source;independent textbook narrowly corroborates,not replaces course. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
       "sources": [
         {
           "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
           "modified_time": "2026-04-20T11:05:12.145Z",
           "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
-          "locator": "characters:5121:5261"
+          "locator": "characters:2877:2901;characters:2951:2993;characters:5120:5233"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:synapse": {
       "item_sha256": "71c3baaade05a2706c741b008e18d6397283b8dd48269544e16616959ab3b884",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -5340,13 +5380,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Contact vs mechanism; chemical/electrical alternatives admitted, not all synapses asserted chemical. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "KEEP generic chemical/electrical intercellular contact distinct from selected chemical transfer process;not all contacts axodendritic. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
           "modified_time": "2026-03-31T06:13:48.046Z",
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
+          "locator": "characters:155:311"
         }
       ],
       "disposition": "keep"
@@ -5354,8 +5394,8 @@
     "glossary:chemical_synaptic_transmission": {
       "item_sha256": "68f2c5c179cb67d06691abb200732476e0a3ff124ae6d5436380b43f9ea01582",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -5367,13 +5407,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Mechanism of a chemical contact distinguished from the contact structure itself; mediator/receptor example appropriate. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "KEEP sequence mediator/cleft/receptor as process distinct from generic contact structure;no universal excitation/sodium-only response. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
       "sources": [
         {
-          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
-          "modified_time": "2026-03-31T06:13:48.046Z",
-          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "characters:155:311"
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "locator": "characters:24593:24821"
         }
       ],
       "disposition": "keep"
@@ -5409,10 +5449,10 @@
       ]
     },
     "glossary:voluntary_involuntary_regulation": {
-      "item_sha256": "75b75fcedd2cf15577862959c04901f2f4ec96e88a7171e69a58b1e9e9ecd6ae",
+      "item_sha256": "0c79b0bed7cb387937b0c245c1ea0994d50661313ae3be573c17111fd89a0995",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -5424,16 +5464,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Bounded course comparison of somatic sensory/skeletal and autonomic visceral/gland/smooth-muscle functions. Not an exhaustive organ classification and not a claim all somatic acts are voluntary; independently checked official anatomy teaching source. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "FIX motor-effector comparison rather than sensory-structure confusion or somatic=alwaysconscious. Course skeletal/organ targets and its separate reflex definition ground authored example;unqualified consciousness absolutes remain held. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
           "modified_time": "2026-03-31T06:13:48.046Z",
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "extracted text, Unicode characters (zero-based, end exclusive): 0:4274"
+          "locator": "characters:834:967;characters:996:1113"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:central_nervous_system": {
       "item_sha256": "03dc3726ee2a1cc3c2d48d0e9bb9fc3a94b95a917d94b4c866864c08b46f3e04",
@@ -5522,8 +5562,8 @@
     "glossary:reflex": {
       "item_sha256": "e490df123e9bb0ef2c61f619c785b25c109d64e6bcfbcdb93dd4c3837941660b",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -5535,13 +5575,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Stimulus-response through nervous system; tendon-reflex example differs from a planned movement, no exam procedure prescribed. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "KEEP generic nerve-mediated stimulus response with authored knee-reflex example,not guarantee every reflex identical or every physiological feedback a CNS reflex. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
       "sources": [
         {
           "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
           "modified_time": "2026-03-31T06:13:48.046Z",
           "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
-          "locator": "characters:450:709"
+          "locator": "characters:450:578"
         }
       ],
       "disposition": "keep"
@@ -7512,10 +7552,10 @@
       "sources": []
     },
     "questions:m1_psyf_004": {
-      "item_sha256": "41448726bc24b7bd79689d20d3e603204c0e46ab303301a5d5ad7d7ca2fcd618",
+      "item_sha256": "f577350c227ed46f2d49206683e8fd84a2b56202af47da23c1ce3bbb4655f623",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -7525,10 +7565,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact course receptor fragments plus read OpenStax12.5 lines57-75,89; alternatives compare chemical/electrical steps without universal excitatory response. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Chemical synaptic mediator release and receptor binding versus electrical contact/endocrine/axonal conduction. Actual retained current edition source/publication approved;complete source and target bodies compared. No current homework uses retired ID. Preserve old ID/body/attempt editions/results. Retirement does not approve the older source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m1_psyf_005": {
       "item_sha256": "7556297214f797e67e90fb7399d1fc6ddfc86d3503cf7ebefeba95c88f816f26",
@@ -18016,8 +18059,8 @@
     "questions:m1_phys_058": {
       "item_sha256": "bfd79ddd275e5360726660165b86e4b5ffd0dd0104970627b734524dae45fcfb",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18029,14 +18072,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact neutrophil fragment and OpenStax21.2 phagocyte/chemotaxis passage read; neighboring immune processes instead of unrelated organ functions. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "KEEP phagocytosis distinguished from chemotaxis,antibody production and cytokine signalling;not all neutrophil functions or infallible immunity. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
+      "sources": [
+        {
+          "source_id": "src_56639aeff206bdd66dac25cdf2937e537b14f1697022e84ff9532ca3c760f460",
+          "modified_time": "2026-04-06T14:48:45.485Z",
+          "snapshot_sha256": "dba8cc929d3e30e7393ccd09904fc8401315ac8a6a671b076b0690853872271a",
+          "locator": "characters:2954:3165"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_059": {
       "item_sha256": "2d9b8f71404fac9a776900820a1da48b9cf10e7d22722686379d3ecb901dd05e",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18048,8 +18099,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Composition/formed elements. Excludes unverified percentages, spleen B-cell maturation and all held claims; platelets explicitly cell fragments. Exact private fragment certificate and independently checked primary teaching source; holds unchanged.",
-      "sources": []
+      "note": "KEEP formed elements,distinguishing plasma proteins and platelet fragments;not universal percentages or developmental claim from surrounding lecture. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
+      "sources": [
+        {
+          "source_id": "src_a97554926f8297edefbc3a1d1fb807574e511d0daf4703800609201d3496d455",
+          "modified_time": "2026-04-06T14:49:49.208Z",
+          "snapshot_sha256": "0d32a19d40d64b597fc7358576de26ff8ffc1aaea9c0785727bcd3d4175c49ee",
+          "locator": "characters:3209:3263"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_060": {
       "item_sha256": "5d0eb108650a5b13fd3bcf9e7b57017ea2014a653dbf4338e014ce2b697efd1d",
@@ -18071,10 +18130,10 @@
       "sources": []
     },
     "questions:m1_phys_061": {
-      "item_sha256": "d98adab55501ea3f350b90ebcc080879b4c7201e2a4abe68806139b36b05c12d",
+      "item_sha256": "6e49bdae51f9d4708d36da77362e62cb182fdffddbdff8ee8a14a18a1170af76",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18086,14 +18145,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact target-cell receptor fragment and OpenStax17.2 read; distinguishes receptor necessity from delivery/location/production. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
-      "sources": []
+      "note": "FIX parallel receptor/transport protein/synthetic enzyme/location alternatives without explicit independent-of-receptors giveaway;direct recognition scope retained. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused. Editorial clarification before application:explanation explicitly distinguishes newly parallel plasma transport protein distractor from target-cell receptor;no assertion that every hormone needs the same carrier.",
+      "sources": [
+        {
+          "source_id": "src_f176d4f0ffc1edaf6718ab60e652df89e35dc30c5c8e308c042b33d30491d3c0",
+          "modified_time": "2026-04-06T14:47:58.092Z",
+          "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6",
+          "locator": "characters:3808:3933"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m1_phys_062": {
-      "item_sha256": "a9071109d14ba2fcdd995d4b38f0b88ffdfefa06485eab8d6565fe3589c9ff7d",
+      "item_sha256": "6bd1e7724f68cee30a96a8f4b40e995d91f1b466d2349f998f5c33329205909c",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18105,8 +18172,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact anatomical chamber enumeration only. Excludes artery naming mistakes, gas-exchange/metabolism confusion, vein/compliance, pressure/disease thresholds and all other held passages. Exact private fragment receipt and primary teaching confirmation.",
-      "sources": []
+      "note": "Normal anatomical chamber/atrioventricular flow distinction only. Course names four chambers,the left atrium/left ventricle separated by mitral valve with ventricular-to-atrial flow explicitly reverse,and explicit right-atrial-to-right-ventricular flow. The later erroneous prevention of normal forward filling remains held. No claim about premature normal filling,pathology,pressure/pulse thresholds,vesselcounts,stress mechanisms or clinical outcome. Other answer pairs are direction/chamber confusions within this explicitly normal anatomical question;not exclusions of all congenital disease or actual patient assessment. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_34e7af0cf12b2b8f1590b185459cd0a66324e576ba86aca4c2d867bc89aed186",
+          "snapshot_sha256": "a0e8350b9f626c27113cd30ceeb82d79ed065457d081f7283305c1a5cbce47d0",
+          "modified_time": "2026-04-06T14:50:56.192Z",
+          "locator": "characters:625:784;characters:1078:1365;characters:22786:22842"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_vnd_058": {
       "item_sha256": "37e0e9206a19a984b3c20f4789136beb7b9e671fef3e0f4abcf365ed90665bb1",
@@ -22314,10 +22389,10 @@
       "disposition": "keep"
     },
     "questions:m1_psyf_081": {
-      "item_sha256": "6e15728fc199d6ddbf5e642a28246afa1d85919a59e899e0114a1a5c41ef0e97",
+      "item_sha256": "ddb24617fbf8b6e3522eeb2d1fb272408cfe2d55848e9c09db6d49299f519d17",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22329,8 +22404,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact lecture naming sentence plus independently checked publisher definition/voltage-change explanation. Erroneous adjacent Na/K pump ratio remains held and is not used; no free-will or medical claim.",
-      "sources": []
+      "note": "Basic propagating neuronal action-potential signal versus resting/local/receptor potentials, without fixed threshold/voltage or all-cell generalisation. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_f6965f8917f038fd43d3076dace05aa878e4ac827aac0c80efd50699c7ab5b52",
+          "snapshot_sha256": "17d70899c3a2fefdbc5566f36248dbf1dc1919a0cb2381c3688e488d111dc243",
+          "modified_time": "2026-03-31T06:13:48.046Z",
+          "locator": "characters:313:450"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m5_clinical_015": {
       "item_sha256": "61b7ac54821fcb0881d890d9ee8baa6544e9b669917955884abb7da94886795d",
@@ -22690,10 +22773,10 @@
       "sources": []
     },
     "questions:m1_psyf_083": {
-      "item_sha256": "4d6af1a56414a6dac2ae7a1a906e5724e06294486623e032728e796a6703bd5f",
+      "item_sha256": "1b46da9828e30fc1c612263898948c148566932badc084526cb90b4af552063e",
       "discipline_id": "psihofiziologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22705,8 +22788,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "Exact named hypothalamus/pituitary hormone-regulation clause, outside retained70843:71692 and75592:77913 holds. Independent introductory primary text checked; no emotion-to-hormone individual inference or reverse control assertion.",
-      "sources": []
+      "note": "One nonexclusive hypothalamic-pituitary link between neural signaling and regulation of several endocrine glands,not all endocrine control. Exact course clauses name hypothalamic control of pituitary and trophic hormones acting on other glands. Held nearby posterior-pituitary synthesis/precursor confusion and exactly-two-hormones classification are not used. Real neighboring brain-structure alternatives are not declared functionless;none identifies this specified complex. No hormone assay,trust inference,melatonin prevention,age/prognosis or clinical/prescription claim. All original21PDFpages and5visualholds retained with conservative wholetext exclusion,not mapped to native scopes or approved for ownPDFderivatives. Integrated exact-body rebind of already complete substantive review to the full frozen456source input;not a fresh claim allsourcecontent approved. All context source nodes remain bound in current425accepted input. No signing or publicapplication. Bound current425 substantive review covers full question/conditions/key/alternatives/explanation. Approval changes only status;all incoming exclusions preserved.",
+      "sources": [
+        {
+          "source_id": "src_f176d4f0ffc1edaf6718ab60e652df89e35dc30c5c8e308c042b33d30491d3c0",
+          "snapshot_sha256": "0550480ac40329a91217f982f233cdcf2a9ef1009d578cb944868610d5f9f4f6",
+          "modified_time": "2026-04-06T14:47:58.092Z",
+          "locator": "characters:15660:15773;characters:16337:16418"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_org_033": {
       "item_sha256": "1a4337d0f6957c69fbf8e7983c783d588a8ea1a963ba337bbb9db5beb9465224",
@@ -23643,8 +23734,8 @@
     "questions:m1_phys_063": {
       "item_sha256": "94d6d043e83fb8a8862975f2e0ee963231f1c2f908546001973264dd4c815a68",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -23656,14 +23747,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "New controlled-comparison operation: same axon diameter and conditions, isolate myelination. Exact saltatory glossary fragment plus OpenStax12.4 propagation including diameter contrast read. Distinct from existing myelin definition; no speed number or disease inference. Every alternative and explanation individually checked; saved exact course edition plus bounded independent primary mechanism review. No live Drive freshness, whole-source approval or clinical certification.",
-      "sources": []
+      "note": "KEEP same-diameter/same-conditions myelin comparison;actual supplementary course glossary teaches saltatory node-to-node conduction. No fixed velocities/multipliers,reverse-signal or age/sex cognition claim. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
+      "sources": [
+        {
+          "source_id": "src_0dc16f9667382b3931984a88cf1f217af4c8e25ed7c7d76709247f0f8b2932a6",
+          "modified_time": "2026-04-20T11:05:12.145Z",
+          "snapshot_sha256": "32fe46f25e7e28aaab9d3ee2e4b47252188b53045c0c8155358a2e5b356b2466",
+          "locator": "characters:2877:2901;characters:2951:2993;characters:5120:5233"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_phys_064": {
       "item_sha256": "066a4f4a50e2b3486b4524fed6188b971307d05d94aefcfe38cba7e20888b05f",
       "discipline_id": "fiziologiya_cheloveka",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -23675,8 +23774,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "New diagram-to-mechanism classification contrasts electrical contact with chemical cleft, hormone delivery and within-axon propagation. Exact course synapse definition names electrical/chemical types; OpenStax12.5 direct ion passage paragraph individually read. Not another recall of chemical release sequence. Every alternative and explanation individually checked; saved exact course edition plus bounded independent primary mechanism review. No live Drive freshness, whole-source approval or clinical certification.",
-      "sources": []
+      "note": "KEEP connected intercellular ion channels distinguish electrical contact,chemical transfer,endocrine transport and intraxon propagation. Pool chlorine→brain inhibition and chloride-specific conductance story explicitly excluded. Complete exact current body/key/alternatives/explanation or term/definition/examples checked against selected course passages and retained earlier whole-body review. Existing complete425source reads reused.",
+      "sources": [
+        {
+          "source_id": "src_90e5ca372802614224b5da13891202a576e92e52a7d81518b71e8b8aa43b9600",
+          "modified_time": "2026-04-06T14:46:17.530Z",
+          "snapshot_sha256": "db46851d508b1d9e6b38baac038e10c5588803405f02d27431677d73db2275dd",
+          "locator": "characters:27261:27307;characters:27655:27864"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_086": {
       "item_sha256": "812e67b222843dc40ebd6a69af3f6fd58ccd3a6070c5c5070d65201bc1c88b7f",

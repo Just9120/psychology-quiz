@@ -39,22 +39,6 @@
       ]
     },
     {
-      "discipline_id": "fiziologiya_cheloveka",
-      "question_ids": [
-        "m1_phys_022",
-        "m1_phys_038",
-        "m1_phys_053"
-      ]
-    },
-    {
-      "discipline_id": "fiziologiya_cheloveka",
-      "question_ids": [
-        "m1_phys_027",
-        "m1_phys_039",
-        "m1_phys_054"
-      ]
-    },
-    {
       "discipline_id": "fiziologiya_vnd",
       "question_ids": [
         "m1_vnd_034",
@@ -73,16 +57,6 @@
       "question_ids": [
         "m3_psychological_consulting_008",
         "m3_psychological_consulting_089"
-      ]
-    },
-    {
-      "discipline_ids": [
-        "fiziologiya_cheloveka",
-        "psihofiziologiya"
-      ],
-      "question_ids": [
-        "m1_phys_006",
-        "m1_psyf_004"
       ]
     }
   ]
