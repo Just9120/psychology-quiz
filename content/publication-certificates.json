@@ -11,9 +11,9 @@
     "glossary:exp_psych_extraneous_variable": {
       "schema_version": 1,
       "item_sha256": "047ecb570f5c0a5a37cadf8976a41a29fc8d3df15bfe95354dc444fe9c4c6ea4",
-      "review_sha256": "fd484f9f27d86fcc56223a957ba7d00b9f65f57999c10ce6b08a7ed8c2d84146",
+      "review_sha256": "c55654efe3269b15b55e86095f2139c5e79ed4b5550113da77e54151a4e892e1",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "PoNvRISCoerkLCjjKC08xa0iH1FqI7dCc5BASNnZuM/j0db84Ro7Ro+42CoCXv9JjkOqonA37mK7hv856EhuBg=="
+      "signature": "kvwyAybtSMfeN3YSQMZSDOG1QdAH2OEc/mWBvKKiFIGQEr2e2LMt2v6f+SOEwqN3Psx/XZbT16nTg395mrQvCg=="
     },
     "questions:m1_intro_054": {
       "schema_version": 2,
@@ -96,30 +96,30 @@
     "glossary:exp_psych_independent_variable": {
       "schema_version": 1,
       "item_sha256": "18298b93fce8d3cfb4eeb837fa09b0f5e864617db67fb701985119ca508068cf",
-      "review_sha256": "75ef068bfd9bdf68a737cbfa7cdf401b814ad3522bdaaddf98aa9810a40da2fb",
+      "review_sha256": "ce715a68529b170d73ce743b9ead722d17e39f15cec52e7521bbc63904f7bed4",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "kJoXEqYoMqcdGuxu7uJpmcqNVFwVpt1K0TPHuRY3mhs9bVqo0rgQ0iex/Hw/FJQUq7AKkMmVgYgBcFEE3GWfDA=="
+      "signature": "V5FOBSZz0CZazmuh5nEZy3pTS1KOi62kg+7Gl7jjdeCZqUSQPbZBcpWTfjuBaffOzavTk8eqIVu+u19nC7NaCQ=="
     },
     "glossary:exp_psych_dependent_variable": {
       "schema_version": 1,
       "item_sha256": "8b1364f1e99d2e60aa3b349452913c7e8dd8a6a91bcbfd0c61b5f3e1fdefe70c",
-      "review_sha256": "afb8dfac37ffe7dcb6e715bceaad245390c54299e6a8b8e7f3a3a987fc077353",
+      "review_sha256": "21ee34ac96b9854fa7603de735967729fc397800db85c79d7ef5e7b4acc3afff",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "W8ISvIBSTLbmAdGyQCnH+G9E8ByeOLdvy6WScgC3n5E5ZKF13Dns1AcJfpIhNi7aEebAjqGMdnLpg4eUmEWdBg=="
+      "signature": "DRf6AjcJXqpA7c1ENP/S68ng4lVQf+k1yZ3kJ7wbsvwMuqehXuEf5gMuqHA6GGaiwpqj6Rr0rWCMbyrzB2P8Cw=="
     },
     "glossary:exp_psych_random_assignment": {
       "schema_version": 1,
-      "item_sha256": "3753ac4b0fd5a759b19311dbd506d3aff40305f01c16839abb528a601739ab6c",
-      "review_sha256": "76812e08fb132c600842d87f46d7f496f623d3b9eeef1321a7399ea01679e120",
+      "item_sha256": "f38cb535346dde3ef8b3a3817fc7206ddc13f2c5f0d9923a1de7c7594f687556",
+      "review_sha256": "05c3dd761757c6b701191658e95061c59f983fe3f505c6d25369658cc59ee99c",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "0p/rmKnabCvKyV5hqlW860Xw5YJdIO0o68lO5ReeMuHLZBbODRHpQkG2jheoZJrYpl/STRPPbVndhjiShSciBw=="
+      "signature": "UN8cS9A2DhSkCakmjYJj6K3I5tjzRwmhKlmMCECI7WvQh+IMcRbYg/1AL9AZ8zEjf5mwyC6vIEDnlxsu0ZqOBg=="
     },
     "glossary:exp_psych_pretest": {
       "schema_version": 1,
-      "item_sha256": "f59c8929175aa99011512345d5b8102a92ededaf46992c6316f61bbd761e80f7",
-      "review_sha256": "13179bf28f88801258db1aa7af137cd254f566b093d069eab0feff596c9d14df",
+      "item_sha256": "17bc250364017faff0d22135f0b1baf1b0ab1fffa046b1cd64419c4722b6a34c",
+      "review_sha256": "2fe3c4523e31c43c6f709238c2cf4fbfbc72a04564895a8d627e65445b741b5e",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "E4780/+89uxwrDOFq8McDHs1Ri20+vatU55vo1vvXvoC9Nyq2bxg1WLqR7KwhJIuxMJD/kudFmiBN1QBxMm7Aw=="
+      "signature": "RoYV1LbEhIiY9OpvW7NpSLzKLhLfbvIfl2KCcugmph5zZXOIdWYu2ejDBVNzm2+m9ODX3A++TGRLWRBxZmVhAg=="
     },
     "glossary:reflex_arc": {
       "schema_version": 1,
@@ -1872,44 +1872,44 @@
     "glossary:supervision_supervisory_request": {
       "schema_version": 1,
       "item_sha256": "d4741123be294c4fbbcdaff50a0b54c750c783b93935aa721cfdee8bd43a62e1",
-      "review_sha256": "324bcf773f9412ad328199915c8ae0b0523d764af830b09daae5d16b936f2ea2",
+      "review_sha256": "f5f4dabe60d79066ae0ece7cdaafe65694f3a1a826eb5e6c10951244478df4d7",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "o0EP5Frf+219Oz/GWOdBaawjhmMdERvO/taJWqH0v6o3Vw+fizMSV4dwjSYPeUGEjBtHlFp0LQGSqUl/iAaIDg=="
+      "signature": "S0FGgkX/YLkho9Zi6CBTrVqknBdhO7j7hzi8CehtXYRaqmiG8vmg8GxISrNJ55eE30uvufSqtMIShHXAhQjrDw=="
     },
     "glossary:supervision_factual_clarification": {
       "schema_version": 1,
       "item_sha256": "c569618f2ead85529024501d57215c05e50dc2b5bf5757aa043e5d42c9e00e47",
-      "review_sha256": "6d88c9ce685e32fb15efaae091526a3fef4f4db32f02ee624f56991e35db1e0f",
+      "review_sha256": "143323019ad08561f38dc432d905cec59bdc5c9591d182c17f7578fa8566d07d",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "BnATwi6UUeIbSdxCI1M6UfTb8IKI17VcBVTYQe4M8kG1zwlId7iCewbyX0n1xlcOcz7b5sCmJiKSo8mSWikDCQ=="
+      "signature": "ix5KRAD1RGtPgEBtlz3zvnkgxM9vk533m4vflzar8hBh8qX0JMk3pW/lkjh/hRHQ4TrHyroG5Wtxjop5d4CFCA=="
     },
     "glossary:supervision_alternative_hypotheses": {
       "schema_version": 1,
       "item_sha256": "3e2b411abc9e15dcc6f7ba47260d8b338543997a0c187879e6422ea9574ccf87",
-      "review_sha256": "f17541d661deed42d6dd2e32b445307e967937e77ef8c5e981f1dbadd598100e",
+      "review_sha256": "a1554a2b9517db7b42a3b8c81aa02fff607fc51fa77914aa749254dbdfcf6615",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "j7rl+ZXF6RzPkM3s6ng+r35tTiO4yNCU30l6SXxT9eTmX7028u5xFdRCdQAyds3DYkllUnEVjteatUhwv57KAQ=="
+      "signature": "1ycAb0X3wcxryB0aIqq1hDQDiW4IQ9Ys9jn77t0tC48tjHKki2S20tcS8lAEZnij1yNkpBCTlb+KaupeNftbCg=="
     },
     "glossary:supervision_professional_self_reflection": {
       "schema_version": 1,
       "item_sha256": "3cf18797f450e532da399925d220e05cfad78a532f178c657192e4ffc21b3eff",
-      "review_sha256": "e239b3bc3430cf6352db34d27050837502d9a87ef18e3abac99e20a1623aebc8",
+      "review_sha256": "175538055e0e726247a8066f4838ab3becb04a5b8acdc7dbe544bd3827e9d6ed",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "UScA2Pd7HeGGOcJqmPyTsCaoCvcm2U+ZrxUNb29iiy5/dSm2BOGrfBxLEZED3Kmwg3F2LpW7UxyqCBbbe89LDQ=="
+      "signature": "/GdtuAnDbB+vsgcRDfHg+PnH+D8JvOkkDlxyk+VTp55oJNPv+88yKGrUi9ritvL+RmxS64I37YzG5ZMsvND8CQ=="
     },
     "glossary:supervision_group_sharing": {
       "schema_version": 1,
       "item_sha256": "1292c944e6dfa2967385b4a9a7f5bbf8302fe62e2f32357d314da2f822c620a2",
-      "review_sha256": "86d439807fc003b133c0f48d2b863f24b04ca9a539b3999d8418cee058077c0c",
+      "review_sha256": "4f3e812493b5658f3162ae2001150d0dacbc8fc3d696b696b69c39c8497300fa",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "FBCzVa3ZLCA8RIO6eykMzyuwwySYGZ5DmPNeMMxVLMLWf5o8leZD2Z7USTOR42vkDsiMty1bO2KGcySRT2rmCQ=="
+      "signature": "zAcHM4bw+wtN6yWeWQ7M41SVYIhvb9FS/jhQhlzpQ7I0R14TP6d4fCCW1ZTf2lNiOQGKiQHfF2xrHQGh9C4fAQ=="
     },
     "glossary:supervision_consultation_dynamics": {
       "schema_version": 1,
-      "item_sha256": "5f952237d5582f8b24ae4606ad161b628658f06b0327a66dc34a3ecbd605c136",
-      "review_sha256": "b9b02c4c7d7ec75f9f8b28263dedd3c571a5598e14dff4d5fd910a58b6d5e8bc",
+      "item_sha256": "e4c5d03459192120781edf06e9738bf824cc8611395ac63b574a47a7ca4555b0",
+      "review_sha256": "ae16461784f9ab901e6459b6893ce34c6538145c98f775ca97743913b82df790",
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
-      "signature": "9p7nJduV3nvUIOG3XWYCTcnRDuy4P7uNU+eZHJN6VQVdY+guOLN9he+qXthvg0bjDiVQZFBLdRxtHt+AkEACDg=="
+      "signature": "M4KFH1YYOyNOd56b9HVpxIXEme+Bo07g1Pj0ib2+AvObbcHCkcSMo0soaBXiMdYCXia5tpaG6YC4Sw9WQmmsAA=="
     },
     "questions:case_homework_barrier_001": {
       "schema_version": 1,
@@ -4225,6 +4225,20 @@
       "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
       "signature": "VaDjxQ0nEn4pJumiJTuJTxQqn5zL6UqQCNCWJoKzbGtyJY4Ru0+CjvL9qoZfrWmpot2uR/d08Bf25hPb75ndBw==",
       "topic_id": "t_6f07f36a8251"
+    },
+    "glossary:client_responsibility": {
+      "schema_version": 1,
+      "item_sha256": "b54621b9668cba380234ed95147950244b38fd231898d8c1bce4194be2c596bc",
+      "review_sha256": "f24571085c5d61f6222ba7f6495a2f1578f2962bd5624b303b3cf8be39e867f3",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "Bvt8etfuA6tPBUtKbbgXUl8qrVE69A/PjKmHqyR2L3rNkVOYFwhN3sepBTBdifxTQ2JqmSsMMDvcCtPIYCbCAg=="
+    },
+    "glossary:metagoal": {
+      "schema_version": 1,
+      "item_sha256": "dde8e9f4ca9ed700d1e151a06affc6a5201961e621819e3e12dc68652bdf1239",
+      "review_sha256": "b7d68ff3a8282197ee95aee2b063976b7e0492704914aadff9da490cf8c5c338",
+      "key_id": "8b31b7997f8b9a09309e9d3f5028eb1b28801767e3f05f80c87f1193fe003d55",
+      "signature": "RQexjtecUdHK7Y5za0NxjUCGY4gpwUzLYc+yzFnqMyXZVzn32HihwhoQp85DjBtlifuN0h2jPYfZXQlBnOJ8CQ=="
     }
   }
 }

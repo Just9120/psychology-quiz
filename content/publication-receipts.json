@@ -454,11 +454,11 @@
     "glossary:client_responsibility": {
       "schema_version": 1,
       "item_sha256": "b54621b9668cba380234ed95147950244b38fd231898d8c1bce4194be2c596bc",
-      "review_sha256": "ab38a6bb82516d28ace6ca818162a4f434e7e18c347bcf71d1a453ca17bfc81c",
+      "review_sha256": "f24571085c5d61f6222ba7f6495a2f1578f2962bd5624b303b3cf8be39e867f3",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-10",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "definition",
@@ -472,11 +472,11 @@
     "glossary:metagoal": {
       "schema_version": 1,
       "item_sha256": "dde8e9f4ca9ed700d1e151a06affc6a5201961e621819e3e12dc68652bdf1239",
-      "review_sha256": "9a0f53409af04bf655279a7c2bcde94178dd9c458e7ca196cf86251fc77be47f",
+      "review_sha256": "b7d68ff3a8282197ee95aee2b063976b7e0492704914aadff9da490cf8c5c338",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-07",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "ambiguity",
         "definition",
@@ -15210,6 +15210,204 @@
         "answer",
         "duplicates",
         "explanation",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:supervision_supervisory_request": {
+      "schema_version": 1,
+      "item_sha256": "d4741123be294c4fbbcdaff50a0b54c750c783b93935aa721cfdee8bd43a62e1",
+      "review_sha256": "f5f4dabe60d79066ae0ece7cdaafe65694f3a1a826eb5e6c10951244478df4d7",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:supervision_factual_clarification": {
+      "schema_version": 1,
+      "item_sha256": "c569618f2ead85529024501d57215c05e50dc2b5bf5757aa043e5d42c9e00e47",
+      "review_sha256": "143323019ad08561f38dc432d905cec59bdc5c9591d182c17f7578fa8566d07d",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:supervision_alternative_hypotheses": {
+      "schema_version": 1,
+      "item_sha256": "3e2b411abc9e15dcc6f7ba47260d8b338543997a0c187879e6422ea9574ccf87",
+      "review_sha256": "a1554a2b9517db7b42a3b8c81aa02fff607fc51fa77914aa749254dbdfcf6615",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:supervision_professional_self_reflection": {
+      "schema_version": 1,
+      "item_sha256": "3cf18797f450e532da399925d220e05cfad78a532f178c657192e4ffc21b3eff",
+      "review_sha256": "175538055e0e726247a8066f4838ab3becb04a5b8acdc7dbe544bd3827e9d6ed",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:supervision_group_sharing": {
+      "schema_version": 1,
+      "item_sha256": "1292c944e6dfa2967385b4a9a7f5bbf8302fe62e2f32357d314da2f822c620a2",
+      "review_sha256": "4f3e812493b5658f3162ae2001150d0dacbc8fc3d696b696b69c39c8497300fa",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:supervision_consultation_dynamics": {
+      "schema_version": 1,
+      "item_sha256": "e4c5d03459192120781edf06e9738bf824cc8611395ac63b574a47a7ca4555b0",
+      "review_sha256": "ae16461784f9ab901e6459b6893ce34c6538145c98f775ca97743913b82df790",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:exp_psych_extraneous_variable": {
+      "schema_version": 1,
+      "item_sha256": "047ecb570f5c0a5a37cadf8976a41a29fc8d3df15bfe95354dc444fe9c4c6ea4",
+      "review_sha256": "c55654efe3269b15b55e86095f2139c5e79ed4b5550113da77e54151a4e892e1",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:exp_psych_independent_variable": {
+      "schema_version": 1,
+      "item_sha256": "18298b93fce8d3cfb4eeb837fa09b0f5e864617db67fb701985119ca508068cf",
+      "review_sha256": "ce715a68529b170d73ce743b9ead722d17e39f15cec52e7521bbc63904f7bed4",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:exp_psych_dependent_variable": {
+      "schema_version": 1,
+      "item_sha256": "8b1364f1e99d2e60aa3b349452913c7e8dd8a6a91bcbfd0c61b5f3e1fdefe70c",
+      "review_sha256": "21ee34ac96b9854fa7603de735967729fc397800db85c79d7ef5e7b4acc3afff",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:exp_psych_random_assignment": {
+      "schema_version": 1,
+      "item_sha256": "f38cb535346dde3ef8b3a3817fc7206ddc13f2c5f0d9923a1de7c7594f687556",
+      "review_sha256": "05c3dd761757c6b701191658e95061c59f983fe3f505c6d25369658cc59ee99c",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
+        "meaning",
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "glossary:exp_psych_pretest": {
+      "schema_version": 1,
+      "item_sha256": "17bc250364017faff0d22135f0b1baf1b0ab1fffa046b1cd64419c4722b6a34c",
+      "review_sha256": "2fe3c4523e31c43c6f709238c2cf4fbfbc72a04564895a8d627e65445b741b5e",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "ambiguity",
+        "definition",
+        "duplicates",
+        "examples",
         "meaning",
         "sources"
       ],

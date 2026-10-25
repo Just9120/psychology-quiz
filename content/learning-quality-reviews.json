@@ -17489,8 +17489,8 @@
     "glossary:client_responsibility": {
       "item_sha256": "b54621b9668cba380234ed95147950244b38fd231898d8c1bce4194be2c596bc",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -17502,13 +17502,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Participation in own choices, not blame or sole responsibility for all outcomes. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Client participates in own choices/implementation;no sole responsibility,victim blame,passive-medical-patient binary or excluding clients with disorder. Complete example supports autonomy without professional-accountability waiver. Only own client choice and stated future-autonomy goal. Excludes healthy-only eligibility,whole responsibility,medical passivity,maturity ranking,mandatory session/therapy/supervision counts,automatic symptom triage,unsupported confidentiality/legal absolutes and efficacy guarantees.",
       "sources": [
         {
           "source_id": "src_fc663085c649b302ae6848bd476eb9c2b910a82537b77376a3de1d9ffd143272",
           "modified_time": "2026-06-07T20:48:25.702Z",
           "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "characters:3820:3958"
+          "locator": "characters:3819:3970"
         }
       ],
       "disposition": "keep"
@@ -17678,8 +17678,8 @@
     "glossary:metagoal": {
       "item_sha256": "dde8e9f4ca9ed700d1e151a06affc6a5201961e621819e3e12dc68652bdf1239",
       "discipline_id": "psychological_consulting",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -17691,13 +17691,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Future independent coping capacity rather than the current single concern; no guaranteed outcome. Complete current definitions/examples/confusion links read. Exact earlier source-backed edition reused when unchanged; no source-wide hold cleared.",
+      "note": "Future coping/autonomy as course goal,not inevitable result/required cessation of help. Distinct current situational task;future-use example not observed efficacy. Only own client choice and stated future-autonomy goal. Excludes healthy-only eligibility,whole responsibility,medical passivity,maturity ranking,mandatory session/therapy/supervision counts,automatic symptom triage,unsupported confidentiality/legal absolutes and efficacy guarantees.",
       "sources": [
         {
           "source_id": "src_fc663085c649b302ae6848bd476eb9c2b910a82537b77376a3de1d9ffd143272",
           "modified_time": "2026-06-07T20:48:25.702Z",
           "snapshot_sha256": "8866a7a88e72e81b022b6f832e9b8f13b8a48c86811a114bc46692a4691e47ef",
-          "locator": "characters:7690:8136"
+          "locator": "characters:7690:7787"
         }
       ],
       "disposition": "keep"
@@ -23303,6 +23303,303 @@
       ],
       "note": "Participant correction improves tentative understanding;do not privilege supposed nonverbal anger over their report or infer global lack of empathy. Use feedback for learning,not mindreading/pretence detection.",
       "disposition": "keep"
+    },
+    "glossary:supervision_supervisory_request": {
+      "discipline_id": "counseling_supervision",
+      "item_sha256": "d4741123be294c4fbbcdaff50a0b54c750c783b93935aa721cfdee8bd43a62e1",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_fb3df441870199f2f53c60b21b88d10e29e88054e53eadab5b22105e94e92702",
+          "modified_time": "2026-06-18T07:15:29.830Z",
+          "snapshot_sha256": "83037e2c7a43be54a57639486f39108436735645ab8731a4022a65804a15fb5a",
+          "locator": "characters:12504:12929"
+        }
+      ],
+      "note": "Concrete practitioner question about own work:episode,reply,working hypothesis/strategy distinct from client request or nonspecific tell-me-what-to-do. Course1-3count is illustrative,not requirement;no all-nonadherence-is-resistance adoption. No absolute secrecy/blanket case-sharing permission,automatic question/advice prohibition,hidden pain from voice,mandatory grounding/breathing,phone/time/fee as automatic misconduct,fixed monthly dose,decoded true problem,unvalidated burnout scores,or symptom-relief goal as magical. Related lecture superiority/causal efficacy/licensing/frequency claims and practice real client/family history remain excluded. Group agreement is not truth;selfreflection not qualification or external supervision;minimum-format times/counts not universal optimum.",
+      "disposition": "keep"
+    },
+    "glossary:supervision_factual_clarification": {
+      "discipline_id": "counseling_supervision",
+      "item_sha256": "c569618f2ead85529024501d57215c05e50dc2b5bf5757aa043e5d42c9e00e47",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_fb3df441870199f2f53c60b21b88d10e29e88054e53eadab5b22105e94e92702",
+          "modified_time": "2026-06-18T07:15:29.830Z",
+          "snapshot_sha256": "83037e2c7a43be54a57639486f39108436735645ab8731a4022a65804a15fb5a",
+          "locator": "characters:1251:1440"
+        }
+      ],
+      "note": "Explicit described structured stage:meeting count/event/time versus an interpretation. No universal ban on why/closed/awareness questions across supervision or counseling;no interpretation disguised as fact. No absolute secrecy/blanket case-sharing permission,automatic question/advice prohibition,hidden pain from voice,mandatory grounding/breathing,phone/time/fee as automatic misconduct,fixed monthly dose,decoded true problem,unvalidated burnout scores,or symptom-relief goal as magical. Related lecture superiority/causal efficacy/licensing/frequency claims and practice real client/family history remain excluded. Group agreement is not truth;selfreflection not qualification or external supervision;minimum-format times/counts not universal optimum.",
+      "disposition": "keep"
+    },
+    "glossary:supervision_alternative_hypotheses": {
+      "discipline_id": "counseling_supervision",
+      "item_sha256": "3e2b411abc9e15dcc6f7ba47260d8b338543997a0c187879e6422ea9574ccf87",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_fb3df441870199f2f53c60b21b88d10e29e88054e53eadab5b22105e94e92702",
+          "modified_time": "2026-06-18T07:15:29.830Z",
+          "snapshot_sha256": "83037e2c7a43be54a57639486f39108436735645ab8731a4022a65804a15fb5a",
+          "locator": "characters:12051:12214"
+        }
+      ],
+      "note": "Working and alternative explanations kept distinct from observed fact;authored generic postponement example discloses no course client. More ideas/group agreement do not establish correctness;needs evidence/joint testing. No absolute secrecy/blanket case-sharing permission,automatic question/advice prohibition,hidden pain from voice,mandatory grounding/breathing,phone/time/fee as automatic misconduct,fixed monthly dose,decoded true problem,unvalidated burnout scores,or symptom-relief goal as magical. Related lecture superiority/causal efficacy/licensing/frequency claims and practice real client/family history remain excluded. Group agreement is not truth;selfreflection not qualification or external supervision;minimum-format times/counts not universal optimum.",
+      "disposition": "keep"
+    },
+    "glossary:supervision_professional_self_reflection": {
+      "discipline_id": "counseling_supervision",
+      "item_sha256": "3cf18797f450e532da399925d220e05cfad78a532f178c657192e4ffc21b3eff",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_fb3df441870199f2f53c60b21b88d10e29e88054e53eadab5b22105e94e92702",
+          "modified_time": "2026-06-18T07:15:29.830Z",
+          "snapshot_sha256": "83037e2c7a43be54a57639486f39108436735645ab8731a4022a65804a15fb5a",
+          "locator": "characters:1968:2640"
+        }
+      ],
+      "note": "Concrete own action,alternative and learning rather than global self-condemnation. No compulsory error in every episode,minimum3score,diagnostic cutoff,burnout guarantee or self-review replacing qualified supervision. No absolute secrecy/blanket case-sharing permission,automatic question/advice prohibition,hidden pain from voice,mandatory grounding/breathing,phone/time/fee as automatic misconduct,fixed monthly dose,decoded true problem,unvalidated burnout scores,or symptom-relief goal as magical. Related lecture superiority/causal efficacy/licensing/frequency claims and practice real client/family history remain excluded. Group agreement is not truth;selfreflection not qualification or external supervision;minimum-format times/counts not universal optimum.",
+      "disposition": "keep"
+    },
+    "glossary:supervision_group_sharing": {
+      "discipline_id": "counseling_supervision",
+      "item_sha256": "1292c944e6dfa2967385b4a9a7f5bbf8302fe62e2f32357d314da2f822c620a2",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_fb3df441870199f2f53c60b21b88d10e29e88054e53eadab5b22105e94e92702",
+          "modified_time": "2026-06-18T07:15:29.830Z",
+          "snapshot_sha256": "83037e2c7a43be54a57639486f39108436735645ab8731a4022a65804a15fb5a",
+          "locator": "characters:1848:1968"
+        }
+      ],
+      "note": "Own practice insight in specified format after presenter reflection,distinct from further advice to presenter;not actual client outcome evidence or a universal group-process prescription. No absolute secrecy/blanket case-sharing permission,automatic question/advice prohibition,hidden pain from voice,mandatory grounding/breathing,phone/time/fee as automatic misconduct,fixed monthly dose,decoded true problem,unvalidated burnout scores,or symptom-relief goal as magical. Related lecture superiority/causal efficacy/licensing/frequency claims and practice real client/family history remain excluded. Group agreement is not truth;selfreflection not qualification or external supervision;minimum-format times/counts not universal optimum.",
+      "disposition": "keep"
+    },
+    "glossary:supervision_consultation_dynamics": {
+      "discipline_id": "counseling_supervision",
+      "item_sha256": "e4c5d03459192120781edf06e9738bf824cc8611395ac63b574a47a7ca4555b0",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_fb3df441870199f2f53c60b21b88d10e29e88054e53eadab5b22105e94e92702",
+          "modified_time": "2026-06-18T07:15:29.830Z",
+          "snapshot_sha256": "83037e2c7a43be54a57639486f39108436735645ab8731a4022a65804a15fb5a",
+          "locator": "characters:11212:11504"
+        }
+      ],
+      "note": "Separate methods/tasks/adherence/state changes over time. Refine ambiguous links into descriptive comparison;temporal sequence not causal proof. No validated treatment response threshold/borrowed real client history. No absolute secrecy/blanket case-sharing permission,automatic question/advice prohibition,hidden pain from voice,mandatory grounding/breathing,phone/time/fee as automatic misconduct,fixed monthly dose,decoded true problem,unvalidated burnout scores,or symptom-relief goal as magical. Related lecture superiority/causal efficacy/licensing/frequency claims and practice real client/family history remain excluded. Group agreement is not truth;selfreflection not qualification or external supervision;minimum-format times/counts not universal optimum.",
+      "disposition": "fix"
+    },
+    "glossary:exp_psych_extraneous_variable": {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "item_sha256": "047ecb570f5c0a5a37cadf8976a41a29fc8d3df15bfe95354dc444fe9c4c6ea4",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "characters:31110:31335"
+        }
+      ],
+      "note": "Factor besides manipulated IV may affect outcome;temperature example need not be systematic confound. Distinct from confound definition;no every study is experimental or all context can/should be excluded. Only experimental variable roles. Related schools/slides and Practice6 do not prove universal intervention requirements,context removal,projective/mindreading validity,classic-experiment generalisations,coercion or clinical diagnosis. Source school examples not empirical proof;no private participant narrative copied.",
+      "disposition": "keep"
+    },
+    "glossary:exp_psych_independent_variable": {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "item_sha256": "18298b93fce8d3cfb4eeb837fa09b0f5e864617db67fb701985119ca508068cf",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "characters:31110:31335"
+        }
+      ],
+      "note": "Manipulated condition specifically in experiment;instruction-format example exact role,not independence in probability or an assertion that every empirical study manipulates. Separate measured outcome. Only experimental variable roles. Related schools/slides and Practice6 do not prove universal intervention requirements,context removal,projective/mindreading validity,classic-experiment generalisations,coercion or clinical diagnosis. Source school examples not empirical proof;no private participant narrative copied.",
+      "disposition": "keep"
+    },
+    "glossary:exp_psych_dependent_variable": {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "item_sha256": "8b1364f1e99d2e60aa3b349452913c7e8dd8a6a91bcbfd0c61b5f3e1fdefe70c",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_c2b6d271b969f17fbca0e31c2be668b94df5df5ac584a976240e06f73e7bc2a8",
+          "modified_time": "2026-04-22T20:21:51.036Z",
+          "snapshot_sha256": "972da01ab2009dc398d48c5e09b4a980a8cb6b19e65907f45c0a3fa0b6d47847",
+          "locator": "characters:31110:31335"
+        }
+      ],
+      "note": "Measured/observed result in experiment;correct-answer count outcome versus varied instruction. A measured shift alone does not establish causal effect or guaranteed variable relation. Only experimental variable roles. Related schools/slides and Practice6 do not prove universal intervention requirements,context removal,projective/mindreading validity,classic-experiment generalisations,coercion or clinical diagnosis. Source school examples not empirical proof;no private participant narrative copied.",
+      "disposition": "keep"
+    },
+    "glossary:exp_psych_random_assignment": {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "item_sha256": "f38cb535346dde3ef8b3a3817fc7206ddc13f2c5f0d9923a1de7c7594f687556",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_3bff269ad27e122277d7e21946caa9c9f472a56cb54a4aa64f0549a2385c7eeb",
+          "modified_time": "2026-04-22T20:23:09.227Z",
+          "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
+          "locator": "characters:17656:17727"
+        }
+      ],
+      "note": "Literal CampbellRdefinition only;refinement distinguishes assignment from sampling and chance imbalance from systematic allocation bias. Existing reviewed randomisation limits retained;not course claim of guaranteed all-characteristic equivalence. Only random assignment definition/pre-post measurement limitation. All practice7/8/9 privacy,unsafe clinical/neurological analogies,causal guarantees/fixed timing and slide visual quarantine remain held. Randomisation does not guarantee actual equivalence;causality not one-group shift,interaction not separate subgroup pvalues,Latin square not full factorial.",
+      "disposition": "fix"
+    },
+    "glossary:exp_psych_pretest": {
+      "discipline_id": "osnovy_eksperimentalnoy_psihologii",
+      "item_sha256": "17bc250364017faff0d22135f0b1baf1b0ab1fffa046b1cd64419c4722b6a34c",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "definition",
+        "examples",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_3bff269ad27e122277d7e21946caa9c9f472a56cb54a4aa64f0549a2385c7eeb",
+          "modified_time": "2026-04-22T20:23:09.227Z",
+          "snapshot_sha256": "9f2ccabaeb66e7a82c0593e0e0dad39e592850ff61209345184165f5695ea07f",
+          "locator": "characters:18251:18653"
+        }
+      ],
+      "note": "Before-versus-after dependent-variable measurement. Add actual course one-group limitation:history/maturation/testing/regression alternatives;pretest not random assignment,control group or causality guarantee. Only random assignment definition/pre-post measurement limitation. All practice7/8/9 privacy,unsafe clinical/neurological analogies,causal guarantees/fixed timing and slide visual quarantine remain held. Randomisation does not guarantee actual equivalence;causality not one-group shift,interaction not separate subgroup pvalues,Latin square not full factorial.",
+      "disposition": "fix"
     }
   }
 }
