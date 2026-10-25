@@ -20172,8 +20172,8 @@
     "questions:m2_pd_004": {
       "item_sha256": "1f40d70be1e59eaf933a5dde42ed78ae6452898be6a6be704e691701352fc30e",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20185,15 +20185,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact reviewed body retained:methodological triangulation contrasts retest,investigator agreement andnorm comparison. Selected literal multiple-method definition does not promise independent corroboration,remove subjectivity orvalidate a projective technique.",
+      "sources": [
+        {
+          "source_id": "src_2b50455c0f1ea829cf89c0ed13e14c3a02269524a43815f1f11c193fa72c34ee",
+          "modified_time": "2026-06-20T08:00:22.688Z",
+          "snapshot_sha256": "000a9505662eea4bdb49284c1581d50202fb8290e679922754147ad2f48d449e",
+          "locator": "characters:47194:47342"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_pd_005": {
       "item_sha256": "ed751176994a5dc879d292828b6aba8f650f551d2360343d92c785c594b5eb1e",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20205,9 +20212,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use four genuine evaluative criteria and sample-bound frequency; remove absurd diagnosis-for-all-rare-traits distractors. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact reviewed body retained:5percent is an authored descriptive frequency in one sample,not clinical prevalence or diagnostic cutoff. Statistical criterion label ends before moral-rightness assertion,which remains held. No rarity=pathology,popularity=ethics or culture-wide biological inference.",
+      "sources": [
+        {
+          "source_id": "src_2b50455c0f1ea829cf89c0ed13e14c3a02269524a43815f1f11c193fa72c34ee",
+          "modified_time": "2026-06-20T08:00:22.688Z",
+          "snapshot_sha256": "000a9505662eea4bdb49284c1581d50202fb8290e679922754147ad2f48d449e",
+          "locator": "characters:48723:48785"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m4_person_012": {
       "item_sha256": "5bc57443188b80f8cbb2a37e63045b24adbd42c310bfdfd98b3721dab305b7c6",
@@ -20409,8 +20423,8 @@
     "questions:m2_pd_007": {
       "item_sha256": "7545a586b0cc4e4fa8f44f70bd7a2d01a6ead4fdba03764d7f13f39cc38e74be",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20422,15 +20436,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact reviewed body retained:named teaching adaptation criterion with contextual limits,not unconditional conformity/health or person-value score. Literal reference to adaptation stops before asserted normality. Statistical/value/absence criteria assess different bases.",
+      "sources": [
+        {
+          "source_id": "src_2b50455c0f1ea829cf89c0ed13e14c3a02269524a43815f1f11c193fa72c34ee",
+          "modified_time": "2026-06-20T08:00:22.688Z",
+          "snapshot_sha256": "000a9505662eea4bdb49284c1581d50202fb8290e679922754147ad2f48d449e",
+          "locator": "characters:49141:49251"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_pd_008": {
       "item_sha256": "eb0ed834d91ebc03ec2a443794bdb08c6574d7e02a39666bb054f2ec17c36c91",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20442,9 +20463,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Full stem/options/key/explanation substantively reviewed and retained: exact source supports bounded meaning; contrast and limitations checked. Reorder the correct alternative to reduce a near-uniform first-position cue in this discipline. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact reviewed body retained:named value criterion is normatively framed morality/good,not observedfrequency or complete current professional/legal code. No moral judgment of client or inferred illness,reporting threshold or cultural exemption.",
+      "sources": [
+        {
+          "source_id": "src_2b50455c0f1ea829cf89c0ed13e14c3a02269524a43815f1f11c193fa72c34ee",
+          "modified_time": "2026-06-20T08:00:22.688Z",
+          "snapshot_sha256": "000a9505662eea4bdb49284c1581d50202fb8290e679922754147ad2f48d449e",
+          "locator": "characters:52205:52343"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_pd_009": {
       "item_sha256": "9c4a14925514622c431e528fc87e37e58d531726ac680e3e52801aaf944cde01",
@@ -20649,8 +20677,8 @@
     "questions:m2_pd_012": {
       "item_sha256": "1633fed0c241186833e426f184512db88388af1ad237725459aab3123a9092b9",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20662,15 +20690,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Remove competing also-necessary standard-administration answer from an ambiguous first-priority stem; separate norm suitability from reliability evidence. ITC Guidelines on Test Use2.7.2/2.7.4/2.7.11 checked https://members.intestcom.org/files/guideline_test_use.pdf . Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact reviewed body retained:select norm group using actual composition,purpose andconditions,not reliability/retest/interrater agreement. Source literal group description,not false whole definition of standardisation as mean. No normative rarity asdisorder,MMPI-version equivalence or unprovided test norms.",
+      "sources": [
+        {
+          "source_id": "src_2b50455c0f1ea829cf89c0ed13e14c3a02269524a43815f1f11c193fa72c34ee",
+          "modified_time": "2026-06-20T08:00:22.688Z",
+          "snapshot_sha256": "000a9505662eea4bdb49284c1581d50202fb8290e679922754147ad2f48d449e",
+          "locator": "characters:53543:53737"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_pd_013": {
       "item_sha256": "4760916a165346dae0bb6ade5c14c52275c1c604ae15bb913654f12bf3470a1a",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -20682,9 +20717,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace zero-abilities/any-score-proves-trait absurd alternatives with plausible unsupported rescaling and norm substitutions; do not automatically reject justified adaptations. ITC test-use2.7.11 and adaptation documentation guidelines checked. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact reviewed body retained:document altered instructions/timing and check evidence for comparison,not automatic proportional score/old percentile/new mean equivalence. Not every legitimate adapted procedure invalid. Course administration warning is context-bound,not instrument-independent adjustment formula.",
+      "sources": [
+        {
+          "source_id": "src_2b50455c0f1ea829cf89c0ed13e14c3a02269524a43815f1f11c193fa72c34ee",
+          "modified_time": "2026-06-20T08:00:22.688Z",
+          "snapshot_sha256": "000a9505662eea4bdb49284c1581d50202fb8290e679922754147ad2f48d449e",
+          "locator": "characters:54280:54386"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_pd_014": {
       "item_sha256": "7e126e3d4156729461faa84443a5ae8b35e8993b64553fa17d05dbc8309210be",
@@ -21728,8 +21770,8 @@
     "questions:m2_pd_017": {
       "item_sha256": "fd800a0c7f8ef6c2d9f14a1fd66be7a092b2446271a45032593756f36774a7cf",
       "discipline_id": "psychodiagnostics",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21741,9 +21783,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Test the kind and limits of generated data instead of remembering exercise instructions; reject medical prediction/age formulas, use actual adjacent data sources as alternatives. Current full question reviewed; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Exact reviewed body retained:subjective personal event-significance ratings,including imagined future,not verified biography,memory accuracy,population frequency or life/biological-age prediction. No real teacher/cohort ages/names/body tables/formula copied. Literal rating instruction only,not held longevity/psychological-age algorithm.",
+      "sources": [
+        {
+          "source_id": "src_2b50455c0f1ea829cf89c0ed13e14c3a02269524a43815f1f11c193fa72c34ee",
+          "modified_time": "2026-06-20T08:00:22.688Z",
+          "snapshot_sha256": "000a9505662eea4bdb49284c1581d50202fb8290e679922754147ad2f48d449e",
+          "locator": "characters:76041:76413"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_org_032": {
       "item_sha256": "bc7fe06995aa7e802bbfd59d04cc54f367d5632975eb9910d17e31811ecf6713",
@@ -23900,6 +23949,33 @@
       ],
       "note": "Before-versus-after dependent-variable measurement. Add actual course one-group limitation:history/maturation/testing/regression alternatives;pretest not random assignment,control group or causality guarantee. Only random assignment definition/pre-post measurement limitation. All practice7/8/9 privacy,unsafe clinical/neurological analogies,causal guarantees/fixed timing and slide visual quarantine remain held. Randomisation does not guarantee actual equivalence;causality not one-group shift,interaction not separate subgroup pvalues,Latin square not full factorial.",
       "disposition": "fix"
+    },
+    "questions:assessment_report_grounding": {
+      "discipline_id": "psychodiagnostics",
+      "item_sha256": "c9e3290e7f0eb9a912fe487b6bae317df57ff31671674d09e006db07b4a86ae6",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_2b50455c0f1ea829cf89c0ed13e14c3a02269524a43815f1f11c193fa72c34ee",
+          "modified_time": "2026-06-20T08:00:22.688Z",
+          "snapshot_sha256": "000a9505662eea4bdb49284c1581d50202fb8290e679922754147ad2f48d449e",
+          "locator": "characters:11902:11988;characters:12521:12653"
+        }
+      ],
+      "note": "Exact reviewed authored team situation retained:interpretations require specific text evidence and explicit uncertainty. Agreement,expert seniority andcoherent portrait are not proof;none warrants clinical feedback ordisclosed-risk dismissal. No actual source protocols,distinct personal bundles or suicidal example published.",
+      "disposition": "keep"
     }
   }
 }
