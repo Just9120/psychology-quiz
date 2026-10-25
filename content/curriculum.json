@@ -9147,6 +9147,18 @@
       "topic_id": "t_e452196d73e9",
       "item_sha256": "643e5dd28977b2e44da873e2357005a24c44eb551862172b4b58672df618dab7",
       "locator": "private review:questions:m6_social_025"
+    },
+    "bbb1fea65bb78cd318c0cb612c3594a0e190408a9c34e81587265fff6e1b38f0": {
+      "external_id": "m2_quant_011",
+      "topic_id": "t_172f3d89602b",
+      "item_sha256": "fac4f5d4759c77c324c9e52f28cb6e1bb408e5d9ab65113662deb5eebbb33835",
+      "locator": "private review:questions:m2_quant_011"
+    },
+    "547b1d636f9c54bd25dfbb0dd60ac9b940f68d63aea63458998575257a4a2916": {
+      "external_id": "m2_quant_012",
+      "topic_id": "t_172f3d89602b",
+      "item_sha256": "7a82b288f9c0503fcddd0c712edf26330e472292b21c4af076baeabf734077b5",
+      "locator": "private review:questions:m2_quant_012"
     }
   }
 }

@@ -57,13 +57,6 @@
     {
       "discipline_id": "fiziologiya_vnd",
       "question_ids": [
-        "m1_vnd_004",
-        "m1_vnd_048"
-      ]
-    },
-    {
-      "discipline_id": "fiziologiya_vnd",
-      "question_ids": [
         "m1_vnd_034",
         "m1_vnd_049"
       ]

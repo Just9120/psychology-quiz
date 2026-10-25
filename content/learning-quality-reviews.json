@@ -5632,10 +5632,10 @@
       "disposition": "fix"
     },
     "questions:m1_vnd_004": {
-      "item_sha256": "a8f32b685a388f9ded14190d12b28584dfc8fd7833241fd4d14aa1c397acb6d5",
+      "item_sha256": "51d66d6af9d6edd683ff2763ef2c96264f859067425be5b18342a48efeaf9e92",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5645,9 +5645,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact foundational lecture passages rather than blanket glossary reference. All current scientific holds unchanged. Classical reflex and dynamic-stereotype terms are bounded to the course historical model; not an individual causal/clinical diagnosis, irreversible programming or measured energy-saving mechanism. General student examples are illustrative applications. _003 now uses salivation-to-food example directly given in lecture; _033 assesses model/individual-explanation boundary rather than duplicating habit identification; _056 removes unsupported energy mechanism and allows change.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Acquired signal-response association in specified prior learning conditions;generic wording/music story do not add distinct assessed objective. Actual retained edition m1_vnd_022 passes current source/publication checks;no current homework uses retired ID. Preserve old ID/body/attempt editions/results. This retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5655,7 +5657,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:6900:7440;characters:8380:8660"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_005": {
       "item_sha256": "d1e6502d6707bc8d28d45161eb07cd65b92a9fda14ea20e1f2e9fe62879d3860",
@@ -5687,10 +5690,10 @@
       ]
     },
     "questions:m1_vnd_006": {
-      "item_sha256": "751ffbd2f223dfa8b348b8f8d7fc3787c2c1394cb0d7bd98db78ff1458466ac6",
+      "item_sha256": "25e02d387744936cf3a5a93bd8796e74f0d362bbfa7c270fa6a480bddf71fa3d",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5700,9 +5703,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Raw exact selected course fragments: unreinforced, weakening. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Extinction after established association and repeated unreinforced signal;learning prerequisites now explicit. Actual retained edition m1_vnd_023 passes current source/publication checks;no current homework uses retired ID. Preserve old ID/body/attempt editions/results. This retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5710,13 +5715,14 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:15637:15697;characters:16201:16294"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_007": {
-      "item_sha256": "595f3be5904880e30c5515d1bce9c3918a1f7a241d5f08a90baa3c0dfcbb252e",
+      "item_sha256": "3ad5aabf2d2d1cabed861187654f9d7317b05dd6ef49d4f784341b3d6144784f",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5726,9 +5732,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Raw exact selected course fragments: discrimination. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Differential reinforcement and selective weakening for a similar nonreinforced signal. Actual retained edition m1_vnd_024 passes current source/publication checks;no current homework uses retired ID. Preserve old ID/body/attempt editions/results. This retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5736,7 +5744,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:17945:18232"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_008": {
       "item_sha256": "d856eb431a0a64d83f09b423bbe39e8364c7a561f4813ba2a80a569c217ded10",
@@ -5875,10 +5884,10 @@
       "disposition": "keep"
     },
     "questions:m1_vnd_013": {
-      "item_sha256": "f3c4a8d98db3e008be4a0e8157e356008bf47f8052aacd4b49fb62f2f4f733c4",
+      "item_sha256": "31f422d3a1be801e284874ff6b0b4cde8a518f27e6e7334fe7b7ad7b8534cd71",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5888,9 +5897,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact switching passage read; neighboring theoretical properties instead of literal bodily movement. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Historical mobility property as switching;not individual trait measurement from one episode. Actual retained edition m1_vnd_041 passes current source/publication checks;no current homework uses retired ID. Preserve old ID/body/attempt editions/results. This retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5898,13 +5909,14 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:23828:24068"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_014": {
-      "item_sha256": "a3ff03888bd26eea45fde2d0e32bce20dd9101763a5566d40cfabf932992ff02",
+      "item_sha256": "4f25355cb863550946419444fba7fb5db1e9726cb046e61ea94954303478208d",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -5914,9 +5926,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact raw course fragments: balance. Individually reviewed stem, key, explanation and distractors. Scope limited to attributed historical/course model and observed conditioning mechanism; no current human diagnostic claims, universal memory guarantees or clinical intervention protocol. All unrelated holds preserved.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Historical balance property contrasts excitation/inhibition;not diagnosis or complete personality model. Actual retained edition m1_vnd_010 passes current source/publication checks;no current homework uses retired ID. Preserve old ID/body/attempt editions/results. This retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -5924,7 +5938,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:22944:23036"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_015": {
       "item_sha256": "6e5f61975ba253ac008779e3d741fac52a812b837bf9a15da14bb4c398d51dfb",
@@ -6080,10 +6095,10 @@
       ]
     },
     "questions:m1_vnd_021": {
-      "item_sha256": "14287e3e2a9a7ac967b106a35d5273754d66ca014ab88aae7b91ab01595cc8be",
+      "item_sha256": "88a247c1fc8863432c07c61b870189ae7f7f0eecfa16978ecd6bc73d6c337951",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6093,9 +6108,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Raw exact selected course fragments: association. Question, correct answer, explanation and distractors individually reviewed. Existing holds untouched; physical erasure, clinical predictions and universal memory conditions not used. Independent review limited to stated supplement.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Acquired signal-response association in specified prior learning conditions;generic wording/music story do not add distinct assessed objective. Actual retained edition m1_vnd_022 passes current source/publication checks;no current homework uses retired ID. Preserve old ID/body/attempt editions/results. This retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6103,7 +6120,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:6006:6165"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_022": {
       "item_sha256": "147785cce7492c22ee931403a7171b029d68c8d55fcad771d65283c693297b3d",
@@ -6459,10 +6477,10 @@
       "disposition": "keep"
     },
     "questions:m1_vnd_035": {
-      "item_sha256": "8da48695ded0a31f8fcea317693b0f6112c1a867ac57c67185138b2318a6bb7e",
+      "item_sha256": "4f083277ae7f7fb81cae546387a021b739f724639d552bda4ad766bcdf6cc366",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-10",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6472,9 +6490,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Exact distracting-stimulus passage read; neighboring conditioning procedures distinguished without ideal concentration claims. Each key/alternative/explanation inspected individually. Saved source-edition evidence only; exact previous related conflict mappings retained and verified, not blanket reapproval.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: External distractor temporarily weakens established conditioned response in specified Pavlov model. Actual retained edition m1_vnd_044 passes current source/publication checks;no current homework uses retired ID. Preserve old ID/body/attempt editions/results. This retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6482,7 +6502,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:12380:12862;characters:14042:14857"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_036": {
       "item_sha256": "de6b40e586459aab24faa8e1d251aea24a9fa78ba2c866326e7e79ec3790acab",
@@ -6812,10 +6833,10 @@
       "disposition": "keep"
     },
     "questions:m1_vnd_048": {
-      "item_sha256": "a679880c6a6b28646e6b06950ac1bb9aa4196ad4e61bb64dd6bfd1c7465e6e80",
+      "item_sha256": "0eb8c30c9f2d99b205041be4e5e006aa59e40bfd9ff4faea65d7a49f7f471394",
       "discipline_id": "fiziologiya_vnd",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -6825,9 +6846,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Сокращение сохраняет отличие обучения от врождённого рефлекса, гормонального ответа и полного подавления коры. Не вводится универсальное число повторений. Reviewed fragment независим от held обобщений о всей долговременной памяти.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Acquired signal-response association in specified prior learning conditions;generic wording/music story do not add distinct assessed objective. Actual retained edition m1_vnd_022 passes current source/publication checks;no current homework uses retired ID. Preserve old ID/body/attempt editions/results. This retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_8da362a81cd31d74865a8bf6bc7fcd26438ff9e81bc041984a467e11ed2c8a0a",
@@ -6835,7 +6858,8 @@
           "snapshot_sha256": "643f6930100735c3727fd64cb47cedba38263f0422b684d7e31923f0c5c1d068",
           "locator": "characters:8473:8913"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m1_vnd_049": {
       "item_sha256": "4a80fa57a479d041fa6e91bdc4d884cfa520a8006cbf9574eac829d406ff248b",
@@ -16700,10 +16724,10 @@
       ]
     },
     "questions:m3_psychological_consulting_076": {
-      "item_sha256": "84a8bc38c45eb7ba4ee6536b870ac9d0923b885cb1d1a31af9d31e01838f66db",
+      "item_sha256": "c5808e98816b9e839cb7f52047ff5cb239b238db4d3d4be76343d2299cfe60c9",
       "discipline_id": "psychological_consulting",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-07",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -16713,9 +16737,11 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Individually reviewed question, answer and explanation against exact consulting glossary definitions 44. Blanket double-relationships claim excluded; original source hold unchanged. No jurisdiction or whole-source certification.",
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Agreed professional support/reflection rather than automatic certification/burnout prevention guarantee. Actual retained edition supervision_support_task passes current source/publication checks;no current homework uses retired ID. Preserve old ID/body/attempt editions/results. This retirement does not approve the older source claim.",
       "sources": [
         {
           "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
@@ -16723,7 +16749,8 @@
           "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
           "locator": "characters:7661:7840"
         }
-      ]
+      ],
+      "disposition": "consolidate"
     },
     "questions:m3_psychological_consulting_077": {
       "item_sha256": "f47f2b6f9d5aa45f7a3406bee9f9eaff6865cab2109435148b25ed1916b1601c",
@@ -18028,8 +18055,8 @@
     "questions:other_tp_001": {
       "item_sha256": "b334998b3bb06b1460415423521d1da3da519b06a22dc219ce633812c6ed81c5",
       "discipline_id": "turning_point",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18041,9 +18068,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace bare memorization of a number pair with application of interval/break sequence; plausible scheduling alternatives, no universal productivity claim. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Described optional25minute work/fiveminute break sequence versus adjacent scheduling choices;not universal optimal schedule or productivity guarantee. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_20baa4df2e52dd9b399ca797a5a2750e82ef2fba0b207f3535e62fe97807c6bf",
+          "modified_time": "2026-04-06T10:58:40.440Z",
+          "snapshot_sha256": "762add118fda2ee3749e12743109b796561c907382464564cc2c52555152a3a4",
+          "locator": "characters:10245:10653"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:other_tp_002": {
       "item_sha256": "0e52968c21b33f9cfc3a7883e87275ed490b3e535ff0d8d8b8a83e51e23647ac",
@@ -18102,8 +18136,8 @@
     "questions:other_tp_004": {
       "item_sha256": "719b9e8a6d4379fa15b751d8c0f23e7a8496beb08f48c1df46ac0bbf85474a2c",
       "discipline_id": "turning_point",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18115,8 +18149,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Intermediate skills/tasks count as progress but not satisfaction of original end-goal criterion; different objective from reflection on trial005. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Actual learnedskills/intermediate completedtasks can count as intermediate progress while finalgoal remainsunmet;not anychange success or universalmotivationguarantee. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_6466ad77e869126fb5822d56b9692a37eb4e01bd8902e66685bf2b20e6f08622",
+          "modified_time": "2026-04-06T10:57:14.108Z",
+          "snapshot_sha256": "12fe8bb66b156d9b330dcee9cfa941fcc4b9fb0c61401195db16ecc8bbbb1239",
+          "locator": "characters:5057:5261"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:other_tp_005": {
@@ -18149,8 +18190,8 @@
     "questions:m2_quant_001": {
       "item_sha256": "1aa0597c659abc0f1849b4971c1b28f97512fbd076fe71a3f5c2756448c5b861",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18162,9 +18203,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace name-based and absolute distractors with plausible reliability/validity confusions; two affirmative and two negative alternatives prevent answer-by-polarity. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Reliability versus intended score interpretation;twoaffirmative/twonegative plausible alternatives,no automatic validity from highalpha/retest. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_fb8dae44750d8d1e0d4fc85df7784a9a41dbbf23f52fe96e93c03b00ed1f04c7",
+          "modified_time": "2026-05-22T10:16:26.450Z",
+          "snapshot_sha256": "9ae4fbcc5a9d8d2696592a9a927edbc3dc5563d21ba482a1a6649d3932bd5050",
+          "locator": "characters:24484:25035"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_family_001": {
       "item_sha256": "4b980e03d9c75d4623684801080b6e88c4a9be07ab67a408fd1ae75fd6a533fe",
@@ -18209,8 +18257,8 @@
     "questions:m2_quant_002": {
       "item_sha256": "b0ecdebc32bef890caba8a3216ce38537b075183ca227fa781272adcf1b4ba53",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18222,15 +18270,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: All alternatives are actual measurement comparisons; remove irrelevant page-count and scale-name cues. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Same people/same tool across time versus equivalent forms/internalconsistency/rater agreement;rank stability not absolute individual agreement. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_fb8dae44750d8d1e0d4fc85df7784a9a41dbbf23f52fe96e93c03b00ed1f04c7",
+          "modified_time": "2026-05-22T10:16:26.450Z",
+          "snapshot_sha256": "9ae4fbcc5a9d8d2696592a9a927edbc3dc5563d21ba482a1a6649d3932bd5050",
+          "locator": "characters:15753:15885"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_quant_003": {
       "item_sha256": "08ba5eb2ba31d74cece9f55729b6f7d776ac002476de4911b7ee61c996d5042c",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18242,15 +18297,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Internal consistency specifically concerns relationships of intended items; explanation does not infer unidimensionality or validity from alpha. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Within-scale item consistency distinguished from retest/rater agreement/valid interpretation;alpha not unidimensionality proof. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_fb8dae44750d8d1e0d4fc85df7784a9a41dbbf23f52fe96e93c03b00ed1f04c7",
+          "modified_time": "2026-05-22T10:16:26.450Z",
+          "snapshot_sha256": "9ae4fbcc5a9d8d2696592a9a927edbc3dc5563d21ba482a1a6649d3932bd5050",
+          "locator": "characters:19733:19860"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m2_quant_004": {
       "item_sha256": "c5f56680a8e6ea9b946d3acf71a3eab8dc9baf3277faf05aea7859a35e7d77bb",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18262,8 +18324,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Concrete observation grid distinguishes instrument from general method and research hypothesis; no automatic quality claim. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Authored observation map is operational instrument;observation method/interest/hypothesis are different levels.No assumption map validated. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_fb8dae44750d8d1e0d4fc85df7784a9a41dbbf23f52fe96e93c03b00ed1f04c7",
+          "modified_time": "2026-05-22T10:16:26.450Z",
+          "snapshot_sha256": "9ae4fbcc5a9d8d2696592a9a927edbc3dc5563d21ba482a1a6649d3932bd5050",
+          "locator": "characters:1044:1424"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m6_org_001": {
@@ -18374,8 +18443,8 @@
     "questions:other_brand_001": {
       "item_sha256": "b1399cfc2554f2d49f5301f1d7c02e5ed5389a6867e684c28f85b11d3e01cba2",
       "discipline_id": "personal_brand",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18387,9 +18456,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Distinguish umbrella concept from legitimate narrower presentation/marketing components; remove only/exclusively answer cues and exclude lecture revenue/Luria claims. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Course image/reputation/association umbrella distinctfrom visualstyle/ads/credentials;no guaranteedincome/safety/competence or control over audience. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_fea9c8af5ec5f83b0c9d9231e02cf1e2214db6578a22a69dd16be65d1e9d1332",
+          "modified_time": "2026-04-06T08:52:40.295Z",
+          "snapshot_sha256": "42e881660f1507e19bda701895a4b1c00e5f45732b22df23ef29506b32271731",
+          "locator": "characters:1490:1565;characters:1930:2127"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m5_clinical_002": {
       "item_sha256": "5e81a6b5a51fc181d14a0c0a8ef29b7cdb513d63b841767039e20fe370d710dc",
@@ -18508,8 +18584,8 @@
     "questions:other_bonus_001": {
       "item_sha256": "691bc9f9127f216aebe214570290a61c38b8ecef2d6bcde77a759023ebc5dd37",
       "discipline_id": "bonus_lessons",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18521,9 +18597,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Correct omission of amounts from the old key and replace only/merely straw distractors with plausible aggregate/activity data; course bookkeeping principle plus authored temporal condition, no investment or financial-outcome advice. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Authored timing comparison requires sums and dates;course records actual/planned expenses,not just annual totals/activity counts.No financial product/allocation advice. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_a7d5d5a210617810344eab0ba6571cc5744ca3eaa90c307129adf6f77fb19900",
+          "modified_time": "2026-06-02T10:26:41.343Z",
+          "snapshot_sha256": "8af22b9531dc4ead5b80a5ed9734edde7a0f06305b9cd41478917ed8dffe1203",
+          "locator": "characters:6414:6496"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_org_002": {
       "item_sha256": "63bfb664def9439f0e25fec0c10a4695b4429d687561c83887f98980d4fe75a3",
@@ -18800,10 +18883,10 @@
       "disposition": "keep"
     },
     "questions:m5_clinical_007": {
-      "item_sha256": "04d7bd794e27ce1480dd23677f17fc77ea4a75fd77446870b50886975b1280ec",
+      "item_sha256": "88bdf77fead3d9c7be43f085d7287e08627073acd53a411613936c126378a1a0",
       "discipline_id": "klinicheskaya_psihologiya",
-      "reviewer": "coding-agent",
-      "reviewed_at": "2026-10-08",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18813,10 +18896,13 @@
         "sources"
       ],
       "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "Bounded course distinction statistical/ideal/social/subjective norm, introductory definition before held population extrapolation and universal36.6example. No numericnorm/automaticdiagnosis/representativepopulation guarantee. Current448 bank has no question about this norm distinction.",
-      "sources": []
+      "source_support": "partial",
+      "issues": [
+        "consolidated_from_new_issuance"
+      ],
+      "note": "CONSOLIDATE: Statistical frequency/rarity within specified group,not health/diagnosis/socialvalue from rarity. Actual retained edition m2_pd_005 passes current source/publication checks;no current homework uses retired ID. Preserve old ID/body/attempt editions/results. This retirement does not approve the older source claim.",
+      "sources": [],
+      "disposition": "consolidate"
     },
     "questions:m5_clinical_008": {
       "item_sha256": "85ac06dd874cd36ed597db34da79a3a1094c309d802c0b767e2b8bd19e2c0bdb",
@@ -18957,8 +19043,8 @@
     "questions:m2_quant_005": {
       "item_sha256": "c2d70ed3515e86b96575907eb0e37dddf34a4a81f2c74492c5a02d87bb8b68e4",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18970,15 +19056,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Make sampling frame explicit and contrast nonresponse with coverage/measurement/sampling errors; do not assert every refusal proves bias. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Explicit complete frame/random invitations and possible differential nonresponse;neither guaranteed direction nor every refusal bias. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_44e217c1298ed444f6580b33b773ccad18e63f479f2877e371b4543c8ceb2858",
+          "modified_time": "2026-05-26T11:13:03.426Z",
+          "snapshot_sha256": "f766def5bcbfad2a127ca76fe4dfbde0008825b5e5f4edbaaf3f60d36326f114",
+          "locator": "characters:17458:17727"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_quant_006": {
       "item_sha256": "9355ff756e834fe083d2fecf0d27b04840d80354273b169a35613779f297d5b1",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -18990,9 +19083,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use adjacent real sampling designs instead of census/volunteer straw alternatives; explicit interval and random start support a single design. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Explicit random start/fixedinterval versus simplerandom/strata/clusters;list periodicity retained. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_44e217c1298ed444f6580b33b773ccad18e63f479f2877e371b4543c8ceb2858",
+          "modified_time": "2026-05-26T11:13:03.426Z",
+          "snapshot_sha256": "f766def5bcbfad2a127ca76fe4dfbde0008825b5e5f4edbaaf3f60d36326f114",
+          "locator": "characters:18031:18427"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m6_org_009": {
       "item_sha256": "40ea693f6733bab8054ed1aaacf504b4e0d848daaa41524c51f4f6666c4e821c",
@@ -21646,8 +21746,8 @@
     "questions:other_tp_007": {
       "item_sha256": "c72f973a9ce94d59cabec9d107a3336a3b241bd1c3f1e83cfff2fb724f2da904",
       "discipline_id": "turning_point",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21659,8 +21759,15 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Explicit resource metaphor distinguished from physical-energy measurement, diagnosis and single-cause fatigue inference; protects against pseudoscientific interpretation. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Explicit course fuel metaphor for selfdiscussion/activity/resources,not physicalunits/medical diagnosis or unique fatigue cause. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_fd30c4765c67e08c206f2d9ba7fdcabaef679341cc79c16c2a67b1b410d924d8",
+          "modified_time": "2026-04-06T10:58:33.766Z",
+          "snapshot_sha256": "87f65ec58b4a479f85f18217bd4ed4145919447bb42e70da9f685c6f628f6a5f",
+          "locator": "characters:2034:2154"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m4_person_024": {
@@ -21685,8 +21792,8 @@
     "questions:other_bonus_002": {
       "item_sha256": "245f6818f184557ad61e58d62f145d4bab1b896293084b4117f216c64e7dfa74",
       "discipline_id": "bonus_lessons",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21698,15 +21805,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace three absurd free-money claims with exact numeric arithmetic alternatives; distinct balance/obligation objective retained, only stated amounts considered. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Authored12000minus5000equals7000under explicitnootherobligations condition;no investment/reserve/debt advice or balance disclosure. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_a7d5d5a210617810344eab0ba6571cc5744ca3eaa90c307129adf6f77fb19900",
+          "modified_time": "2026-06-02T10:26:41.343Z",
+          "snapshot_sha256": "8af22b9531dc4ead5b80a5ed9734edde7a0f06305b9cd41478917ed8dffe1203",
+          "locator": "characters:4466:4815"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:other_brand_002": {
       "item_sha256": "60b34636011f72ee2aadf0e568fe5e51610532b67b201bc41f4002a9f75be8b4",
       "discipline_id": "personal_brand",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -21718,9 +21832,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Use concrete communication-function distinction with three meaningful neighboring information types; no copied personal success case, marketing efficacy or qualification guarantee. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Authored audience/request description informs intended recipients/scope;not credentials validation/outcome assessment/privacy rules.No hidden marketing/realclient testimonial. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_fea9c8af5ec5f83b0c9d9231e02cf1e2214db6578a22a69dd16be65d1e9d1332",
+          "modified_time": "2026-04-06T08:52:40.295Z",
+          "snapshot_sha256": "42e881660f1507e19bda701895a4b1c00e5f45732b22df23ef29506b32271731",
+          "locator": "characters:26587:26641"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m1_psyf_081": {
       "item_sha256": "6e15728fc199d6ddbf5e642a28246afa1d85919a59e899e0114a1a5c41ef0e97",
@@ -22354,8 +22475,8 @@
     "questions:m2_quant_007": {
       "item_sha256": "778c448fefeae76010e344a73f86eb117dc548e0c2f93db635e792c30ade739c",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22367,15 +22488,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Replace impossible identical samples/no-error distractors with equal-probability, quota and compositional-coverage confusions. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "fix"
+      "note": "Known nonzero unequal inclusion probabilities permitted;equal probability/quota/composition do not define all probability designs. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_44e217c1298ed444f6580b33b773ccad18e63f479f2877e371b4543c8ceb2858",
+          "modified_time": "2026-05-26T11:13:03.426Z",
+          "snapshot_sha256": "f766def5bcbfad2a127ca76fe4dfbde0008825b5e5f4edbaaf3f60d36326f114",
+          "locator": "characters:15879:16037"
+        }
+      ],
+      "disposition": "keep"
     },
     "questions:m2_quant_008": {
       "item_sha256": "34cc70ae4a22b22ceed73ee8f0bd4bcafab4971971e067ac4cf061cc90abe4a3",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22387,15 +22515,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Random selection within every stated stratum distinguishes it from quota or cluster selection. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Explicit random selection within each course stratum,not quota proportions imply probabilistic sampling. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_44e217c1298ed444f6580b33b773ccad18e63f479f2877e371b4543c8ceb2858",
+          "modified_time": "2026-05-26T11:13:03.426Z",
+          "snapshot_sha256": "f766def5bcbfad2a127ca76fe4dfbde0008825b5e5f4edbaaf3f60d36326f114",
+          "locator": "characters:18586:18853"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m2_quant_009": {
       "item_sha256": "55760c2b71afbd119b8c2db9a0ec007729e51aa0ecd3feeeac4f9a323725c0b0",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22407,15 +22542,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Successive school/class/pupil random stages identify multistage cluster design; dependence caveat retained. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Actual school-class-pupil multistage cluster example,not individual simplerandom/systematic/quota;no independence guaranteed. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_44e217c1298ed444f6580b33b773ccad18e63f479f2877e371b4543c8ceb2858",
+          "modified_time": "2026-05-26T11:13:03.426Z",
+          "snapshot_sha256": "f766def5bcbfad2a127ca76fe4dfbde0008825b5e5f4edbaaf3f60d36326f114",
+          "locator": "characters:20192:20680"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m2_quant_010": {
       "item_sha256": "97e5c372dc842cb867004a028ce6fbf777db3c46ba7b7eaa71f98355ea198f52",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22427,15 +22569,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Disproportionate sampling for rare-group comparison requires design-aware aggregate weighting; no assertion weights solve all errors. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
+      "note": "Disproportionate subgroup allocation and possibleweights for overallpopulation estimate;not automatic invalidity or weighting fixes every error. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_44e217c1298ed444f6580b33b773ccad18e63f479f2877e371b4543c8ceb2858",
+          "modified_time": "2026-05-26T11:13:03.426Z",
+          "snapshot_sha256": "f766def5bcbfad2a127ca76fe4dfbde0008825b5e5f4edbaaf3f60d36326f114",
+          "locator": "characters:19619:20192"
+        }
+      ],
       "disposition": "keep"
     },
     "questions:m2_quant_011": {
-      "item_sha256": "78012eb6cfd19a57a7f2cc3164fae782e9adb2aff19b0b6a8e75c08e663e4fd9",
+      "item_sha256": "fac4f5d4759c77c324c9e52f28cb6e1bb408e5d9ab65113662deb5eebbb33835",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22447,15 +22596,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Experts matching test content to a domain addresses content evidence, not repeated-score or internal-consistency evidence. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Content-to-domain evidence,not stability/internalconsistency/response count. Concrete expert comparison;actual lecture source replaces Practice15topic in a new immutable edition. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_fb8dae44750d8d1e0d4fc85df7784a9a41dbbf23f52fe96e93c03b00ed1f04c7",
+          "modified_time": "2026-05-22T10:16:26.450Z",
+          "snapshot_sha256": "9ae4fbcc5a9d8d2696592a9a927edbc3dc5563d21ba482a1a6649d3932bd5050",
+          "locator": "characters:26230:26664"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m2_quant_012": {
-      "item_sha256": "d347785fe89439dbf3232b8c482d1b525beaf764566f558f2069efc07bac3fcf",
+      "item_sha256": "7a82b288f9c0503fcddd0c712edf26330e472292b21c4af076baeabf734077b5",
       "discipline_id": "quantitative_methods",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -22467,9 +22623,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Understanding a task and thinking during answering addresses response-process evidence; distinct from other validity objectives. Current full wording/options/key/explanation individually reviewed. Unchanged exact prior source-backed edition reused; no whole-source approval.",
-      "sources": [],
-      "disposition": "keep"
+      "note": "Actual response understanding/reasoning versus aggregate score stability/rater agreement/missing questionnaires;not face validity or all-evidence substitute. Actual lecture source replaces Practice15topic in a new immutable edition. Complete current question/allfour alternatives/key/explanation compared with literal source clauses and exact earlier body review. Distinct assessed objective,one justified answer;all scientific/privacy restrictions remain. Saved complete425source reads reused,not a new corpus pass.",
+      "sources": [
+        {
+          "source_id": "src_fb8dae44750d8d1e0d4fc85df7784a9a41dbbf23f52fe96e93c03b00ed1f04c7",
+          "modified_time": "2026-05-22T10:16:26.450Z",
+          "snapshot_sha256": "9ae4fbcc5a9d8d2696592a9a927edbc3dc5563d21ba482a1a6649d3932bd5050",
+          "locator": "characters:27561:27835"
+        }
+      ],
+      "disposition": "fix"
     },
     "questions:m6_psyl_012": {
       "item_sha256": "f7d52fcfca782b627d2185dfd433d2bb29e3d73c3dcdf096b496478d15ee1371",
