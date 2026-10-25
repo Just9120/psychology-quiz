@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1400
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1403
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 23 and len(catalog['topics']) == 174
@@ -421,7 +421,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             'm3_psychological_consulting_086',
             'm3_psychological_consulting_098',
             'm3_psychological_consulting_102',
-        }) - {'m2_exp_108', 'm2_exp_110'}
+        }) - {'m2_exp_108', 'm2_exp_110'} | {'m1_intro_058'}
         assert retired == (({'m2_qual_009', 'm2_qual_013', 'm6_ethics_001', 'm4_dev_002'} | {f'm1_gp_{n:03}' for n in (36, 40, 45, 56)} | {f'm1_intro_{n:03}' for n in (9, 26, 27, 28, 30, 36, 37, 42)} | {f'm2_exp_{n:03}' for n in (20, 21, 24, 26, 38, 41, 43, 45, 46, 47, 48, 65, 68, 76, 81, 82, 83, 84, 86, 87, 89, 93, 100, 103, 104, 106, 113)} | {'m2_pd_003'} | {f'm2_qual_{n:03}' for n in (1, 2, 3, 4, 6, 14, 17, 24, 25, 29, 43, 53)} | {'cbt_abc_separation', 'cbt_experiment_function', 'cbt_activation_principle'}) | {
             'm1_psyf_002',
             'm1_psyf_013',

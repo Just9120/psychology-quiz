@@ -47,8 +47,8 @@
     "questions:m1_intro_001": {
       "item_sha256": "34ad2d8c50acde83d68d0d0c4538f2fa9fa24954244e6e16bb0d2bc0b98564f8",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -60,49 +60,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Role support distinguished from three plausible ways to substitute the consultant's judgment; removed unrelated profession distractors. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Collaborative exploration/choices rather than imposing experience/values or premature advice. Positive listening/support clauses only;source no-assessment/no-advice/healthy-only absolutes remain held.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "characters:3209:3572;characters:4084:4920"
-        }
-      ],
-      "disposition": "fix"
-    },
-    "questions:m1_intro_002": {
-      "item_sha256": "0e8e82f793288b6fa61abe4168f28b72e527068149de87ed461ef1fa851b87da",
-      "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
-      "checks": [
-        "meaning",
-        "answer",
-        "explanation",
-        "ambiguity",
-        "duplicates",
-        "sources"
-      ],
-      "meaning": "consistent",
-      "source_support": "supported",
-      "issues": [],
-      "note": "KEEP: Qualification distinction explicit in exact course passage; no claim that psychiatrists do not use conversation. Current full wording/options/key/explanation checked; previous source holds retained.",
-      "sources": [
-        {
-          "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
-          "modified_time": "2026-04-05T22:24:03.847Z",
-          "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "characters:2294:2515"
+          "locator": "characters:3301:3940;characters:4084:4920"
         }
       ],
       "disposition": "keep"
     },
-    "questions:m1_intro_003": {
-      "item_sha256": "d5ac7e8c8929ca102b2ba49e0fb2dd8f2c7d49e68388434eb80de1c4f453de30",
+    "questions:m1_intro_002": {
+      "item_sha256": "2b2cc16d0b60782095b3ed62709422296205a9d86b68de011cee8158be50f3ac",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -114,13 +87,40 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Different starting requests distinguish own inquiry from controlling others or outsourcing choice; explanation allows clarification. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Medical qualification and within-scope prescribing distinction,not a universal cross-country licensing law or medical school alone sufficient authority. Psychiatric conversation/psychological methods possible;client consent does not grant medical qualification. Direct RCPsychcore-role check,not imported UKlicensing durations/duties.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "characters:3209:3572"
+          "locator": "characters:2294:2446"
+        }
+      ],
+      "disposition": "fix"
+    },
+    "questions:m1_intro_003": {
+      "item_sha256": "d5ac7e8c8929ca102b2ba49e0fb2dd8f2c7d49e68388434eb80de1c4f453de30",
+      "discipline_id": "vvedenie_v_professiyu",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "note": "Negotiable own experience/choice versus delegated decision,changing third party or confirming righteousness;all requests can be explored rather than rejected for imperfect initial wording.",
+      "sources": [
+        {
+          "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
+          "modified_time": "2026-04-05T22:24:03.847Z",
+          "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
+          "locator": "characters:3301:3940"
         }
       ],
       "disposition": "keep"
@@ -229,8 +229,8 @@
     "questions:m1_intro_008": {
       "item_sha256": "29430131eb56dd845c5e6250b90da77483fb1d05d06c9977ead068dc52f624fd",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -242,16 +242,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Distinguishes information from prescriptive control rather than asking why all advice is bad. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Agreed psychoeducation supplies information for client choice;no universal ban on recommendations,assessment,appropriate interventions or safety/referral information.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "characters:13411:13946"
+          "locator": "characters:13411:13659"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_intro_009": {
       "item_sha256": "33b7252c00a2c187b931e347e89c96c9d56473b4d9dc90cdb9f4201bed984977",
@@ -343,10 +343,10 @@
       "disposition": "fix"
     },
     "questions:m1_intro_013": {
-      "item_sha256": "b28674421c56e6a4bb8ebf2262533bdb4305da6c7ebec46d5157f0052645dec8",
+      "item_sha256": "16c359e54b0457b13c2c41ebcf47fed2b462a58cc91e01bc3cf8c5a0c37d0015",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -358,22 +358,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Referral/competence condition already checked in prior exact edition and professional-scope evidence; no automatic referral for silence or disagreement. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Concrete missing-preparation scenario;balanced next-action alternatives rather than uniquely long correct definition. Discuss suitable qualified help and continuity,not abrupt abandonment or assume analogous cases/instruction/supervision supply missing competence.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "characters:2294:2515;characters:3209:3572"
+          "locator": "characters:13054:13381"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "questions:m1_intro_014": {
       "item_sha256": "29f1f3ad99796f40a523df6b26065e58825dbd3436176374394d544e8246b04c",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -385,13 +385,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Task-specific preparation contrasted with borrowed competence, an instruction and supervision; no blanket ban on new learning. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Task/method-specific preparation and ongoing development;similarity,reading an instruction or having a supervisor are not automatic competence. Selected explicit actual qualification paragraph replaces broad earlierrole citation.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "characters:3209:3572"
+          "locator": "characters:13054:13381"
         }
       ],
       "disposition": "keep"
@@ -486,8 +486,8 @@
     "questions:m1_intro_019": {
       "item_sha256": "41af8c58558e4f9352d62c984143e13859cf685eba36ea366a39b60c1578005a",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -499,16 +499,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Preserves homework theory item; no directive/goal-avoidance caricatures. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "Explore client criteria/consequences;clinician preference and majority other cases do not substitute individual choice. Information can be shared;not absolute no-advice.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "characters:4084:4920;characters:13411:13946"
+          "locator": "characters:4084:4920;characters:13411:13659"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "questions:m1_intro_020": {
       "item_sha256": "43c208110e246251f2d8e754b781505de8d8258b0084b1c7753610a8b30aaa58",
@@ -553,8 +553,8 @@
     "questions:m1_intro_022": {
       "item_sha256": "907f3b3a68d0d07431c4a513b56a7266f32b33f0d21cfbaf01ada587148ac29b",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "answer",
@@ -566,13 +566,13 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Client asks for personal advice; response elicits criteria, distinct from theoretical autonomy item019 and information item008. Current full wording/options/key/explanation checked; previous source holds retained.",
+      "note": "An authored client asks for clinician personal choice;collaborative exploration rather than clinician decision,rigid refusal or past-clients majority. Distinct applied conversation task from general autonomy019.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "characters:4084:4920;characters:13411:13946"
+          "locator": "characters:4084:4920;characters:13411:13659"
         }
       ],
       "disposition": "keep"
@@ -1447,8 +1447,8 @@
     "glossary:psychologist_consultant_role": {
       "item_sha256": "f2cb07a7d835d541b9f7c2abcf5bb0adfd5e65845a0668334966eeaa95223a46",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1460,7 +1460,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Support for exploring experience/choice distinct from medical qualification; example does not promise an outcome. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Course counselling role within professional contact,not universal healthy-only exclusion or inability to provide all psychological assessment/recommendation. Authored choice exploration,not actual client history.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -1472,10 +1472,10 @@
       "disposition": "keep"
     },
     "glossary:psychiatrist_difference": {
-      "item_sha256": "aef9ec9333506b43f59659c2fee4a8694ff477fd30534a868fbad4887dead167",
+      "item_sha256": "a748c4391592a34e01c4f2ebc734d8f1ee7bcfb6ece3aad3c671d0311f699736",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1487,22 +1487,22 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Medical qualification and medication role match named introductory course passage and prior review; no prescribing guidance or eligibility advice. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Psychiatrist is a medical doctor specialising in mental disorders;scope/qualification/regulatory limits explicit,not all-medication necessary or one-country permission projected worldwide. Direct RCPsychcore-role clarification only.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
           "modified_time": "2026-04-05T22:24:03.847Z",
           "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
-          "locator": "characters:2294:2610"
+          "locator": "characters:2294:2446"
         }
       ],
-      "disposition": "keep"
+      "disposition": "fix"
     },
     "glossary:consulting_request_topics": {
       "item_sha256": "940ad4f501d2e21e68a807dea374a127e03be4ef0c88823663f3fb0aa173420a",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1514,7 +1514,7 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "KEEP: Examples describe typical concerns, not an exhaustive healthy-only eligibility rule; distinct from agreed working focus. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Course examples of stress/relationships/self-esteem/choices are examples,not a prevalence statistic,medical diagnosis or exclusion of people with comorbid conditions.",
       "sources": [
         {
           "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
@@ -1636,8 +1636,8 @@
     "glossary:client_autonomy": {
       "item_sha256": "7ef51aacc8dad1c6f488d7f59b33627d7075cce38e32b276b6f331d676c78437",
       "discipline_id": "vvedenie_v_professiyu",
-      "reviewer": "bank-quality-20261022",
-      "reviewed_at": "2026-10-22",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
       "checks": [
         "meaning",
         "definition",
@@ -1649,16 +1649,16 @@
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
-      "note": "FIX: Removed fictional label; distinction between informational support and substituting a choice remains explicit. Complete current term/definitions/examples/confusion links checked.",
+      "note": "Client own analysis/choice supported by collaborative information;imposed decisions differ from useful recommendations and agreed intervention. Not a guarantee that every course of action is safe.",
       "sources": [
         {
-          "source_id": "src_54b505dfca19eeba500069da1365bb93588319673b495c7da43eb5865f299e6e",
-          "modified_time": "2026-06-07T21:20:48.648Z",
-          "snapshot_sha256": "7f14d10e04a4110869e0c2d4c7b95f9e18bb6aa81ae55718bc549df3a2ce4be8",
-          "locator": "characters:8485:8779"
+          "source_id": "src_198930e3bf86623d806456d16dc422da6724b9642982dc2dcbf96a40c7323b69",
+          "modified_time": "2026-04-05T22:24:03.847Z",
+          "snapshot_sha256": "b5970ac6bf0415134ca7f40379d82530f45f74da57fce71b88e90d70e4086eb1",
+          "locator": "characters:4084:4920;characters:13411:13659"
         }
       ],
-      "disposition": "fix"
+      "disposition": "keep"
     },
     "glossary:client_centeredness": {
       "item_sha256": "9c090e3cbc22ac86b713f35efe862998bf77a97442b63756c7fa0b7d3567bf2f",
@@ -22813,6 +22813,33 @@
       ],
       "note": "Behaviour changed after a direct request,not necessarily changed belief or stable compliant personality. No coercion or blanket obedience claim.",
       "disposition": "keep"
+    },
+    "questions:m1_intro_058": {
+      "discipline_id": "vvedenie_v_professiyu",
+      "item_sha256": "6ea1c8d71de92d1bc3d538a6492903bb8487c2489875e863e7049160b81eaade",
+      "reviewer": "bank-quality-20261025",
+      "reviewed_at": "2026-10-25",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_416cf8d544ac8d0fb672c6f36f5a7b70bc32d4e76c42a2a3251686d67296f13d",
+          "modified_time": "2026-04-05T22:57:49.497Z",
+          "snapshot_sha256": "7be70a070add6c43e1f82f3bef996ee1e7be7d4fd71ff497467f514270f4c033",
+          "locator": "characters:9696:10036;characters:10141:10206"
+        }
+      ],
+      "note": "Authored study-load planning case;test a realistic block/break rhythm,not fixed universal interval,guaranteed concentration/burnout prevention or clinical protocol. Source coordinate diagnostic explicitly reconciled from exact embedded snapshot;all actual impostor/breathing/prevention/stage prohibitions retained.",
+      "disposition": "fix"
     }
   }
 }
