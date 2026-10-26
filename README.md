@@ -97,6 +97,35 @@ PowerShell: вместо Bash export задайте `$env:DB_PATH = Join-Path $e
 | Python format / lint / typecheck | N/A: отдельных команд нет; whitespace проверяет `git diff --check`. Frontend typecheck — ниже |
 | Python build | N/A отдельная компиляция; runtime image собирает действующая Docker delivery procedure |
 
+## Повторная проверка учебных источников
+
+Результаты обработки хранятся отдельно от учебной папки «Психология»: в Google Drive владельца найдите папку **PsychologyAtlas — результаты проверки источников**, затем снимок **2026-10-26 — BANK-QUALITY-20261022 — 1ba5486**. Доступ закрыт; ссылки/Drive ID, исходные тексты и capture mapping в Git не публикуются. Для восстановления используйте только завершённый снимок с `CACHE_READY.json`, `drive-index.json` и `cache-manifest.json`. Незавершённая загрузка без completion marker не является доступным полным архивом. Локальная резервная цепочка на D сохраняется независимо от облачной копии.
+
+Снимок переносим: относительные logical paths указывают на immutable объекты SHA-256; исходные absolute paths остаются историческими сведениями. В него входят все 14 018 полезных файлов текущей проверенной копии, включая текущий журнал 425 материалов, 31 новый источник, извлечения, original files, visual evidence, досье и сохранённые scientific holds. Исключены 17 сгенерированных файлов Python bytecode; keys, learner databases и временные authenticated URLs не являются содержимым архива. `cache-manifest.json` содержит точные covered/excluded entries и authoritative paths текущих inventory/processing/registry/topics/links/accepted indexes. Это датированный результат, а не утверждение, что все научные положения источников верны.
+
+| Слой | Части | Назначение |
+| --- | --- | --- |
+| `core` | `cache-core.zip.part001`–`003`, около 153 MiB | Тексты, журналы, metadata, review/hold records и прошлые operator artifacts; обычная сверка начинается с него |
+| `originals` | `cache-originals.zip.part001`–`004`, около 229 MiB | Сохранённые исходные PDF/Office files для точной проверки |
+| `renders` | `cache-renders.zip.part001`–`023`, около 1410 MiB | Изображения страниц и visual evidence; скачиваются при необходимости визуальной проверки |
+
+Каждый слой разбит на части до 64 MiB. Скачайте manifest, recovery helper и все части нужного слоя. Прежде чем исполнять скачанный `restore_cache.py`, проверьте его SHA-256: `b02f3be970df5f8c3bfde9f0138b3fd1309bf5961d921ed4271d03d25cdee4a2`. SHA-256 manifest этого снимка: `d648835fd4003f8aa4ebf1c708d040b053c732b1aca3ce6138b0c07dc33a5211`. Для новой версии снимка нужны её отдельно проверенные digests, старые значения не заменяются догадкой.
+
+Из корня репозитория восстановите core в ignored `data/`, заменив только `<скачанный-снимок>` фактическим каталогом загрузки:
+
+```bash
+python "<скачанный-снимок>/restore_cache.py" --manifest "<скачанный-снимок>/cache-manifest.json" --manifest-sha256 d648835fd4003f8aa4ebf1c708d040b053c732b1aca3ce6138b0c07dc33a5211 --parts-dir "<скачанный-снимок>" --output data/source-review-cache/2026-10-26 --layers core
+```
+
+Для visual/original verification скачайте соответствующие части и повторите ту же команду с `--layers originals,renders`. Helper проверяет SHA/size частей, собранных ZIP и каждого объекта, отвергает escape paths/неожиданные члены архива/конфликтующие существующие файлы. Он создаёт `objects/`, читаемый `view/`, `PATHS.json` и `cache-state.json`; данные по historical absolute paths не записывает, источники/досье/holds не меняет и approvals не создаёт. `complete_snapshot:false` после core-only восстановления ожидаем: недостающие слои нельзя выдавать за проверенные. Старые scripts внутри view являются историческими данными; для восстановления исполняется только проверенный recovery helper.
+
+После восстановления:
+
+1. Через `cache-manifest.json` → `authoritative_paths` откройте текущие inventory, journal, processing и accepted indexes. Historical references разрешайте через `PATHS.json`, сохраняя оригинальные bytes/fingerprints; immutable досье не редактируются ради нового пути.
+2. Получите текущий полный metadata inventory разрешённой папки, проверьте pagination, revisions и перемещения. Используйте извлечения/прежние review при совпадении content digest, профиля извлечения и редакции; changed metadata требует адресной сверки, а не автоматического approval.
+3. Содержательно проверьте новые/изменённые вопросы, затронутые fragments/дубли и новые научные противоречия. Все прежние own/related holds сохраняются; cache hit не отменяет publication gates. Не делайте вывод об отсутствии проверки только из-за отсутствия старого локального пути.
+4. Сохраните следующий versioned snapshot с актуальным manifest/изменениями и прежней историей. Не включайте папку результатов в обход учебных источников и не создавайте полный backup ZIP на каждый commit. Если нужного объекта или слоя нет, восстановите его либо обозначьте точный пробел; полный аудит всего банка запускается отдельно по [согласованным правилам](docs/question_bank_content_rollout.md#обычное-обновление-и-отдельный-полный-аудит).
+
 Для приватного рекурсивного metadata export Drive используйте `python scripts/source_inventory_report.py --current data/source-inventory-current.json` из корня репозитория. Опциональные `--previous`, `--processed` и `--links` принимают приватные JSON snapshots того же обхода, обработанных редакций и подтверждённых связей занятий; каждая связь теперь требует текущую revision/path и evidence редакторской сверки. Формат и границы публикации описаны в [content rollout](docs/question_bank_content_rollout.md#проверка-происхождения-и-публикация). Держите входные файлы в ignored `data/`: по умолчанию команда только читает их и выводит агрегаты без file IDs, названий и путей. Неполную pagination chain она отвергает.
 
 `--reviewed` в inventory report дополнительно сверяет приватный metadata snapshot с `content/source-corpus.json` и `content/curriculum.json`: выводит только агрегаты по текущим, изменённым, перемещённым и отсутствующим источникам и связей с занятиями. Совпадение metadata не подтверждает содержательный review. Без `--processed` поле `new_unprocessed` означает отсутствие переданного private processing snapshot, а не отсутствие уже выполненного review; без `--links` поле `linked_lessons` не учитывает связи из curriculum (`reviewed_graph.reviewed_lesson_edges`).
