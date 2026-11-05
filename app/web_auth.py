@@ -81,9 +81,15 @@ class WebAuth:
             begin_write(conn, "auth")
             yield conn
 
-    def limit(self, bucket: str, maximum: int, window: int) -> None:
+    def limit(self, bucket: str, maximum: int, window: int, *, source: str = "local") -> None:
+        if not 0 < window <= 3600:
+            raise ValueError("unsupported_auth_limit_window")
+        bucket = bucket + ":" + digest(source)
         now = int(self.clock())
         with self.transaction() as conn:
+            # Only pseudonymous digests persist. Every quota request removes
+            # buckets older than the longest window, including attacker sources.
+            conn.execute("DELETE FROM web_auth_limits WHERE started_at<=?", (now - 3600,))
             row = conn.execute("SELECT started_at,count FROM web_auth_limits WHERE bucket=?", (bucket,)).fetchone()
             if row is None or now >= row["started_at"] + window:
                 conn.execute("""INSERT INTO web_auth_limits VALUES(?,?,1)
@@ -96,14 +102,14 @@ class WebAuth:
         if not allowed:
             raise AuthError("rate_limited", 429)
 
-    def request_mail(self, email: object, purpose: str) -> None:
-        self.limit("mail", 5, 3600)
+    def request_mail(self, email: object, purpose: str, *, source: str = "local") -> None:
         try:
             email = normalize_email(email)
         except ValueError:
             return
         if not self._allowed_email(email) or purpose not in {"register", "recover"}:
             return
+        self.limit("mail", 5, 3600, source=source)
         if not MAIL_SLOTS.acquire(blocking=False):
             raise AuthError("mail_unavailable", 503)
         token = secrets.token_urlsafe(32)
@@ -140,10 +146,11 @@ class WebAuth:
         return row
 
     def set_password(self, token: object, password: object, purpose: str) -> None:
-        self.limit("token", 10, 60)
         password = validate_password(password)
         with closing(get_connection(self.db_path)) as conn:
             self._mail_proof(conn, token, purpose)
+        # An invalid or unrelated proof cannot spend a real proof's budget.
+        self.limit("token", 10, 60, source="proof:" + digest(token))
         with hash_slot():
             encoded = PASSWORDS.hash(password)
         now = int(self.clock())
@@ -165,8 +172,7 @@ class WebAuth:
             # All outstanding proofs for this action are invalidated on success.
             conn.execute("DELETE FROM web_mail_tokens WHERE email=? AND purpose=?", (proof["email"], purpose))
 
-    def login(self, email: object, password: object) -> str:
-        self.limit("login", 10, 60)
+    def login(self, email: object, password: object, *, source: str = "local") -> str:
         try:
             email = normalize_email(email)
         except ValueError:
@@ -177,6 +183,7 @@ class WebAuth:
             password.encode("utf-8")
         except UnicodeError:
             raise AuthError("invalid_credentials", 401) from None
+        self.limit("login", 10, 60, source=source)
         with closing(get_connection(self.db_path)) as conn:
             row = conn.execute("SELECT * FROM web_accounts WHERE email=?", (email,)).fetchone()
         encoded = row["password_hash"] if row else self.dummy_hash

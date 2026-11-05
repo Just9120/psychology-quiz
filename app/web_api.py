@@ -16,6 +16,7 @@ from app.payload_validation import is_sqlite_integer
 from app.quiz_service import QuizSetupError, answer_quiz, prepare_quiz, quiz_setup_options, quiz_state, start_confirmed_quiz
 from app.owner_google_oauth import OwnerGoogleOAuth, TTL as OAUTH_TTL
 from app.web_auth import AuthError, SESSION_TTL, WebAuth
+from app.web_request_context import authentication_source
 from app.logging_config import configure_noisy_http_client_loggers
 
 GET_ACTIONS = {"auth/google/available", "auth/me", "quiz/state", "quiz/options", "homework/catalog", "progress/overview", "progress/mastery", "progress/review", "progress/goals", "progress/achievements", "glossary/state", "glossary/options", "literature/catalog", "literature/catalog-compact"}
@@ -36,20 +37,20 @@ class WebAccessLogFilter(logging.Filter):
         return True
 
 
-def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf: str | None):
+def _dispatch(auth: WebAuth, action: str, payload: dict, token: str | None, csrf: str | None, *, source="local"):
     if action == "auth/google/available":
         with auth.transaction() as conn:
             linked = conn.execute("""SELECT 1 FROM web_google_identities g JOIN web_accounts a ON a.id=g.account_id
                 WHERE a.email=? AND a.enabled=1""", (auth.settings.owner_email,)).fetchone()
         return {"ok": True, "available": auth.settings.google is not None and linked is not None}, None
     if action in {"auth/register", "auth/recover"}:
-        auth.request_mail(payload.get("email"), "register" if action == "auth/register" else "recover")
+        auth.request_mail(payload.get("email"), "register" if action == "auth/register" else "recover", source=source)
         return {"ok": True}, None
     if action in {"auth/verify", "auth/reset"}:
         auth.set_password(payload.get("token"), payload.get("password"), "register" if action == "auth/verify" else "recover")
         return {"ok": True}, None
     if action == "auth/login":
-        session = auth.login(payload.get("email"), payload.get("password"))
+        session = auth.login(payload.get("email"), payload.get("password"), source=source)
         return {"ok": True}, session
     with auth.transaction() as conn:
         account = auth.authenticate(conn, token, csrf=csrf, mutation=action in POST_ACTIONS)
@@ -213,7 +214,8 @@ def install_web_api(app, auth: WebAuth) -> None:
             if len(request.url.query) > 8192 or any(len(params.getlist(key)) != 1 for key in params):
                 raise AuthError("invalid_oauth_state", 401)
             cookie = await asyncio.to_thread(google.complete, params.get("state"),
-                request.cookies.get(google.cookie_name), params.get("code"))
+                request.cookies.get(google.cookie_name), params.get("code"),
+                source=authentication_source(request, auth.settings))
             response = RedirectResponse(auth.settings.origin + "/", status_code=303)
             if cookie:
                 response.set_cookie(auth.settings.cookie_name, cookie, max_age=SESSION_TTL,
@@ -262,10 +264,13 @@ def install_web_api(app, auth: WebAuth) -> None:
                     raise AuthError("invalid_payload")
             if action == "auth/google/begin":
                 result, oauth_cookie = await asyncio.to_thread(google.begin, payload.get("purpose"),
-                    request.cookies.get(auth.settings.cookie_name), request.headers.get("x-csrf-token"))
+                    request.cookies.get(auth.settings.cookie_name), request.headers.get("x-csrf-token"),
+                    source=authentication_source(request, auth.settings))
             else:
+                source = authentication_source(request, auth.settings) if action in {
+                    "auth/register", "auth/recover", "auth/login"} else "local"
                 result, cookie = await asyncio.to_thread(_dispatch, auth, action, payload,
-                    request.cookies.get(auth.settings.cookie_name), request.headers.get("x-csrf-token"))
+                    request.cookies.get(auth.settings.cookie_name), request.headers.get("x-csrf-token"), source=source)
             response = JSONResponse(result)
         except AuthError as exc:
             response = JSONResponse({"ok": False, "error": exc.code}, status_code=exc.status)

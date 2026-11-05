@@ -39,6 +39,16 @@ Template: no-store, nosniff, no-referrer, self-only scripts/connect/worker, fram
 
 ## CI → merge → CD: backend и PWA
 
+### Граница адреса для auth лимитов
+
+F-176 требует одновременного контракта Nginx/API. Перед поставкой нового backend оператор проверяет точный vhost, loopback8081 и фактический Docker socket peer; unrelated host rules не меняются. [Шаблон](../deployment/pwa/nginx.conf.template) содержит location-scoped Cloudflare real-IP ranges, проверенные05.11.2026, и перезапись `X-Psychology-Client-Address`. Нужен установленный Nginx realip module. Backend не доверяет XFF/CF headers и отключает автоматическую подмену peer в Uvicorn.
+
+[Cutover helper](../scripts/pwa_auth_proxy_config.py) принимает `--config` (resolved root-owned файл PWA vhost), `--env` (root-owned runtime.env), `--backup` (новый каталог в приватном root-owned parent), `--template`, `--peer`, `--expected-config` и `--expected-env` (SHA-256 свежего прочитанного состояния). Он заменяет только единственный простой `/web/` location с существующим upstream127.0.0.1:8081 и единственный `PWA_AUTH_PROXY_PEERS`, сохраняет остальные blocks/settings/permissions. Перед записью создаёт0600backup обоих файлов; concurrent changes/неизвестная структура/повтор backup блокируют действие. После записи — `nginx -t`, reload, точный readback. При ошибке восстанавливает только собственные неизменённые записи и проверяет/reload прежний config; конфликт восстановления требует отдельной диагностики. Значения secrets не печатаются. Сам helper не перезапускает приложение и не меняет Docker network.
+
+До merge допустим только отдельно проверенный cutover текущего vhost: старый backend игнорирует новый header/env. Затем required CI проверяет новый backend и реальный Linux Nginx против synthetic upstream: прямые поддельные CF/XFF/private headers и выделенный trusted-edge fixture. После штатной поставки обязательны health/readiness/version, owner read-only session и public auth boundary, плюс подтверждение peer/config. Наличие шаблона или unit tests не означает применение настройки на VPS. После смены Docker network peer перепроверяется; hostname/CIDR/wildcard вместо exact peer запрещены.
+
+### Штатная цепочка поставки
+
 Обычные обновления не требуют скачивания архива владельцем или команд в MobaXterm. Existing CD использует production Environment, `DEPLOY_HOST/DEPLOY_USER`, `DEPLOY_SSH_KEY/DEPLOY_KNOWN_HOSTS`, strict SSH host verification и очередь `production-deploy` без cancellation. [deploy.sh](../deploy.sh) держит `/tmp/psychology-quiz-deploy.lock` на протяжении stage, backend delivery и static activation; `.release.lock` дополнительно защищает release helpers. Новые секреты, сервисы, Nginx/DNS/SMTP configuration не создаются.
 
 1. Candidate gate сверяет full SHA с main и последней успешной main/push CI из `.github/workflows/ci.yml`; более новый pending/failed run запрещает reuse. [pwa_artifact.py](../scripts/pwa_artifact.py) требует success jobs `pwa-client` и `validate-and-smoke-test` текущего run attempt, trusted repository/head repository и единственный неистёкший artifact `pwa-SHA`. Creation time artifact должен попадать в интервал текущего PWA job, чтобы не принять старый artifact после rerun.

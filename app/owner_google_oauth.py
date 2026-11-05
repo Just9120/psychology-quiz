@@ -1,11 +1,13 @@
 """Durable, browser-bound owner OIDC flow; provider tokens never persist."""
 import hmac
 import secrets
+import threading
 
 from app.google_oauth import GoogleOAuthClient, GoogleOAuthError, authorization_url
 from app.web_auth import AuthError, IDLE_TTL, digest, valid_token
 
 TTL = 600
+OAUTH_SLOTS = threading.BoundedSemaphore(2)
 
 
 class OwnerGoogleOAuth:
@@ -17,12 +19,12 @@ class OwnerGoogleOAuth:
     def cookie_name(self):
         return "__Host-psychology_oauth" if self.auth.settings.secure_cookie else "psychology_dev_oauth"
 
-    def begin(self, purpose, token=None, csrf=None):
+    def begin(self, purpose, token=None, csrf=None, *, source="local"):
         if self.provider is None:
             raise AuthError("google_unavailable", 503)
         if purpose not in {"login", "link"}:
             raise AuthError("invalid_oauth_purpose")
-        self.auth.limit("google_begin", 10, 60)
+        self.auth.limit("google_begin", 10, 60, source=source)
         state, browser, nonce, verifier = [secrets.token_urlsafe(32) for _ in range(4)]
         now = int(self.auth.clock())
         with self.auth.transaction() as conn:
@@ -36,12 +38,11 @@ class OwnerGoogleOAuth:
                 account["id"] if account else None, account["session_digest"] if account else None, now+TTL))
         return {"ok": True, "url": authorization_url(self.auth.settings.google, state=state, nonce=nonce, verifier=verifier)}, browser
 
-    def complete(self, state, browser, code):
+    def complete(self, state, browser, code, *, source="local"):
         if self.provider is None:
             raise AuthError("google_unavailable", 503)
         if not valid_token(state) or not valid_token(browser):
             raise AuthError("invalid_oauth_state", 401)
-        self.auth.limit("google_callback", 10, 60)
         now = int(self.auth.clock())
         # Commit consumption before network IO: failed code exchange also consumes
         # this proof, and concurrent callbacks can never exchange it twice.
@@ -52,10 +53,18 @@ class OwnerGoogleOAuth:
                 raise AuthError("invalid_oauth_state", 401)
             proof = dict(row)
             conn.execute("DELETE FROM web_oauth_challenges WHERE state_digest=?", (digest(state),))
+        # Existing proofs may span several begin windows. Bound both their
+        # source's exchange rate and total in-flight provider IO independently.
+        self.auth.limit("google_callback", 10, 60, source=source)
+        if not OAUTH_SLOTS.acquire(blocking=False):
+            raise AuthError("google_unavailable", 503)
         try:
-            identity = self.provider.exchange(code, verifier=proof["pkce_verifier"], nonce=proof["nonce"])
-        except GoogleOAuthError:
-            raise AuthError("google_login_failed", 401) from None
+            try:
+                identity = self.provider.exchange(code, verifier=proof["pkce_verifier"], nonce=proof["nonce"])
+            except GoogleOAuthError:
+                raise AuthError("google_login_failed", 401) from None
+        finally:
+            OAUTH_SLOTS.release()
         with self.auth.transaction() as conn:
             now = int(self.auth.clock())
             if proof["purpose"] == "link":

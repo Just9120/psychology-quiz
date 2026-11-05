@@ -175,6 +175,15 @@ retention не требуется. Файл и shared Nginx configuration не �
 API child запускается с `--no-access-log`: request URI, включая OAuth callback
 code/state, не должны попадать в новые диагностические файлы через Uvicorn
 access logger. Bot/API diagnostics остаются в private daily files по D-47.
+Auth limits используют SHA-256 канонического сетевого адреса либо digest
+одноразового proof в `web_auth_limits`. Это псевдонимные security metadata,
+не анонимные данные: IP имеет ограниченное пространство перебора. Raw адрес
+и forwarded headers не добавляются в app logs. Окна не длиннее1часа;
+истёкшие buckets удаляются при следующем auth limit request, поэтому при
+полном отсутствии auth traffic строки могут сохраняться до него. Backup
+retention остаётся отдельной D-47 процедурой. Источник и доверие proxy —
+[auth contract](pwa-auth.md); применение новой настройки подтверждается
+отдельно при поставке, не наличием шаблона.
 Cloudflare, Telegram, Google и SMTP — отдельные внешние системы; их страны и
 провайдерская retention этим снимком не установлены. Не описывать фактическую
 обработку как ограниченную только почтой: Telegram identity, учебная история

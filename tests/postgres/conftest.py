@@ -74,5 +74,5 @@ def bank(source, pg_target):
 def web(bank):
     now, mailbox = [1800000000], Mailbox()
     app = create_app(db_path=bank, bot_token=TOKEN, web_settings=SETTINGS, web_mailer=mailbox, web_clock=lambda: now[0])
-    with TestClient(app, base_url=ORIGIN) as client:
+    with TestClient(app, base_url=ORIGIN, client=("127.0.0.1", 50000)) as client:
         yield SimpleNamespace(db=bank, app=app, client=client, mailbox=mailbox, now=now, auth=app.state.web_auth)
