@@ -4,3 +4,4 @@ miniapp-react/index.html text eol=lf
 # Vault hashes and reviewed-note identity must survive Windows/Linux checkout.
 vault/generated/** text eol=lf
 content/vault-notes.json text eol=lf
+content/knowledge-coverage.json text eol=lf

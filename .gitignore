@@ -2,6 +2,7 @@
 .postgres/
 data/
 .private-search/
+content/vault-notes.json
 __pycache__/
 *.pyc
 .venv/

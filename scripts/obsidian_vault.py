@@ -1,7 +1,7 @@
 """Render reviewed private notes into an owner-only Obsidian Vault.
 
-This command never contacts Drive. Repository output requires an authenticated
-GitHub visibility check; local staging remains outside the application repo.
+This command never contacts Drive. Ready knowledge belongs in a private package,
+never a tracked repository. Ignored data staging is allowed explicitly.
 """
 from __future__ import annotations
 
@@ -15,7 +15,6 @@ import shutil
 import sys
 import subprocess
 import tempfile
-from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -214,51 +213,50 @@ def _remove_owned_directory(path: Path, target: Path) -> None:
 
 
 def _verify_repository_vault(target: Path, *, published_content: bool = False) -> None:
-    """Verify target and access; private manifests still require private Git."""
-    if target != ROOT.resolve() / "vault":
-        raise VaultError("repository_vault_path_required")
-    try:
-        remote = subprocess.run(["git", "config", "--get", "remote.origin.url"], cwd=ROOT,
-                                capture_output=True, text=True, timeout=10, check=True).stdout.strip()
-        if remote not in {"https://github.com/Just9120/psychology-quiz.git",
-                          "https://github.com/Just9120/psychology-quiz",
-                          "git@github.com:Just9120/psychology-quiz.git"}:
-            raise VaultError("repository_identity_mismatch")
-        response = subprocess.run(["gh", "api", "--hostname", "github.com", "repos/Just9120/psychology-quiz"], cwd=ROOT,
-                                  capture_output=True, text=True, timeout=15, check=True)
-        metadata = json.loads(response.stdout)
-        if (metadata.get("full_name") != "Just9120/psychology-quiz"
-                or type(metadata.get("private")) is not bool
-                or (not published_content and metadata.get("private") is not True)
-                or metadata.get("archived") is not False
-                or metadata.get("permissions", {}).get("push") is not True):
-            raise VaultError("private_repository_required")
-    except (OSError, subprocess.SubprocessError, ValueError, AttributeError) as error:
-        if isinstance(error, VaultError):
-            raise
-        raise VaultError("private_repository_verification_unavailable") from None
+    """Keep the old entry point fail-closed after the private ZIP requirement."""
+    raise VaultError("private_package_delivery_required")
+
+
+def private_vault_location(target: Path) -> None:
+    """Outside Git, or explicitly ignored, untracked staging in this repo's data."""
+    target = target.resolve(strict=True)
+    if target.is_relative_to(ROOT.resolve()):
+        if not target.is_relative_to(ROOT.resolve() / 'data'):
+            raise VaultError('separate_private_vault_required')
+        relative = target.relative_to(ROOT.resolve()).as_posix()
+        ignored = subprocess.run(['git', 'check-ignore', '-q', '--', relative], cwd=ROOT,
+                                 stdin=subprocess.DEVNULL, capture_output=True)
+        tracked = subprocess.run(['git', 'ls-files', '-z', '--', relative], cwd=ROOT,
+                                 stdin=subprocess.DEVNULL, capture_output=True)
+        if ignored.returncode != 0 or tracked.returncode != 0 or tracked.stdout:
+            raise VaultError('ignored_private_vault_required')
+        if _git_common_directory(target) != _git_common_directory(ROOT):
+            raise VaultError('separate_private_vault_required')
+    elif _git_common_directory(target) is not None:
+        raise VaultError('separate_private_vault_required')
 
 
 def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool = False,
-                published_content: bool = False, replace_catalogue: bool = False) -> dict:
+                published_content: bool = False, replace_catalogue: bool = False,
+                reviewed_payload: bytes | None = None) -> dict:
     if (not isinstance(files, dict) or not ({"index.md", "База знаний.md"} & files.keys())
             or any(not isinstance(content, bytes) or not content for content in files.values())):
         raise VaultError("generated_files_required")
     files = dict(files)
+    if repository_vault:
+        _verify_repository_vault(vault)
     if replace_catalogue and not published_content:
         raise VaultError("catalogue_migration_requires_reviewed_knowledge")
     if published_content:
-        from scripts.obsidian_catalogue import render_published
-        if files != render_published()[0]:
+        from scripts.obsidian_catalogue import render_published, render_reviewed_payload
+        expected = (render_reviewed_payload(reviewed_payload) if reviewed_payload is not None
+                    else render_published())[0]
+        if files != expected:
             raise VaultError("published_catalogue_required")
     target = vault.resolve(strict=True)
     if not target.is_dir() or vault.is_symlink():
         raise VaultError("separate_private_vault_required")
-    repository = _git_common_directory(ROOT)
-    if repository_vault:
-        _verify_repository_vault(target, published_content=published_content)
-    elif target.is_relative_to(ROOT) or (repository is not None and _git_common_directory(target) == repository):
-        raise VaultError("separate_private_vault_required")
+    private_vault_location(target)
     generated = target / GENERATED
     if generated.is_symlink():
         raise VaultError("generated_symlink_forbidden")
@@ -286,21 +284,6 @@ def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool 
         from scripts.obsidian_catalogue import LEGACY_STATE_SHA256
         if not previous or _hash((generated / STATE).read_bytes()) != LEGACY_STATE_SHA256:
             raise VaultError("unknown_catalogue_migration")
-        # Personal links to the removed catalogue need an explicit owner edit;
-        # silently breaking them is not part of replacing the managed export.
-        removed = {name[:-3] for name in previous if name not in files}
-        personal = target / "personal"
-        if personal.is_symlink():
-            raise VaultError("personal_link_migration_required")
-        if personal.is_dir():
-            for path in personal.rglob("*.md"):
-                if path.is_symlink():
-                    raise VaultError("personal_link_migration_required")
-                text = path.read_text(encoding="utf-8")
-                links = WIKI_LINK.findall(text) + re.findall(r"\[[^\]]*\]\(([^)\s]+)\)", text)
-                if any(unquote(link.split('|')[0].split('#')[0]).replace('\\', '/')
-                       .rsplit('/', 1)[-1].removesuffix('.md') in removed for link in links):
-                    raise VaultError("personal_link_migration_required")
     # An incremental manifest is not permission to remove previous note IDs.
     # Preserve their bytes and make the older review scope explicit in the index.
     retained = {name: (generated / name).read_bytes() for name in previous
@@ -330,6 +313,15 @@ def write_vault(vault: Path, files: dict[str, bytes], *, repository_vault: bool 
                or any(needle in data for needle in needles) for data in files.values()):
             raise VaultError("private_provenance_in_public_vault")
         validate_links(files)
+    if previous:
+        from scripts.vault_links import personal_link_breaks
+        try:
+            broken = personal_link_breaks(
+                target, {name: (generated / name).read_bytes() for name in previous}, files)
+        except (OSError, UnicodeError, ValueError) as error:
+            raise VaultError("personal_link_migration_required") from error
+        if broken:
+            raise VaultError("personal_link_migration_required")
     staged = Path(tempfile.mkdtemp(prefix=".vault-stage-", dir=target))
     backup = target / ".vault-generated-backup"
     try:
@@ -366,7 +358,7 @@ def main() -> None:
     parser.add_argument("--processing", type=Path, required=True)
     parser.add_argument("--vault", type=Path, required=True)
     parser.add_argument("--repository-vault", action="store_true",
-                        help="Write to this project's vault/ only after authenticated private visibility verification")
+                        help="Obsolete: repository exports are refused; use a private package")
     args = parser.parse_args()
     try:
         files = render(_private_input(args.manifest), _private_input(args.inventory),

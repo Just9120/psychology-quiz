@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from scripts.audit_public_assets import audit_assets, known_source_ids
-from scripts.obsidian_vault import VaultError, valid_generated_name, write_vault
+from scripts.obsidian_vault import VaultError, _private_input, valid_generated_name, write_vault
 
 ENTRY = 'База знаний.md'
 LEGACY_STATE_SHA256 = '7bf9cb0ddcb88c0874624f4ca58e30734e22bbbcc6e2b3c87cc0d30fe5fcd886'
@@ -25,8 +25,8 @@ RETIRED_NOTE = ('# Заметка предыдущей редакции\n\n'
                 '[[База знаний]]\n').encode('utf-8')
 
 
-def prepared_notes():
-    payload = (ROOT / 'content/vault-notes.json').read_bytes()
+def reviewed_notes_payload(payload: bytes):
+    """An archive's status or metadata cannot substitute for the reviewed bytes."""
     if hashlib.sha256(payload).hexdigest() != REVIEWED_NOTES_SHA256:
         raise VaultError('prepared_note_source_review_required')
     manifest = json.loads(payload)
@@ -42,8 +42,27 @@ def prepared_notes():
     return manifest
 
 
-def render_published() -> tuple[dict[str, bytes], dict[str, int]]:
-    manifest = prepared_notes()
+def prepared_notes(path: Path | None = None):
+    if path is None:
+        raise VaultError('private_reviewed_manifest_required')
+    # Private inputs never become tracked content merely for reproducibility.
+    inspected = _private_input(path)
+    payload = path.read_bytes()
+    manifest = reviewed_notes_payload(payload)
+    if manifest != inspected:
+        raise VaultError('private_manifest_changed_during_read')
+    return manifest
+
+
+def render_published(manifest_path: Path | None = None) -> tuple[dict[str, bytes], dict[str, int]]:
+    return _render_manifest(prepared_notes() if manifest_path is None else prepared_notes(manifest_path))
+
+
+def render_reviewed_payload(payload: bytes) -> tuple[dict[str, bytes], dict[str, int]]:
+    return _render_manifest(reviewed_notes_payload(payload))
+
+
+def _render_manifest(manifest) -> tuple[dict[str, bytes], dict[str, int]]:
     files, sections = {}, {}
     for item in manifest['notes']:
         if not isinstance(item, dict) or set(item) != {'title', 'section', 'body', 'links', 'sources'}:
@@ -114,13 +133,15 @@ def validate_links(files):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--vault', type=Path, default=ROOT / 'vault')
+    parser.add_argument('--vault', type=Path, required=True)
+    parser.add_argument('--manifest', type=Path, required=True,
+                        help='Exact reviewed manifest from ignored/private storage')
     parser.add_argument('--repository-vault', action='store_true')
     parser.add_argument('--replace-catalogue', action='store_true',
                         help='Replace only the unchanged fingerprinted PR347 catalogue')
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
-    files, counts = render_published()
+    files, counts = render_published(args.manifest)
     if args.check:
         generated = args.vault / 'generated'
         if generated.is_symlink() or any(p.is_symlink() or not p.is_file()
@@ -139,7 +160,8 @@ def main():
             raise VaultError('invalid_generated_state')
     else:
         write_vault(args.vault, files, repository_vault=args.repository_vault,
-                    published_content=True, replace_catalogue=args.replace_catalogue)
+                    published_content=True, replace_catalogue=args.replace_catalogue,
+                    reviewed_payload=args.manifest.read_bytes())
     audit_assets([args.vault / 'generated'], known_source_ids())
     print('KNOWLEDGE_VAULT_OK', counts)
 
