@@ -14,6 +14,7 @@ from app.literature import load_topic_registry
 from app.payload_validation import valid_quiz_setup
 from app.quiz_overlap import balanced_kinds_diverse_first
 from app.repetition import adaptive_questions
+from app.study_navigation import question_scopes
 from app.db import (
     abandon_in_progress_sessions_for_user, get_active_categories,
     select_random_approved_question_ids_across_active_categories,
@@ -70,7 +71,8 @@ def prepare_quiz(conn, payload: dict, *, actor_user_id: int | None = None) -> Pr
         raise QuizSetupError("invalid_setup")
     mode, count = payload["quiz_mode"], payload["question_count"]
     kinds = payload.get("content_kinds")
-    pool_limit = None if kinds is not None or mode in {"adaptive", "selected_mix"} else count
+    topic_ids = payload.get("topic_ids")
+    pool_limit = None if kinds is not None or topic_ids is not None or mode in {"adaptive", "selected_mix"} else count
     difficulty = None if payload["difficulty"] == "any" else payload["difficulty"]
     category_id, selected = None, ()
     if mode == "single":
@@ -90,6 +92,16 @@ def prepare_quiz(conn, payload: dict, *, actor_user_id: int | None = None) -> Pr
         selected = tuple(category_ids)
     else:
         questions = select_random_approved_question_ids_across_active_categories(conn, pool_limit, difficulty)
+    if topic_ids is not None:
+        navigation, scopes = question_scopes(conn)
+        allowed = {topic['id'] for item in navigation
+                   if not category_ids or item['category_id'] in category_ids for topic in item['topics']}
+        if any(topic not in allowed for topic in topic_ids):
+            raise QuizSetupError("invalid_setup")
+        selected_questions = set().union(*(scopes[topic] for topic in topic_ids))
+        questions = [qid for qid in questions if qid in selected_questions]
+        if count is not None and kinds is None and mode in {'single', 'all'}:
+            questions = questions[:count]
     kind_by_id = {}
     metadata_by_id = {}
     if questions and (kinds is not None or (mode == "selected_mix" and count is not None)):
@@ -171,6 +183,7 @@ def quiz_setup_options(conn) -> dict:
         "question_count_choices": [5, 10, 15, "all"],
         "difficulty_choices": ["any", "easy", "medium", "hard"],
         "content_kind_choices": [kind for kind in ("theory", "glossary", "case") if kind in available_kinds],
+        "study_navigation": question_scopes(conn)[0],
     }
 
 
