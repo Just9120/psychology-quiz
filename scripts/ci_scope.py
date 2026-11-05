@@ -27,6 +27,15 @@ def changed_paths(base, *, root=ROOT):
                                     "-z", base, "HEAD"]).decode().strip("\0").split("\0")
 
 
+def dependency_lock(runtime_checks):
+    """Only an explicit docs decision can omit the unused pytest toolchain.
+
+    Validators/DB smoke and exact artifact builds still run. Unknown selection
+    retains full development dependencies; it cannot silently skip a test.
+    """
+    return 'requirements.lock' if runtime_checks is False else 'requirements-dev.lock'
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--github-output", type=Path, required=True)
@@ -38,6 +47,7 @@ def main():
     required = os.environ.get("CI_EVENT") == "workflow_dispatch" or not documentation_only(paths)
     with args.github_output.open("a", encoding="utf-8") as output:
         output.write(f"runtime_checks={'true' if required else 'false'}\n")
+        output.write(f"dependency_lock={dependency_lock(required)}\n")
     print("CI_SCOPE_RUNTIME_REQUIRED" if required else "CI_SCOPE_DOCUMENTATION_ONLY")
 
 

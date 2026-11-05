@@ -50,7 +50,7 @@ Production can run in either long polling or webhook mode. Long polling remains 
 
 Repository-visible GitHub Actions are split by responsibility:
 - open PR and merge approved changes to `main`;
-- CI validation runs on pull requests, pushes to `main`, and manual `workflow_dispatch`; [scope classifier](scripts/ci_scope.py) проверяет полный diff до PostgreSQL/browser setup. Только README/AGENTS/ci-cd-rules и Markdown в docs допускают пропуск runtime regressions. Required jobs остаются активными, ошибка classifier останавливает их; code/content/Vault/dependency/workflow changes и manual runs выполняют полный набор;
+- CI validation runs on pull requests, pushes to `main`, and manual `workflow_dispatch`; [scope classifier](scripts/ci_scope.py) проверяет полный diff до PostgreSQL/browser setup. Только README/AGENTS/ci-cd-rules и Markdown в docs допускают пропуск runtime regressions. Тогда backend устанавливает runtime lock без неиспользуемого pytest; неизвестный выбор сохраняет полный dev lock. Pip cache привязан к lockfiles, установка всегда проверяет hashes. Validators/DB smoke, frontend checks/build и exact-revision artifacts сохраняются. Required jobs остаются активными, ошибка classifier останавливает их; code/content/Vault/dependency/workflow changes и manual runs выполняют полный набор;
 - routine delivery follows [AGENTS.md](AGENTS.md) and [project procedures](docs/miniapp-deployment-qa.md); workflow/settings changes require their own authorized scope;
 - CI must not deploy, access production SSH, or mutate production runtime state;
 - deployment/CD uses Repository Secrets and the configured target environment; after merge, verify deployed commit/runtime state when deployment matters;
