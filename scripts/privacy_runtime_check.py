@@ -1,4 +1,4 @@
-"""Read-only check of owned live logging settings, without printing inspect data."""
+"""Check owned logging settings and retention dry-run without printing private data."""
 from __future__ import annotations
 import argparse
 import json
@@ -41,7 +41,9 @@ def main():
             if not isinstance(data, list) or len(data) != 1:
                 raise ValueError("one_running_container_required")
             verify(data[0], service, args.expected_sha)
-            # Check file metadata only. Never read log text, actor copies or env.
+            # Inspect log metadata without log text or environment output.
+            # Retention dry-run validates receipts and copies under its lock;
+            # apply=False prevents deletion, and private contents stay suppressed.
             code = """from pathlib import Path
 from scripts.runtime_log import private
 from scripts.learning_copy_retention import locked_cleanup
