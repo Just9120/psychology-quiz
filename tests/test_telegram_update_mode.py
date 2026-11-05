@@ -69,6 +69,27 @@ class TelegramUpdateModeSettingsTests(unittest.TestCase):
         self.assertEqual(settings.telegram_webhook_port, 8090)
         self.assertEqual(settings.telegram_webhook_secret_token, "secret-header-token")
 
+    def test_webhook_mode_rejects_missing_blank_and_invalid_secret_without_logging_value(self):
+        for secret in (None, "", "  ", "contains space", "invalid\nvalue", "x" * 257, "не-ascii"):
+            with self.subTest(secret=secret):
+                env = {**self._base_env(), "TELEGRAM_UPDATE_MODE": "webhook",
+                       "TELEGRAM_WEBHOOK_URL": "https://quiz.example.com/webhook",
+                       "TELEGRAM_WEBHOOK_LISTEN": "127.0.0.1", "TELEGRAM_WEBHOOK_PORT": "8090"}
+                if secret is not None:
+                    env["TELEGRAM_WEBHOOK_SECRET_TOKEN"] = secret
+                with patch.dict(os.environ, env, clear=True):
+                    with self.assertRaisesRegex(ValueError, "TELEGRAM_WEBHOOK_SECRET_TOKEN"):
+                        load_settings()
+
+    def test_webhook_accepts_both_documented_secret_length_boundaries(self):
+        for secret in ("a", "A9_-" * 64):
+            env = {**self._base_env(), "TELEGRAM_UPDATE_MODE": "webhook",
+                   "TELEGRAM_WEBHOOK_URL": "https://quiz.example.com/webhook",
+                   "TELEGRAM_WEBHOOK_LISTEN": "127.0.0.1", "TELEGRAM_WEBHOOK_PORT": "8090",
+                   "TELEGRAM_WEBHOOK_SECRET_TOKEN": secret}
+            with patch.dict(os.environ, env, clear=True):
+                self.assertEqual(secret, load_settings().telegram_webhook_secret_token)
+
 
     def test_classic_quiz_send_next_as_new_message_defaults_false_and_parses_true(self):
         with patch.dict(os.environ, self._base_env(), clear=True):
@@ -101,6 +122,16 @@ class TelegramUpdateModeSettingsTests(unittest.TestCase):
 
 
 class TelegramUpdateModeStartupTests(unittest.TestCase):
+    def test_direct_startup_cannot_bypass_secret_validation(self):
+        for secret in (None, "", "blank secret", "x" * 257):
+            with self.subTest(secret=secret):
+                application = MagicMock()
+                settings = SimpleNamespace(telegram_update_mode="webhook", telegram_webhook_secret_token=secret)
+                with self.assertRaisesRegex(ValueError, "TELEGRAM_WEBHOOK_SECRET_TOKEN"):
+                    run_application(application, settings)
+                application.run_webhook.assert_not_called()
+                application.run_polling.assert_not_called()
+
     def test_startup_chooses_polling_path(self):
         application = MagicMock()
         settings = SimpleNamespace(telegram_update_mode="polling")

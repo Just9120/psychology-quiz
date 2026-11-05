@@ -37,7 +37,7 @@ from telegram.ext import (
     filters,
 )
 
-from app.config import load_settings
+from app.config import load_settings, validate_webhook_secret
 from app.owner_stats import get_owner_period_stats
 from app.web_link_handlers import link_command, confirm_link_callback
 from app.logging_config import configure_app_logging
@@ -869,6 +869,7 @@ def _webhook_url_path(settings) -> str:
 
 def run_application(application: Application, settings) -> None:
     if settings.telegram_update_mode == "webhook":
+        validate_webhook_secret(settings.telegram_webhook_secret_token)
         safe_host = _safe_webhook_host_for_log(settings)
         safe_path = _safe_webhook_path_for_log(settings)
         logger.info(

@@ -190,9 +190,10 @@ def create_app(
             response.headers["Content-Length"] = "0"
 
         duration_ms = _duration_ms(started_at)
+        logged_endpoint = endpoint if endpoint in _ENDPOINTS else "unknown"
         logger.info(
             "miniapp_api endpoint=%s request_id=%s transport=preflight method=OPTIONS status=%s duration_ms=%s error_code=-",
-            endpoint,
+            logged_endpoint,
             request_id or "-",
             response.status_code,
             duration_ms,
@@ -200,7 +201,7 @@ def create_app(
         if duration_ms > slow_request_ms:
             logger.warning(
                 "miniapp_api_slow endpoint=%s duration_ms=%s status=%s request_id=%s",
-                endpoint,
+                logged_endpoint,
                 duration_ms,
                 response.status_code,
                 request_id or "-",
@@ -208,7 +209,7 @@ def create_app(
 
         logger.info(
             "miniapp_options endpoint=%s request_id=%s method=OPTIONS status=%s duration_ms=%s origin_allowed=%s",
-            endpoint,
+            logged_endpoint,
             request_id or "-",
             response.status_code,
             duration_ms,

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import logging
+import re
 from dataclasses import dataclass, field
 from app.database import resolve_database_target
 
@@ -49,6 +50,11 @@ def _parse_admin_telegram_ids(raw_ids: str) -> frozenset[int]:
             "Некорректный ADMIN_TELEGRAM_IDS токен проигнорирован. Ожидался numeric Telegram user id.",
         )
     return frozenset(parsed_ids)
+
+
+def validate_webhook_secret(secret: object) -> None:
+    if not isinstance(secret, str) or re.fullmatch(r"[A-Za-z0-9_-]{1,256}", secret) is None:
+        raise ValueError("TELEGRAM_WEBHOOK_SECRET_TOKEN must contain 1..256 letters, digits, '_' or '-'.")
 
 
 def load_settings() -> Settings:
@@ -101,6 +107,7 @@ def load_settings() -> Settings:
             missing.append("TELEGRAM_WEBHOOK_PORT")
         if missing:
             raise ValueError("Webhook mode requires environment variables: " + ", ".join(missing) + ".")
+        validate_webhook_secret(telegram_webhook_secret_token)
         try:
             telegram_webhook_port = int(telegram_webhook_port_raw)
         except ValueError as exc:

@@ -1299,11 +1299,11 @@ def _load_classic_text_next_state(settings, tg_user, state: dict) -> dict:
         session = get_quiz_session(conn, session_id)
         if session is None:
             return {"status": "missing", "session_id": session_id}
-        if str(session["status"]) == "finished":
-            return {"status": "finished", "session_id": session_id, "score": int(session["score"]), "total_questions": int(session["total_questions"])}
         user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
         if int(session["user_id"]) != int(user_row["id"]):
             return {"status": "forbidden", "session_id": session_id}
+        if str(session["status"]) == "finished":
+            return {"status": "finished", "session_id": session_id, "score": int(session["score"]), "total_questions": int(session["total_questions"])}
         return {"status": "ok", "session_id": session_id}
 
 
@@ -1699,11 +1699,11 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 session = get_quiz_session(conn, session_id)
                 if session is None:
                     return {"status": "missing"}
-                if str(session["status"]) == "finished":
-                    return {"status": "finished", "score": int(session["score"]), "total_questions": int(session["total_questions"])}
                 user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
                 if int(session["user_id"]) != int(user_row["id"]):
                     return {"status": "forbidden"}
+                if str(session["status"]) == "finished":
+                    return {"status": "finished", "score": int(session["score"]), "total_questions": int(session["total_questions"])}
                 return {"status": "ok"}
 
         db_started_at = time.perf_counter()
