@@ -119,6 +119,22 @@ python "<скачанный-снимок>/restore_cache.py" --manifest "<ска�
 
 Для visual/original verification скачайте соответствующие части и повторите ту же команду с `--layers originals,renders`. Helper проверяет SHA/size частей, собранных ZIP и каждого объекта, отвергает escape paths/неожиданные члены архива/конфликтующие существующие файлы. Он создаёт `objects/`, читаемый `view/`, `PATHS.json` и `cache-state.json`; данные по historical absolute paths не записывает, источники/досье/holds не меняет и approvals не создаёт. `complete_snapshot:false` после core-only восстановления ожидаем: недостающие слои нельзя выдавать за проверенные. Старые scripts внутри view являются историческими данными; для восстановления исполняется только проверенный recovery helper.
 
+Адресное восстановление отдельного материала поддерживает [source_material_cache.py](scripts/source_material_cache.py). В закрытой папке результатов новый per-source набор считается готовым только при наличии `MATERIAL_CACHE_READY.json` и полного `material-index.json` с проверенными package digests и Drive readback. Частично загруженные ZIP без marker не заменяют прежний завершённый снимок. Private index связывает source revision с отдельным пакетом; реальные ID и точные связи остаются вне Git.
+
+После выбора записи в private index скачайте только её ZIP и передайте его проверенный SHA-256:
+
+```bash
+python scripts/source_material_cache.py restore --package data/selected-material.zip --package-sha256 <проверенный-SHA256> --source-id <ID-из-private-index> --output data/selected-material
+```
+
+Команда требует новый ignored/private destination, проверяет весь package digest, source identity, размеры/хеши объектов и переносимые paths до активации папки. Она сохраняет exact bytes и материал с processing/journal/related holds; файлы архива не исполняются. Подмена пакета, чужой source ID, повреждение или существующая папка останавливают восстановление. Missing layers и неполный historical lineage остаются явными ограничениями, а не разрешением публикации.
+
+Для подготовки нового per-source пакета используйте private dossier с exact `source_id`, `revision`, `processing`, `files` (logical paths pinned snapshot), `scientific_or_publication_approval:false` и сохранёнными данными профиля/удержаний. `package` читает исходные split archives на месте и проверяет каждый выбранный объект; не создаёт ещё один общий ZIP и не распаковывает весь слой:
+
+```bash
+python scripts/source_material_cache.py package --manifest data/cache-manifest.json --manifest-sha256 <проверенный-SHA256> --parts <каталог-частей> --dossier data/material-dossier.json --package data/material.zip
+```
+
 После восстановления:
 
 1. Через `cache-manifest.json` → `authoritative_paths` откройте текущие inventory, journal, processing и accepted indexes. Historical references разрешайте через `PATHS.json`, сохраняя оригинальные bytes/fingerprints; immutable досье не редактируются ради нового пути.
