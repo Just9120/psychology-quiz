@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Icon } from './Icon'
 import { ChoiceMenu } from './ChoiceMenu'
+import { moduleLabel } from './studyScope'
 import type { Setup, SetupOptions } from './types'
 
 const difficultyNames = { any: 'Любая', easy: 'Базовые', medium: 'Средние', hard: 'Сложные' }
@@ -45,14 +46,14 @@ export function QuizSetup({ options, busy, activeSessionId, onStart, onResume }:
     <fieldset className="plain-fieldset"><legend className="section-label">01 <span>Выберите темы</span></legend>
       <div className="segmented" aria-label="Режим квиза">{([['single','Одна тема'],['selected_mix','Микс тем'],['all','Все темы'],['adaptive','Адаптивный']] as const).map(([value,label]) => <button type="button" key={value} className={mode === value ? 'active' : ''} aria-pressed={mode === value} disabled={busy} onClick={() => { setMode(value); setCategories([]); setTopics([]); if (value === 'all') setModule(''); setConfirmReplaceFor(null) }}>{label}</button>)}</div>
       {mode === 'adaptive' && <p className="hint">Сначала вопросы для повторения и слабые темы, с частью новых вопросов. Без выбора темы используются все доступные.</p>}
-      {modules.length > 0 && <ChoiceMenu label="Модуль обучения" value={activeModule} disabled={busy || mode === 'all'} onChange={setModule} options={[{ value: '', label: 'Все модули' }, ...modules.map(value => ({ value, label: value.startsWith('module') ? `Модуль ${value.slice(6)}` : value === 'other' ? 'Дополнительные материалы' : 'Без модуля' }))]} />}
+      {modules.length > 0 && <ChoiceMenu label="Модуль обучения" value={activeModule} disabled={busy || mode === 'all'} onChange={setModule} options={[{ value: '', label: 'Все модули' }, ...modules.map(value => ({ value, label: moduleLabel(value) }))]} />}
       {mode !== 'all' && categoryIds.length > 0 && <p className="hint" role="status">Выбрано дисциплин: {categoryIds.length}{topics.length ? ` · конкретных тем: ${topics.length}` : ''}. Выбор сохраняется при смене модуля.</p>}
       {options.categories.length === 0 ? <div className="panel empty-state">Темы пока недоступны. Попробуйте обновить страницу позже.</div>
         : <div className="topic-grid">{options.categories.filter(category => !activeModule || navigation.find(item => item.category_id === category.id)?.modules.includes(activeModule)).map((category, index) => {
           const selected = mode === 'all' || categories.includes(category.id)
           const branches = navigation.find(item => item.category_id === category.id)
           return <div className="study-discipline" key={category.id}><label className={`topic-card ${selected ? 'selected' : ''} ${mode === 'all' ? 'all-mode' : ''}`}><input type={mode === 'single' ? 'radio' : 'checkbox'} name={mode === 'single' ? 'topic' : undefined} checked={selected} disabled={busy || mode === 'all'} onChange={() => chooseCategory(category.id)} /><span className={`topic-symbol hue-${index % 4}`}><Icon name={index % 2 ? 'spark' : 'book'} size={22} /></span><span className="topic-title">{category.name}</span><span className="selection-indicator">{selected && <Icon name="check" size={14} />}</span></label>
-            {branches && <details className="study-topics"><summary>Темы дисциплины · {branches.topics.length}</summary><fieldset className="plain-fieldset"><legend className="sr-only">Темы: {category.name}</legend>{branches.topics.map(topic => <label className="study-topic" key={topic.id}><input type={mode === 'single' ? 'radio' : 'checkbox'} name={mode === 'single' ? 'topic' : undefined} checked={mode === 'all' || topics.includes(topic.id)} disabled={busy || mode === 'all'} onChange={() => chooseTopic(category.id, topic.id)} /><span>{topic.title} <small>· {topic.question_count} вопр.</small></span></label>)}</fieldset></details>}
+            {branches && <details className="study-topics"><summary>Темы дисциплины · {branches.topics.length}</summary><fieldset className="plain-fieldset"><legend className="sr-only">Темы: {category.name}</legend>{branches.topics.map(topic => <label className="study-topic" key={topic.id}><input type={mode === 'single' ? 'radio' : 'checkbox'} value={topic.id} name={mode === 'single' ? 'topic' : undefined} checked={mode === 'all' || topics.includes(topic.id)} disabled={busy || mode === 'all'} onChange={() => chooseTopic(category.id, topic.id)} /><span>{topic.title} <small>· {topic.question_count} вопр.</small></span></label>)}</fieldset></details>}
           </div>
         })}</div>}
     </fieldset>

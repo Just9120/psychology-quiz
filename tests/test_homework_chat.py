@@ -4,33 +4,28 @@ from app import homework_chat
 
 def test_paged_hierarchy_keeps_all_long_topics_reachable_and_returns_to_parent_page(monkeypatch):
     catalog = [{"id": str(index), "title": "Полное длинное название задания " + str(index),
+        "module": f"Модуль {index // 6 + 1}",
         "discipline": f"Дисциплина {index // 7:02}", "topic": "Подробное название темы без потери значимых слов " + str(index),
         "completed": index == 8, "active_session_id": None} for index in range(42)]
     monkeypatch.setattr(homework_chat, "catalog_for_actor", lambda conn, actor: {"assignments": catalog})
     seen = set()
-    disciplines = homework_chat._children(catalog, ())
-    for root_page in range(2):
-        text, keyboard = homework_chat._list(None, 42, page=root_page)
-        buttons = [button for row in keyboard.inline_keyboard for button in row]
-        assert len(buttons) <= 7
-        for button in [b for b in buttons if b.callback_data.startswith("hw:nav:")]:
-            discipline = next(path for path in disciplines if homework_chat._path_token(path) == button.callback_data.split(":")[2])
-            for page in range(2):
-                text, keyboard = homework_chat._list(None, 42, navigation=homework_chat._path_token(discipline), page=page)
-                back = keyboard.inline_keyboard[0][0].callback_data
-                assert back == f"hw:list:all:{disciplines.index(discipline) // homework_chat.PAGE_SIZE}"
-                topics = homework_chat._children(catalog, discipline)
-                for row in keyboard.inline_keyboard[1:]:
-                    for child in row:
-                        if not child.callback_data.startswith("hw:nav:") or len(child.callback_data.split(":")) != 3:
-                            continue
-                        path = next(path for path in topics if homework_chat._path_token(path) == child.callback_data.split(":")[2])
-                        assert path[-1] in text  # Full title remains readable even when the button is shortened.
-                        preview, actions = homework_chat._list(None, 42, navigation=homework_chat._path_token(path))
-                        callbacks = [b.callback_data for r in actions.inline_keyboard for b in r]
-                        assert callbacks[0] == f"hw:nav:{homework_chat._path_token(discipline)}:{topics.index(path) // homework_chat.PAGE_SIZE}"
-                        seen.update(value[9:] for value in callbacks if value.startswith("hw:start:"))
-                        assert all(len(value.encode()) <= 64 for value in callbacks)
+    expected_paths = {(item['module'], item['discipline'], item['topic']) for item in catalog}
+    for path in sorted(expected_paths):
+        for depth in range(3):
+            parent, child = path[:depth], path[:depth + 1]
+            children = sorted({value[:depth + 1] for value in expected_paths if value[:depth] == parent})
+            page = children.index(child) // homework_chat.PAGE_SIZE
+            text, keyboard = homework_chat._list(None, 42,
+                navigation=homework_chat._path_token(parent) if parent else None, page=page)
+            buttons = [button for row in keyboard.inline_keyboard for button in row]
+            assert len(buttons) <= 8 and child[-1] in text
+            assert 'hw:nav:' + homework_chat._path_token(child) in [button.callback_data for button in buttons]
+        preview, actions = homework_chat._list(None, 42, navigation=homework_chat._path_token(path))
+        callbacks = [button.callback_data for row in actions.inline_keyboard for button in row]
+        siblings = sorted({value for value in expected_paths if value[:2] == path[:2]})
+        assert callbacks[0] == f"hw:nav:{homework_chat._path_token(path[:2])}:{siblings.index(path) // homework_chat.PAGE_SIZE}"
+        seen.update(value[9:] for value in callbacks if value.startswith('hw:start:'))
+        assert all(len(value.encode()) <= 64 for value in callbacks)
     assert seen == {item["id"] for item in catalog}
 
 
@@ -45,20 +40,22 @@ def test_hierarchy_filters_exact_parent_and_keeps_attempt_callbacks(monkeypatch)
         return {"assignments": catalog}
     monkeypatch.setattr(homework_chat, "catalog_for_actor", actor_catalog)
     root, markup = homework_chat._list(None, 42)
-    assert "Модуль" not in root
-    assert all("Модуль" not in button.text for row in markup.inline_keyboard for button in row)
-    assert len(markup.inline_keyboard) == 1  # Same topic across internal modules.
-    text, markup = homework_chat._list(None, 42, navigation=homework_chat._path_token(("Психология", "Память")))
-    assert "Первое" in text and "Второе" in text
+    assert "Модуль 1" in root and "Модуль 2" in root
+    assert len(markup.inline_keyboard) == 2
+    text, markup = homework_chat._list(None, 42, navigation=homework_chat._path_token(("Модуль 1", "Психология", "Память")))
+    assert "Первое" in text and "Второе" not in text
     callbacks = [button.callback_data for row in markup.inline_keyboard for button in row]
-    assert "hw:start:one" in callbacks and "hw:start:two" in callbacks
+    assert "hw:start:one" in callbacks and "hw:start:two" not in callbacks
     assert "hw:resume:12" in callbacks
     assert all(len(value.encode()) <= 64 for value in callbacks)
-    for token in ("old-token", homework_chat._path_token(("Модуль 1",))):
+    text, markup = homework_chat._list(None, 42, navigation=homework_chat._path_token(("Модуль 2", "Психология", "Память")))
+    assert "Второе" in text and "Первое" not in text
+    assert 'hw:resume:12' not in [button.callback_data for row in markup.inline_keyboard for button in row]
+    for token in ("old-token", homework_chat._path_token(("Психология", "Память"))):
         text, markup = homework_chat._list(None, 42, navigation=token)
         assert "Раздел изменился" in text
         assert all(button.callback_data == "hw:list:all" for row in markup.inline_keyboard for button in row)
-    assert actors == [42] * 4
+    assert actors == [42] * 5
 
 
 def test_navigation_callback_does_not_start_attempt_and_refuses_group(monkeypatch):
@@ -111,21 +108,27 @@ def test_real_new_topics_are_reachable_in_classic_quiz_glossary_homework_and_lit
     with closing(get_connection(str(path))) as conn:
         quiz = {button.text for row in build_category_keyboard(get_active_categories(conn)).inline_keyboard for button in row}
         catalog = homework_chat.catalog_for_actor(conn, actor)["assignments"]
-        disciplines = homework_chat._children(catalog, ())
+        modules = homework_chat._children(catalog, ())
         for identity, (title, expected_assignments) in expected.items():
             assert registry[identity]["title"] == title and title in quiz
             assert callback_token_to_topic_id(glossary[title].split(":")[-1]) == identity
-            root_page = disciplines.index((title,)) // homework_chat.PAGE_SIZE
+            first = next(value for value in catalog if value['id'] in expected_assignments)
+            root = (first['module'],)
+            discipline = (*root, title)
+            root_page = modules.index(root) // homework_chat.PAGE_SIZE
             text, buttons = homework_chat._list(conn, actor, page=root_page)
-            assert title in text and "Модуль" not in text
-            token = homework_chat._path_token((title,))
-            assert any(b.callback_data == "hw:nav:" + token for row in buttons.inline_keyboard for b in row)
-            children = homework_chat._children(catalog, (title,))
+            assert first['module'] in text
+            disciplines = homework_chat._children(catalog, root)
+            text, buttons = homework_chat._list(conn, actor, navigation=homework_chat._path_token(root),
+                                               page=disciplines.index(discipline) // homework_chat.PAGE_SIZE)
+            token = homework_chat._path_token(discipline)
+            assert title in text and any(b.callback_data == "hw:nav:" + token for row in buttons.inline_keyboard for b in row)
+            children = homework_chat._children(catalog, discipline)
             for entry in (v for v in catalog if v["id"] in expected_assignments):
-                leaf = (title, entry["topic"])
+                leaf = (*discipline, entry['curriculum_topic']['title'])
                 text, _ = homework_chat._list(conn, actor, navigation=token,
                                               page=children.index(leaf) // homework_chat.PAGE_SIZE)
-                assert entry["topic"] in text and "Модуль" not in text
+                assert entry['curriculum_topic']['title'] in text
                 text, actions = homework_chat._list(conn, actor, navigation=homework_chat._path_token(leaf))
                 assert entry["title"] in text
                 callbacks = [b.callback_data for row in actions.inline_keyboard for b in row]

@@ -130,6 +130,8 @@ export interface HomeworkAssignment {
   title: string
   module: string
   discipline: string
+  discipline_id?: string
+  curriculum_topic?: { id: string; title: string }
   topic: string
   description: string
   question_count: number

@@ -403,7 +403,10 @@ def build_literature_items_response(
         if isinstance(item_id, str) and item_id in user_states:
             enriched["user_state"] = user_states[item_id]
         enriched_items.append(enriched)
-    return _json(HTTPStatus.OK, {"ok": True, "literature_items": enriched_items})
+    from app.literature import list_reading_topic_payloads
+    return _json(HTTPStatus.OK, {"ok": True, "literature_items": enriched_items,
+                               "literature_topics": list_literature_topic_payloads(),
+                               "reading_topics": list_reading_topic_payloads()})
 
 
 def build_literature_state_response(

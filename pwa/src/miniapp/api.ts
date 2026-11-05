@@ -68,12 +68,12 @@ export const miniApi = {
   glossaryNext: (session_id: string, step_id: number) =>
     miniRequest<{ ok: true; glossary_state: GlossaryState }>('glossary/next', { session_id, step_id }),
   literatureTopics: () => miniRequest<{ ok: true; literature_topics: MiniLiteratureTopic[]; reading_topics?: MiniLiteratureTopic[] }>('literature/topics'),
-  literatureItems: async (topic_id?: string) => {
-    if (topic_id) return miniRequest<{ ok: true; literature_items: MiniLiteratureItem[]; reading_topics?: MiniLiteratureTopic[] }>(`literature/items?topic_id=${encodeURIComponent(topic_id)}`)
+  literatureItems: async (topic_id?: string): Promise<MiniLiteratureCatalog> => {
+    if (topic_id) return miniRequest<MiniLiteratureCatalog>(`literature/items?topic_id=${encodeURIComponent(topic_id)}`)
     const actor = window.Telegram?.WebApp?.initData
     try {
       const result = await miniRequest<LiteratureCatalog>('literature/catalog-compact')
-      return { ok: true as const, reading_topics: result.reading_topics ?? result.topics,
+      return { ok: true as const, reading_topics: result.reading_topics ?? result.topics, literature_topics: result.topics,
         literature_items: result.works.flatMap(({ entries, ...work }) => entries.map(entry => ({ ...work, ...entry }))) }
     } catch (failure) {
       // Worker and VPS releases can arrive in either order. A missing route
@@ -81,7 +81,7 @@ export const miniApi = {
       // preflight handler. Both paths are read-only and enforce the same proof.
       if (!(failure instanceof MiniAppError) || (failure.status !== 404 && failure.code !== 'network')) throw failure
       if (!actor || actor !== window.Telegram?.WebApp?.initData) throw new MiniAppError('telegram_required', 401)
-      const legacy = await miniRequest<{ ok: true; literature_items: MiniLiteratureItem[]; reading_topics?: MiniLiteratureTopic[] }>('literature/items')
+      const legacy = await miniRequest<MiniLiteratureCatalog>('literature/items')
       if (actor !== window.Telegram?.WebApp?.initData) throw new MiniAppError('telegram_required', 401)
       return legacy
     }
@@ -103,4 +103,5 @@ export const miniApi = {
 }
 
 export type MiniLiteratureTopic = { topic_id: string; title: string; module?: string; modules?: string[] }
+export type MiniLiteratureCatalog = { ok: true; literature_items: MiniLiteratureItem[]; reading_topics?: MiniLiteratureTopic[]; literature_topics?: MiniLiteratureTopic[] }
 export type MiniLiteratureItem = { type?: string; module?: string; book_search?: { query: string; url: string }; id: string; work_id?: string; topic_id: string; reading_topics?: { id: string; title: string }[]; reading_level?: string; prerequisites?: string[]; curriculum_topics?: { id: string; title: string }[]; title?: string; authors?: string[]; year?: number | null; why_read?: string; metadata_warnings?: string[]; importance?: 'basic' | 'important' | 'additional' | 'advanced' | null; importance_source?: 'teacher' | 'agent' | null; access_links?: { format: 'text' | 'audio'; provider: string; url: string; access: 'provider_terms'; access_modes?: ('free' | 'subscription' | 'purchase')[]; access_review?: string; checked_at: string }[]; source?: { title?: string; citation?: string }; user_state?: { reading_status: ReadingStatus; progress_percent: number | null; updated_at?: string } | null }

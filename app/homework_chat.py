@@ -30,8 +30,8 @@ def _path_token(path: tuple[str, ...]) -> str:
 def _paths(catalog):
     paths = {}
     for item in catalog:
-        full = (item["discipline"], item["topic"])
-        for depth in range(1, 3):
+        full = _item_path(item)
+        for depth in range(1, 4):
             path = full[:depth]
             token = _path_token(path)
             if token in paths and paths[token] != path:
@@ -40,10 +40,14 @@ def _paths(catalog):
     return paths
 
 
+def _item_path(item):
+    return (item["module"], item["discipline"], item.get("curriculum_topic", {}).get("title", item["topic"]))
+
+
 def _children(catalog, path):
     depth = len(path)
-    return sorted({(item["discipline"], item["topic"])[:depth + 1] for item in catalog
-                   if (item["discipline"], item["topic"])[:depth] == path})
+    return sorted({_item_path(item)[:depth + 1] for item in catalog
+                   if _item_path(item)[:depth] == path})
 
 
 def _list(conn, actor: int, *, navigation: str | None = None, page: int = 0):
@@ -56,7 +60,7 @@ def _list(conn, actor: int, *, navigation: str | None = None, page: int = 0):
             return "Раздел изменился. Обновите список через /homework.", InlineKeyboardMarkup([
                 [InlineKeyboardButton("Все домашние задания", callback_data="hw:list:all")]])
     catalog = [item for item in catalog
-               if (item["discipline"], item["topic"])[:len(path)] == path]
+               if _item_path(item)[:len(path)] == path]
     lines = ["<b>Домашние задания</b>", "Тест проверяет знания, а не выполнение эссе или упражнения.",
              "Зачёт — 80% в одной завершённой попытке.\n"]
     keyboard = []
@@ -66,11 +70,11 @@ def _list(conn, actor: int, *, navigation: str | None = None, page: int = 0):
         parent_page = _children(full_catalog, parent).index(path) // PAGE_SIZE
         back = ("hw:nav:" + _path_token(parent) if parent else "hw:list:all") + f":{parent_page}"
         keyboard.append([InlineKeyboardButton("Назад", callback_data=back)])
-    if len(path) < 2 and catalog:
+    if len(path) < 3 and catalog:
         children = _children(catalog, path)
         page = max(0, min(page, (len(children) - 1) // PAGE_SIZE))
         start = page * PAGE_SIZE
-        lines.append(f"{'Дисциплины' if not path else 'Темы'} {start + 1}–{min(start + PAGE_SIZE, len(children))} из {len(children)}.")
+        lines.append(f"{('Модули', 'Дисциплины', 'Темы')[len(path)]} {start + 1}–{min(start + PAGE_SIZE, len(children))} из {len(children)}.")
         for index, child in enumerate(children[start:start + PAGE_SIZE], start + 1):
             title = child[-1]
             lines.append(f"{index}. {escape(title)}")

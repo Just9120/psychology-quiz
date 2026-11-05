@@ -84,8 +84,13 @@ def test_chat_literature_write_is_shared_with_linked_pwa_and_miniapp_but_not_oth
     csrf = linked(web)
     command = _update()
     asyncio.run(literature_chat.literature_command(command, _context(web)))
-    topic_button = command.effective_message.reply_text.call_args.kwargs["reply_markup"].inline_keyboard[0][0]
-    assert topic_button.callback_data.startswith("lit:t:")
+    view = command.effective_message.reply_text.call_args
+    for _ in range(2):
+        button = next(button for row in view.kwargs['reply_markup'].inline_keyboard for button in row
+                      if button.callback_data.startswith('lit:n:') and button.text != 'Назад')
+        view = _click(web, 42, button.callback_data)
+    topic_button = next(button for row in view.kwargs['reply_markup'].inline_keyboard for button in row
+                        if button.callback_data.startswith('lit:c:'))
     topic = _click(web, 42, topic_button.callback_data)
     item_button = topic.kwargs["reply_markup"].inline_keyboard[0][0]
     item = _click(web, 42, item_button.callback_data)
@@ -94,6 +99,9 @@ def test_chat_literature_write_is_shared_with_linked_pwa_and_miniapp_but_not_oth
     saved = _click(web, 42, read_button.callback_data)
     assert "Статус: Прочитано" in saved.args[0]
     assert "%" not in saved.args[0]
+    back = saved.kwargs['reply_markup'].inline_keyboard[-1][0].callback_data
+    assert back == topic_button.callback_data + ':a'
+    assert 'Фильтр: Все статусы' in _click(web, 42, back).args[0]
 
     selected_id = next(item["id"] for item in load_literature_items()
                        if literature_chat._token(item["id"]) == item_button.callback_data.split(":")[2])

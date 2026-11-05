@@ -104,6 +104,9 @@ def catalog_for_actor(conn, actor_user_id: int) -> dict:
         completed = any(passed(int(row[3]), int(row[4])) for row in finished)
         active = next((row for row in attempts if row[2] == "in_progress"), None)
         output.append({"id": item["id"], "title": item["title"], "module": item["module"],
+                       "discipline_id": item["discipline_id"],
+                       "curriculum_topic": {"id": item["topic_id"],
+                                            "title": curriculum["topics"][item["topic_id"]]["title"]},
                        "discipline": curriculum["disciplines"][item["discipline_id"]]["title"],
                        "topic": item["title"],
                        "description": item["description"], "question_count": len(item["question_ids"]),

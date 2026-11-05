@@ -6,6 +6,8 @@ import { readRoute, writeRoute } from './navigation'
 import { ReadingOrder } from './ReadingOrder'
 import { ReadingSummary } from './ReadingSummary'
 import { BookSearch } from './BookSearch'
+import { StudyFilters } from './StudyFilters'
+import { literaturePaths, matchesStudy, studyChoices, type StudyScope } from './studyScope'
 import { api, ApiError } from './api'
 import type { LiteratureCatalog, LiteratureEntry, ReadingStatus } from './types'
 
@@ -22,6 +24,8 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
   const heading = useRef<HTMLHeadingElement>(null)
   const returnTo = useRef<{ y: number; element: HTMLElement | null } | null>(null)
   const [topic, setTopic] = useState(initialParams.get('topic') ?? '')
+  const [studyScope, setStudyScope] = useState<StudyScope>({ module: initialParams.get('study_module') ?? '',
+    discipline: initialParams.get('study_discipline') ?? '', topic: initialParams.get('study_topic') ?? '' })
   const [statusFilter, setStatusFilter] = useState<ReadingStatus | ''>((['not_started', 'in_progress', 'read', 'deferred'].includes(initialParams.get('status') ?? '') ? initialParams.get('status') : '') as ReadingStatus | '')
   const [workId, setWorkId] = useState<string | null>(initialParams.get('book'))
   const [entryId, setEntryId] = useState<string | null>(initialParams.get('entry'))
@@ -31,8 +35,9 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
   const work = catalog.works.find(item => item.work_id === workId)
   const entry = work?.entries.find(item => item.id === entryId) ?? work?.entries[0]
   const readingTopics = catalog.reading_topics ?? catalog.topics
-  const inScope = (link: LiteratureEntry) => !topic || (link.reading_topics
-    ? link.reading_topics.some(item => item.id === topic) : link.topic_id === topic)
+  const study = studyChoices(catalog.works.flatMap(work => work.entries.flatMap(link => literaturePaths(link, catalog.topics))), studyScope)
+  const inScope = (link: LiteratureEntry) => matchesStudy(literaturePaths(link, catalog.topics), study.scope)
+    && (!topic || (link.reading_topics ? link.reading_topics.some(item => item.id === topic) : link.topic_id === topic))
   const matches = (link: LiteratureEntry) => inScope(link)
     && (!statusFilter || (link.user_state?.reading_status ?? 'not_started') === statusFilter)
   const visible = catalog.works.filter(item => item.entries.some(matches) && `${item.title} ${item.authors.join(' ')}`.toLocaleLowerCase('ru').includes(query.trim().toLocaleLowerCase('ru')))
@@ -40,7 +45,8 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
 
   function route(overrides: Record<string, string | null> = {}, replace = false) {
     const params = new URLSearchParams()
-    const values = { book: workId, entry: entryId, topic, status: statusFilter, q: query, ...overrides }
+    const values = { book: workId, entry: entryId, topic, status: statusFilter, q: query,
+      study_module: study.scope.module, study_discipline: study.scope.discipline, study_topic: study.scope.topic, ...overrides }
     Object.entries(values).forEach(([key, value]) => { if (value) params.set(key, value) })
     if (readRoute()?.view === 'literature') writeRoute('literature', params, replace)
   }
@@ -49,6 +55,7 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
     if (current?.view !== 'literature') return
     setWorkId(current.params.get('book')); setEntryId(current.params.get('entry'))
     setTopic(current.params.get('topic') ?? ''); setQuery(current.params.get('q') ?? '')
+    setStudyScope({ module: current.params.get('study_module') ?? '', discipline: current.params.get('study_discipline') ?? '', topic: current.params.get('study_topic') ?? '' })
     const filter = current.params.get('status') ?? ''
     setStatusFilter((['not_started', 'in_progress', 'read', 'deferred'].includes(filter) ? filter : '') as ReadingStatus | '')
   }, [locationVersion])
@@ -116,7 +123,8 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
       </form>
     </article>}<div hidden={Boolean(work && entry)}>
       <label className="field">Поиск по названию или автору<input type="search" value={query} onChange={event => { setQuery(event.target.value); route({ q: event.target.value }, true) }} placeholder="Название или автор" /></label>
-      <div className="literature-filters"><ChoiceMenu label="Тема" value={topic} disabled={busy} onChange={value => { setTopic(value); route({ topic: value }, true) }} options={[{ value: '', label: 'Все темы' }, ...readingTopics.map(item => ({ value: item.topic_id, label: item.title }))]} />
+      <StudyFilters choices={study} busy={busy} onChange={scope => { setStudyScope(scope); route({ study_module: scope.module, study_discipline: scope.discipline, study_topic: scope.topic }, true) }} />
+      <div className="literature-filters"><ChoiceMenu label="Направление чтения" value={topic} disabled={busy} onChange={value => { setTopic(value); route({ topic: value }, true) }} options={[{ value: '', label: 'Все направления' }, ...readingTopics.map(item => ({ value: item.topic_id, label: item.title }))]} />
         <ChoiceMenu label="Фильтр статуса чтения" value={statusFilter} disabled={busy} onChange={value => { setStatusFilter(value as ReadingStatus | ''); route({ status: value }, true) }} options={[{ value: '', label: 'Все статусы' }, ...Object.entries(statuses).map(([value, label]) => ({ value, label }))]} /></div>
       {!query.trim() && <><ReadingSummary showActions={!statusFilter} allItems={catalog.works.flatMap(work => work.entries.map(link => ({ ...link, work_id: work.work_id, title: work.title, authors: work.authors, type: work.type })))} items={summaryItems} busy={busy} onSelect={openEntry} />
       <ReadingOrder items={summaryItems} allItems={catalog.works.flatMap(item => item.entries.map(link => ({ ...link, work_id: item.work_id, title: item.title, authors: item.authors, type: item.type })))} busy={busy} onSelect={openEntry} /></>}

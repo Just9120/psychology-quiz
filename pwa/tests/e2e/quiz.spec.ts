@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test'
+import { scopedQuiz, scopeHomework, scopeLiterature } from '../study-navigation'
 
 async function chooseMenu(page: Page, field: import('@playwright/test').Locator, value: string) {
   await field.click()
@@ -33,9 +34,9 @@ test('styled topic menus and reading cards work by keyboard and touch without ov
   await expect(homework).toContainText(homeworkTopic)
   await expect(page.getByRole('listbox')).toHaveCount(0)
   await navigate(page, 'Литература')
-  const topics = page.getByRole('combobox', { name: 'Тема', exact: true })
+  const topics = page.getByRole('combobox', { name: 'Направление чтения', exact: true })
   await topics.click()
-  const topicSearch = page.getByRole('searchbox', { name: 'Поиск: Тема', exact: true })
+  const topicSearch = page.getByRole('searchbox', { name: 'Поиск: Направление чтения', exact: true })
   await topicSearch.fill('мозг')
   await expect(page.getByRole('option')).toHaveCount(1)
   await topicSearch.press('Enter')
@@ -145,7 +146,7 @@ test('reading catalog shares a work status across themes, lost save and reload',
     && catalog.works.filter(other => other.title === item.title).length === 1)!
   expect(work, 'a published work spans independent reading themes').toBeTruthy()
   const [first, second] = work.entries[0].reading_topics.map(item => item.id)
-  await chooseMenu(page, page.getByLabel('Тема', { exact: true }), first)
+  await chooseMenu(page, page.getByLabel('Направление чтения', { exact: true }), first)
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page, first)}`)).toBeVisible()
   await page.locator('.reading-order > summary').click()
   await expect(page.locator('.reading-stage[open] > ol').first()).toBeVisible()
@@ -161,14 +162,14 @@ test('reading catalog shares a work status across themes, lost save and reload',
   await page.getByRole('button', { name: 'Обновить каталог и прогресс' }).click()
   await expect(page.getByLabel('Статус чтения')).toHaveAttribute('value', 'in_progress')
   await page.getByRole('button', { name: '← К списку литературы' }).click()
-  await chooseMenu(page, page.getByLabel('Тема', { exact: true }), second)
+  await chooseMenu(page, page.getByLabel('Направление чтения', { exact: true }), second)
   await page.locator('.literature-title').filter({ hasText: title }).click()
   await expect(page.getByLabel('Статус чтения')).toHaveAttribute('value', 'in_progress')
   await chooseMenu(page, page.getByLabel('Статус чтения'), 'read')
   await page.getByRole('button', { name: 'Сохранить чтение' }).click()
   await expect(page.getByText('Прогресс чтения сохранён.')).toBeVisible()
   await page.getByRole('button', { name: '← К списку литературы' }).click()
-  await chooseMenu(page, page.getByLabel('Тема', { exact: true }), first)
+  await chooseMenu(page, page.getByLabel('Направление чтения', { exact: true }), first)
   await page.locator('.literature-title').filter({ hasText: title }).click()
   await expect(page.getByLabel('Статус чтения')).toHaveAttribute('value', 'read')
   await page.getByText('Библиографическая запись', { exact: true }).click()
@@ -902,6 +903,7 @@ test('canonical new topics and ABC homework work with durable case feedback', as
     await expect(page.getByRole('button', { name: 'Начать тест по терминам' })).toBeEnabled()
   }
   await navigate(page, 'Домашние задания')
+  await scopeHomework(page)
   const card = page.locator('.homework-card').filter({ has: page.getByRole('heading', { name: 'ABC-разбор и дневник наблюдений', exact: true }) })
   await expect(card).toContainText('не подтверждает выполнение самонаблюдения')
   await card.getByRole('button', { name: 'Начать тест · 5 вопросов', exact: true }).click()
@@ -934,4 +936,8 @@ test('canonical new topics and ABC homework work with durable case feedback', as
     await expect(page.locator('.literature-title').filter({ hasText: title })).toBeVisible()
   }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+  await scopeLiterature(page)
+  await page.screenshot({ path: `test-results/study-literature-${testInfo.project.name}.png`, fullPage: true })
+  await navigate(page, 'Квиз по психологии')
+  await scopedQuiz(page, '/web/quiz/setup', `test-results/study-quiz-${testInfo.project.name}.png`)
 })
