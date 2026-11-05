@@ -7,6 +7,41 @@ from app.config import load_settings
 from app.main import run_application
 
 
+def test_pinned_tornado_serves_real_ptb_webhook_and_enforces_secret_without_telegram_network():
+    import asyncio
+    from telegram import Bot
+    from telegram.ext._utils.webhookhandler import WebhookAppClass
+    from tornado.httpclient import AsyncHTTPClient, HTTPRequest
+    from tornado.httpserver import HTTPServer
+    from tornado.netutil import bind_sockets
+
+    async def exercise():
+        updates = asyncio.Queue()
+        application = WebhookAppClass('/synthetic-webhook', Bot('123:synthetic-only'), updates,
+                                      secret_token='synthetic-webhook-secret')
+        sockets = bind_sockets(0, address='127.0.0.1')
+        port = sockets[0].getsockname()[1]
+        server = HTTPServer(application, max_body_size=16384)
+        server.add_sockets(sockets)
+        client = AsyncHTTPClient(force_instance=True)
+        try:
+            for secret, expected in [(None, 403), ('wrong-secret', 403), ('synthetic-webhook-secret', 200)]:
+                headers = {'Content-Type': 'application/json'}
+                if secret is not None:
+                    headers['X-Telegram-Bot-Api-Secret-Token'] = secret
+                response = await client.fetch(HTTPRequest(f'http://127.0.0.1:{port}/synthetic-webhook',
+                    method='POST', headers=headers, body=b'{"update_id":123}',
+                    connect_timeout=2, request_timeout=2), raise_error=False)
+                assert response.code == expected
+            assert updates.qsize() == 1 and updates.get_nowait().update_id == 123
+        finally:
+            client.close()
+            server.stop()
+            await server.close_all_connections()
+
+    asyncio.run(exercise())
+
+
 def _render_log_calls(mock):
     rendered = []
     for call in mock.call_args_list:
