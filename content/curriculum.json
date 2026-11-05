@@ -9453,6 +9453,42 @@
       "topic_id": "t_082cd47dd86a",
       "item_sha256": "d06e7bfada2e398c9eed887aeba601f76ec51a49c733de37f599fd0b66d397d9",
       "locator": "private review:questions:m1_psyf_086"
+    },
+    "488a71bb9078fb910f1030849d10e8e1cb14cb5fb3d2b35b0fd07b12a3d93e91": {
+      "external_id": "cbt_practice_beliefs_and_conduct",
+      "topic_id": "t_ff4f6a25db3e",
+      "item_sha256": "d1dcafc33879de91eddaab7d35f5cbbbd7bf37b525134f815c8e7d9e0ea467ad",
+      "locator": "private certificate:questions:cbt_practice_beliefs_and_conduct"
+    },
+    "01fcaa9e783a40c490f0b7046d48ba77a88329d1665dd0bfd65c6ba593042fe0": {
+      "external_id": "intro_reflection_motive",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "14a2e90441203408dfdc20b5956106db453df069ec9954897a40fc99bf799589",
+      "locator": "private certificate:questions:intro_reflection_motive"
+    },
+    "6a66711a924cda30c56a0f8a0970b93f34d2de7dd8fd40f028fd0e3ce13fe78d": {
+      "external_id": "intro_reflection_resources",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "569c96c558e5c1a7a69481d641f7ac7068c0ef31e9a66afd01dae20807be2c64",
+      "locator": "private certificate:questions:intro_reflection_resources"
+    },
+    "b7f2fe3dec436d44b0206f37f10d8a39f4ad4ce28c0be1d2c7eb32fa4b3c70c6": {
+      "external_id": "intro_reflection_family",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "54ddf034fa34edc0dab108ee13d4e2973a85e24d1b8bef9f8896202fcea4aea3",
+      "locator": "private certificate:questions:intro_reflection_family"
+    },
+    "9da12155a02b7d6423d2de050f6a1604983abbb571d557b2e64e8f3ca61a8057": {
+      "external_id": "intro_reflection_private_answers",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "991e9569125e6d263705bd7345c6e00ecdecb560896cfc9e6ed6da132df82f5b",
+      "locator": "private certificate:questions:intro_reflection_private_answers"
+    },
+    "81d9ba924eb7b0f7c0e59b90a89052e571d678568d2071eb6d1e9b090f94b494": {
+      "external_id": "intro_reflection_future_learning",
+      "topic_id": "t_c17d1ae57018",
+      "item_sha256": "b7441720d34dc4e0aae8ca7adcb8db9932966f619872c6df10c06503b5706b98",
+      "locator": "private certificate:questions:intro_reflection_future_learning"
     }
   }
 }

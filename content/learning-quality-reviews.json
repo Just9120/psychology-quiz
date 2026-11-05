@@ -24457,9 +24457,9 @@
     },
     "questions:intro_reflection_motive": {
       "discipline_id": "vvedenie_v_professiyu",
-      "item_sha256": "fbf6d1bf0ebb3cc2797ccac7f3a9b569bf379f998d6422d923ea7d01febcfc85",
-      "reviewer": "bank-quality-20261025",
-      "reviewed_at": "2026-10-25",
+      "item_sha256": "14a2e90441203408dfdc20b5956106db453df069ec9954897a40fc99bf799589",
+      "reviewer": "project-closure-quality-six-20261105",
+      "reviewed_at": "2026-11-05",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -24479,14 +24479,14 @@
           "locator": "characters:11148:13600"
         }
       ],
-      "note": "Acknowledged recognition motive is material to examine influence on actions,not unsuitability,client approval as care quality,or socially desired selfpresentation. Start after held noble/nonfinancial true-motive assertion.",
-      "disposition": "keep"
+      "note": "Full new stem/options/key/explanation read and compared with the exact source passage; four plausible neighbouring tasks, one answer for the stated objective. No personal source case copied, no deterministic suitability verdict, clinical claim, disclosure obligation or completion certification. All earlier source/related holds remain in force. Exact full-body review after neighbouring-task comparison: no option presupposes a family-role repetition or motive effect; absence of an effect and exceptions remain possible. Other options address career choice/knowledge/feedback, not the stated observation task. Old scientific/related restrictions unchanged.",
+      "disposition": "fix"
     },
     "questions:intro_reflection_resources": {
       "discipline_id": "vvedenie_v_professiyu",
-      "item_sha256": "5a417a339be321a88bb37f4c9519f07aa58016154845adb21670cceea8079067",
-      "reviewer": "bank-quality-20261025",
-      "reviewed_at": "2026-10-25",
+      "item_sha256": "569c96c558e5c1a7a69481d641f7ac7068c0ef31e9a66afd01dae20807be2c64",
+      "reviewer": "project-closure-quality-six-20261105",
+      "reviewed_at": "2026-11-05",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -24506,14 +24506,14 @@
           "locator": "characters:11148:13600"
         }
       ],
-      "note": "Concrete observed skill/difficulty informs learning. General empathy confidence,one anxious moment or teacher resemblance does not establish competence or unsuitability.",
-      "disposition": "keep"
+      "note": "Full new stem/options/key/explanation read and compared with the exact source passage; four plausible neighbouring tasks, one answer for the stated objective. No personal source case copied, no deterministic suitability verdict, clinical claim, disclosure obligation or completion certification. All earlier source/related holds remain in force.",
+      "disposition": "fix"
     },
     "questions:intro_reflection_family": {
       "discipline_id": "vvedenie_v_professiyu",
-      "item_sha256": "9f803de0413693f8bda8fa7a8f4c8aa2aace483e8d25a06002531661c53e1b97",
-      "reviewer": "bank-quality-20261025",
-      "reviewed_at": "2026-10-25",
+      "item_sha256": "54ddf034fa34edc0dab108ee13d4e2973a85e24d1b8bef9f8896202fcea4aea3",
+      "reviewer": "project-closure-quality-six-20261105",
+      "reviewed_at": "2026-11-05",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -24533,14 +24533,14 @@
           "locator": "characters:11148:13600"
         }
       ],
-      "note": "Possible family-role influence is jointly/exploratorily considered,not full causal biography,competence proof or condemnation of past support. No actual student family history copied.",
-      "disposition": "keep"
+      "note": "Full new stem/options/key/explanation read and compared with the exact source passage; four plausible neighbouring tasks, one answer for the stated objective. No personal source case copied, no deterministic suitability verdict, clinical claim, disclosure obligation or completion certification. All earlier source/related holds remain in force. Exact full-body review after neighbouring-task comparison: no option presupposes a family-role repetition or motive effect; absence of an effect and exceptions remain possible. Other options address career choice/knowledge/feedback, not the stated observation task. Old scientific/related restrictions unchanged.",
+      "disposition": "fix"
     },
     "questions:intro_reflection_private_answers": {
       "discipline_id": "vvedenie_v_professiyu",
-      "item_sha256": "9dfb0737bd8fc05518e5781d41fe85b742cd29ad1d9f6ed70f76e1a2e0d66c49",
-      "reviewer": "bank-quality-20261025",
-      "reviewed_at": "2026-10-25",
+      "item_sha256": "991e9569125e6d263705bd7345c6e00ecdecb560896cfc9e6ed6da132df82f5b",
+      "reviewer": "project-closure-quality-six-20261105",
+      "reviewed_at": "2026-11-05",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -24560,14 +24560,14 @@
           "locator": "characters:11148:13600"
         }
       ],
-      "note": "Actual course explicitly allows personal answers to remain private. Quiz checks task understanding,not a suitability certificate,forced group disclosure,correct biography or collection of those answers.",
-      "disposition": "keep"
+      "note": "Full new stem/options/key/explanation read and compared with the exact source passage; four plausible neighbouring tasks, one answer for the stated objective. No personal source case copied, no deterministic suitability verdict, clinical claim, disclosure obligation or completion certification. All earlier source/related holds remain in force.",
+      "disposition": "fix"
     },
     "questions:intro_reflection_future_learning": {
       "discipline_id": "vvedenie_v_professiyu",
-      "item_sha256": "967bacdf6cc1ed586407d407d15dea0904c4fca073497e81827fffb0064ef425",
-      "reviewer": "bank-quality-20261025",
-      "reviewed_at": "2026-10-25",
+      "item_sha256": "b7441720d34dc4e0aae8ca7adcb8db9932966f619872c6df10c06503b5706b98",
+      "reviewer": "project-closure-quality-six-20261105",
+      "reviewed_at": "2026-11-05",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -24587,8 +24587,8 @@
           "locator": "characters:14900:16200"
         }
       ],
-      "note": "Monthly reflection yields a specific trainable clarification skill and later behavioural review;no zero-doubt competence criterion,fixed-characteristic professional exclusion or stronger untested explanation as progress.",
-      "disposition": "keep"
+      "note": "Full new stem/options/key/explanation read and compared with the exact source passage; four plausible neighbouring tasks, one answer for the stated objective. No personal source case copied, no deterministic suitability verdict, clinical claim, disclosure obligation or completion certification. All earlier source/related holds remain in force.",
+      "disposition": "fix"
     },
     "questions:intro_diary_observation": {
       "discipline_id": "vvedenie_v_professiyu",
@@ -25233,6 +25233,33 @@
         }
       ],
       "disposition": "add"
+    },
+    "questions:cbt_practice_beliefs_and_conduct": {
+      "discipline_id": "cognitive_behavioral_therapy",
+      "item_sha256": "d1dcafc33879de91eddaab7d35f5cbbbd7bf37b525134f815c8e7d9e0ea467ad",
+      "reviewer": "project-closure-quality-six-20261105",
+      "reviewed_at": "2026-11-05",
+      "meaning": "consistent",
+      "source_support": "supported",
+      "issues": [],
+      "checks": [
+        "meaning",
+        "answer",
+        "explanation",
+        "ambiguity",
+        "duplicates",
+        "sources"
+      ],
+      "sources": [
+        {
+          "source_id": "src_848b4a0d121455474c61ebf3633d79ea1a1a0f960a2b6b87dbccee08416e4ddb",
+          "modified_time": "2026-10-18T06:57:31.982Z",
+          "snapshot_sha256": "d1aa9cd2d36ee851f389cbb35e18b075a4a1a67f51e81fda88c71b61c5b76564",
+          "locator": "characters:6136:7238"
+        }
+      ],
+      "note": "Full new stem/options/key/explanation read and compared with the exact source passage; four plausible neighbouring tasks, one answer for the stated objective. No personal source case copied, no deterministic suitability verdict, clinical claim, disclosure obligation or completion certification. All earlier source/related holds remain in force.",
+      "disposition": "fix"
     }
   }
 }
