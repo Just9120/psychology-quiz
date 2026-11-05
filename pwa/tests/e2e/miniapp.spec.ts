@@ -424,8 +424,8 @@ test('canonical new bank reaches Mini App topics and structured homework cases',
   const choices = [1, 1, 1, 0, 3]
   for (let index = 0; index < choices.length; index++) {
     if (index === 4) {
-      await expect(page.locator('.question-heading')).toContainText('Клиент записал в дневнике')
-      await expect(page.locator('.question-heading')).not.toContainText(/вымышленн|выдуманн/i)
+      await expect(page.locator('.question-prompt')).toContainText('Клиент записал в дневнике')
+      await expect(page.locator('.question-prompt')).not.toContainText(/вымышленн|выдуманн/i)
       await page.screenshot({ path: `test-results/bank-quality-miniapp-${testInfo.project.name}-homework-case.png`, fullPage: true })
     }
     await page.getByRole('radio').nth(choices[index]).check()

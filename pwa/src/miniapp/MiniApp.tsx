@@ -276,6 +276,6 @@ export function MiniApp() {
         : !state || !options ? <section className="page-width panel empty-state"><h1>Не удалось загрузить обучение</h1><button className="button primary" disabled={busy} onClick={() => void run(loadInitial)}>Повторить загрузку</button></section>
         : page === 'setup' || state.state === 'setup' ? <QuizSetup options={options} busy={busy} activeSessionId={state.state === 'in_progress' ? state.session?.session_id ?? null : null} onStart={(setup, confirmed) => void run(() => start(setup, confirmed))} onResume={() => void run(refreshQuiz)} />
         : <QuizView state={state} feedback={feedback} feedbackQuestion={feedbackQuestion} selected={selected} pending={pending} busy={busy} onSelect={setSelected} onAnswer={choice => void run(() => answer(choice))} onNext={() => { setFeedback(null); setFeedbackQuestion(null); setSelected(null) }} onSetup={() => { setPage('setup'); setFeedback(null) }} onRefresh={() => void run(refreshQuiz)} />}
-    </main></div>
+    </main><footer className="workspace-footer"><a href="./third-party-notices.txt" target="_blank" rel="noopener noreferrer">Лицензии</a></footer></div>
   </div>
 }

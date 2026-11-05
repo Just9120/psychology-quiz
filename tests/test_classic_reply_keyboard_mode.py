@@ -407,6 +407,10 @@ class ClassicReplyKeyboardModeTests(unittest.TestCase):
         feedback = message.reply_text.call_args.args[0]
         self.assertIn("Не знаю", feedback)
         self.assertIn("Правильный ответ", feedback)
+        self.assertIn("Пробел знаний сохранён", feedback)
+        self.assertIn("<b>Ваш ответ:</b> Не знаю", feedback)
+        self.assertNotIn("Неверно", feedback)
+        self.assertNotIn("— —", feedback)
 
     def test_next_text_handling_requires_awaiting_next_state(self):
         next_state = _load_classic_text_next_state(

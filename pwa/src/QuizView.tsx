@@ -1,4 +1,5 @@
 import { Icon } from './Icon'
+import { QuestionPrompt } from './QuestionPrompt'
 import type { Answer, Feedback, Question, RunnerState } from './types'
 
 export function QuizView({ state, feedback, feedbackQuestion, selected, pending, busy, onSelect, onAnswer, onNext, onSetup, onRefresh, homeworkTitle }: {
@@ -21,12 +22,12 @@ export function QuizView({ state, feedback, feedbackQuestion, selected, pending,
     <progress className="quiz-progress" value={answered} max={Math.max(total, 1)} aria-label="Отвечено вопросов" />
     <article className={`panel question-panel ${feedback ? feedback.is_correct ? 'question-panel-correct' : 'question-panel-incorrect' : ''}`}>
       {feedback ? <><div className={`feedback-label ${feedback.is_correct ? 'correct' : 'incorrect'}`} role="status"><Icon name={feedback.is_correct ? 'check' : 'close'} />{feedback.is_correct ? 'Верно' : feedback.knowledge_gap ? 'Пробел знаний сохранён' : 'Разберём этот ответ'}</div>
-        <h1 className="question-heading">{question?.question_text ?? 'Продолжим с сохранённого ответа'}</h1>
+        <QuestionPrompt text={question?.question_text ?? 'Продолжим с сохранённого ответа'} number={question?.order_index} />
         <div className="feedback-answers"><p className={feedback.is_correct ? 'your-answer correct' : 'your-answer incorrect'}><span>Ваш ответ</span><strong>{feedback.selected_option_text ?? 'В старой попытке вариант ответа не сохранён'}</strong></p>{!feedback.is_correct && <p className="correct-answer"><span>Правильный ответ</span><strong>{feedback.correct_option_text}</strong></p>}</div>
         {feedback.explanation && <div className="explanation"><span className="eyebrow">ПОЧЕМУ ТАК</span><p>{feedback.explanation}</p></div>}
         {feedback.case_review && <section className="panel case-review" aria-label="Разбор кейса"><h2>Разбор кейса</h2><p><strong>Подход:</strong> {feedback.case_review.approach}</p><h3>Условия</h3><ul>{feedback.case_review.conditions.map((condition, index) => <li key={index}>{condition}</li>)}</ul><h3>Варианты действий</h3><ol>{feedback.case_review.option_rationales.map((reason, index) => <li key={index}>{reason}</li>)}</ol><p className="hint">{feedback.case_review.ambiguity}</p></section>}
         <div className="question-actions"><span className="saved-label"><Icon name="check" size={16} />Ответ сохранён</span><button className="button primary" disabled={busy} onClick={onNext}>{state.state === 'completed' ? 'Посмотреть результат' : 'Следующий вопрос'}<Icon name="arrow" /></button></div>
-      </> : question ? <><span className="eyebrow">ВЫБЕРИТЕ ОДИН ОТВЕТ</span><h1 className="question-heading">{question.question_text}</h1>
+      </> : question ? <><span className="eyebrow">ВЫБЕРИТЕ ОДИН ОТВЕТ</span><QuestionPrompt text={question.question_text} number={question.order_index} />
         <fieldset className="answer-options"><legend className="sr-only">Варианты ответа</legend>{question.options.map((option, index) => <label key={option.option_index} className={`answer-option ${selected === option.option_index ? 'selected' : ''}`}><input type="radio" name="answer" checked={selected === option.option_index} disabled={busy || pending !== null} onChange={() => onSelect(option.option_index)} /><span className="answer-letter">{index + 1}</span><span>{option.option_text}</span><span className="selection-indicator">{selected === option.option_index && <Icon name="check" size={14} />}</span></label>)}</fieldset>
         {pending && !busy && <div className="notice" role="status"><span>Подтверждение не получено. Повторим тот же ответ — второй раз он не засчитается.</span></div>}
         <div className="question-actions"><span className="hint">Можно обдумать ответ — время не ограничено.</span><button className="button secondary" disabled={busy || pending !== null} onClick={() => onAnswer(-1)}>Не знаю</button><button className="button primary" disabled={busy || (selected === null && pending === null)} onClick={() => onAnswer()}>{busy ? 'Сохраняем…' : pending ? 'Повторить отправку' : 'Проверить ответ'}<Icon name="arrow" /></button></div>

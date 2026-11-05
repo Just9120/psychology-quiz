@@ -8,6 +8,7 @@ from app.classic_quiz_view import (
     QUESTION_COUNT_CHOICES,
     build_category_keyboard,
     build_classic_answer_reply_keyboard,
+    build_classic_feedback_heading,
     build_classic_next_reply_keyboard,
     build_classic_reply_answer_detail_line,
     build_classic_reply_feedback_text,
@@ -1269,6 +1270,7 @@ def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, questi
             "status": submission.status,
             "is_correct": bool(submission.is_correct),
             "selected_option_label": "—" if saved_option_index == -1 else numeric_answer_label_for_option(options, saved_option_index),
+            "knowledge_gap": saved_option_index == -1,
             "selected_option_text": "Не знаю" if saved_option_index == -1 else str(selected_option["option_text"]),
             "correct_option_label": numeric_answer_label_for_option(options, correct_option_index),
             "correct_option_text": str(correct_option["option_text"]),
@@ -1560,6 +1562,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 return {
                     "status": submission.status,
                     "is_correct": bool(submission.is_correct),
+                    "knowledge_gap": submission.selected_option_index == -1,
                     "selected_option_text": "Не знаю" if submission.selected_option_index == -1 else str(selected_option["option_text"]),
                     "correct_option_text": str(correct_option["option_text"]),
                     "explanation": str(content["explanation"] or ""),
@@ -1614,7 +1617,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             _mark_repeated_tap(latency)
 
         is_correct = result["is_correct"]
-        result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
+        result_line = build_classic_feedback_heading(is_correct=is_correct, knowledge_gap=result.get("knowledge_gap", False))
         selected_text = result.get("selected_option_text")
         selected_line = (f"<b>Ваш ответ:</b> "
                          f"{render_reading_mode_text(selected_text, result['reading_mode'])}\n"

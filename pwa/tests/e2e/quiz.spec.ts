@@ -442,7 +442,7 @@ test('published theory, term and case work together and each kind can be selecte
   await page.getByRole('button', { name: 'Начать квиз', exact: true }).click()
   const kinds = new Set<string>()
   for (let step = 1; step <= 5; step++) {
-    const text = await page.locator('.question-heading').innerText()
+    const text = await page.locator('.question-prompt').innerText()
     kinds.add(text.includes('учебный термин') ? 'glossary' : text.includes('Вымышленный клиент') ? 'case' : 'theory')
     await page.getByRole('radio').first().check()
     await page.getByRole('button', { name: 'Проверить ответ' }).click()
@@ -465,7 +465,7 @@ test('published theory, term and case work together and each kind can be selecte
     }
     await page.getByRole('button', { name: 'Все', exact: true }).click()
     await page.getByRole('button', { name: 'Начать квиз', exact: true }).click()
-    await expect(page.locator('.question-heading')).toContainText(expected)
+    await expect(page.locator('.question-prompt')).toContainText(expected)
     const state = (await (await page.request.get('/web/quiz/state')).json()).runner_state
     expect(state.progress.total_questions).toBe(1)
     if (label === 'Кейс') {
@@ -908,8 +908,8 @@ test('canonical new topics and ABC homework work with durable case feedback', as
   const choices = [1, 1, 1, 0, 3] // One wrong answer, then four correct in this single attempt.
   for (let index = 0; index < choices.length; index++) {
     if (index === 4) {
-      await expect(page.locator('.question-heading')).toContainText('Клиент записал в дневнике')
-      await expect(page.locator('.question-heading')).not.toContainText(/вымышленн|выдуманн/i)
+      await expect(page.locator('.question-prompt')).toContainText('Клиент записал в дневнике')
+      await expect(page.locator('.question-prompt')).not.toContainText(/вымышленн|выдуманн/i)
       await page.screenshot({ path: `test-results/bank-quality-${testInfo.project.name}-homework-case.png`, fullPage: true })
     }
     await page.getByRole('radio').nth(choices[index]).check()

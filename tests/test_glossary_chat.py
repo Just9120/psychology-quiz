@@ -48,3 +48,18 @@ def test_chat_old_confirmation_does_not_replace_a_newer_attempt(bank, session, m
     asyncio.run(chat.glossary_callback(stale, ctx))
     assert 'Тест изменился' in stale.message.reply_text.call_args.args[0]
     assert call(bank, glossary_service.state)['session_id'] == replacement['session_id']
+
+
+def test_unknown_glossary_answer_and_resume_use_saved_gap_label(bank, session):
+    first, ctx = update(), context(bank)
+    asyncio.run(chat.glossary_command(first, ctx))
+    answer = update('Не знаю')
+    asyncio.run(chat.glossary_reply_text_answer_handler(answer, ctx))
+    for message in (answer, update()):
+        if message is not answer:
+            asyncio.run(chat.glossary_command(message, context(bank)))
+        text = message.message.reply_text.call_args.args[0]
+        assert 'Пробел знаний сохранён' in text
+        assert '<b>Ваш ответ:</b> Не знаю' in text
+        assert 'Правильный ответ' in text and 'Неверно' not in text
+    assert call(bank, glossary_service.state)['feedback']['selected_option_index'] == -1

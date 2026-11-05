@@ -90,11 +90,19 @@ def numeric_answer_label_for_option(options, option_index: int) -> str:
 
 def build_classic_reply_answer_detail_line(label: str, *, option_position_label: str, option_text: str, reading_mode: str) -> str:
     rendered_option_text = render_reading_mode_text(option_text, reading_mode)
-    return f"<b>{label}:</b> {option_position_label} — {rendered_option_text}"
+    position = f"{option_position_label} — " if option_position_label else ""
+    return f"<b>{label}:</b> {position}{rendered_option_text}"
+
+
+def build_classic_feedback_heading(*, is_correct: bool, knowledge_gap: bool = False) -> str:
+    if knowledge_gap:
+        return "<b>Пробел знаний сохранён</b>"
+    return "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
 
 def build_classic_reply_feedback_text(result: dict) -> str:
-    result_line = "<b>Верно ✅</b>" if result["is_correct"] else "<b>Неверно ❌</b>"
-    answer_lines = [build_classic_reply_answer_detail_line("Ваш ответ", option_position_label=str(result["selected_option_label"]), option_text=str(result["selected_option_text"]), reading_mode=str(result["reading_mode"]))]
+    gap = result.get("knowledge_gap", False)
+    result_line = build_classic_feedback_heading(is_correct=result["is_correct"], knowledge_gap=gap)
+    answer_lines = [build_classic_reply_answer_detail_line("Ваш ответ", option_position_label="" if gap else str(result["selected_option_label"]), option_text=str(result["selected_option_text"]), reading_mode=str(result["reading_mode"]))]
     if not result["is_correct"]:
         answer_lines.append(build_classic_reply_answer_detail_line("Правильный ответ", option_position_label=str(result["correct_option_label"]), option_text=str(result["correct_option_text"]), reading_mode=str(result["reading_mode"])))
     rendered_explanation = render_reading_mode_text(result["explanation"], result["reading_mode"])

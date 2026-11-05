@@ -312,6 +312,6 @@ export function App({ initialProof = null }: { initialProof?: MailProof | null }
             : !options || !state ? <section className="page-width panel empty-state"><h1>Подключимся к вашему прогрессу</h1><button className="button primary" disabled={busy} onClick={() => void run(loadAccount)}>Повторить загрузку</button></section>
               : view === 'setup' || state.state === 'setup' ? <QuizSetup options={options} busy={busy} activeSessionId={state.state === 'in_progress' ? state.session?.session_id ?? null : null} onStart={(setup, confirmed) => void run(() => start(setup, confirmed))} onResume={() => void run(refreshState)} />
                 : <QuizView state={state} feedback={feedback} feedbackQuestion={feedbackQuestion} selected={selected} pending={pending} busy={busy} onSelect={setSelected} onAnswer={choice => void run(() => answer(choice))} onNext={() => { setFeedback(null); setFeedbackQuestion(null); setSelected(null) }} onSetup={() => { setView('setup'); setFeedback(null) }} onRefresh={() => void run(refreshState)} />}
-    </main><footer className="workspace-footer">PsychologyAtlas <span>·</span> В своём темпе, с пониманием</footer></div>
+    </main><footer className="workspace-footer">PsychologyAtlas <span>·</span> В своём темпе, с пониманием <span>·</span> <a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Лицензии</a></footer></div>
   </div>
 }
