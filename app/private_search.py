@@ -29,8 +29,10 @@ MODEL_REPOSITORY = "qdrant/paraphrase-multilingual-MiniLM-L12-v2-onnx-Q"
 MODEL_REVISION = "faf4aa4225822f3bc6376869cb1164e8e3feedd0"
 MODEL_FILES = ("config.json", "model_optimized.onnx", "special_tokens_map.json",
                "tokenizer.json", "tokenizer_config.json")
-FASTEMBED_VERSION = "0.8.0"
-BASE_MODEL_IDENTITY = f"{MODEL}@{MODEL_REVISION}:fastembed-{FASTEMBED_VERSION}:mean-pooling"
+FASTEMBED_VERSION = "0.9.1"
+# This marker names the stored vector space, including its original producer.
+# Upgrade the runtime independently only after checking compatibility.
+BASE_MODEL_IDENTITY = f"{MODEL}@{MODEL_REVISION}:fastembed-0.8.0:mean-pooling"
 MODEL_IDENTITY = BASE_MODEL_IDENTITY + ":reviewed-neighbour-context-v1"
 INDEX_VERSION = "private-search-v3"
 DIMENSIONS = 384
@@ -307,8 +309,8 @@ def embedder():
     cache = os.environ.get("SEARCH_MODEL_CACHE", "/data/search-model-cache")
     try:
         # FastEmbed's named model otherwise follows the latest Hub revision.
-        # Pin both the ONNX/tokenizer bytes and pooling implementation used by
-        # stored vectors; a later change requires a deliberate index rebuild.
+        # Pin the ONNX/tokenizer bytes and use the reviewed runtime above.
+        # A change to the vector space requires a deliberate index rebuild.
         try:
             path = snapshot_download(repo_id=MODEL_REPOSITORY, revision=MODEL_REVISION,
                                      allow_patterns=MODEL_FILES, cache_dir=cache,
