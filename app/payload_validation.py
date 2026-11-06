@@ -1,4 +1,5 @@
 """Shared validation before either client adapter opens a write transaction."""
+import re
 
 
 def is_sqlite_integer(value: object, *, minimum: int = 0) -> bool:
@@ -12,12 +13,16 @@ def valid_quiz_setup(payload: dict) -> bool:
     difficulty = payload.get("difficulty")
     categories = payload.get("category_ids")
     kinds = payload.get("content_kinds")
+    topics = payload.get("topic_ids")
     return (
         isinstance(mode, str) and mode in {"single", "selected_mix", "all", "adaptive"}
         and (count is None or (type(count) is int and count in {5, 10, 15}))
         and isinstance(difficulty, str) and difficulty in {"any", "easy", "medium", "hard"}
         and isinstance(categories, list)
         and all(is_sqlite_integer(item, minimum=1) for item in categories)
+        and ("topic_ids" not in payload or isinstance(topics, list) and 0 < len(topics) <= 256
+             and all(isinstance(item, str) and re.fullmatch(r"(?:t_[0-9a-f]{12}|unclassified:[1-9][0-9]{0,18})", item) for item in topics)
+             and len(topics) == len(set(topics)))
         and ("content_kinds" not in payload or
              isinstance(kinds, list) and bool(kinds)
              and all(type(kind) is str and kind in {"theory", "glossary", "case"} for kind in kinds)

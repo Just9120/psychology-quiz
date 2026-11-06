@@ -4,6 +4,7 @@ from contextvars import ContextVar
 from functools import wraps
 import time
 from app.handler_latency import HandlerLatency
+from app.classic_quiz_view import build_classic_feedback_heading
 from app.bot_menu import (
     START_QUIZ_BUTTON_TEXT, READING_MODE_BUTTON_TEXT, GLOSSARY_BUTTON_TEXT, LITERATURE_BUTTON_TEXT, HIDE_MENU_BUTTON_TEXT,
     get_main_menu_keyboard,
@@ -104,7 +105,7 @@ async def _render(message, context, state):
         'status': 'awaiting_next' if state['state'] == 'feedback' else 'awaiting_answer'}
     if state['state'] == 'feedback':
         f = state['feedback']
-        text = ('<b>Верно ✅</b>' if f['is_correct'] else '<b>Неверно ❌</b>')
+        text = build_classic_feedback_heading(is_correct=f['is_correct'], knowledge_gap=f['selected_option_index'] == -1)
         text += f"\n\n<b>Ваш ответ:</b> {escape(f['selected_option_text'])}"
         if not f['is_correct']:
             text += f"\n<b>Правильный ответ:</b> {escape(f['correct_option_text'])}"

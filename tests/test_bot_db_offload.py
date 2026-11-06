@@ -748,20 +748,24 @@ class BotDbOffloadTests(unittest.TestCase):
     def test_quiz_mode_callback_branches_do_not_raise_nameerror_and_render_next_step(self):
         context = self._context()
 
-        categories = [{'id': 1, 'name': 'Cat'}]
+        navigation = [{'category_id': 1, 'title': 'Cat', 'modules': ['module1'],
+                       'topics': [{'id': 'unclassified:1', 'title': 'Общая тема', 'question_count': 5}]}]
+        calls = []
         async def fake_run_db_task(func, *args, **kwargs):
-            return categories
+            calls.append(func.__name__)
+            return navigation
+        message = SimpleNamespace(chat=SimpleNamespace(type='private'))
 
         with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task):
-            single_query = SimpleNamespace(data='qzmode:single', answer=AsyncMock(), edit_message_text=AsyncMock())
+            single_query = SimpleNamespace(data='qzmode:single', message=message, answer=AsyncMock(), edit_message_text=AsyncMock())
             single_update = SimpleNamespace(callback_query=single_query, effective_user=SimpleNamespace(id=1))
             asyncio.run(main.quiz_mode_callback(single_update, context))
 
-            all_query = SimpleNamespace(data='qzmode:all', answer=AsyncMock(), edit_message_text=AsyncMock())
+            all_query = SimpleNamespace(data='qzmode:all', message=message, answer=AsyncMock(), edit_message_text=AsyncMock())
             all_update = SimpleNamespace(callback_query=all_query, effective_user=SimpleNamespace(id=1))
             asyncio.run(main.quiz_mode_callback(all_update, context))
 
-            selected_mix_query = SimpleNamespace(data='qzmode:selected_mix', answer=AsyncMock(), edit_message_text=AsyncMock())
+            selected_mix_query = SimpleNamespace(data='qzmode:selected_mix', message=message, answer=AsyncMock(), edit_message_text=AsyncMock())
             selected_mix_update = SimpleNamespace(callback_query=selected_mix_query, effective_user=SimpleNamespace(id=1))
             asyncio.run(main.quiz_mode_callback(selected_mix_update, context))
 
@@ -771,18 +775,14 @@ class BotDbOffloadTests(unittest.TestCase):
         single_query.edit_message_text.assert_awaited()
         all_query.edit_message_text.assert_awaited()
         selected_mix_query.edit_message_text.assert_awaited()
-        single_query.edit_message_text.assert_awaited_with(
-            "Выберите категорию:",
-            reply_markup=main.build_category_keyboard(categories),
-        )
-        all_query.edit_message_text.assert_awaited_with(
-            "Выберите количество вопросов:",
-            reply_markup=main.build_question_count_keyboard("qcntall"),
-        )
-        selected_mix_query.edit_message_text.assert_awaited_with(
-            "Выберите темы для микса:",
-            reply_markup=main.build_selected_mix_keyboard(categories, set()),
-        )
+        self.assertEqual(calls, ['_load_navigation'] * 3)
+        for query in (single_query, selected_mix_query):
+            self.assertIn('Выберите модуль', query.edit_message_text.call_args.args[0])
+            markup = query.edit_message_text.call_args.kwargs['reply_markup']
+            self.assertEqual(markup.inline_keyboard[0][0].text, 'Модуль 1')
+            self.assertTrue(markup.inline_keyboard[0][0].callback_data.startswith('qn:nav:'))
+        self.assertIn('Выберите количество вопросов', all_query.edit_message_text.call_args.args[0])
+        self.assertEqual(context.user_data['study_quiz_navigation']['mode'], 'selected_mix')
 
 
     def test_main_registers_imported_classic_quiz_handlers_and_patterns(self):

@@ -37,7 +37,7 @@ from telegram.ext import (
     filters,
 )
 
-from app.config import load_settings
+from app.config import load_settings, validate_webhook_secret
 from app.owner_stats import get_owner_period_stats
 from app.web_link_handlers import link_command, confirm_link_callback
 from app.logging_config import configure_app_logging
@@ -57,6 +57,7 @@ from app.glossary_handlers import (
     glossary_reply_text_next_handler,
 )
 from app.literature_chat import literature_command, literature_callback
+from app.study_quiz_chat import study_quiz_callback
 from app.homework_chat import BUTTON_TEXT as HOMEWORK_BUTTON_TEXT, homework_command, homework_callback
 from app.privacy_chat import delete_data_command, confirm_delete_data_command
 from app.db import (
@@ -869,6 +870,7 @@ def _webhook_url_path(settings) -> str:
 
 def run_application(application: Application, settings) -> None:
     if settings.telegram_update_mode == "webhook":
+        validate_webhook_secret(settings.telegram_webhook_secret_token)
         safe_host = _safe_webhook_host_for_log(settings)
         safe_path = _safe_webhook_path_for_log(settings)
         logger.info(
@@ -1008,6 +1010,7 @@ def main() -> None:
         )
     )
     application.add_handler(CallbackQueryHandler(literature_callback, pattern=r"^lit:"))
+    application.add_handler(CallbackQueryHandler(study_quiz_callback, pattern=r"^qn:"))
     application.add_handler(
         CallbackQueryHandler(quiz_mode_callback, pattern=r"^qzmode:(single|selected_mix|all)$")
     )

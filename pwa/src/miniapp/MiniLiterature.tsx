@@ -5,6 +5,8 @@ import { materialType } from '../materialType'
 import { ReadingOrder } from '../ReadingOrder'
 import { ReadingSummary } from '../ReadingSummary'
 import { BookSearch } from '../BookSearch'
+import { StudyFilters } from '../StudyFilters'
+import { emptyStudyScope, literaturePaths, matchesStudy, studyChoices } from '../studyScope'
 import type { ReadingStatus } from '../types'
 import { miniApi, type MiniLiteratureItem, type MiniLiteratureTopic } from './api'
 
@@ -12,17 +14,20 @@ const labels: Record<ReadingStatus, string> = { not_started: 'Не начато'
 const importanceLabels = { basic: 'Базовая', important: 'Важная', additional: 'Дополнительная', advanced: 'Углублённая' } as const
 const importanceSources = { teacher: 'приоритет преподавателя', agent: 'рекомендация агента' } as const
 
-export function MiniLiterature({ initial, topics, busy, run, onItems, onInvalidate }: {
+export function MiniLiterature({ initial, topics, studyTopics = [], busy, run, onItems, onInvalidate }: {
   initial: MiniLiteratureItem[]; topics: MiniLiteratureTopic[]; busy: boolean
+  studyTopics?: MiniLiteratureTopic[]
   run: (action: () => Promise<void>) => Promise<void>
-  onItems?: (items: MiniLiteratureItem[]) => void
+  onItems?: (items: MiniLiteratureItem[], disciplines?: MiniLiteratureTopic[]) => void
   onInvalidate?: () => void
 }) {
   const [query, setQuery] = useState('')
   const heading = useRef<HTMLHeadingElement>(null)
   const returnTo = useRef<{ y: number; id: string; element: HTMLElement | null } | null>(null)
   const [items, setItems] = useState(initial)
+  const [disciplines, setDisciplines] = useState(studyTopics.length ? studyTopics : topics)
   const [topic, setTopic] = useState('')
+  const [studyScope, setStudyScope] = useState(emptyStudyScope)
   const [statusFilter, setStatusFilter] = useState<ReadingStatus | ''>('')
   const [selected, setSelected] = useState<string | null>(null)
   const [status, setStatus] = useState<ReadingStatus>('not_started')
@@ -31,7 +36,9 @@ export function MiniLiterature({ initial, topics, busy, run, onItems, onInvalida
   const item = items.find(entry => entry.id === selected)
   const readingTopics = [...new Map(items.flatMap(entry => entry.reading_topics ?? []).map(link => [link.id, { topic_id: link.id, title: link.title }])).values()]
   const navigationTopics = topics.some(entry => entry.topic_id.startsWith('reading_')) ? topics : readingTopics.length ? readingTopics : topics
-  const scoped = items.filter(entry => !topic || (entry.reading_topics ? entry.reading_topics.some(link => link.id === topic) : entry.topic_id === topic))
+  const study = studyChoices(items.flatMap(entry => literaturePaths(entry, disciplines)), studyScope)
+  const scoped = items.filter(entry => matchesStudy(literaturePaths(entry, disciplines), study.scope)
+    && (!topic || (entry.reading_topics ? entry.reading_topics.some(link => link.id === topic) : entry.topic_id === topic)))
   const visible = [...new Map(scoped.filter(entry => (!statusFilter || (entry.user_state?.reading_status ?? 'not_started') === statusFilter) && [entry.title ?? '', ...(entry.authors ?? [])].join(' ').toLocaleLowerCase('ru').includes(query.trim().toLocaleLowerCase('ru'))).map(entry => [entry.work_id ?? entry.id, entry])).values()]
   useLayoutEffect(() => {
     if (selected) { heading.current?.focus({ preventScroll: true }); heading.current?.scrollIntoView?.({ block: 'start' }) }
@@ -44,7 +51,8 @@ export function MiniLiterature({ initial, topics, busy, run, onItems, onInvalida
   }
   async function refresh() {
     const result = await miniApi.literatureItems()
-    setItems(result.literature_items); onItems?.(result.literature_items); setUncertain(false)
+    if (result.literature_topics) setDisciplines(result.literature_topics)
+    setItems(result.literature_items); onItems?.(result.literature_items, result.literature_topics); setUncertain(false)
     const updated = result.literature_items.find(entry => entry.id === selected)
     if (updated) choose(updated)
   }
@@ -78,7 +86,8 @@ export function MiniLiterature({ initial, topics, busy, run, onItems, onInvalida
         <button className="button primary" type="submit" disabled={busy || uncertain}>Сохранить чтение</button>{saved && <p role="status">Отметка сохранена.</p>}
       </form></article>}<div hidden={Boolean(item)}>
       <label className="field">Поиск по названию или автору<input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Название или автор" /></label>
-      <div className="literature-filters"><ChoiceMenu label="Тема" value={topic} disabled={busy} onChange={setTopic} options={[{ value: '', label: 'Все темы' }, ...navigationTopics.map(entry => ({ value: entry.topic_id, label: entry.title }))]} />
+      <StudyFilters choices={study} busy={busy} onChange={setStudyScope} />
+      <div className="literature-filters"><ChoiceMenu label="Направление чтения" value={topic} disabled={busy} onChange={setTopic} options={[{ value: '', label: 'Все направления' }, ...navigationTopics.map(entry => ({ value: entry.topic_id, label: entry.title }))]} />
         <ChoiceMenu label="Фильтр статуса чтения" value={statusFilter} disabled={busy} onChange={value => setStatusFilter(value as ReadingStatus | '')} options={[{ value: '', label: 'Все статусы' }, ...Object.entries(labels).map(([value, label]) => ({ value, label }))]} /></div>
       {!query.trim() && <><ReadingSummary showActions={!statusFilter} allItems={items} items={scoped} busy={busy} onSelect={id => choose(items.find(entry => entry.id === id)!)} />
       <ReadingOrder items={scoped} allItems={items} busy={busy} onSelect={id => choose(items.find(entry => entry.id === id)!)} /></>}

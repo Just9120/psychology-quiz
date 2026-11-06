@@ -2,7 +2,7 @@
 
 `psychology-quiz` — репозиторий PsychologyAtlas. Согласованная цель — учебная платформа с PWA, тестами (включая домашние задания в формате тестов), повторением, прогрессом и source-backed учебными материалами. Требования и AC находятся в [спецификации](docs/project-spec.md), состояние реализации — в [плане](docs/delivery-plan.md). Поставка раздела домашних заданий и её Evidence описаны в плане.
 
-Текущая реализация — Telegram-бот на Python/FastAPI, Mini App и самостоятельный PWA quiz client на React/TypeScript/Vite. Клиенты используют общий backend и банк. Owner PWA опубликована на `psy.cloud-nodes.net`; доступ и поставка описаны в [PWA procedure](docs/pwa-delivery.md), текущая приёмка — в [плане](docs/delivery-plan.md#current-audit--audit-review-20261021). Backend поддерживает SQLite и PostgreSQL; [процедура переноса](docs/postgres-storage.md) сохраняет user state и включает verified backup/restore. Фактический cutover требует operator records. Внутренний pgvector/search готовится отдельно от публичного приложения; его включение требует stateful gates из [операторской процедуры](docs/private-search-operations.md).
+Текущая реализация — Telegram-бот на Python/FastAPI, Mini App и самостоятельный PWA quiz client на React/TypeScript/Vite. Клиенты используют общий backend и банк. Owner PWA опубликована на `psy.cloud-nodes.net`; доступ и поставка описаны в [PWA procedure](docs/pwa-delivery.md), текущая приёмка — в [плане](docs/delivery-plan.md#current-goal--project-closure-20261105). Backend поддерживает SQLite и PostgreSQL; [процедура переноса](docs/postgres-storage.md) сохраняет user state и включает verified backup/restore. Фактический cutover требует operator records. Внутренний pgvector/search готовится отдельно от публичного приложения; его включение требует stateful gates из [операторской процедуры](docs/private-search-operations.md).
 
 Текущее состояние продукта: утверждённые вопросы и термины хранятся в `content/`; актуальный состав банка проверяют canonical validators ниже. Вопросы без достаточного подтверждения сохраняются для истории, но снимаются с новой выдачи. Текущая Goal и подтверждённая история поставки домашних заданий указаны в [плане](docs/delivery-plan.md).
 
@@ -50,7 +50,7 @@ Production can run in either long polling or webhook mode. Long polling remains 
 
 Repository-visible GitHub Actions are split by responsibility:
 - open PR and merge approved changes to `main`;
-- CI validation runs on pull requests, pushes to `main`, and manual `workflow_dispatch`; [scope classifier](scripts/ci_scope.py) проверяет полный diff до PostgreSQL/browser setup. Только README/AGENTS/ci-cd-rules и Markdown в docs допускают пропуск runtime regressions. Required jobs остаются активными, ошибка classifier останавливает их; code/content/Vault/dependency/workflow changes и manual runs выполняют полный набор;
+- CI validation runs on pull requests, pushes to `main`, and manual `workflow_dispatch`; [scope classifier](scripts/ci_scope.py) проверяет полный diff до PostgreSQL/browser setup. Только README/AGENTS/ci-cd-rules и Markdown в docs допускают пропуск runtime regressions. Тогда backend устанавливает runtime lock без неиспользуемого pytest; неизвестный выбор сохраняет полный dev lock. Pip cache привязан к lockfiles, установка всегда проверяет hashes. Validators/DB smoke, frontend checks/build и exact-revision artifacts сохраняются. Required jobs остаются активными, ошибка classifier останавливает их; code/content/Vault/dependency/workflow changes и manual runs выполняют полный набор;
 - routine delivery follows [AGENTS.md](AGENTS.md) and [project procedures](docs/miniapp-deployment-qa.md); workflow/settings changes require their own authorized scope;
 - CI must not deploy, access production SSH, or mutate production runtime state;
 - deployment/CD uses Repository Secrets and the configured target environment; after merge, verify deployed commit/runtime state when deployment matters;
@@ -119,6 +119,22 @@ python "<скачанный-снимок>/restore_cache.py" --manifest "<ска�
 
 Для visual/original verification скачайте соответствующие части и повторите ту же команду с `--layers originals,renders`. Helper проверяет SHA/size частей, собранных ZIP и каждого объекта, отвергает escape paths/неожиданные члены архива/конфликтующие существующие файлы. Он создаёт `objects/`, читаемый `view/`, `PATHS.json` и `cache-state.json`; данные по historical absolute paths не записывает, источники/досье/holds не меняет и approvals не создаёт. `complete_snapshot:false` после core-only восстановления ожидаем: недостающие слои нельзя выдавать за проверенные. Старые scripts внутри view являются историческими данными; для восстановления исполняется только проверенный recovery helper.
 
+Адресное восстановление отдельного материала поддерживает [source_material_cache.py](scripts/source_material_cache.py). В закрытой папке результатов готовность набора подтверждает `MATERIAL_CACHE_READY.json`. Сверьте SHA-256 индекса с полем `index.sha256` в отметке готовности. Индекс связывает редакции источников с пакетами и содержит их проверенные размеры и хеши. Реальные ID и точные связи хранятся в закрытом индексе.
+
+После выбора записи в индексе скачайте её ZIP и передайте проверенный SHA-256. Если у записи есть `revision_overlay`, восстановите его в отдельный каталог и сверьте `requires_base_package` с базовым пакетом.
+
+```bash
+python scripts/source_material_cache.py restore --package data/selected-material.zip --package-sha256 <проверенный-SHA256> --source-id <ID-из-private-index> --output data/selected-material
+```
+
+Команда требует новый ignored/private destination, проверяет весь package digest, source identity, размеры/хеши объектов и переносимые paths до активации папки. Она сохраняет exact bytes и материал с processing/journal/related holds; файлы архива не исполняются. Подмена пакета, чужой source ID, повреждение или существующая папка останавливают восстановление. Missing layers и неполный historical lineage остаются явными ограничениями, а не разрешением публикации.
+
+Для подготовки нового per-source пакета используйте private dossier с exact `source_id`, `revision`, `processing`, `files` (logical paths pinned snapshot), `scientific_or_publication_approval:false` и сохранёнными данными профиля/удержаний. `package` читает исходные split archives на месте и проверяет каждый выбранный объект; не создаёт ещё один общий ZIP и не распаковывает весь слой:
+
+```bash
+python scripts/source_material_cache.py package --manifest data/cache-manifest.json --manifest-sha256 <проверенный-SHA256> --parts <каталог-частей> --dossier data/material-dossier.json --package data/material.zip
+```
+
 После восстановления:
 
 1. Через `cache-manifest.json` → `authoritative_paths` откройте текущие inventory, journal, processing и accepted indexes. Historical references разрешайте через `PATHS.json`, сохраняя оригинальные bytes/fingerprints; immutable досье не редактируются ради нового пути.
@@ -144,7 +160,7 @@ Discovery schema v2 reports `uncaptured_source_ids` / `uncaptured_in_batch`: fil
 из корня репозитория. Manifest содержит `schema_version: 1` и `sources` с
 `source_id` и `content` (UTF-8 файл непосредственно в ignored `data/`). Команда
 сверяет revision и SHA извлечений, сохраняет приватные фрагменты/координаты,
-кандидатов существующих works и явный список ещё не прочитанных источников.
+кандидатов существующих works и список источников, отсутствующих в переданном capture manifest.
 Результат — очередь проверки, а не approval: совпадение названия не объединяет
 works, не публикует книги и не меняет личные отметки. Неоднозначные названия,
 неизвестные книги и предполагаемые упоминания проверяются до изменения каталога.
@@ -195,7 +211,7 @@ Browser tests сами поднимают изолированный backend н�
 
 ## Личная база Obsidian
 
-База знаний из проверенных источников, с русскими именами страниц и смысловыми связями, поставляется в [vault/](vault/README.md) единого репозитория независимо от visibility. Приватные источники и досье остаются вне Git. Команды экспорта, проверки полноты/ссылок и правила личных заметок — в [процедуре](docs/obsidian-vault.md). Клиенты не используют Vault как runtime dependency.
+База знаний из проверенных источников поставляется отдельным переносимым ZIP в закрытой папке Google Drive с результатами, вне учебных источников. В Git остаются средства подготовки и [инструкция открытия](vault/README.md); готовые заметки, исходники и досье хранятся приватно. Команды проверки архива и безопасного обновления личной базы — в [процедуре](docs/obsidian-vault.md). Клиенты не используют Vault как runtime dependency.
 
 ## Учебная практика через внешнюю модель
 

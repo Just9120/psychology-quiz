@@ -50,7 +50,7 @@ def web(bank):
     now = [1800000000]
     mailbox = Mailbox()
     app = create_app(db_path=str(bank), bot_token=TOKEN, web_settings=SETTINGS, web_mailer=mailbox, web_clock=lambda: now[0])
-    with TestClient(app, base_url=ORIGIN) as client:
+    with TestClient(app, base_url=ORIGIN, client=("127.0.0.1", 50000)) as client:
         yield SimpleNamespace(db=bank, app=app, client=client, mailbox=mailbox, now=now, auth=app.state.web_auth)
 
 
@@ -236,7 +236,7 @@ def test_logout_recovery_expiry_and_process_restart_revoke_sessions(web):
     csrf = login(web)
     old_cookie = web.client.cookies.get(SETTINGS.cookie_name)
     restarted = create_app(db_path=str(web.db), bot_token=TOKEN, web_settings=SETTINGS, web_mailer=web.mailbox, web_clock=lambda: web.now[0])
-    with TestClient(restarted, base_url=ORIGIN) as client:
+    with TestClient(restarted, base_url=ORIGIN, client=("127.0.0.1", 50000)) as client:
         client.cookies.set(SETTINGS.cookie_name, old_cookie)
         assert client.get('/web/auth/me').status_code == 200
     assert post(web, 'auth/logout', csrf=csrf).status_code == 200
@@ -274,10 +274,53 @@ def test_login_rate_limit_survives_restart_and_expires(web):
         assert post(web, 'auth/login', {'email': 'unknown@example.test', 'password': 'wrong'}).status_code == 401
     restarted = WebAuth(str(web.db), SETTINGS, web.mailbox, clock=lambda: web.now[0])
     with pytest.raises(AuthError) as error:
-        restarted.login('unknown@example.test', 'wrong')
+        restarted.login('unknown@example.test', 'wrong', source='127.0.0.1')
     assert error.value.status == 429
     web.now[0] += 60
     assert post(web, 'auth/login', {'email': 'unknown@example.test', 'password': 'wrong'}).status_code == 401
+
+
+def test_independent_attacker_budgets_do_not_block_owner_login_recovery_or_proof(web):
+    register(web)
+    with TestClient(web.app, base_url=ORIGIN, client=("198.51.100.9", 50000)) as client:
+        attacker = SimpleNamespace(client=client)
+        for _ in range(10):
+            assert post(attacker, 'auth/login', {'email': EMAIL, 'password': 'wrong'}).status_code == 401
+        # Forging both common and private address headers cannot reset this source.
+        response = post(attacker, 'auth/login', {'email': EMAIL, 'password': 'wrong'}, headers={
+            'X-Forwarded-For': '203.0.113.7', 'X-Psychology-Client-Address': '203.0.113.8'})
+        assert response.status_code == 429
+        for _ in range(5):
+            assert post(attacker, 'auth/recover', {'email': EMAIL}).status_code == 200
+        assert post(attacker, 'auth/recover', {'email': EMAIL}).status_code == 429
+        for _ in range(12):
+            assert post(attacker, 'auth/reset', {'token': secrets.token_urlsafe(32), 'password': NEW_PASSWORD}).status_code == 400
+    assert post(web, 'auth/recover', {'email': EMAIL}).status_code == 200
+    proof = web.mailbox.messages[-1][2]
+    assert post(web, 'auth/reset', {'token': proof, 'password': NEW_PASSWORD}).status_code == 200
+    assert post(web, 'auth/login', {'email': EMAIL, 'password': NEW_PASSWORD}).status_code == 200
+
+
+def test_invalid_recipient_does_not_consume_owner_mail_budget_even_on_same_source(web):
+    register(web)
+    for email in (None, '', 'not-an-email', 'unrelated@example.test'):
+        for _ in range(6):
+            assert post(web, 'auth/recover', {'email': email}).status_code == 200
+    assert post(web, 'auth/recover', {'email': EMAIL}).status_code == 200
+    assert len(web.mailbox.messages) == 2
+
+
+def test_expired_dynamic_auth_sources_are_removed_and_active_sources_remain(web):
+    web.auth.limit('login', 10, 60, source='old')
+    web.now[0] += 3599
+    web.auth.limit('mail', 5, 3600, source='active')
+    web.now[0] += 1
+    web.auth.limit('login', 10, 60, source='current')
+    with closing(get_connection(str(web.db))) as conn:
+        rows = conn.execute('SELECT bucket,started_at FROM web_auth_limits').fetchall()
+    assert len(rows) == 2
+    assert all(row['started_at'] > web.now[0] - 3600 for row in rows)
+    assert all('198.51.100.' not in row['bucket'] for row in rows)
 
 
 def test_link_requires_both_confirmations_preserves_history_and_blocks_replay(web):

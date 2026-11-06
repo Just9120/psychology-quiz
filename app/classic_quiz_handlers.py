@@ -8,6 +8,7 @@ from app.classic_quiz_view import (
     QUESTION_COUNT_CHOICES,
     build_category_keyboard,
     build_classic_answer_reply_keyboard,
+    build_classic_feedback_heading,
     build_classic_next_reply_keyboard,
     build_classic_reply_answer_detail_line,
     build_classic_reply_feedback_text,
@@ -438,74 +439,27 @@ async def show_finished_quiz_message(query, session_id: int, score: int, total_q
 
 
 async def quiz_mode_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    latency = _HandlerLatency(
-        handler="quiz_mode_callback",
-        callback_prefix="qzmode",
-        telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None),
-    )
     query = update.callback_query
-    if query is None or query.data is None:
-        latency.summary()
+    if query is None or query.data not in {"qzmode:single", "qzmode:selected_mix", "qzmode:all"}:
         return
-
-    data = query.data
-    if not data.startswith("qzmode:"):
-        latency.summary()
-        return
+    latency = _HandlerLatency(handler="quiz_mode_callback", callback_prefix="qzmode",
+        telegram_user_id=getattr(getattr(update, "effective_user", None), "id", None))
     latency.start()
-
     await _timed_telegram_api_call(latency, query.answer())
-
-    if data == "qzmode:single":
-        settings = context.application.bot_data["settings"]
-        def _load_categories():
-            with closing(get_connection(settings.db_path)) as conn, conn:
-                return get_active_categories(conn)
-
-        categories = await _run_db_task(_load_categories)
-        if not categories:
-            await _timed_telegram_api_call(latency, query.edit_message_text(
-                "Нет доступных категорий. Сначала загрузите вопросы в базу данных."
-            ))
-            latency.summary()
-            return
-        await _timed_telegram_api_call(latency, query.edit_message_text(
-            "Выберите категорию:",
-            reply_markup=build_category_keyboard(categories),
-        ))
+    if query.message is None or query.message.chat.type != 'private':
+        await query.edit_message_text('Откройте викторину в личном чате с ботом.')
         latency.summary()
         return
-
-    if data == "qzmode:all":
-        await _timed_telegram_api_call(latency, query.edit_message_text(
-            "Выберите количество вопросов:",
-            reply_markup=build_question_count_keyboard("qcntall"),
-        ))
-        latency.summary()
-        return
-
-    if data == "qzmode:selected_mix":
-        settings = context.application.bot_data["settings"]
-        def _load_categories():
-            with closing(get_connection(settings.db_path)) as conn, conn:
-                return get_active_categories(conn)
-
-        categories = await _run_db_task(_load_categories)
-        if not categories:
-            await _timed_telegram_api_call(latency, query.edit_message_text(
-                "Нет доступных категорий. Сначала загрузите вопросы в базу данных."
-            ))
-            latency.summary()
-            return
-
-        context.user_data["selected_mix_categories"] = set()
-        await _timed_telegram_api_call(latency, query.edit_message_text(
-            "Выберите темы для микса:",
-            reply_markup=build_selected_mix_keyboard(categories, set()),
-        ))
-        latency.summary()
-        return
-
+    settings = context.application.bot_data['settings']
+    def _load_navigation():
+        from app.study_navigation import question_scopes
+        with closing(get_connection(settings.db_path)) as conn:
+            return question_scopes(conn)[0]
+    db_started_at = time.perf_counter()
+    navigation = await _run_db_task(_load_navigation)
+    latency.add_db(db_started_at)
+    from app.study_quiz_chat import begin_study_quiz
+    await begin_study_quiz(query, context, query.data.split(":")[1], navigation)
     latency.summary()
 
 
@@ -1269,6 +1223,7 @@ def _handle_classic_text_answer_db(settings, tg_user, *, session_id: int, questi
             "status": submission.status,
             "is_correct": bool(submission.is_correct),
             "selected_option_label": "—" if saved_option_index == -1 else numeric_answer_label_for_option(options, saved_option_index),
+            "knowledge_gap": saved_option_index == -1,
             "selected_option_text": "Не знаю" if saved_option_index == -1 else str(selected_option["option_text"]),
             "correct_option_label": numeric_answer_label_for_option(options, correct_option_index),
             "correct_option_text": str(correct_option["option_text"]),
@@ -1299,11 +1254,11 @@ def _load_classic_text_next_state(settings, tg_user, state: dict) -> dict:
         session = get_quiz_session(conn, session_id)
         if session is None:
             return {"status": "missing", "session_id": session_id}
-        if str(session["status"]) == "finished":
-            return {"status": "finished", "session_id": session_id, "score": int(session["score"]), "total_questions": int(session["total_questions"])}
         user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
         if int(session["user_id"]) != int(user_row["id"]):
             return {"status": "forbidden", "session_id": session_id}
+        if str(session["status"]) == "finished":
+            return {"status": "finished", "session_id": session_id, "score": int(session["score"]), "total_questions": int(session["total_questions"])}
         return {"status": "ok", "session_id": session_id}
 
 
@@ -1560,6 +1515,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
                 return {
                     "status": submission.status,
                     "is_correct": bool(submission.is_correct),
+                    "knowledge_gap": submission.selected_option_index == -1,
                     "selected_option_text": "Не знаю" if submission.selected_option_index == -1 else str(selected_option["option_text"]),
                     "correct_option_text": str(correct_option["option_text"]),
                     "explanation": str(content["explanation"] or ""),
@@ -1614,7 +1570,7 @@ async def answer_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             _mark_repeated_tap(latency)
 
         is_correct = result["is_correct"]
-        result_line = "<b>Верно ✅</b>" if is_correct else "<b>Неверно ❌</b>"
+        result_line = build_classic_feedback_heading(is_correct=is_correct, knowledge_gap=result.get("knowledge_gap", False))
         selected_text = result.get("selected_option_text")
         selected_line = (f"<b>Ваш ответ:</b> "
                          f"{render_reading_mode_text(selected_text, result['reading_mode'])}\n"
@@ -1699,11 +1655,11 @@ async def next_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
                 session = get_quiz_session(conn, session_id)
                 if session is None:
                     return {"status": "missing"}
-                if str(session["status"]) == "finished":
-                    return {"status": "finished", "score": int(session["score"]), "total_questions": int(session["total_questions"])}
                 user_row = create_or_load_user(conn, tg_user.id, tg_user.username, tg_user.first_name, tg_user.last_name)
                 if int(session["user_id"]) != int(user_row["id"]):
                     return {"status": "forbidden"}
+                if str(session["status"]) == "finished":
+                    return {"status": "finished", "score": int(session["score"]), "total_questions": int(session["total_questions"])}
                 return {"status": "ok"}
 
         db_started_at = time.perf_counter()

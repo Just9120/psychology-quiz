@@ -23,6 +23,7 @@ from app.classic_quiz_handlers import (
     build_question_text_with_options,
     build_quiz_finished_text,
     classic_reply_text_answer_handler,
+    next_callback,
     parse_classic_reply_answer_number,
 )
 
@@ -73,6 +74,39 @@ class ClassicReplyKeyboardModeTests(unittest.TestCase):
         text = build_question_text_with_options(1, 1, "Question", [{"option_index": 0, "option_text": "Alpha"}], "normal")
         self.assertIn("A. Alpha", text)
         self.assertNotIn("1. Alpha", text)
+
+    def test_foreign_next_never_exposes_results_in_any_session_state(self):
+        foreign_user = SimpleNamespace(id=1002, username="other", first_name="Other", last_name=None)
+        for status in ("in_progress", "finished", "abandoned"):
+            with self.subTest(status=status):
+                with closing(sqlite3.connect(self.db_path)) as conn, conn:
+                    conn.execute("UPDATE quiz_sessions SET status=?,score=1,total_questions=2 WHERE id=?",
+                                 (status, self.session_id))
+                state = _load_classic_text_next_state(self.settings, foreign_user,
+                    {"status": "awaiting_next", "session_id": self.session_id})
+                self.assertEqual({"status": "forbidden", "session_id": self.session_id}, state)
+                query = SimpleNamespace(data=f"next:{self.session_id}", answer=AsyncMock(), edit_message_text=AsyncMock())
+                context = SimpleNamespace(application=SimpleNamespace(bot_data={"settings": self.settings}), user_data={})
+                with patch("app.classic_quiz_handlers.show_finished_quiz_message", new_callable=AsyncMock) as finished, \
+                     patch("app.classic_quiz_handlers.send_current_question", new_callable=AsyncMock) as current:
+                    asyncio.run(next_callback(SimpleNamespace(callback_query=query, effective_user=foreign_user), context))
+                finished.assert_not_awaited()
+                current.assert_not_awaited()
+                query.edit_message_text.assert_awaited_once_with("Эта сессия вам не принадлежит.")
+
+    def test_owner_can_replay_finished_next_in_both_transports(self):
+        with closing(sqlite3.connect(self.db_path)) as conn, conn:
+            conn.execute("UPDATE quiz_sessions SET status='finished',score=1,total_questions=2 WHERE id=?", (self.session_id,))
+        state = _load_classic_text_next_state(self.settings, self.tg_user,
+            {"status": "awaiting_next", "session_id": self.session_id})
+        self.assertEqual({"status": "finished", "session_id": self.session_id, "score": 1, "total_questions": 2}, state)
+        query = SimpleNamespace(data=f"next:{self.session_id}", answer=AsyncMock(), edit_message_text=AsyncMock())
+        context = SimpleNamespace(application=SimpleNamespace(bot_data={"settings": self.settings}), user_data={})
+        with patch("app.classic_quiz_handlers.show_finished_quiz_message", new_callable=AsyncMock) as finished:
+            asyncio.run(next_callback(SimpleNamespace(callback_query=query, effective_user=self.tg_user), context))
+        self.assertEqual(1, finished.await_count)
+        self.assertEqual(1, finished.await_args.kwargs["score"])
+        self.assertEqual(2, finished.await_args.kwargs["total_questions"])
 
     def test_reply_keyboard_mode_renders_numeric_options_and_buttons(self):
         options = [{"option_index": 0, "option_text": "Alpha"}, {"option_index": 1, "option_text": "Beta"}]
@@ -373,6 +407,10 @@ class ClassicReplyKeyboardModeTests(unittest.TestCase):
         feedback = message.reply_text.call_args.args[0]
         self.assertIn("Не знаю", feedback)
         self.assertIn("Правильный ответ", feedback)
+        self.assertIn("Пробел знаний сохранён", feedback)
+        self.assertIn("<b>Ваш ответ:</b> Не знаю", feedback)
+        self.assertNotIn("Неверно", feedback)
+        self.assertNotIn("— —", feedback)
 
     def test_next_text_handling_requires_awaiting_next_state(self):
         next_state = _load_classic_text_next_state(

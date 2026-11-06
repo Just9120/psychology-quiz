@@ -3,6 +3,7 @@ from dataclasses import dataclass
 import os
 import re
 from urllib.parse import urlsplit
+from ipaddress import ip_address
 from app.google_oauth import GoogleOAuthSettings
 
 
@@ -27,6 +28,7 @@ class WebSettings:
     sender: str
     secure_cookie: bool = True
     google: GoogleOAuthSettings | None = None
+    auth_proxy_peers: frozenset[str] = frozenset()
     @property
     def cookie_name(self) -> str:
         return "__Host-psychology_session" if self.secure_cookie else "psychology_dev_session"
@@ -69,5 +71,19 @@ class WebSettings:
         if google_enabled == "true":
             google = GoogleOAuthSettings(required("PWA_GOOGLE_CLIENT_ID"), required("PWA_GOOGLE_CLIENT_SECRET"),
                                          origin + "/web/auth/google/callback")
+        peers = set()
+        for value in os.getenv("PWA_AUTH_PROXY_PEERS", "").split(","):
+            value = value.strip()
+            if not value:
+                continue
+            try:
+                if "%" in value:
+                    raise ValueError
+                address = ip_address(value)
+                peers.add(str(getattr(address, "ipv4_mapped", None) or address))
+            except ValueError:
+                raise RuntimeError("PWA_AUTH_PROXY_PEERS requires exact IP addresses") from None
+        if not local and not peers:
+            raise RuntimeError("Missing PWA_AUTH_PROXY_PEERS for the HTTPS reverse proxy")
         return cls(origin, owner, required("PWA_SMTP_HOST"), port,
-                   required("PWA_SMTP_USERNAME"), required("PWA_SMTP_PASSWORD"), sender, not local, google)
+                   required("PWA_SMTP_USERNAME"), required("PWA_SMTP_PASSWORD"), sender, not local, google, frozenset(peers))

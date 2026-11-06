@@ -101,6 +101,23 @@ class MiniAppFastApiTests(unittest.TestCase):
                 self.assertEqual("600", response.headers.get("Access-Control-Max-Age"))
                 self.assertEqual("0", response.headers.get("Content-Length"))
 
+    def test_unknown_learning_preflight_never_logs_untrusted_path_even_when_slow(self):
+        for action in ("untrusted-action", "untrusted%0Aforged", "untrusted%0Dforged", "untrusted%09forged"):
+            with self.subTest(action=action), \
+                 patch("app.miniapp_fastapi._duration_ms", return_value=10000), \
+                 self.assertLogs("uvicorn.error", level="INFO") as captured:
+                response = self.client.options(f"/miniapp/learning/{action}",
+                    headers={"Origin": "https://miniapp.example.com"})
+            self.assertEqual(404, response.status_code)
+            self.assertNotIn("access-control-allow-origin", response.headers)
+            messages = [record.getMessage() for record in captured.records]
+            self.assertTrue(any("miniapp_api_slow" in message for message in messages))
+            for message in messages:
+                self.assertIn("endpoint=unknown", message)
+                self.assertNotIn("untrusted", message)
+                self.assertNotIn("forged", message)
+                self.assertFalse(any(char in message for char in "\r\n\t"))
+
     def test_get_endpoint_builder_status_headers_and_body_pass_through(self):
         with patch("app.miniapp_fastapi.build_state_response", return_value=(202, {"Content-Type": "application/custom", "X-Builder": "yes"}, b"custom-body")) as builder:
             response = self.client.get(

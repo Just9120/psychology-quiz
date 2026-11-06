@@ -103,13 +103,15 @@ def test_smtp_tls_failure_does_not_authenticate_or_send():
 def env_settings():
     return {'PWA_ENABLED':'true','PWA_OWNER_EMAIL':EMAIL,'PWA_ORIGIN':ORIGIN,
             'PWA_SMTP_HOST':'smtp.yandex.ru','PWA_SMTP_PORT':'465','PWA_SMTP_USERNAME':EMAIL,
-            'PWA_SMTP_PASSWORD':'synthetic','PWA_SMTP_FROM':EMAIL}
+            'PWA_SMTP_PASSWORD':'synthetic','PWA_SMTP_FROM':EMAIL,'PWA_AUTH_PROXY_PEERS':'127.0.0.1'}
 
 
 @pytest.mark.parametrize('key,value', [('PWA_ORIGIN','http://public.example.test'), ('PWA_ORIGIN',ORIGIN+'/path'),
     ('PWA_ORIGIN','https://user:password@example.test'), ('PWA_ORIGIN',ORIGIN+'?token=secret'),
     ('PWA_OWNER_EMAIL','owner@example.test\r\nBcc: other@example.test'), ('PWA_SMTP_PORT','25'),
-    ('PWA_ENABLED','yes'), ('PWA_SMTP_PASSWORD','')])
+    ('PWA_ENABLED','yes'), ('PWA_SMTP_PASSWORD',''), ('PWA_AUTH_PROXY_PEERS',''),
+    ('PWA_AUTH_PROXY_PEERS','*'), ('PWA_AUTH_PROXY_PEERS','172.20.0.0/16'),
+    ('PWA_AUTH_PROXY_PEERS','proxy.example.test'), ('PWA_AUTH_PROXY_PEERS','fe80::1%eth0')])
 def test_enabled_config_fails_closed(key,value):
     with patch.dict(os.environ, {**env_settings(),key:value}, clear=True), pytest.raises(RuntimeError):
         WebSettings.from_env()

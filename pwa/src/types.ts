@@ -38,6 +38,8 @@ export interface SetupOptions {
   question_count_choices: (5 | 10 | 15 | 'all')[]
   difficulty_choices: ('any' | 'easy' | 'medium' | 'hard')[]
   content_kind_choices?: ('theory' | 'glossary' | 'case')[]
+  study_navigation?: { category_id: number; discipline_id: string | null; title: string; modules: string[];
+    topics: { id: string; title: string; question_count: number }[] }[]
 }
 
 export interface Setup {
@@ -46,6 +48,7 @@ export interface Setup {
   question_count: 5 | 10 | 15 | null
   difficulty: 'any' | 'easy' | 'medium' | 'hard'
   content_kinds?: ('theory' | 'glossary' | 'case')[]
+  topic_ids?: string[]
   replace_active?: boolean
   expected_session_id?: number | null
 }
@@ -127,6 +130,8 @@ export interface HomeworkAssignment {
   title: string
   module: string
   discipline: string
+  discipline_id?: string
+  curriculum_topic?: { id: string; title: string }
   topic: string
   description: string
   question_count: number

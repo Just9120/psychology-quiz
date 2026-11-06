@@ -15032,13 +15032,13 @@
     },
     "questions:intro_reflection_motive": {
       "schema_version": 1,
-      "item_sha256": "fbf6d1bf0ebb3cc2797ccac7f3a9b569bf379f998d6422d923ea7d01febcfc85",
-      "review_sha256": "561ed321dc6a3e4ccaeb6903c0d4e4250ce91141a562fe7aa847dbed071fb82b",
+      "item_sha256": "14a2e90441203408dfdc20b5956106db453df069ec9954897a40fc99bf799589",
+      "review_sha256": "611462013e575620c24d5090ac22ee2a9411e0fb6bb1e6429fa75e6a0b39c5ee",
       "topic_id": "t_c17d1ae57018",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-25",
+      "reviewed_at": "2026-11-05",
       "checks": [
         "ambiguity",
         "answer",
@@ -15051,13 +15051,13 @@
     },
     "questions:intro_reflection_resources": {
       "schema_version": 1,
-      "item_sha256": "5a417a339be321a88bb37f4c9519f07aa58016154845adb21670cceea8079067",
-      "review_sha256": "b722819cd26bf8e26b6d45a43292de0493a68059b29bd634fe4367dd70eb4d9d",
+      "item_sha256": "569c96c558e5c1a7a69481d641f7ac7068c0ef31e9a66afd01dae20807be2c64",
+      "review_sha256": "fb46b036c3e6fc4068ca23363d737af0746fb334da04f65b4506a3729fd7a67f",
       "topic_id": "t_c17d1ae57018",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-25",
+      "reviewed_at": "2026-11-05",
       "checks": [
         "ambiguity",
         "answer",
@@ -15070,13 +15070,13 @@
     },
     "questions:intro_reflection_family": {
       "schema_version": 1,
-      "item_sha256": "9f803de0413693f8bda8fa7a8f4c8aa2aace483e8d25a06002531661c53e1b97",
-      "review_sha256": "6db3f005e102555353974f1774cc33237840fa80e867103b41aed84e5a845b31",
+      "item_sha256": "54ddf034fa34edc0dab108ee13d4e2973a85e24d1b8bef9f8896202fcea4aea3",
+      "review_sha256": "81434e37001655073a6569c26ab043964ffe6a273f71b5cbad6524b3ab8dc156",
       "topic_id": "t_c17d1ae57018",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-25",
+      "reviewed_at": "2026-11-05",
       "checks": [
         "ambiguity",
         "answer",
@@ -15089,13 +15089,13 @@
     },
     "questions:intro_reflection_private_answers": {
       "schema_version": 1,
-      "item_sha256": "9dfb0737bd8fc05518e5781d41fe85b742cd29ad1d9f6ed70f76e1a2e0d66c49",
-      "review_sha256": "d57c8c42a16ac0b984916d15f7e150ffd5efeeb125325b59b884d6f456d50b3f",
+      "item_sha256": "991e9569125e6d263705bd7345c6e00ecdecb560896cfc9e6ed6da132df82f5b",
+      "review_sha256": "1727b841f9d56c406061b65446b261b4f1af39418c95879addd45510ac45eb4b",
       "topic_id": "t_c17d1ae57018",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-25",
+      "reviewed_at": "2026-11-05",
       "checks": [
         "ambiguity",
         "answer",
@@ -15108,13 +15108,13 @@
     },
     "questions:intro_reflection_future_learning": {
       "schema_version": 1,
-      "item_sha256": "967bacdf6cc1ed586407d407d15dea0904c4fca073497e81827fffb0064ef425",
-      "review_sha256": "3461450a366c9bd01d6529d95044e7f9689630349c0acded97dde8b8d1b5b74c",
+      "item_sha256": "b7441720d34dc4e0aae8ca7adcb8db9932966f619872c6df10c06503b5706b98",
+      "review_sha256": "c673163617cb4f75e913a3e6cd0e3ddbefb635a5ba76730d8a5c7366e0ed71f6",
       "topic_id": "t_c17d1ae57018",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-10-25",
+      "reviewed_at": "2026-11-05",
       "checks": [
         "ambiguity",
         "answer",
@@ -17942,6 +17942,25 @@
       "reviewer": "private-review",
       "reviewed_at": "2026-10-25",
       "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "questions:cbt_practice_beliefs_and_conduct": {
+      "schema_version": 1,
+      "item_sha256": "cace6b40cd44209df2ba0d77bc8b7796641a1243d85b2612ca9d0dfc98800c6e",
+      "review_sha256": "6f32ba0112fbf753d462c894ed69e8dec5aa17635c93281401f224a8684a2c4b",
+      "topic_id": "t_ff4f6a25db3e",
+      "decision": "approved",
+      "purpose": "learning_content",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-06",
+      "checks": [
+        "ambiguity",
+        "answer",
+        "duplicates",
+        "explanation",
+        "meaning",
         "sources"
       ],
       "source_support": "supported"

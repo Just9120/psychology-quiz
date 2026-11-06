@@ -1,11 +1,14 @@
 import { chooseMenu } from './choose-menu'
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { expect, it, vi } from 'vitest'
+import { afterEach, expect, it, vi } from 'vitest'
 import { LiteratureView } from '../src/LiteratureView'
 import { api, ApiError } from '../src/api'
 import { MiniLiterature } from '../src/miniapp/MiniLiterature'
 import type { LiteratureCatalog } from '../src/types'
+
+const initialUrl = window.location.href
+afterEach(() => window.history.replaceState(null, '', initialUrl))
 
 const catalog: LiteratureCatalog = { ok: true, topics: [{ topic_id: 'one', title: 'Первая тема', module: 'module1' }], works: [{ work_id: 'book', title: 'Учебная книга', authors: [], type: 'book', access_links: [], entries: [{ id: 'book', topic_id: 'one', topic_title: 'Первая тема', module: 'module1', year: null, importance: null, importance_source: null, source: { citation: 'Исходная запись' }, metadata_warnings: ['Год неизвестен'], user_state: null }] }] }
 
@@ -15,9 +18,9 @@ it.each(['pwa', 'miniapp'])('keeps additional-course books under their concrete 
   const second = { ...first, id: 'extra-book', topic_id: 'extra', topic_title: 'Дополнительный курс', module: 'other', title: 'Дополнительная книга' }
   if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, topics, works: [catalog.works[0], { ...catalog.works[0], work_id: 'extra-book', title: second.title, entries: [second] }] }} busy={false} run={async op => op()} />)
   else render(<MiniLiterature initial={[first, second]} topics={topics} busy={false} run={async op => op()} />)
-  await chooseMenu(userEvent.setup(), screen.getByLabelText('Тема'), 'extra')
-  expect(screen.queryByLabelText('Модуль литературы')).not.toBeInTheDocument()
-  expect(screen.getByLabelText('Тема')).toHaveTextContent('Дополнительный курс')
+  await chooseMenu(userEvent.setup(), screen.getByLabelText('Направление чтения'), 'extra')
+  expect(screen.getByLabelText('Модуль обучения')).toBeVisible()
+  expect(screen.getByLabelText('Направление чтения')).toHaveTextContent('Дополнительный курс')
   expect(screen.getByRole('button', { name: 'Дополнительная книга' })).toBeVisible()
   expect(screen.queryByRole('button', { name: 'Учебная книга' })).not.toBeInTheDocument()
 })
@@ -28,11 +31,40 @@ it.each(['pwa', 'miniapp'])('finds cross-module disciplines and keeps exact book
   const second = { ...first, id: 'second', module: 'module3', title: 'Книга другого модуля' }
   if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, topics, works: [catalog.works[0], { ...catalog.works[0], work_id: 'second', title: second.title, entries: [second] }] }} busy={false} run={async op => op()} />)
   else render(<MiniLiterature initial={[first, second]} topics={topics} busy={false} run={async op => op()} />)
-  await chooseMenu(userEvent.setup(), screen.getByLabelText('Тема'), 'one')
-  expect(screen.getByLabelText('Тема')).toHaveTextContent('Первая тема')
+  await chooseMenu(userEvent.setup(), screen.getByLabelText('Направление чтения'), 'one')
+  expect(screen.getByLabelText('Направление чтения')).toHaveTextContent('Первая тема')
   expect(screen.getByRole('button', { name: 'Книга другого модуля' })).toBeVisible()
   expect(screen.getByRole('button', { name: 'Учебная книга' })).toBeVisible()
-  expect(screen.queryByLabelText('Модуль литературы')).not.toBeInTheDocument()
+  expect(screen.getByLabelText('Модуль обучения')).toBeVisible()
+  const user = userEvent.setup()
+  await chooseMenu(user, screen.getByLabelText('Модуль обучения'), 'module3')
+  expect(screen.queryByRole('button', { name: 'Учебная книга' })).not.toBeInTheDocument()
+  expect(screen.getByRole('button', { name: 'Книга другого модуля' })).toBeVisible()
+  await chooseMenu(user, screen.getByLabelText('Модуль обучения'), 'module1')
+  expect(screen.getByRole('button', { name: 'Учебная книга' })).toBeVisible()
+  expect(screen.queryByRole('button', { name: 'Книга другого модуля' })).not.toBeInTheDocument()
+})
+
+it.each(['pwa', 'miniapp'])('keeps reviewed course topics and general reading separate and preserves the path after opening a book in %s', async client => {
+  window.history.replaceState(null, '', '/#/literature')
+  const first = { ...catalog.works[0].entries[0], title: 'Книга по памяти', curriculum_topics: [{ id: 't_memory', title: 'Память' }] }
+  const second = { ...first, id: 'attention', title: 'Книга по вниманию', curriculum_topics: [{ id: 't_attention', title: 'Внимание' }] }
+  const general = { ...first, id: 'general', title: 'Общее введение', curriculum_topics: [] }
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, works: [first, second, general].map(entry => ({ ...catalog.works[0], work_id: entry.id, title: entry.title, entries: [entry] })) }} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[first, second, general]} topics={catalog.topics} busy={false} run={async op => op()} />)
+  const user = userEvent.setup()
+  await chooseMenu(user, screen.getByLabelText('Модуль обучения'), 'module1')
+  await chooseMenu(user, screen.getByLabelText('Дисциплина'), 'one')
+  await chooseMenu(user, screen.getByLabelText('Тема курса'), 't_memory')
+  expect(screen.getByRole('button', { name: 'Книга по памяти' })).toBeVisible()
+  expect(screen.queryByRole('button', { name: 'Общее введение' })).not.toBeInTheDocument()
+  expect(screen.queryByRole('button', { name: 'Книга по вниманию' })).not.toBeInTheDocument()
+  await user.click(screen.getByRole('button', { name: 'Книга по памяти' }))
+  await user.click(screen.getByRole('button', { name: /← К списку/ }))
+  expect(screen.getByLabelText('Тема курса')).toHaveValue('t_memory')
+  await chooseMenu(user, screen.getByLabelText('Тема курса'), 'general:one')
+  expect(screen.getByRole('button', { name: 'Общее введение' })).toBeVisible()
+  expect(screen.queryByRole('button', { name: 'Книга по памяти' })).not.toBeInTheDocument()
 })
 
 it.each(['pwa', 'miniapp'])('uses independent topics, hides lesson labels and deduplicates books in %s', async client => {
@@ -43,12 +75,12 @@ it.each(['pwa', 'miniapp'])('uses independent topics, hides lesson labels and de
   if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, reading_topics, works: [{ ...catalog.works[0], entries: [entry, alias] }, { ...catalog.works[0], work_id: 'general', title: general.title, entries: [general] }] }} busy={false} run={async op => op()} />)
   else render(<MiniLiterature initial={[entry, alias, general]} topics={catalog.topics} busy={false} run={async op => op()} />)
   const user = userEvent.setup()
-  await chooseMenu(user, screen.getByLabelText('Тема'), 'memory')
+  await chooseMenu(user, screen.getByLabelText('Направление чтения'), 'memory')
   expect(screen.getAllByRole('button', { name: 'Учебная книга' })).toHaveLength(1)
   expect(screen.queryByRole('button', { name: 'Общая книга' })).not.toBeInTheDocument()
   expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
   expect(screen.queryByLabelText('Учебная тема')).not.toBeInTheDocument()
-  await user.click(screen.getByLabelText('Тема'))
+  await user.click(screen.getByLabelText('Направление чтения'))
   expect(screen.queryByRole('option', { name: /Лекция|Практика/ })).not.toBeInTheDocument()
   expect(screen.getAllByRole('option')).toHaveLength(3)
   await user.keyboard('{Escape}')
@@ -65,14 +97,14 @@ it.each(['pwa', 'miniapp'])('combines topic/status filters without borrowing ano
   if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, topics, works: [{ ...catalog.works[0], entries: [first, second] }] }} busy={false} run={async op => op()} />)
   else render(<MiniLiterature initial={[first, second]} topics={topics} busy={false} run={async op => op()} />)
   const user = userEvent.setup()
-  await chooseMenu(user, screen.getByLabelText('Тема'), 'one')
+  await chooseMenu(user, screen.getByLabelText('Направление чтения'), 'one')
   await chooseMenu(user, screen.getByLabelText('Фильтр статуса чтения'), 'read')
   expect(screen.queryByRole('button', { name: 'Учебная книга' })).not.toBeInTheDocument()
   await chooseMenu(user, screen.getByLabelText('Фильтр статуса чтения'), 'not_started')
   expect(screen.getByRole('button', { name: 'Учебная книга' })).toBeVisible()
-  await chooseMenu(user, screen.getByLabelText('Тема'), 'one')
-  await chooseMenu(user, screen.getByLabelText('Тема'), 'two')
-  expect(screen.getByLabelText('Тема')).toHaveValue('two')
+  await chooseMenu(user, screen.getByLabelText('Направление чтения'), 'one')
+  await chooseMenu(user, screen.getByLabelText('Направление чтения'), 'two')
+  expect(screen.getByLabelText('Направление чтения')).toHaveValue('two')
   await chooseMenu(user, screen.getByLabelText('Фильтр статуса чтения'), 'read')
   expect(screen.getByRole('button', { name: 'Учебная книга' })).toBeVisible()
 })
@@ -150,11 +182,11 @@ it.each(['pwa', 'miniapp'])('shows scoped work totals and current reading indepe
   const user = userEvent.setup()
   await chooseMenu(user, screen.getByLabelText('Фильтр статуса чтения'), 'read')
   expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
-  await chooseMenu(user, screen.getByLabelText('Тема'), 'one')
+  await chooseMenu(user, screen.getByLabelText('Направление чтения'), 'one')
   // A topic filter must not conceal conflicting aliases of the same work.
   expect(screen.getByText('Прочитано 0 из 1')).toBeVisible()
   expect(screen.getByText(/У 1 работ отметки/)).toBeVisible()
-  await chooseMenu(user, screen.getByLabelText('Тема'), 'two')
+  await chooseMenu(user, screen.getByLabelText('Направление чтения'), 'two')
   await chooseMenu(user, screen.getByLabelText('Фильтр статуса чтения'), '')
   const current = screen.getByRole('complementary', { name: 'Прогресс списка чтения' })
   await user.click(current.querySelector('button')!)

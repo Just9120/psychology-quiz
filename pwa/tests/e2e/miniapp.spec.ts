@@ -1,5 +1,6 @@
 import { createHmac } from 'node:crypto'
 import { expect, test } from '@playwright/test'
+import { scopedQuiz, scopeHomework, scopeLiterature } from '../study-navigation'
 
 async function chooseMenu(page: import('@playwright/test').Page, field: import('@playwright/test').Locator, value: string) {
   await field.click()
@@ -419,13 +420,14 @@ test('canonical new bank reaches Mini App topics and structured homework cases',
     await expect(page.getByRole('button', { name: 'Начать тест по терминам' })).toBeEnabled()
   }
   await navigateMini(page, 'Домашние задания')
+  await scopeHomework(page)
   const card = page.locator('.homework-card').filter({ has: page.getByRole('heading', { name: 'ABC-разбор и дневник наблюдений', exact: true }) })
   await card.getByRole('button', { name: 'Начать тест · 5 вопросов', exact: true }).click()
   const choices = [1, 1, 1, 0, 3]
   for (let index = 0; index < choices.length; index++) {
     if (index === 4) {
-      await expect(page.locator('.question-heading')).toContainText('Клиент записал в дневнике')
-      await expect(page.locator('.question-heading')).not.toContainText(/вымышленн|выдуманн/i)
+      await expect(page.locator('.question-prompt')).toContainText('Клиент записал в дневнике')
+      await expect(page.locator('.question-prompt')).not.toContainText(/вымышленн|выдуманн/i)
       await page.screenshot({ path: `test-results/bank-quality-miniapp-${testInfo.project.name}-homework-case.png`, fullPage: true })
     }
     await page.getByRole('radio').nth(choices[index]).check()
@@ -445,4 +447,8 @@ test('canonical new bank reaches Mini App topics and structured homework cases',
     await expect(page.locator('.literature-title').filter({ hasText: title })).toBeVisible()
   }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
+  await scopeLiterature(page)
+  await page.screenshot({ path: `test-results/study-literature-miniapp-${testInfo.project.name}.png`, fullPage: true })
+  await navigateMini(page, 'Квиз')
+  await scopedQuiz(page, '/miniapp/setup', `test-results/study-quiz-miniapp-${testInfo.project.name}.png`)
 })

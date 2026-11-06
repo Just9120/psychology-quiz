@@ -2,34 +2,25 @@
 import copy
 import hashlib
 import json
-from types import SimpleNamespace
 
 import pytest
 
 from scripts import obsidian_catalogue as catalogue
 from scripts import obsidian_vault as exporter
-from scripts.audit_public_assets import audit_assets, known_source_ids
 
 
-def test_committed_knowledge_has_descriptive_files_and_semantic_links():
-    files, counts = catalogue.render_published()
-    manifest = catalogue.prepared_notes()
-    generated = catalogue.ROOT / 'vault/generated'
-    actual = {p.name: p.read_bytes() for p in generated.glob('*.md')}
-    assert actual == files
-    catalogue.validate_links(actual)
-    state = json.loads((generated / exporter.STATE).read_text(encoding='utf-8'))
-    assert state['files'] == {name: exporter._hash(data) for name, data in actual.items()}
+def test_knowledge_has_descriptive_files_and_semantic_links(vault_reviewed_payload):
+    files, counts = catalogue.render_reviewed_payload(vault_reviewed_payload)
+    manifest = catalogue.reviewed_notes_payload(vault_reviewed_payload)
+    catalogue.validate_links(files)
     assert counts['atomic_notes'] == len(manifest['notes'])
-    assert all(not name.startswith(('question-', 'work-', 'homework-', 'topic-')) for name in actual)
-    assert 'Социальный характер.md' in actual
-    fromm = actual['Социальный характер.md'].decode()
-    assert 'Фромм' in fromm and '## Связи' in fromm
-    assert all(label not in fromm for label in ('## Вопрос', '## Варианты', 'correct_option_index'))
+    assert all(not name.startswith(('question-', 'work-', 'homework-', 'topic-')) for name in files)
+    note = files['Уточнение запроса.md'].decode()
+    assert '[[Рабочая гипотеза]]' in note and '## Связи' in note
+    assert all(label not in note for label in ('## Вопрос', '## Варианты', 'correct_option_index'))
     concepts = {item['title'] for item in manifest['notes']}
     assert all(set(item['links']) <= concepts for item in manifest['notes'])
-    assert 'не полный пересказ' in actual['Границы базы.md'].decode()
-    audit_assets([catalogue.ROOT / 'vault'], known_source_ids())
+    assert 'не полный пересказ' in files['Границы базы.md'].decode()
     assert 'vault/' in (catalogue.ROOT / '.dockerignore').read_text()
     assert 'content/vault-notes.json' in (catalogue.ROOT / '.dockerignore').read_text()
 
@@ -40,7 +31,22 @@ def test_prepared_notes_need_exact_source_review_not_just_status(tmp_path, monke
     (content / 'vault-notes.json').write_text('{"schema_version":2,"notes":[],"status":"approved"}', encoding="utf-8")
     monkeypatch.setattr(catalogue, 'ROOT', tmp_path)
     with pytest.raises(exporter.VaultError, match='prepared_note_source_review_required'):
+        catalogue.reviewed_notes_payload((content / 'vault-notes.json').read_bytes())
+
+
+def test_private_manifest_is_explicit_and_has_no_repository_fallback():
+    with pytest.raises(exporter.VaultError, match='private_reviewed_manifest_required'):
         catalogue.prepared_notes()
+
+
+def test_ready_knowledge_is_absent_from_repository_and_container_context():
+    assert not (catalogue.ROOT / 'content/vault-notes.json').exists()
+    assert not (catalogue.ROOT / 'vault/generated').exists()
+    ignored = (catalogue.ROOT / '.gitignore').read_text(encoding='utf-8')
+    assert 'content/vault-notes.json' in ignored
+    assert 'generated/' in (catalogue.ROOT / 'vault/.gitignore').read_text(encoding='utf-8')
+    excluded = (catalogue.ROOT / '.dockerignore').read_text(encoding='utf-8')
+    assert 'vault/' in excluded and 'data/' in excluded
 
 
 @pytest.mark.parametrize('change,error', [
@@ -49,8 +55,8 @@ def test_prepared_notes_need_exact_source_review_not_just_status(tmp_path, monke
     ('collision', 'duplicate_knowledge_title'), ('extra_private_field', 'knowledge_fields_required'),
     ('missing_summary', 'section_coverage_mismatch'), ('opaque_title', 'invalid_knowledge_note'),
 ])
-def test_unreviewable_graph_and_dump_are_rejected(monkeypatch, change, error):
-    manifest = copy.deepcopy(catalogue.prepared_notes())
+def test_unreviewable_graph_and_dump_are_rejected(monkeypatch, change, error, vault_reviewed_payload):
+    manifest = json.loads(vault_reviewed_payload)
     item = manifest['notes'][0]
     if change == 'quiz': item['body'] = '## Вопрос\n' + item['body']
     if change == 'dangling': item['links'] = {'Несуществующее понятие': 'Отношение.'}
@@ -70,27 +76,20 @@ def test_filename_cannot_escape_directory_or_break_portability(name):
     assert not exporter.valid_generated_name(name)
 
 
-@pytest.mark.parametrize('private', [False, True])
-def test_unified_repository_identity_idempotency_and_owner_files(tmp_path, monkeypatch, private):
-    monkeypatch.setattr(exporter, 'ROOT', tmp_path)
-    monkeypatch.setattr(exporter, '_git_common_directory', lambda _: tmp_path)
-    def run(command, **kwargs):
-        if command[0] == 'git': return SimpleNamespace(stdout='https://github.com/Just9120/psychology-quiz.git')
-        return SimpleNamespace(stdout=json.dumps({'full_name':'Just9120/psychology-quiz',
-            'private':private, 'archived':False, 'permissions':{'push':True}}))
-    monkeypatch.setattr(exporter.subprocess, 'run', run)
+def test_private_vault_idempotency_and_owner_files(tmp_path, monkeypatch):
+    monkeypatch.setattr(exporter, '_git_common_directory', lambda _: None)
     files = {catalogue.ENTRY: '# База знаний\n'.encode()}
     monkeypatch.setattr(catalogue, 'render_published', lambda: (files, {}))
     vault = tmp_path / 'vault'; (vault / 'personal').mkdir(parents=True)
     personal = vault / 'personal/Моя заметка.md'; personal.write_text('Owner note', encoding="utf-8")
-    exporter.write_vault(vault, files, repository_vault=True, published_content=True)
-    exporter.write_vault(vault, files, repository_vault=True, published_content=True)
+    exporter.write_vault(vault, files, published_content=True)
+    exporter.write_vault(vault, files, published_content=True)
     assert personal.read_text() == 'Owner note'
     with pytest.raises(exporter.VaultError, match='published_catalogue_required'):
-        exporter.write_vault(vault, {catalogue.ENTRY:b'private dossier'}, repository_vault=True, published_content=True)
+        exporter.write_vault(vault, {catalogue.ENTRY:b'private dossier'}, published_content=True)
     (vault / 'generated' / catalogue.ENTRY).write_text('Owner edit', encoding="utf-8")
     with pytest.raises(exporter.VaultError, match='generated_note_changed_by_owner'):
-        exporter.write_vault(vault, files, repository_vault=True, published_content=True)
+        exporter.write_vault(vault, files, published_content=True)
     assert (vault / 'generated' / catalogue.ENTRY).read_text() == 'Owner edit'
 
 
@@ -159,13 +158,11 @@ def test_explicit_migration_replaces_only_known_unchanged_catalogue(tmp_path, mo
     assert personal.read_bytes() == personal_before
 
 
-def test_unknown_repository_visibility_is_not_assumed(tmp_path, monkeypatch):
+def test_repository_export_does_not_infer_permission_from_visibility(tmp_path, monkeypatch):
     monkeypatch.setattr(exporter, 'ROOT', tmp_path)
     vault = tmp_path / 'vault'; vault.mkdir()
-    def run(command, **kwargs):
-        return SimpleNamespace(stdout=('https://github.com/Just9120/psychology-quiz.git'
-            if command[0]=='git' else json.dumps({'full_name':'Just9120/psychology-quiz',
-                'archived':False,'permissions':{'push':True}})))
-    monkeypatch.setattr(exporter.subprocess, 'run', run)
-    with pytest.raises(exporter.VaultError, match='private_repository_required'):
+    def forbidden(*args, **kwargs):
+        raise AssertionError('Repository visibility cannot authorize a Vault export')
+    monkeypatch.setattr(exporter.subprocess, 'run', forbidden)
+    with pytest.raises(exporter.VaultError, match='private_package_delivery_required'):
         exporter._verify_repository_vault(vault,published_content=True)

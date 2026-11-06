@@ -121,7 +121,7 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     items = inventory()
     registry = {item['id']: item for item in json.loads((curriculum.ROOT / 'content/topics.json').read_text(encoding='utf-8'))}
     core = json.loads((curriculum.ROOT / 'content/curriculum.json').read_text(encoding='utf-8'))
-    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1502
+    assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1509
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
     assert len(catalog['disciplines']) == 23 and len(catalog['topics']) == 174
@@ -198,6 +198,10 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
             assert 'глоссар' not in source['title'].lower()
             assert any(all(e[k] == v for k, v in topic['source'].items()) and e['locator'] == item['locator'] for e in review['sources'])
         assert historical == ((((((((({
+                              'cbt_practice_beliefs_and_conduct',
+                              'intro_reflection_motive', 'intro_reflection_resources',
+                              'intro_reflection_family', 'intro_reflection_private_answers',
+                              'intro_reflection_future_learning',
                               'm1_phys_027', 'm1_phys_031', 'm1_phys_038',
                               'm1_phys_050', 'm1_phys_057', 'm1_phys_061',
                               'm2_pd_006', 'm2_pd_011', 'm2_pd_015',

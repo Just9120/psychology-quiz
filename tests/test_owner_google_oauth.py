@@ -46,6 +46,73 @@ def test_google_explicit_owner_link_then_stable_subject_login(flow):
         assert flow.web.auth.account_state(conn, account, token)['google_linked'] is True
 
 
+def test_unrelated_oauth_starts_and_invalid_callbacks_cannot_spend_owner_proof(flow):
+    for _ in range(10):
+        flow.oauth.begin('login', source='198.51.100.9')
+    with pytest.raises(AuthError, match='rate_limited'):
+        flow.oauth.begin('login', source='198.51.100.9')
+    result, browser = flow.oauth.begin('link', flow.token, csrf_token(flow.token), source='203.0.113.2')
+    state = parse_qs(urlsplit(result['url']).query)['state'][0]
+    for _ in range(12):
+        with pytest.raises(AuthError, match='invalid_oauth_state'):
+            flow.oauth.complete('x' * 43, 'y' * 43, 'code')
+    assert flow.oauth.complete(state, browser, 'code') is None
+    with pytest.raises(AuthError, match='invalid_oauth_state'):
+        flow.oauth.complete(state, browser, 'code')
+
+
+def test_accumulated_oauth_proofs_keep_source_exchange_limit(flow):
+    proofs = [begin(flow, 'login') for _ in range(10)]
+    flow.web.now[0] += 60
+    proofs.append(begin(flow, 'login'))
+    for state, browser in proofs[:10]:
+        with pytest.raises(AuthError, match='invalid_credentials'):
+            flow.oauth.complete(state, browser, 'code', source='198.51.100.9')
+    with pytest.raises(AuthError, match='rate_limited'):
+        flow.oauth.complete(*proofs[10], 'code', source='198.51.100.9')
+    # A different source can still complete its own proof during this window.
+    state, browser = begin(flow)
+    assert flow.oauth.complete(state, browser, 'code', source='203.0.113.2') is None
+
+
+def test_oauth_provider_io_has_finite_concurrency_and_releases_capacity(flow):
+    from concurrent.futures import ThreadPoolExecutor
+    import threading
+
+    proofs = [begin(flow, 'login') for _ in range(3)]
+    ready, release, lock = threading.Event(), threading.Event(), threading.Lock()
+    active = [0]
+    provider = flow.oauth.provider.exchange
+
+    def exchange(*args, **kwargs):
+        with lock:
+            active[0] += 1
+            if active[0] == 2:
+                ready.set()
+        assert release.wait(5), 'Provider fixture was not released'
+        raise GoogleOAuthError('synthetic-provider-failure')
+
+    def complete(proof):
+        try:
+            flow.oauth.complete(*proof, 'code')
+        except AuthError as error:
+            return error.code, error.status
+
+    flow.oauth.provider.exchange = exchange
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        pending = [pool.submit(complete, proof) for proof in proofs[:2]]
+        try:
+            assert ready.wait(3), 'Two provider calls did not start'
+            assert complete(proofs[2]) == ('google_unavailable', 503)
+            assert active[0] == 2
+        finally:
+            release.set()
+        assert [item.result(timeout=3) for item in pending] == [('google_login_failed', 401)] * 2
+    flow.oauth.provider.exchange = provider
+    state, browser = begin(flow)
+    assert flow.oauth.complete(state, browser, 'code') is None
+
+
 @pytest.mark.parametrize('invalidate', ['logout', 'expire', 'disable', 'recover'])
 def test_google_link_revalidates_initiating_owner_session(flow, invalidate):
     state, browser = begin(flow)
@@ -103,7 +170,7 @@ def test_google_api_callback_is_browser_bound_and_leaves_actor_unchanged(flow, m
         lambda *args, **kwargs: {'subject': 'api-owner', 'email': 'different@gmail.test'})
     app = create_app(db_path=str(flow.web.db), bot_token=TOKEN, web_settings=flow.web.auth.settings,
                      web_mailer=flow.web.mailbox, web_clock=lambda: flow.web.now[0])
-    with TestClient(app, base_url=ORIGIN) as client:
+    with TestClient(app, base_url=ORIGIN, client=("127.0.0.1", 50000)) as client:
         assert client.get('/web/auth/google/available').json()['available'] is False
         client.cookies.set(flow.web.auth.settings.cookie_name, flow.token)
         before = client.get('/web/auth/me').json()
@@ -156,7 +223,7 @@ def test_google_callback_failure_keeps_credentials_out_of_response_and_logs(flow
     monkeypatch.setattr('app.owner_google_oauth.OwnerGoogleOAuth.complete', fail)
     app = create_app(db_path=str(flow.web.db), bot_token=TOKEN, web_settings=flow.web.auth.settings,
                      web_mailer=flow.web.mailbox, web_clock=lambda: flow.web.now[0])
-    with caplog.at_level(logging.INFO), TestClient(app, base_url=ORIGIN) as client:
+    with caplog.at_level(logging.INFO), TestClient(app, base_url=ORIGIN, client=("127.0.0.1", 50000)) as client:
         client.cookies.set(flow.oauth.cookie_name, 'private-cookie')
         result = client.get('/web/auth/google/callback?state=private-state&code=private-provider-code',
                             follow_redirects=False)
@@ -180,7 +247,8 @@ def test_google_configuration_is_default_off_and_requires_complete_secret_config
     from app.web_config import WebSettings
     for name, value in {'PWA_ENABLED':'true', 'PWA_ORIGIN':'https://pwa.example.test',
         'PWA_OWNER_EMAIL':EMAIL, 'PWA_SMTP_FROM':EMAIL, 'PWA_SMTP_HOST':'smtp.test',
-        'PWA_SMTP_PORT':'465', 'PWA_SMTP_USERNAME':EMAIL, 'PWA_SMTP_PASSWORD':'synthetic'}.items():
+        'PWA_SMTP_PORT':'465', 'PWA_SMTP_USERNAME':EMAIL, 'PWA_SMTP_PASSWORD':'synthetic',
+        'PWA_AUTH_PROXY_PEERS':'127.0.0.1'}.items():
         monkeypatch.setenv(name, value)
     monkeypatch.delenv('PWA_GOOGLE_OAUTH_ENABLED', raising=False)
     assert WebSettings.from_env().google is None
