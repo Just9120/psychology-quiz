@@ -1,7 +1,7 @@
 {
   "state": "PUBLISHED",
-  "atomic_notes": 387,
-  "unmapped_notes": 242,
+  "atomic_notes": 425,
+  "unmapped_notes": 290,
   "sections": [
     {
       "title": "Нервная система и регуляция",
@@ -25,7 +25,7 @@
     },
     {
       "title": "Профессиональная позиция и границы",
-      "notes": 13
+      "notes": 19
     },
     {
       "title": "Клинические понятия и границы вывода",
@@ -54,6 +54,18 @@
     {
       "title": "Самоорганизация и профессиональное представление",
       "notes": 9
+    },
+    {
+      "title": "Терапия принятия и ответственности",
+      "notes": 12
+    },
+    {
+      "title": "Терапия, сфокусированная на сострадании",
+      "notes": 8
+    },
+    {
+      "title": "Когнитивно-поведенческая терапия",
+      "notes": 12
     }
   ],
   "lessons": {
@@ -68,7 +80,7 @@
     "t_8416412afc7d": 10,
     "t_2be8cec234c0": 3,
     "t_4451554cf717": 4,
-    "t_2476fabb75f8": 12,
+    "t_2476fabb75f8": 0,
     "t_32c45a18e1bf": 2,
     "t_e8545fea4531": 2,
     "t_f2b92ac4b2ef": 1,
@@ -93,23 +105,25 @@
     "t_6be3cecd6596": 3,
     "t_059cbac41979": 2,
     "t_09efb9aedb46": 7,
-    "t_7246705017fc": 5,
+    "t_7246705017fc": 4,
     "t_89b592be8732": 4,
     "t_84bd9f531980": 3,
     "t_34b2eed9d99a": 3,
     "t_944c292b1d23": 1,
-    "t_350cf495eee7": 3
+    "t_350cf495eee7": 3,
+    "t_082cd47dd86a": 0,
+    "t_628424ccc652": 0
   },
   "disciplines": {
-    "fiziologiya_cheloveka": 24,
+    "fiziologiya_cheloveka": 13,
     "psihofiziologiya": 8,
     "obschaya_psihologiya": 21,
     "fiziologiya_vnd": 14,
     "osnovy_eksperimentalnoy_psihologii": 46,
     "kachestvennye_metody_issledovaniya": 8,
-    "psychological_consulting": 22,
-    "vvedenie_v_professiyu": 15
+    "vvedenie_v_professiyu": 15,
+    "psychological_consulting": 21
   },
-  "package_sha256": "fccd7208d77fb75d09823b0d4aec6f18612471aae8682a01a3f6bd9fda47abaf",
-  "published_at": "2026-10-10"
+  "package_sha256": "76940d2ec39cb33a0a690a4b68484c98d37b32082153dfe951be28545e6a28ba",
+  "published_at": "2026-11-06"
 }

@@ -43,11 +43,12 @@ def test_published_knowledge_reproduces_its_dated_context_and_holds_are_independ
     # the exact private package is part of the package's operator validation;
     # the qualification algorithm is exercised above without private bodies.
     assert result['package_sha256'] == REVIEWED_NOTES_SHA256
-    assert result['published_at'] == '2026-10-10'
+    assert result['published_at'] == '2026-11-06'
     assert result['state'] == 'PUBLISHED'
-    assert result['atomic_notes'] == 387 and len(result['sections']) == 13
-    assert result['unmapped_notes'] == 242
-    assert len(result['lessons']) == 42 and all(count > 0 for count in result['lessons'].values())
+    assert result['atomic_notes'] == 425 and len(result['sections']) == 16
+    assert result['unmapped_notes'] == 290
+    assert len(result['lessons']) == 44
+    assert sum(count > 0 for count in result['lessons'].values()) == 41
     # Changing the live lesson registry must not rewrite this dated package.
     monkeypatch.setattr(knowledge, 'load_reviewed_catalog', lambda: {'topics': {}})
     assert knowledge.published_knowledge() == result
