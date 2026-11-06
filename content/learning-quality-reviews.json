@@ -25236,9 +25236,9 @@
     },
     "questions:cbt_practice_beliefs_and_conduct": {
       "discipline_id": "cognitive_behavioral_therapy",
-      "item_sha256": "d1dcafc33879de91eddaab7d35f5cbbbd7bf37b525134f815c8e7d9e0ea467ad",
+      "item_sha256": "cace6b40cd44209df2ba0d77bc8b7796641a1243d85b2612ca9d0dfc98800c6e",
       "reviewer": "project-closure-quality-six-20261105",
-      "reviewed_at": "2026-11-05",
+      "reviewed_at": "2026-11-06",
       "meaning": "consistent",
       "source_support": "supported",
       "issues": [],
@@ -25258,7 +25258,7 @@
           "locator": "characters:6136:7238"
         }
       ],
-      "note": "Full new stem/options/key/explanation read and compared with the exact source passage; four plausible neighbouring tasks, one answer for the stated objective. No personal source case copied, no deterministic suitability verdict, clinical claim, disclosure obligation or completion certification. All earlier source/related holds remain in force.",
+      "note": "Full new stem/options/key/explanation read and compared with the exact source passage; four plausible neighbouring tasks, one answer for the stated objective. No personal source case copied, no deterministic suitability verdict, clinical claim, disclosure obligation or completion certification. All earlier source/related holds remain in force. Same exact source and learning task. The revised question asks for the evidence linking the specific error with a global self-appraisal. Alternatives still address consequences, a future action and emotions. The correct answer is no longer the longest option. No change to related holds or captured editions.",
       "disposition": "fix"
     }
   }

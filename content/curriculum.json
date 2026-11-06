@@ -9489,6 +9489,12 @@
       "topic_id": "t_c17d1ae57018",
       "item_sha256": "b7441720d34dc4e0aae8ca7adcb8db9932966f619872c6df10c06503b5706b98",
       "locator": "private certificate:questions:intro_reflection_future_learning"
+    },
+    "52ef741e3faaeec7a385308259e8fcedef23aceba2481803e60f4f06a1e55af6": {
+      "external_id": "cbt_practice_beliefs_and_conduct",
+      "topic_id": "t_ff4f6a25db3e",
+      "item_sha256": "cace6b40cd44209df2ba0d77bc8b7796641a1243d85b2612ca9d0dfc98800c6e",
+      "locator": "private certificate:questions:cbt_practice_beliefs_and_conduct"
     }
   }
 }

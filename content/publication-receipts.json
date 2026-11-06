@@ -17948,13 +17948,13 @@
     },
     "questions:cbt_practice_beliefs_and_conduct": {
       "schema_version": 1,
-      "item_sha256": "d1dcafc33879de91eddaab7d35f5cbbbd7bf37b525134f815c8e7d9e0ea467ad",
-      "review_sha256": "417040f6818825ca0cba4b30db433b840653e23e3bf06ac96ceb35fdf647c7fb",
+      "item_sha256": "cace6b40cd44209df2ba0d77bc8b7796641a1243d85b2612ca9d0dfc98800c6e",
+      "review_sha256": "6f32ba0112fbf753d462c894ed69e8dec5aa17635c93281401f224a8684a2c4b",
       "topic_id": "t_ff4f6a25db3e",
       "decision": "approved",
       "purpose": "learning_content",
       "reviewer": "private-review",
-      "reviewed_at": "2026-11-05",
+      "reviewed_at": "2026-11-06",
       "checks": [
         "ambiguity",
         "answer",

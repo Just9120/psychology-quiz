@@ -1,6 +1,7 @@
 import copy
 import io
 import json
+import subprocess
 import zipfile
 
 import pytest
@@ -124,10 +125,17 @@ def test_partial_read_seeks_across_part_boundary_and_closes_handles(tmp_path):
     assert all(handle.closed for handle in stream.streams)
 
 
-def test_private_destination_rejects_existing_and_public_repo_paths(tmp_path):
+def test_private_destination_rejects_existing_and_public_repo_paths(tmp_path, monkeypatch):
     target = tmp_path / 'one'; target.write_text('existing')
     with pytest.raises(ValueError, match='new_private_destination'):
         cache.private_destination(target)
+    repo = tmp_path / 'repo'
+    repo.mkdir()
+    subprocess.run(['git', 'init', '--quiet', str(repo)], check=True)
+    (repo / '.gitignore').write_text('/data/\n', encoding='utf-8')
+    (repo / 'content').mkdir()
+    (repo / 'data').mkdir()
+    monkeypatch.setattr(cache, 'ROOT', repo.resolve())
     with pytest.raises(ValueError, match='private_material_output'):
         cache.private_destination(cache.ROOT / 'content/new-material.zip')
     assert cache.private_destination(cache.ROOT / 'data/new-material.zip').parent == cache.ROOT / 'data'
