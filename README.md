@@ -119,9 +119,9 @@ python "<скачанный-снимок>/restore_cache.py" --manifest "<ска�
 
 Для visual/original verification скачайте соответствующие части и повторите ту же команду с `--layers originals,renders`. Helper проверяет SHA/size частей, собранных ZIP и каждого объекта, отвергает escape paths/неожиданные члены архива/конфликтующие существующие файлы. Он создаёт `objects/`, читаемый `view/`, `PATHS.json` и `cache-state.json`; данные по historical absolute paths не записывает, источники/досье/holds не меняет и approvals не создаёт. `complete_snapshot:false` после core-only восстановления ожидаем: недостающие слои нельзя выдавать за проверенные. Старые scripts внутри view являются историческими данными; для восстановления исполняется только проверенный recovery helper.
 
-Адресное восстановление отдельного материала поддерживает [source_material_cache.py](scripts/source_material_cache.py). В закрытой папке результатов новый per-source набор считается готовым только при наличии `MATERIAL_CACHE_READY.json` и полного `material-index.json` с проверенными package digests и Drive readback. Частично загруженные ZIP без marker не заменяют прежний завершённый снимок. Private index связывает source revision с отдельным пакетом; реальные ID и точные связи остаются вне Git.
+Адресное восстановление отдельного материала поддерживает [source_material_cache.py](scripts/source_material_cache.py). В закрытой папке результатов готовность набора подтверждает `MATERIAL_CACHE_READY.json`. Сверьте SHA-256 индекса с полем `index.sha256` в отметке готовности. Индекс связывает редакции источников с пакетами и содержит их проверенные размеры и хеши. Реальные ID и точные связи хранятся в закрытом индексе.
 
-После выбора записи в private index скачайте только её ZIP и передайте его проверенный SHA-256:
+После выбора записи в индексе скачайте её ZIP и передайте проверенный SHA-256. Если у записи есть `revision_overlay`, восстановите его в отдельный каталог и сверьте `requires_base_package` с базовым пакетом.
 
 ```bash
 python scripts/source_material_cache.py restore --package data/selected-material.zip --package-sha256 <проверенный-SHA256> --source-id <ID-из-private-index> --output data/selected-material
@@ -160,7 +160,7 @@ Discovery schema v2 reports `uncaptured_source_ids` / `uncaptured_in_batch`: fil
 из корня репозитория. Manifest содержит `schema_version: 1` и `sources` с
 `source_id` и `content` (UTF-8 файл непосредственно в ignored `data/`). Команда
 сверяет revision и SHA извлечений, сохраняет приватные фрагменты/координаты,
-кандидатов существующих works и явный список ещё не прочитанных источников.
+кандидатов существующих works и список источников, отсутствующих в переданном capture manifest.
 Результат — очередь проверки, а не approval: совпадение названия не объединяет
 works, не публикует книги и не меняет личные отметки. Неоднозначные названия,
 неизвестные книги и предполагаемые упоминания проверяются до изменения каталога.
