@@ -888,14 +888,29 @@ test('owner preparation is compact and readable, controls retain contrast at all
   await expect(page.getByText('Первая дисциплина · тем: 1')).toHaveCount(0)
   await page.getByText('Вторая дисциплина · тем: 1').click()
   await expect(page.getByRole('heading', { name: 'Подробная тема 1' })).toBeVisible()
-  // WCAG measured pairs: test actual computed author focus ring, placeholder and informative label tokens.
-  const colors = await page.evaluate(() => ({ focus: getComputedStyle(document.documentElement).getPropertyValue('--focus').trim(), muted: getComputedStyle(document.documentElement).getPropertyValue('--muted').trim(), paper: getComputedStyle(document.documentElement).getPropertyValue('--paper').trim() }))
-  const luminance = (hex: string) => {
-    const channels = hex.replace('#', '').match(/../g)!.map(value => parseInt(value, 16) / 255).map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)
+  const luminance = (rgb: string) => {
+    const channels = rgb.match(/[\d.]+/g)!.map(value => Number(value) / 255).map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)
     return .2126 * channels[0] + .7152 * channels[1] + .0722 * channels[2]
   }
   const contrast = (a: string, b: string) => { const values = [luminance(a), luminance(b)].sort((a, b) => b - a); return (values[0] + .05) / (values[1] + .05) }
-  for (const background of ['#ffffff', colors.paper]) { expect(contrast(colors.focus, background)).toBeGreaterThanOrEqual(3); expect(contrast(colors.muted, background)).toBeGreaterThanOrEqual(4.5) }
+  for (const colorScheme of ['light', 'dark'] as const) {
+    await page.emulateMedia({ colorScheme })
+    // Resolve the tokens as used CSS colours, including their light-dark() values.
+    const [focus, muted, paper, surface] = await page.evaluate(() => {
+      const sample = document.createElement('span')
+      document.body.append(sample)
+      try {
+        return ['focus', 'muted', 'paper', 'surface'].map(name => {
+          sample.style.color = `var(--${name})`
+          return getComputedStyle(sample).color
+        })
+      } finally { sample.remove() }
+    })
+    for (const background of [paper, surface]) {
+      expect(contrast(focus, background)).toBeGreaterThanOrEqual(3)
+      expect(contrast(muted, background)).toBeGreaterThanOrEqual(4.5)
+    }
+  }
 })
 
 
