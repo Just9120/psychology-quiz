@@ -48,7 +48,7 @@ test('styled topic menus and reading cards work by keyboard and touch without ov
   await page.locator('.literature-title').filter({ hasText: 'Мозг. Как он устроен' }).click()
   await expect(page.getByRole('link', { name: 'Читать · MyBook' })).toBeVisible()
   await expect(page.getByRole('link', { name: 'Читать · Яндекс Книги' })).toBeVisible()
-  await page.getByRole('button', { name: 'Другие способы найти книгу' }).click()
+  await page.locator('.book-search-disclosure > summary').click()
   const moreCatalogs = page.getByRole('button', { name: 'Поиск в других каталогах' })
   await moreCatalogs.click()
   for (const name of ['МИФ ↗', 'Альпина ↗', 'Питер ↗']) {

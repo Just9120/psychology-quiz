@@ -1,5 +1,4 @@
 import { compareBooks, LiteratureControls, LiteratureEmpty, readingStatuses as labels, type LiteratureSort } from '../LiteratureControls'
-import { SourcesMenu } from '../SourcesMenu'
 import { BookOffers } from '../BookOffers'
 import { ChoiceMenu } from '../ChoiceMenu'
 import { useLayoutEffect, useRef, useState } from 'react'
@@ -91,7 +90,9 @@ export function MiniLiterature({ initial, topics, studyTopics = [], busy, run, o
         <button className="button primary" type="submit" disabled={busy || uncertain}>Сохранить чтение</button>{saved && <p role="status">Отметка сохранена.</p>}
       </form>
       <BookOffers links={item.access_links} description="Доступ и совпадение издания уточняются у провайдера." />
-      {item.book_search && <SourcesMenu label="Другие способы найти книгу"><BookSearch search={item.book_search} /></SourcesMenu>}
+      {item.book_search && <details className="book-search-disclosure"><summary><span aria-hidden="true">⋮</span> Другие способы найти книгу</summary>
+        <BookSearch search={item.book_search} />
+      </details>}
       {(item.source?.citation || item.metadata_warnings?.length) && <details className="source-details"><summary>Библиографическая запись</summary>
         {item.source?.citation && <blockquote>{item.source.citation}</blockquote>}
         {item.metadata_warnings?.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}

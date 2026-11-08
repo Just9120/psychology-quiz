@@ -1,5 +1,4 @@
 import { compareBooks, LiteratureControls, LiteratureEmpty, readingStatuses as statuses, type LiteratureSort } from './LiteratureControls'
-import { SourcesMenu } from './SourcesMenu'
 import { BookOffers } from './BookOffers'
 import { ChoiceMenu } from './ChoiceMenu'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -127,7 +126,9 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
         {saved && <p role="status">Прогресс чтения сохранён.</p>}
       </form>
       <BookOffers links={work.access_links} />
-      {work.book_search && <SourcesMenu label="Другие способы найти книгу"><BookSearch search={work.book_search} /></SourcesMenu>}
+      {work.book_search && <details className="book-search-disclosure"><summary><span aria-hidden="true">⋮</span> Другие способы найти книгу</summary>
+        <BookSearch search={work.book_search} />
+      </details>}
       <details className="source-details"><summary>Библиографическая запись</summary><blockquote>{entry.source.citation}</blockquote>
         {entry.metadata_warnings.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
       </details>

@@ -309,7 +309,7 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
 .literature-control-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 10px; }
 .literature-control-row:has(details[open]) { grid-template-columns: minmax(0, 1fr); }
 .literature-control-row > .choice-field { margin: 0; }
-.literature-filter-panel > summary, .reading-progress-disclosure > summary {
+.literature-filter-panel > summary, .reading-progress-disclosure > summary, .book-search-disclosure > summary {
   min-height: 44px; padding: 10px 12px; border: 1px solid var(--line);
   border-radius: 9px; background: var(--surface); color: var(--green); cursor: pointer;
 }
