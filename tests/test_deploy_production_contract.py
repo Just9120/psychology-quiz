@@ -92,6 +92,7 @@ git() {
       elif [[ "$FAULT" == evidence_policy_change ]]; then echo app/source_evidence.py;
       elif [[ "$FAULT" == case_policy_change ]]; then echo app/case_content.py;
       elif [[ "$FAULT" == pg_upgrade || "$FAULT" == pg_upgrade_failed ]]; then echo app/postgres_config.py;
+      elif [[ "$FAULT" == pg_deletion_change ]]; then echo app/deletion_journal.py;
       else echo app/db.py; fi ;;
     'merge --ff-only '*) FAKE_HEAD="$EXPECTED" ;;
     *) return 0 ;;
@@ -140,6 +141,7 @@ python3() {
       if [[ "$FAULT" == docs ]]; then target="$OLD"; else target="$EXPECTED"; fi
       echo "PWA_DELIVERY_OK revision=$target source=$EXPECTED previous=$OLD" ;;
     *postgres_vps.py\ backup*) [[ "$FAULT" != pg_backup ]] || return 2; echo /opt/psychology-quiz/.postgres/backups/release-test/record.json ;;
+    *postgres_vps.py\ prepare-deletion-journal*) echo DELETION_JOURNAL_READY ;;
     *postgres_vps.py\ image-state*) if [[ "$FAULT" == pg_upgrade* ]]; then echo previous; else echo current; fi ;;
     *postgres_vps.py\ stage-vector-image*) echo VECTOR_IMAGE_STAGED ;;
     *postgres_vps.py\ upgrade-vector-image*) [[ "$FAULT" != pg_upgrade_failed ]] || return 2; echo /opt/psychology-quiz/.postgres/backups/release-test/record.json ;;
@@ -225,6 +227,16 @@ def test_pgvector_upgrade_stages_before_outage_and_rehearses_before_migration(tm
                 'postgres_vps.py rehearse-user-recovery', 'scripts/init_db.py', 'postgres_vps.py verify', 'up -d']
     assert [log.index(command) for command in commands] == sorted(log.index(command) for command in commands)
     assert 'postgres_vps.py backup' not in log
+
+
+def test_deletion_recovery_rehearsed_without_reseeding_production(tmp_path):
+    result, log = run_deploy(tmp_path, 'pg_deletion_change')
+    assert result.returncode == 0, result.stdout + result.stderr
+    commands = ['stop psych_quiz_bot', 'postgres_vps.py prepare-deletion-journal',
+                'postgres_vps.py backup', 'postgres_vps.py rehearse-user-recovery', 'up -d']
+    positions = [log.index(command) for command in commands]
+    assert positions == sorted(positions)
+    assert 'scripts/init_db.py' not in log and 'scripts/seed_questions.py' not in log
 
 
 @pytest.mark.parametrize('fault,restarts_original', [('pg_recovery', True), ('pg_upgrade_recovery', False)])

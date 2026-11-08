@@ -21,6 +21,7 @@ services:
     environment:
       MINIAPP_LEGACY_API_ENABLED: "false"
       APP_REVISION: ${APP_REVISION:-UNSET}
+      LEARNING_DELETION_JOURNAL: /data/deletion-journal
 
   psych_quiz_miniapp_api:
     image: psychology-quiz-runtime:${APP_REVISION:-local}
@@ -35,6 +36,7 @@ services:
       - .env
     environment:
       APP_REVISION: ${APP_REVISION:-UNSET}
+      LEARNING_DELETION_JOURNAL: /data/deletion-journal
     command: ["python", "scripts/runtime_log.py", "api"]
     logging:
       driver: "none"

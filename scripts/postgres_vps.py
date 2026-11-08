@@ -24,7 +24,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from app.postgres_config import PG_DATABASE, PG_IMAGE, PG_PREVIOUS_IMAGE, PG_ROLE, PG_SERVICE, private_target
-from scripts.postgres_backup import backup_and_rehearse, file_digest, read_verified_record, rehearse_user_recovery, sync_directory, write_record
+from scripts.postgres_backup import (LegacyDeletionPointError, backup_and_rehearse, file_digest,
+                                     read_verified_record, rehearse_user_recovery, sync_directory, write_record)
 
 PROJECT = Path("/opt/psychology-quiz")
 STATE = PROJECT / ".postgres"
@@ -123,7 +124,7 @@ class Runtime:
         image = json.loads(run(["docker", "image", "inspect", images[0]]))[0]
         if (image["Config"].get("Labels") or {}).get("org.opencontainers.image.revision") != self.revision:
             raise OperationError("candidate_application_image_revision_mismatch")
-        return compose(["run", "--rm", "--no-deps", *overrides, SERVICES[0], "python", *arguments],
+        return compose(["run", "--rm", "--no-deps", "-T", *overrides, SERVICES[0], "python", *arguments],
                        data=data, environment=environment, timeout=300)
 
     def container(self, service):
@@ -195,6 +196,17 @@ class Runtime:
                 raise OperationError("owned_restore_name_required")
             arguments += ["--database", database]
         return json.loads(self.app(arguments))
+
+    def deletion_point(self):
+        return json.loads(self.app(["scripts/postgres_manifest.py", "--deletion-point",
+                                    "--cluster", self.identity()["cluster"]]))
+
+    def replay_deletions(self, name, point, before):
+        if name not in self.owned_restore or RESTORE.fullmatch(name) is None:
+            raise OperationError("restore_target_not_owned")
+        return json.loads(self.app(["scripts/postgres_manifest.py", "--replay-deletions",
+                                    "--cluster", self.identity()["cluster"], "--database", name],
+                                   data=json.dumps({"point": point, "before": before}).encode()))
 
     def dump(self, path):
         # The pgvector schema is a rebuildable operator index. Its extension
@@ -536,6 +548,7 @@ def upgrade_vector_image(revision):
         # The image was pulled and checked while application writers ran.
         if not json.loads(run(["docker", "image", "inspect", PG_IMAGE])):
             raise OperationError("vector_candidate_image_missing")
+        prepare_deletion_journal(old)
         backup_path = backup(old)
         backup_record = read_verified_record(backup_path)
         record = {"format": VECTOR_UPGRADE_FORMAT, "phase": "backed_up",
@@ -581,10 +594,28 @@ def upgrade_vector_image(revision):
     return backup_path
 
 
+def prepare_deletion_journal(runtime):
+    runtime.require_stopped_writers()
+    journal = PROJECT / "data" / "deletion-journal"
+    if not journal.exists() and not journal.is_symlink():
+        # A later missing journal is a recovery incident, never a new baseline.
+        for service in SERVICES:
+            previous = runtime.container(service)["Config"]["Labels"].get(
+                "org.opencontainers.image.revision", "")
+            if re.fullmatch(r"[0-9a-f]{40}", previous) is None:
+                raise OperationError("verified_previous_revision_required")
+            if run(["git", "ls-tree", previous, "--", "app/deletion_journal.py"]).strip():
+                raise OperationError("previous_runtime_requires_existing_deletion_journal")
+        runtime.app(["scripts/postgres_manifest.py", "--initialize-deletion-journal",
+                     "--cluster", runtime.identity()["cluster"]])
+    runtime.deletion_point()
+
+
 def backup(runtime):
     size = int(runtime.sql(f"SELECT pg_database_size('{PG_DATABASE}');"))
     check_space(max(1024 ** 3, size * 3))
-    return backup_and_rehearse(runtime, STATE / "backups")
+    runtime.require_stopped_writers()
+    return backup_and_rehearse(runtime, STATE / "backups", deletion_point=runtime.deletion_point())
 
 
 def verify_backup(runtime, path):
@@ -684,6 +715,7 @@ def cutover(revision):
             runtime.app(["scripts/deployment_db.py", "smoke"])
             phase(record, "imported", import_report=report)
         if record["phase"] == "imported":
+            prepare_deletion_journal(runtime)
             recovery = backup(runtime)
             verify_backup(runtime, recovery)
             phase(record, "recovery_verified", recovery_record=str(recovery))
@@ -726,7 +758,8 @@ def post_checks(runtime):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("preflight", "prepare", "cutover", "status", "backup", "verify",
-                                           "image-state", "stage-vector-image", "upgrade-vector-image", "rehearse-user-recovery"))
+                                           "image-state", "stage-vector-image", "upgrade-vector-image",
+                                           "prepare-deletion-journal", "rehearse-user-recovery"))
     parser.add_argument("--expected-sha", required=True)
     parser.add_argument("--record", type=Path)
     parser.add_argument("--lock-held", action="store_true", help="Only deploy.sh with inherited fd 200")
@@ -773,7 +806,10 @@ def main():
                 for service in SERVICES:
                     if env_target(runtime.container(service))[0] != app_target():
                         raise OperationError("existing_writer_database_target_mismatch")
-                if args.action == "backup":
+                if args.action == "prepare-deletion-journal":
+                    prepare_deletion_journal(runtime)
+                    print("DELETION_JOURNAL_READY")
+                elif args.action == "backup":
                     print(backup(runtime))
                 else:
                     if args.record is None:
@@ -785,7 +821,11 @@ def main():
                         private_file(path)
                         size = int(runtime.sql(f"SELECT pg_database_size('{PG_DATABASE}');"))
                         check_space(max(1024 ** 3, size * 3))
-                        print(rehearse_user_recovery(runtime, path, STATE / "recovery-rehearsals"))
+                        try:
+                            print(rehearse_user_recovery(runtime, path, STATE / "recovery-rehearsals",
+                                                          replay_deletions=runtime.replay_deletions))
+                        except LegacyDeletionPointError:
+                            raise OperationError("legacy_backup_requires_deletion_reconciliation") from None
                     else:
                         verify_backup(runtime, args.record)
                         print("POSTGRES_USER_STATE_PRESERVED")

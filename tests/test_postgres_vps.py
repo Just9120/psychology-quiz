@@ -170,13 +170,14 @@ def cutover_host(tmp_path, monkeypatch):
     monkeypatch.setattr(vps, 'Runtime', FakeRuntime)
     monkeypatch.setattr(vps, 'configured_runtime', lambda revision: (FakeRuntime(revision), json.loads((state / 'state.json').read_text())))
     monkeypatch.setattr(vps, 'compose', compose)
+    monkeypatch.setattr(vps, 'prepare_deletion_journal', lambda runtime: fail_at('deletion_journal'))
     monkeypatch.setattr(vps, 'backup', native_backup)
     monkeypatch.setattr(vps, 'verify_backup', lambda *args: fail_at('preservation'))
     monkeypatch.setattr(vps, 'post_checks', lambda *args: fail_at('post_checks'))
     return host
 
 
-@pytest.mark.parametrize('failure', ['sqlite_backup','import','native_backup','preservation','start','post_checks'])
+@pytest.mark.parametrize('failure', ['sqlite_backup','import','deletion_journal','native_backup','preservation','start','post_checks'])
 def test_interrupted_cutover_resumes_without_sqlite_rollback_or_reimport_after_writes(cutover_host, failure):
     host = cutover_host
     original = (host.project / '.env').read_bytes()

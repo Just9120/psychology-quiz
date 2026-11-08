@@ -59,7 +59,10 @@ async def confirm_delete_data_command(update: Update, context: ContextTypes.DEFA
     try:
         await asyncio.to_thread(_run, context.application.bot_data["settings"].db_path,
                                 update.effective_user, token)
-    except PrivacyError:
+    except PrivacyError as error:
+        if str(error) == "deletion_reconciliation_required":
+            await update.message.reply_text("Не удалось подтвердить результат удаления. Обратитесь к владельцу бота для проверки.")
+            return
         await update.message.reply_text("Подтверждение больше не действует. Данные не изменены; начните заново через /delete_data.")
         return
     context.user_data.clear()
