@@ -99,7 +99,7 @@ def test_chat_literature_write_is_shared_with_linked_pwa_and_miniapp_but_not_oth
     saved = _click(web, 42, read_button.callback_data)
     assert "Статус: Прочитано" in saved.args[0]
     assert "%" not in saved.args[0]
-    back = saved.kwargs['reply_markup'].inline_keyboard[-1][0].callback_data
+    back = saved.kwargs['reply_markup'].inline_keyboard[0][0].callback_data
     assert back == topic_button.callback_data + ':a'
     assert 'Фильтр: Все статусы' in _click(web, 42, back).args[0]
 
@@ -174,7 +174,8 @@ def test_book_card_preserves_and_escapes_metadata_uncertainty():
     assert "<b>не уточнено</b>" not in text
     assert "private-source-id" not in text and "private-page" not in text
     assert "Статус: Не начато" in text
-    assert keyboard.inline_keyboard[0][0].text == "Не начато"
+    assert keyboard.inline_keyboard[0][0].text == "К теме"
+    assert keyboard.inline_keyboard[1][0].text == "Не начато"
 
 
 @pytest.mark.parametrize("value,label,origin,origin_label", [

@@ -34,6 +34,14 @@ function message(error: unknown) { return error instanceof MiniAppError ? errors
 
 export function MiniApp() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [theme, setTheme] = useState(() => window.Telegram?.WebApp?.colorScheme)
+  useEffect(() => {
+    const webApp = window.Telegram?.WebApp
+    const update = () => setTheme(webApp?.colorScheme)
+    update()
+    webApp?.onEvent?.('themeChanged', update)
+    return () => webApp?.offEvent?.('themeChanged', update)
+  }, [])
   const [page, setPage] = useState<Page>('setup')
   const [options, setOptions] = useState<SetupOptions | null>(null)
   const [state, setState] = useState<RunnerState | null>(null)
@@ -229,8 +237,8 @@ export function MiniApp() {
 
   if (!authorized) return <main className="loading-screen"><Brand /><h1>Откройте в Telegram</h1><p>Для личного квиза требуется запуск Mini App из Telegram.</p><p>Для пользователей от 18 лет.</p><a className="button primary" href="https://t.me/psychologyquiz1_bot">Открыть бота в Telegram</a></main>
   if (booting) return <main className="loading-screen"><Brand /><p role="status">Восстанавливаем ваши занятия…</p></main>
-  return <div className="app-layout miniapp-layout"><a className="skip-link" href="#main-content">Перейти к содержимому</a>
-    <aside className={menuOpen ? 'sidebar menu-open' : 'sidebar'}><Brand /><div className="mobile-header-actions"><button className="menu-toggle" disabled={busy} aria-expanded={menuOpen} aria-controls="miniapp-navigation" onClick={() => setMenuOpen(value => !value)} aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}>Меню</button></div><nav id="miniapp-navigation" aria-label="Разделы Mini App" onClick={event => { if ((event.target as Element).closest('button:not(:disabled), a')) setMenuOpen(false) }}>
+  return <div className="app-layout miniapp-layout" data-color-scheme={theme}><a className="skip-link" href="#main-content">Перейти к содержимому</a>
+    <aside className={menuOpen ? 'sidebar menu-open' : 'sidebar'}><Brand /><div className="mobile-header-actions"><button className="menu-toggle" disabled={busy} aria-expanded={menuOpen} aria-controls="miniapp-navigation" onClick={() => setMenuOpen(value => !value)} aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}>Меню</button></div><nav id="miniapp-navigation" aria-label="Разделы Mini App" onClick={event => { if (menuOpen && (event.target as Element).closest('button:not(:disabled), a')) { setMenuOpen(false); document.getElementById('main-content')?.focus({ preventScroll: true }) } }}>
       <button className={page === 'quiz' || page === 'setup' ? 'nav-item active' : 'nav-item'} aria-current={page === 'quiz' || page === 'setup' ? 'page' : undefined} disabled={busy} onClick={() => setPage(state?.state === 'in_progress' || state?.state === 'completed' ? 'quiz' : 'setup')}>Квиз</button>
       <button className={page === 'homework' || page === 'homeworkQuiz' ? 'nav-item active' : 'nav-item'} aria-current={page === 'homework' || page === 'homeworkQuiz' ? 'page' : undefined} disabled={busy} onClick={() => void run(loadHomework)}>Домашние задания</button>
       <button className={page === 'glossary' ? 'nav-item active' : 'nav-item'} aria-current={page === 'glossary' ? 'page' : undefined} disabled={busy} onClick={() => void run(loadGlossary)}>Глоссарий</button>

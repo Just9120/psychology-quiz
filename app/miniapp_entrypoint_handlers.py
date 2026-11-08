@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.bot_menu import START_QUIZ_BUTTON_TEXT, MINI_APP_BUTTON_TEXT
+from app.bot_menu import START_QUIZ_BUTTON_TEXT, MINI_APP_BUTTON_TEXT, dismiss_main_menu
 
 from contextlib import closing
 
@@ -108,7 +108,7 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         "\n"
         f"В чате её по-прежнему можно пройти через {START_QUIZ_BUTTON_TEXT}.\n"
         "\n"
-        f"Если кнопка не открылась, нажмите {MINI_APP_BUTTON_TEXT} в меню или отправьте /ui ещё раз."
+        "Если кнопка не открылась, отправьте /ui ещё раз."
     )
     if fallback_mode:
         intro_text = (
@@ -121,9 +121,10 @@ async def ui_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
             "У вас уже есть начатая викторина. В окне можно выбрать новый режим.\n"
             "Запуск новой викторины завершит текущую активную попытку.\n"
             "\n"
-            f"Если кнопка не открылась, нажмите {MINI_APP_BUTTON_TEXT} в меню или отправьте /ui ещё раз."
+            "Если кнопка не открылась, отправьте /ui ещё раз."
         )
     api_started_at = time.perf_counter()
+    await dismiss_main_menu(update.message)
     await update.message.reply_text(
         intro_text,
         reply_markup=build_miniapp_launch_inline_keyboard(miniapp_url),

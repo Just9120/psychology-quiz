@@ -34,6 +34,7 @@ test('styled topic menus and reading cards work by keyboard and touch without ov
   await expect(homework).toContainText(homeworkTopic)
   await expect(page.getByRole('listbox')).toHaveCount(0)
   await navigate(page, 'Литература')
+  await page.locator('.literature-filter-panel > summary').click()
   const topics = page.getByRole('combobox', { name: 'Направление чтения', exact: true })
   await topics.click()
   const topicSearch = page.getByRole('searchbox', { name: 'Поиск: Направление чтения', exact: true })
@@ -47,6 +48,7 @@ test('styled topic menus and reading cards work by keyboard and touch without ov
   await page.locator('.literature-title').filter({ hasText: 'Мозг. Как он устроен' }).click()
   await expect(page.getByRole('link', { name: 'Читать · MyBook' })).toBeVisible()
   await expect(page.getByRole('link', { name: 'Читать · Яндекс Книги' })).toBeVisible()
+  await page.locator('.book-search-disclosure > summary').click()
   const moreCatalogs = page.getByRole('button', { name: 'Поиск в других каталогах' })
   await moreCatalogs.click()
   for (const name of ['МИФ ↗', 'Альпина ↗', 'Питер ↗']) {
@@ -99,6 +101,7 @@ test('personal learning shows empty queue and persists a weekly target', async (
   await page.reload()
   await navigate(page, 'Повторение и цели')
   await expect(page.getByLabel('Завершённые попытки')).toHaveValue('2')
+  await expect(page.locator('.week-checklist')).toContainText('Завершённые попытки · 0 из 2')
 })
 
 test('homework passes at 80 percent and keeps the completed card after reload', async ({ page, request }) => {
@@ -119,6 +122,10 @@ test('homework passes at 80 percent and keeps the completed card after reload', 
   await page.reload()
   await navigate(page, 'Домашние задания')
   await expect(page.locator('.homework-status')).toContainText('Выполнено')
+  await page.getByRole('button', { name: 'К прохождению', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Закрепление знаний' })).toHaveCount(0)
+  await page.getByRole('button', { name: 'Зачтено', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Закрепление знаний' })).toBeVisible()
   const catalog = await (await page.request.get('/web/homework/catalog')).json()
   expect(catalog.assignments[0]).toMatchObject({ completed: true, best_score: 4, best_total: 5 })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy()
@@ -146,6 +153,7 @@ test('reading catalog shares a work status across themes, lost save and reload',
     && catalog.works.filter(other => other.title === item.title).length === 1)!
   expect(work, 'a published work spans independent reading themes').toBeTruthy()
   const [first, second] = work.entries[0].reading_topics.map(item => item.id)
+  await page.locator('.literature-filter-panel > summary').click()
   await chooseMenu(page, page.getByLabel('Направление чтения', { exact: true }), first)
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page, first)}`)).toBeVisible()
   await page.locator('.reading-order > summary').click()
@@ -224,6 +232,24 @@ test('reviewed literature links open a separate provider page without learning c
     .toEqual(before.works.map(item => item.entries.map(entry => entry.user_state)))
 })
 
+test('compact literature reaches the books and retains keyboard focus in both themes', async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.emulateMedia({ colorScheme: 'light' })
+  await fresh(page)
+  const menu = page.getByRole('button', { name: 'Открыть меню', exact: true })
+  await menu.press('Enter')
+  await page.getByRole('navigation', { name: 'Основная навигация' }).getByRole('button', { name: 'Литература', exact: true }).press('Enter')
+  await expect(page.getByRole('heading', { name: 'Литература', exact: true })).toBeVisible()
+  await expect(page.getByRole('main')).toBeFocused()
+  await expect(page.locator('.literature-title').first()).toBeInViewport()
+  await expect(page.getByRole('combobox', { name: 'Модуль обучения' })).toBeHidden()
+  await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-compact-light.png` })
+  await page.emulateMedia({ colorScheme: 'dark' })
+  await expect.poll(() => page.locator('html').evaluate(element => getComputedStyle(element).colorScheme)).toBe('dark')
+  await expect(page.locator('.literature-title').first()).toBeInViewport()
+  await page.screenshot({ path: `test-results/visual-${testInfo.project.name}-compact-dark.png` })
+})
+
 test('reading empty and failed catalog loads are recoverable', async ({ page }) => {
   await fresh(page)
   await page.route('**/web/literature/catalog-compact', route => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ ok: false, error: 'database_unavailable' }) }), { times: 1 })
@@ -231,7 +257,7 @@ test('reading empty and failed catalog loads are recoverable', async ({ page }) 
   await expect(page.getByRole('alert')).toContainText('Сервер занят')
   await page.route('**/web/literature/catalog-compact', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, works: [], topics: [] }) }), { times: 1 })
   await navigate(page, 'Литература')
-  await expect(page.getByRole('heading', { name: 'Список пока пуст' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'В каталоге пока нет материалов' })).toBeVisible()
   await page.getByRole('button', { name: 'Обновить каталог и прогресс' }).click()
   await expect(page.getByText(`Работ по фильтру: ${await readingCount(page)}`)).toBeVisible()
 })
@@ -740,6 +766,7 @@ async function navigate(page: Page, name: string) {
 test('reading next step persists start, continuation and completion in the current catalogue', async ({ page }) => {
   await fresh(page)
   await navigate(page, 'Литература')
+  await page.locator('.reading-progress-disclosure > summary').click()
   const next = page.getByRole('region', { name: 'Следующий шаг чтения' })
   const startButton = next.getByRole('button', { name: /^Начать «/ })
   await expect(startButton).toBeVisible()
@@ -754,6 +781,7 @@ test('reading next step persists start, continuation and completion in the curre
   await expect(page.getByText('Прогресс чтения сохранён.')).toBeVisible()
   await page.reload()
   await navigate(page, 'Литература')
+  await page.locator('.reading-progress-disclosure > summary').click()
   await next.getByRole('button', { name: `Продолжить «${title}»`, exact: true }).click()
   await expect(page.getByLabel('Статус чтения')).toHaveAttribute('value', 'in_progress')
   await chooseMenu(page, page.getByLabel('Статус чтения'), 'read')
@@ -761,6 +789,7 @@ test('reading next step persists start, continuation and completion in the curre
   await expect(page.getByText('Прогресс чтения сохранён.')).toBeVisible()
   await page.reload()
   await navigate(page, 'Литература')
+  await page.locator('.reading-progress-disclosure > summary').click()
   await expect(next.getByRole('button', { name: /^Начать «/ })).toBeVisible()
   await expect(next).not.toContainText(title)
   const catalog = await (await page.request.get('/web/literature/catalog')).json() as {
@@ -859,14 +888,29 @@ test('owner preparation is compact and readable, controls retain contrast at all
   await expect(page.getByText('Первая дисциплина · тем: 1')).toHaveCount(0)
   await page.getByText('Вторая дисциплина · тем: 1').click()
   await expect(page.getByRole('heading', { name: 'Подробная тема 1' })).toBeVisible()
-  // WCAG measured pairs: test actual computed author focus ring, placeholder and informative label tokens.
-  const colors = await page.evaluate(() => ({ focus: getComputedStyle(document.documentElement).getPropertyValue('--focus').trim(), muted: getComputedStyle(document.documentElement).getPropertyValue('--muted').trim(), paper: getComputedStyle(document.documentElement).getPropertyValue('--paper').trim() }))
-  const luminance = (hex: string) => {
-    const channels = hex.replace('#', '').match(/../g)!.map(value => parseInt(value, 16) / 255).map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)
+  const luminance = (rgb: string) => {
+    const channels = rgb.match(/[\d.]+/g)!.map(value => Number(value) / 255).map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4)
     return .2126 * channels[0] + .7152 * channels[1] + .0722 * channels[2]
   }
   const contrast = (a: string, b: string) => { const values = [luminance(a), luminance(b)].sort((a, b) => b - a); return (values[0] + .05) / (values[1] + .05) }
-  for (const background of ['#ffffff', colors.paper]) { expect(contrast(colors.focus, background)).toBeGreaterThanOrEqual(3); expect(contrast(colors.muted, background)).toBeGreaterThanOrEqual(4.5) }
+  for (const colorScheme of ['light', 'dark'] as const) {
+    await page.emulateMedia({ colorScheme })
+    // Resolve the tokens as used CSS colours, including their light-dark() values.
+    const [focus, muted, paper, surface] = await page.evaluate(() => {
+      const sample = document.createElement('span')
+      document.body.append(sample)
+      try {
+        return ['focus', 'muted', 'paper', 'surface'].map(name => {
+          sample.style.color = `var(--${name})`
+          return getComputedStyle(sample).color
+        })
+      } finally { sample.remove() }
+    })
+    for (const background of [paper, surface]) {
+      expect(contrast(focus, background)).toBeGreaterThanOrEqual(3)
+      expect(contrast(muted, background)).toBeGreaterThanOrEqual(4.5)
+    }
+  }
 })
 
 

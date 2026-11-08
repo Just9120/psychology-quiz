@@ -77,7 +77,11 @@ def _list(conn, actor: int, *, navigation: str | None = None, page: int = 0):
         lines.append(f"{('Модули', 'Дисциплины', 'Темы')[len(path)]} {start + 1}–{min(start + PAGE_SIZE, len(children))} из {len(children)}.")
         for index, child in enumerate(children[start:start + PAGE_SIZE], start + 1):
             title = child[-1]
-            lines.append(f"{index}. {escape(title)}")
+            disciplines = [entry[-1] for entry in _children(catalog, child)] if not path else []
+            preview = ", ".join(escape(value) for value in disciplines[:2])
+            if len(disciplines) > 2:
+                preview += " и другие"
+            lines.append(f"{index}. {escape(title)}" + (f" · {preview}" if preview else ""))
             label = title if len(title) <= 48 else title[:47] + "…"
             keyboard.append([InlineKeyboardButton(label, callback_data="hw:nav:" + _path_token(child))])
         current = "hw:nav:" + _path_token(path) if path else "hw:list:all"

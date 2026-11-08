@@ -26,13 +26,26 @@ const question = { session_id: 10, question_id: 20, question_text: 'Первый
 const setup = { categories: [{ id: 1, name: 'Кейсы' }], question_count_choices: [5, 'all'], difficulty_choices: ['any'], content_kind_choices: ['theory', 'glossary', 'case'] }
 
 test('Mini App compact catalog preserves cold navigation and avoids warm personal refetch', async ({ page, request }) => {
+  await page.setViewportSize({ width: 420, height: 680 })
+  await page.emulateMedia({ colorScheme: 'light' })
   const backend = 'http://127.0.0.1:8085'
   expect((await request.post(backend + '/__test/reset', { data: { seed: true } })).ok()).toBe(true)
   const proof = new URLSearchParams({ auth_date: String(Math.floor(Date.now() / 1000)), user: JSON.stringify({ id: 4242, first_name: 'Synthetic learner' }) })
   const secret = createHmac('sha256', 'WebAppData').update('123:synthetic-e2e').digest()
   proof.set('hash', createHmac('sha256', secret).update([...proof.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => `${k}=${v}`).join('\n')).digest('hex'))
   await page.route('https://telegram.org/js/telegram-web-app.js', route => route.abort())
-  await page.addInitScript(initData => { window.Telegram = { WebApp: { initData, ready() {}, expand() {} } } }, proof.toString())
+  await page.addInitScript(initData => {
+    const themeListeners = new Set<() => void>()
+    window.Telegram = { WebApp: {
+      initData, colorScheme: 'dark', ready() {}, expand() {},
+      onEvent(_event, listener) { themeListeners.add(listener) },
+      offEvent(_event, listener) { themeListeners.delete(listener) },
+    } }
+    window.addEventListener('synthetic-theme-change', () => {
+      window.Telegram!.WebApp!.colorScheme = 'light'
+      themeListeners.forEach(listener => listener())
+    })
+  }, proof.toString())
   const samples: { bytes: number; api_ms: number; cold_ui_ms: number; warm_ui_ms: number; encoding: string }[] = []
   let catalogCalls = 0
   await page.route('https://quiz-api.librechat.online/miniapp/**', async route => {
@@ -51,6 +64,12 @@ test('Mini App compact catalog preserves cold navigation and avoids warm persona
     const cold = performance.now()
     await navigateMini(page, 'Литература')
     await expect(page.locator('.literature-card').first()).toBeVisible()
+    if (index === 0) {
+      await expect(page.locator('.literature-title').first()).toBeInViewport()
+      await expect.poll(() => page.locator('html').evaluate(element => getComputedStyle(element).colorScheme)).toBe('dark')
+      await page.evaluate(() => window.dispatchEvent(new Event('synthetic-theme-change')))
+      await expect.poll(() => page.locator('html').evaluate(element => getComputedStyle(element).colorScheme)).toBe('light')
+    }
     samples[index].cold_ui_ms = performance.now() - cold
     await navigateMini(page, 'Квиз')
     const warm = performance.now()
@@ -305,6 +324,7 @@ test('Mini App reading next step persists against the real local backend', async
     await page.goto(site)
     await expect(page.getByRole('heading', { name: 'Что изучим сегодня?' })).toBeVisible()
     await navigateMini(page, 'Литература')
+    await page.locator('.reading-progress-disclosure > summary').click()
   }
   await openReading()
   const next = page.getByRole('region', { name: 'Следующий шаг чтения' })

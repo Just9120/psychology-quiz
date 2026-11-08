@@ -22,6 +22,7 @@ from app.classic_quiz_view import (
     numeric_answer_label_for_option,
     parse_classic_reply_answer_number,
 )
+from app.bot_menu import dismiss_main_menu
 from app.bot_menu import (
     START_QUIZ_BUTTON_TEXT, READING_MODE_BUTTON_TEXT, GLOSSARY_BUTTON_TEXT, LITERATURE_BUTTON_TEXT, HIDE_MENU_BUTTON_TEXT,
     get_main_menu_keyboard,
@@ -216,6 +217,8 @@ async def quiz_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     if update.message:
         context.user_data["selected_mix_categories"] = set()
         context.user_data.pop(CONFIRMED_REPLACEMENT_KEY, None)
+        if update.effective_chat and update.effective_chat.type == "private":
+            await dismiss_main_menu(update.message)
         if active is not None:
             await update.message.reply_text(
                 "У вас есть незавершённый квиз. Продолжить его или подтвердить начало нового?",

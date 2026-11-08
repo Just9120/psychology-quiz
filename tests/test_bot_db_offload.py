@@ -18,7 +18,7 @@ class BotDbOffloadTests(unittest.TestCase):
 
     def test_quiz_ui_stats_readingmode_offload(self):
         context = self._context()
-        update_quiz = SimpleNamespace(message=SimpleNamespace(reply_text=AsyncMock()))
+        update_quiz = SimpleNamespace(message=SimpleNamespace(reply_text=AsyncMock()), effective_chat=SimpleNamespace(type="private"))
         update_ui = SimpleNamespace(message=SimpleNamespace(reply_text=AsyncMock()), effective_chat=SimpleNamespace(type='private'), effective_user=None)
         update_stats = SimpleNamespace(effective_chat=SimpleNamespace(type='private'), effective_user=SimpleNamespace(id=1), message=SimpleNamespace(reply_text=AsyncMock()))
         update_mode = SimpleNamespace(effective_user=SimpleNamespace(id=1, username='u', first_name='f', last_name='l'), message=SimpleNamespace(reply_text=AsyncMock()))
@@ -62,6 +62,7 @@ class BotDbOffloadTests(unittest.TestCase):
         context = self._context()
         update = SimpleNamespace(
             message=SimpleNamespace(reply_text=AsyncMock()),
+            effective_chat=SimpleNamespace(type="private"),
             effective_user=SimpleNamespace(id=123),
         )
 
@@ -72,8 +73,11 @@ class BotDbOffloadTests(unittest.TestCase):
         with patch('app.bot_runtime.run_db_task', side_effect=fake_run_db_task):
             asyncio.run(main.quiz_command(update, context))
 
-        text = update.message.reply_text.call_args.args[0]
-        markup = update.message.reply_text.call_args.kwargs['reply_markup']
+        menu_removal, mode_menu = update.message.reply_text.await_args_list
+        self.assertTrue(menu_removal.kwargs['reply_markup'].remove_keyboard)
+        self.assertIn('/start', menu_removal.args[0])
+        text = mode_menu.args[0]
+        markup = mode_menu.kwargs['reply_markup']
         button_texts = [row[0].text for row in markup.inline_keyboard]
         callback_data = [row[0].callback_data for row in markup.inline_keyboard]
 
@@ -200,6 +204,7 @@ class BotDbOffloadTests(unittest.TestCase):
         context = self._context()
         update_quiz = SimpleNamespace(
             message=SimpleNamespace(reply_text=AsyncMock()),
+            effective_chat=SimpleNamespace(type="private"),
             effective_user=SimpleNamespace(id=123),
         )
         async def _slow_noop(*args, **kwargs):

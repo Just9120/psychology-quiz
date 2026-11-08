@@ -94,6 +94,8 @@ export function ErrorsView({ data, busy, onRefresh, onMore, onTrain, onResume }:
 }) {
   const [count, setCount] = useState<number | null>(5)
   const [confirm, setConfirm] = useState(false)
+  const [trainableOnly, setTrainableOnly] = useState(false)
+  const visibleErrors = trainableOnly ? data.items.filter(item => item.trainable) : data.items
   useEffect(() => setConfirm(false), [data.latest_session_id])
   return <section className="page-width progress-page"><div className="practice-heading"><div><span className="eyebrow">ПОВТОРИТЬ И ПОНЯТЬ</span><h1>Мои ошибки</h1></div><button className="button secondary" disabled={busy} onClick={() => { setConfirm(false); onRefresh() }}><Icon name="refresh" />Обновить</button></div>
     <p className="lead">Здесь вопросы, на редакцию которых вы в последний раз ответили неверно. Правильный повтор убирает ошибку этой редакции, сохраняя историю.</p>
@@ -105,7 +107,12 @@ export function ErrorsView({ data, busy, onRefresh, onMore, onTrain, onResume }:
       </> : <p className="muted">{data.total ? 'Остались исторические ошибки: текущие редакции уже решены верно или вопросы выведены из банка.' : 'Ошибок пока нет. Они появятся после неверного ответа; верно решённые редакции сюда не попадают.'}</p>}
     </div>
     {data.items.length > 0 && <h2>Разбор ошибок · {data.total}</h2>}
-    {data.items.map(item => <article className="panel review-card" key={item.answer_id}><span className="eyebrow">{item.topic}</span><h2>{item.question_text}</h2><p className="hint">{date(item.answered_at)}{item.edition_state === 'changed' && ' · Предыдущая редакция'}{item.edition_state === 'retired' && ' · Вопрос выведен из банка'}{item.edition_state === 'changed' && !item.trainable && ' · Текущая редакция уже решена верно'}</p><details><summary>Разобрать ответ</summary><AnswerReview item={item} /></details></article>)}
+    {data.items.length > 0 && <div className="quick-filters" role="group" aria-label="Фильтр разбора ошибок">
+      <button type="button" aria-pressed={!trainableOnly} onClick={() => setTrainableOnly(false)}>Все ошибки</button>
+      <button type="button" aria-pressed={trainableOnly} onClick={() => setTrainableOnly(true)}>К повторению</button>
+    </div>}
+    {trainableOnly && visibleErrors.length === 0 && <p role="status">{data.next_before === null ? 'В загруженном списке нет ошибок для повторения.' : 'На загруженных страницах совпадений нет. Можно загрузить ещё ошибки.'}</p>}
+    {visibleErrors.map(item => <article className="panel review-card" key={item.answer_id}><span className="eyebrow">{item.topic}</span><h2>{item.question_text}</h2><p className="hint">{date(item.answered_at)}{item.edition_state === 'changed' && ' · Предыдущая редакция'}{item.edition_state === 'retired' && ' · Вопрос выведен из банка'}{item.edition_state === 'changed' && !item.trainable && ' · Текущая редакция уже решена верно'}</p><details><summary>Разобрать ответ</summary><AnswerReview item={item} /></details></article>)}
     {data.next_before !== null && <button className="button secondary" disabled={busy} onClick={onMore}>Ещё ошибки</button>}
   </section>
 }
