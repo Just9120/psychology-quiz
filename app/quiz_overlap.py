@@ -98,8 +98,8 @@ def balanced_diverse_first(buckets: dict[int, list[tuple[int, str]]],
     return selected
 
 
-def balanced_kinds_diverse_first(candidates: list[tuple[int, str, int, str]],
-                                 topics: list[int], requested_kinds: list[str],
+def balanced_kinds_diverse_first(candidates: list[tuple[int, str, int | str, str]],
+                                 topics: list[int | str], requested_kinds: list[str],
                                  limit: int) -> list[int]:
     """Balance a finite mixed quiz after filtering its requested content kinds.
 

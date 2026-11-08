@@ -35,6 +35,22 @@ it('sorts the displayed catalogue and clears a no-match search without changing 
   expect(screen.getAllByRole('article')).toHaveLength(2)
 })
 
+it.each(['pwa', 'miniapp'])('returns focus to search from both clear buttons in %s', async client => {
+  const work = catalog.works[0]
+  if (client === 'pwa') render(<LiteratureView initial={catalog} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[{ ...work.entries[0], title: work.title }]} topics={catalog.topics} busy={false} run={async op => op()} />)
+  const user = userEvent.setup()
+  const search = screen.getByRole('searchbox')
+  for (const name of ['Очистить поиск и фильтры', 'Сбросить фильтры']) {
+    await user.type(search, 'несуществующая книга')
+    screen.getByRole('button', { name }).focus()
+    await user.keyboard('{Enter}')
+    expect(search).toHaveFocus()
+    expect(search).toHaveValue('')
+    expect(screen.getByRole('button', { name: work.title })).toBeVisible()
+  }
+})
+
 it.each(['pwa', 'miniapp'])('keeps additional-course books under their concrete topic in %s', async client => {
   const topics = [...catalog.topics, { topic_id: 'extra', title: 'Дополнительный курс', module: 'other' }]
   const first = { ...catalog.works[0].entries[0], title: 'Учебная книга' }
@@ -72,23 +88,23 @@ it.each(['pwa', 'miniapp'])('finds cross-module disciplines and keeps exact book
 
 it.each(['pwa', 'miniapp'])('keeps reviewed course topics and general reading separate and preserves the path after opening a book in %s', async client => {
   window.history.replaceState(null, '', '/#/literature')
-  const first = { ...catalog.works[0].entries[0], title: 'Книга по памяти', curriculum_topics: [{ id: 't_memory', title: 'Память' }] }
-  const second = { ...first, id: 'attention', title: 'Книга по вниманию', curriculum_topics: [{ id: 't_attention', title: 'Внимание' }] }
-  const general = { ...first, id: 'general', title: 'Общее введение', curriculum_topics: [] }
+  const first = { ...catalog.works[0].entries[0], title: 'Книга по памяти', reading_topics: [{ id: 'reading_memory', title: 'Память' }], curriculum_topics: [{ id: 'lesson', title: 'Практика №2' }] }
+  const second = { ...first, id: 'attention', title: 'Книга по вниманию', reading_topics: [{ id: 'reading_attention', title: 'Внимание' }] }
+  const general = { ...first, id: 'general', title: 'Общее введение', reading_topics: [] }
   if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, works: [first, second, general].map(entry => ({ ...catalog.works[0], work_id: entry.id, title: entry.title, entries: [entry] })) }} busy={false} run={async op => op()} />)
   else render(<MiniLiterature initial={[first, second, general]} topics={catalog.topics} busy={false} run={async op => op()} />)
   const user = userEvent.setup()
   openFilters()
   await chooseMenu(user, screen.getByLabelText('Модуль обучения'), 'module1')
   await chooseMenu(user, screen.getByLabelText('Дисциплина'), 'one')
-  await chooseMenu(user, screen.getByLabelText('Тема курса'), 't_memory')
+  await chooseMenu(user, screen.getByLabelText('Предметная тема'), 'reading_memory')
   expect(screen.getByRole('button', { name: 'Книга по памяти' })).toBeVisible()
   expect(screen.queryByRole('button', { name: 'Общее введение' })).not.toBeInTheDocument()
   expect(screen.queryByRole('button', { name: 'Книга по вниманию' })).not.toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: 'Книга по памяти' }))
   await user.click(screen.getByRole('button', { name: /← К списку/ }))
-  expect(screen.getByLabelText('Тема курса')).toHaveValue('t_memory')
-  await chooseMenu(user, screen.getByLabelText('Тема курса'), 'general:one')
+  expect(screen.getByLabelText('Предметная тема')).toHaveValue('reading_memory')
+  await chooseMenu(user, screen.getByLabelText('Предметная тема'), 'general:one')
   expect(screen.getByRole('button', { name: 'Общее введение' })).toBeVisible()
   expect(screen.queryByRole('button', { name: 'Книга по памяти' })).not.toBeInTheDocument()
 })
@@ -115,6 +131,28 @@ it.each(['pwa', 'miniapp'])('uses independent topics, hides lesson labels and de
   await user.click(screen.getByRole('button', { name: 'Учебная книга' }))
   expect(screen.queryByLabelText('Учебный список')).not.toBeInTheDocument()
   expect(screen.queryByText('Практика №2')).not.toBeInTheDocument()
+})
+
+it.each(['pwa', 'miniapp'])('opens the same canonical association by default and the scoped association after filtering in %s', async client => {
+  const work = catalog.works[0]
+  const reading_topics = [{ id: 'reading_coping', title: 'Совладание' }, { id: 'reading_personality', title: 'Личность' }]
+  const first = { ...work.entries[0], work_id: work.work_id, title: work.title, reading_topics, why_read: 'Первая связь каталога.' }
+  const second = { ...first, id: 'second', topic_id: 'two', module: 'module2', why_read: 'Связь со второй дисциплиной.' }
+  const topics = [...catalog.topics, { topic_id: 'two', title: 'Вторая дисциплина', module: 'module2' }]
+  if (client === 'pwa') render(<LiteratureView initial={{ ...catalog, topics, works: [{ ...work, entries: [first, second] }] }} busy={false} run={async op => op()} />)
+  else render(<MiniLiterature initial={[first, second]} topics={topics} busy={false} run={async op => op()} />)
+  const user = userEvent.setup()
+  await user.click(screen.getByRole('button', { name: work.title }))
+  expect(screen.getByText('Первая связь каталога.')).toBeVisible()
+  await user.click(screen.getByRole('button', { name: /← К списку/ }))
+  openFilters()
+  await chooseMenu(user, screen.getByLabelText('Дисциплина'), 'two')
+  await chooseMenu(user, screen.getByLabelText('Предметная тема'), 'reading_coping')
+  await user.click(screen.getByRole('button', { name: work.title }))
+  expect(screen.getByText('Связь со второй дисциплиной.')).toBeVisible()
+  expect(document.querySelector('.literature-detail .eyebrow')).toHaveTextContent(/^Совладание$/)
+  await user.click(screen.getByRole('button', { name: /← К списку/ }))
+  expect(screen.getByRole('button', { name: work.title })).toHaveFocus()
 })
 
 it.each(['pwa', 'miniapp'])('combines topic/status filters without borrowing another association in %s', async client => {

@@ -8,7 +8,7 @@ import { ReadingOrder } from './ReadingOrder'
 import { ReadingSummary } from './ReadingSummary'
 import { BookSearch } from './BookSearch'
 import { StudyFilters } from './StudyFilters'
-import { emptyStudyScope, literaturePaths, matchesStudy, studyChoices, type StudyScope } from './studyScope'
+import { emptyStudyScope, literaturePaths, literatureSubjectLabel, matchesStudy, studyChoices, type StudyScope } from './studyScope'
 import { api, ApiError } from './api'
 import type { LiteratureCatalog, LiteratureEntry, ReadingStatus } from './types'
 
@@ -20,6 +20,7 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
   const initialParams = readRoute()?.view === 'literature' ? readRoute()!.params : new URLSearchParams()
   const [query, setQuery] = useState(initialParams.get('q') ?? '')
   const [sort, setSort] = useState<LiteratureSort>('catalog')
+  const search = useRef<HTMLInputElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
   const returnTo = useRef<{ y: number; element: HTMLElement | null } | null>(null)
   const [topic, setTopic] = useState(initialParams.get('topic') ?? '')
@@ -32,11 +33,11 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
   const [uncertain, setUncertain] = useState(false)
   const [saved, setSaved] = useState(false)
   const work = catalog.works.find(item => item.work_id === workId)
-  const entry = work?.entries.find(item => item.id === entryId) ?? work?.entries[0]
   const readingTopics = catalog.reading_topics ?? catalog.topics
   const study = studyChoices(catalog.works.flatMap(work => work.entries.flatMap(link => literaturePaths(link, catalog.topics))), studyScope)
   const inScope = (link: LiteratureEntry) => matchesStudy(literaturePaths(link, catalog.topics), study.scope)
     && (!topic || (link.reading_topics ? link.reading_topics.some(item => item.id === topic) : link.topic_id === topic))
+  const entry = work?.entries.find(item => item.id === entryId) ?? work?.entries.find(inScope) ?? work?.entries[0]
   const matches = (link: LiteratureEntry) => inScope(link)
     && (!statusFilter || (link.user_state?.reading_status ?? 'not_started') === statusFilter)
   const visible = catalog.works.filter(item => item.entries.some(matches) && `${item.title} ${item.authors.join(' ')}`.toLocaleLowerCase('ru').includes(query.trim().toLocaleLowerCase('ru'))).sort((a, b) => compareBooks(sort, { title: a.title, status: a.entries.find(matches)?.user_state?.reading_status ?? 'not_started' }, { title: b.title, status: b.entries.find(matches)?.user_state?.reading_status ?? 'not_started' }))
@@ -50,6 +51,7 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
   function resetFilters() {
     setQuery(''); setTopic(''); setStudyScope(emptyStudyScope); setStatusFilter('')
     route({ q: null, topic: null, status: null, study_module: null, study_discipline: null, study_topic: null }, true)
+    search.current?.focus()
   }
   const summaryItems = catalog.works.flatMap(item => item.entries.filter(inScope).map(link => ({ ...link, work_id: item.work_id, title: item.title, authors: item.authors, type: item.type })))
 
@@ -116,7 +118,7 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
     {work && entry && <article className="panel literature-detail">
       <button className="text-button" disabled={busy || uncertain} onClick={backToList}>← К списку литературы</button>
       <header className="book-heading"><span className="book-kicker">{materialType(work.type)}</span><h2 ref={heading} tabIndex={-1}>{work.title}</h2><p className="book-authors">{work.authors.length ? work.authors.join(', ') : 'Автор не указан в источнике'}</p></header>
-      <p className="eyebrow">{entry.reading_topics?.map(item => item.title).join(' · ') ?? entry.topic_title}</p>
+      <p className="eyebrow">{literatureSubjectLabel(entry, study.scope.topic || topic)}</p>
       <p className="book-purpose">{entry.why_read}</p>
       <div className="book-metadata"><span>Значимость: {entry.importance ? `${importanceLabels[entry.importance]} · ${entry.importance_source ? importanceSources[entry.importance_source] : 'источник оценки не указан'}` : 'не определена'}</span><span>Год: {entry.year ?? 'не указан'}</span></div>
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!busy && !uncertain) void run(save) }}>
@@ -134,8 +136,8 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
       </details>
 
     </article>}<div hidden={Boolean(work && entry)}>
-      <LiteratureControls query={query} onQuery={value => { setQuery(value); route({ q: value }, true) }} filters={activeFilters} onReset={resetFilters} sort={sort} onSort={setSort} busy={busy}>
-      <StudyFilters choices={study} busy={busy} onChange={scope => { setStudyScope(scope); route({ study_module: scope.module, study_discipline: scope.discipline, study_topic: scope.topic }, true) }} />
+      <LiteratureControls search={search} query={query} onQuery={value => { setQuery(value); route({ q: value }, true) }} filters={activeFilters} onReset={resetFilters} sort={sort} onSort={setSort} busy={busy}>
+      <StudyFilters choices={study} busy={busy} topicLabel="Предметная тема" onChange={scope => { setStudyScope(scope); route({ study_module: scope.module, study_discipline: scope.discipline, study_topic: scope.topic }, true) }} />
       <div className="literature-filters"><ChoiceMenu label="Направление чтения" value={topic} disabled={busy} onChange={value => { setTopic(value); route({ topic: value }, true) }} options={[{ value: '', label: 'Все направления' }, ...readingTopics.map(item => ({ value: item.topic_id, label: item.title }))]} />
         <ChoiceMenu label="Фильтр статуса чтения" value={statusFilter} disabled={busy} onChange={value => { setStatusFilter(value as ReadingStatus | ''); route({ status: value }, true) }} options={[{ value: '', label: 'Все статусы' }, ...Object.entries(statuses).map(([value, label]) => ({ value, label }))]} /></div>
       </LiteratureControls>
@@ -147,7 +149,7 @@ export function LiteratureView({ initial, busy, run, locationVersion = 0, onCata
         return <article className="panel literature-card" key={item.work_id}><h2><button className="text-button literature-title" disabled={busy} id={`literature-${links[0].id}`} data-entry={links[0].id} onClick={() => openEntry(links[0].id)}>{item.title}</button></h2>
           <p>{item.authors.length ? item.authors.join(', ') : 'Автор не указан в источнике'}</p>
           <span className="status-chip" data-status={links[0].user_state?.reading_status ?? 'not_started'}>{statuses[links[0].user_state?.reading_status ?? 'not_started']}</span>
-          <p className="muted">{links[0].reading_topics?.map(link => link.title).join(' · ')}</p>
+          <p className="muted">{literatureSubjectLabel(links[0], study.scope.topic || topic)}</p>
         </article>
       })}</div> : <LiteratureEmpty filtered={Boolean(query.trim() || activeFilters.length)} onReset={resetFilters} />}
     </div>

@@ -44,7 +44,7 @@ def test_bot_reading_topics_keep_status_pagination_and_retire_lesson_buttons(mon
     assert next_page.callback_data == f"lit:t:{token}:1:d"
     assert literature_chat.CALLBACK_PATTERN.fullmatch(next_page.callback_data)
     text, keyboard = literature_chat._topic_view(items, states, token, 1, "d")
-    assert any(button.callback_data == "lit:i:" + literature_chat._token("book_5")
+    assert any(button.callback_data == f"lit:ci:{literature_chat._token('book_5')}:t:{token}:1:d"
                for row in keyboard.inline_keyboard for button in row)
     assert literature_chat._topic_view(items, states, token, 0, "a", literature_chat._token("lesson")) is None
     assert "Прочитано 0 из 6" in literature_chat._topic_view(items, {}, token, 0, "d")[0]

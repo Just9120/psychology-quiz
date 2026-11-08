@@ -1,4 +1,4 @@
-import { useRef, type ReactNode } from 'react'
+import type { ReactNode, RefObject } from 'react'
 import { ChoiceMenu } from './ChoiceMenu'
 import type { ReadingStatus } from './types'
 
@@ -15,11 +15,11 @@ export function compareBooks(sort: LiteratureSort, a: { title?: string; status: 
     || (a.title ?? '').localeCompare(b.title ?? '', 'ru')
 }
 
-export function LiteratureControls({ query, onQuery, filters, onReset, sort, onSort, busy, children }: {
+export function LiteratureControls({ search, query, onQuery, filters, onReset, sort, onSort, busy, children }: {
+  search: RefObject<HTMLInputElement | null>
   query: string; onQuery: (value: string) => void; filters: string[]; onReset: () => void
   sort: LiteratureSort; onSort: (value: LiteratureSort) => void; busy: boolean; children: ReactNode
 }) {
-  const search = useRef<HTMLInputElement>(null)
   return <div className="literature-controls">
     <label className="field">Поиск по названию или автору
       <input ref={search} type="search" value={query} onChange={event => onQuery(event.target.value)} placeholder="Название или автор" />
@@ -34,7 +34,7 @@ export function LiteratureControls({ query, onQuery, filters, onReset, sort, onS
     </div>
     {(filters.length > 0 || query.trim()) && <div className="literature-active-filters">
       {filters.map((filter, index) => <span className="status-chip" key={index}>{filter}</span>)}
-      <button type="button" className="text-button" onClick={() => { onReset(); search.current?.focus() }}>Сбросить фильтры</button>
+      <button type="button" className="text-button" onClick={onReset}>Сбросить фильтры</button>
     </div>}
   </div>
 }

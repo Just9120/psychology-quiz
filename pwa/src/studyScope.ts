@@ -39,12 +39,17 @@ export function matchesStudy(paths: StudyPath[], scope: StudyScope): boolean {
 }
 
 export type ReadingDiscipline = { topic_id: string; title: string; module?: string; modules?: string[] }
-export function literaturePaths(entry: { topic_id: string; topic_title?: string; module?: string; curriculum_topics?: { id: string; title: string }[] }, disciplines: ReadingDiscipline[]): StudyPath[] {
+export function literaturePaths(entry: { topic_id: string; topic_title?: string; module?: string; reading_topics?: { id: string; title: string }[] }, disciplines: ReadingDiscipline[]): StudyPath[] {
   const discipline = disciplines.find(item => item.topic_id === entry.topic_id)
   // The entry's reviewed association is more precise than the discipline's
   // possible modules. No topic binding is invented for a general reading list.
   const modules = entry.module ? [moduleId(entry.module)] : (discipline?.modules ?? [moduleId(discipline?.module)])
-  const topics = entry.curriculum_topics?.length ? entry.curriculum_topics : [{ id: `general:${entry.topic_id}`, title: 'Общее чтение дисциплины' }]
+  const topics = entry.reading_topics?.length ? entry.reading_topics : [{ id: `general:${entry.topic_id}`, title: 'Общее чтение дисциплины' }]
   return (modules.length ? modules : ['other']).flatMap(module => topics.map(topic => ({ module, discipline_id: entry.topic_id,
     discipline: discipline?.title ?? entry.topic_title ?? 'Другие материалы', topic_id: topic.id, topic: topic.title })))
+}
+
+export function literatureSubjectLabel(entry: { topic_title?: string; reading_topics?: { id: string; title: string }[] }, selected: string) {
+  return entry.reading_topics?.find(topic => topic.id === selected)?.title
+    ?? (entry.reading_topics?.map(topic => topic.title).join(' · ') || entry.topic_title)
 }

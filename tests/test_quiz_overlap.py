@@ -1,4 +1,5 @@
 import sqlite3
+from contextlib import closing
 import pytest
 
 from app.quiz_overlap import balanced_diverse_first, balanced_kinds_diverse_first, diverse_first, memberships
@@ -163,3 +164,34 @@ def test_selected_mix_with_content_kinds_uses_balanced_concept_selection(monkeyp
         assert sorted(sum(row["category_id"] == topic for row in rows) for topic in (10, 20)) == [2, 3]
     finally:
         conn.close()
+
+
+@pytest.mark.parametrize("second_topic", [{6, 7, 8, 9, 10}, {6}])
+def test_selected_mix_balances_leaves_within_one_discipline(monkeypatch, second_topic):
+    first, second = "t_123456789abc", "t_abcdef123456"
+    scopes = {first: {1, 2, 3, 4, 5}, second: second_topic}
+    monkeypatch.setattr("app.quiz_service.question_scopes", lambda _: (
+        [{"category_id": 10, "topics": [{"id": first}, {"id": second}]}], scopes,
+    ))
+    monkeypatch.setattr("app.quiz_overlap.memberships", lambda: {
+        "q2": frozenset({1}), "q7": frozenset({1}),
+    })
+    with closing(sqlite3.connect(":memory:")) as conn:
+        conn.row_factory = sqlite3.Row
+        conn.executescript("""
+            CREATE TABLE categories(id integer primary key, slug text, name text);
+            INSERT INTO categories VALUES (10,'a','A');
+            CREATE TABLE questions(id integer primary key, category_id integer,
+                external_id text, kind text, status text, difficulty text);
+        """)
+        conn.executemany("INSERT INTO questions VALUES (?,10,?,?,'approved','easy')", [
+            (qid, f"q{qid}", "case" if qid == 6 else "theory") for qid in range(1, 11)
+        ])
+        chosen = set(prepare_quiz(conn, {
+            "quiz_mode": "selected_mix", "category_ids": [10], "topic_ids": [first, second],
+            "question_count": 5, "difficulty": "any", "content_kinds": ["case", "theory"],
+        }).question_ids)
+    counts = sorted(len(chosen & ids) for ids in scopes.values())
+    assert counts == ([2, 3] if len(second_topic) >= 5 else [1, 4])
+    assert 6 in chosen
+    assert not {2, 7}.issubset(chosen)

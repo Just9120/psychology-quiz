@@ -293,6 +293,8 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
 .step-authors { color: var(--muted); font-size: 13px; margin-bottom: 5px; }
 .case-situation { white-space: pre-line; }
 .question-body { font-size: 17px; line-height: 1.75; white-space: pre-line; overflow-wrap: anywhere; margin: 0 0 29px; }
+.case-situation { margin-bottom: 12px; }
+@media (max-width: 520px) { .case-situation { font-size: 15px; line-height: 1.55; } }
 .workspace-footer a { color: inherit; }
 .study-discipline { min-width: 0; }
 .study-topics { margin: 6px 0 12px; padding: 0 12px; font-size: 13px; }

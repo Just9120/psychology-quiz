@@ -7,7 +7,7 @@ import { ReadingOrder } from '../ReadingOrder'
 import { ReadingSummary } from '../ReadingSummary'
 import { BookSearch } from '../BookSearch'
 import { StudyFilters } from '../StudyFilters'
-import { emptyStudyScope, literaturePaths, matchesStudy, studyChoices } from '../studyScope'
+import { emptyStudyScope, literaturePaths, literatureSubjectLabel, matchesStudy, studyChoices } from '../studyScope'
 import type { ReadingStatus } from '../types'
 import { miniApi, type MiniLiteratureItem, type MiniLiteratureTopic } from './api'
 
@@ -23,6 +23,7 @@ export function MiniLiterature({ initial, topics, studyTopics = [], busy, run, o
 }) {
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState<LiteratureSort>('catalog')
+  const search = useRef<HTMLInputElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
   const returnTo = useRef<{ y: number; id: string; element: HTMLElement | null } | null>(null)
   const [items, setItems] = useState(initial)
@@ -40,7 +41,14 @@ export function MiniLiterature({ initial, topics, studyTopics = [], busy, run, o
   const study = studyChoices(items.flatMap(entry => literaturePaths(entry, disciplines)), studyScope)
   const scoped = items.filter(entry => matchesStudy(literaturePaths(entry, disciplines), study.scope)
     && (!topic || (entry.reading_topics ? entry.reading_topics.some(link => link.id === topic) : entry.topic_id === topic)))
-  const visible = [...new Map(scoped.filter(entry => (!statusFilter || (entry.user_state?.reading_status ?? 'not_started') === statusFilter) && [entry.title ?? '', ...(entry.authors ?? [])].join(' ').toLocaleLowerCase('ru').includes(query.trim().toLocaleLowerCase('ru'))).map(entry => [entry.work_id ?? entry.id, entry])).values()].sort((a, b) => compareBooks(sort, { title: a.title, status: a.user_state?.reading_status ?? 'not_started' }, { title: b.title, status: b.user_state?.reading_status ?? 'not_started' }))
+  const visibleWorks = new Map<string, MiniLiteratureItem>()
+  for (const entry of scoped) {
+    if (statusFilter && (entry.user_state?.reading_status ?? 'not_started') !== statusFilter) continue
+    if (![entry.title ?? '', ...(entry.authors ?? [])].join(' ').toLocaleLowerCase('ru').includes(query.trim().toLocaleLowerCase('ru'))) continue
+    const key = entry.work_id ?? entry.id
+    if (!visibleWorks.has(key)) visibleWorks.set(key, entry)
+  }
+  const visible = [...visibleWorks.values()].sort((a, b) => compareBooks(sort, { title: a.title, status: a.user_state?.reading_status ?? 'not_started' }, { title: b.title, status: b.user_state?.reading_status ?? 'not_started' }))
   const activeFilters = [
     study.modules.find(item => item.value === study.scope.module)?.label,
     study.disciplines.find(item => item.value === study.scope.discipline)?.label,
@@ -50,6 +58,7 @@ export function MiniLiterature({ initial, topics, studyTopics = [], busy, run, o
   ].filter((label): label is string => Boolean(label))
   function resetFilters() {
     setQuery(''); setTopic(''); setStudyScope(emptyStudyScope); setStatusFilter('')
+    search.current?.focus()
   }
   useLayoutEffect(() => {
     if (selected) { heading.current?.focus({ preventScroll: true }); heading.current?.scrollIntoView?.({ block: 'start' }) }
@@ -81,7 +90,7 @@ export function MiniLiterature({ initial, topics, studyTopics = [], busy, run, o
     <button className="button secondary" disabled={busy} onClick={() => void run(refresh)}>Обновить каталог</button>
     {item && <article className="panel literature-detail"><button className="text-button" disabled={busy || uncertain} onClick={() => setSelected(null)}>← К списку</button>
       <header className="book-heading"><span className="book-kicker">{materialType(item.type)}</span><h2 ref={heading} tabIndex={-1}>{item.title}</h2><p className="book-authors">{item.authors?.join(', ') || 'Автор не указан'} · {item.year ?? 'год не указан'}</p></header>
-      <p className="eyebrow">{item.reading_topics?.map(link => link.title).join(' · ')}</p>
+      <p className="eyebrow">{literatureSubjectLabel(item, study.scope.topic || topic)}</p>
       <p className="book-purpose">{item.why_read}</p>
       <p className="book-metadata">Значимость: {item.importance ? `${importanceLabels[item.importance]} · ${item.importance_source ? importanceSources[item.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!uncertain) void run(save) }}>
@@ -98,8 +107,8 @@ export function MiniLiterature({ initial, topics, studyTopics = [], busy, run, o
         {item.metadata_warnings?.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
       </details>}
 </article>}<div hidden={Boolean(item)}>
-      <LiteratureControls query={query} onQuery={setQuery} filters={activeFilters} onReset={resetFilters} sort={sort} onSort={setSort} busy={busy}>
-      <StudyFilters choices={study} busy={busy} onChange={setStudyScope} />
+      <LiteratureControls search={search} query={query} onQuery={setQuery} filters={activeFilters} onReset={resetFilters} sort={sort} onSort={setSort} busy={busy}>
+      <StudyFilters choices={study} busy={busy} topicLabel="Предметная тема" onChange={setStudyScope} />
       <div className="literature-filters"><ChoiceMenu label="Направление чтения" value={topic} disabled={busy} onChange={setTopic} options={[{ value: '', label: 'Все направления' }, ...navigationTopics.map(entry => ({ value: entry.topic_id, label: entry.title }))]} />
         <ChoiceMenu label="Фильтр статуса чтения" value={statusFilter} disabled={busy} onChange={value => setStatusFilter(value as ReadingStatus | '')} options={[{ value: '', label: 'Все статусы' }, ...Object.entries(labels).map(([value, label]) => ({ value, label }))]} /></div>
       </LiteratureControls>

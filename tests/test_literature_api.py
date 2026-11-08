@@ -1,3 +1,4 @@
+import gzip
 import json
 import os
 import sqlite3
@@ -94,6 +95,32 @@ class LiteratureApiTests(unittest.TestCase):
         self.assertGreater(topic["item_count"], 0)
         self.assertIn("approved", topic["status_counts"])
         self.assertEqual({"in_progress": 1}, topic["user_reading_status_counts"])
+
+    def test_only_successful_compact_catalog_negotiates_gzip_without_changing_payload(self):
+        origin = 'https://mini.example.invalid'
+        client = TestClient(create_app(db_path=self.db, bot_token=self.bot_token, allowed_origin=origin))
+        route = '/miniapp/literature/catalog-compact'
+        headers = {'Authorization': 'tma ' + self.init_data, 'Origin': origin}
+        plain = client.get(route, headers={**headers, 'Accept-Encoding': 'gzip;q=0, *;q=1'})
+        self.assertNotIn('Content-Encoding', plain.headers)
+        with client.stream('GET', route, headers={**headers, 'Accept-Encoding': 'br, GZip;q=0.7'}) as response:
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.headers['Content-Encoding'], 'gzip')
+            self.assertEqual(response.headers['Cache-Control'], 'no-store')
+            self.assertEqual(response.headers['Access-Control-Allow-Origin'], origin)
+            self.assertEqual(set(response.headers['Vary'].split(', ')), {'Origin', 'Accept-Encoding'})
+            encoded = b''.join(response.iter_raw())
+            self.assertEqual(len(encoded), int(response.headers['Content-Length']))
+            self.assertLess(len(encoded), len(plain.content))
+            self.assertEqual(gzip.decompress(encoded), plain.content)
+        self.assertNotIn(b'private text', plain.content)
+        self.assertNotIn(self.init_data.encode(), plain.content)
+        denied = client.get(route, headers={'Accept-Encoding': 'gzip', 'Origin': origin})
+        self.assertEqual(denied.status_code, 401)
+        self.assertNotIn('Content-Encoding', denied.headers)
+        flat = client.get('/miniapp/literature/items', headers={**headers, 'Accept-Encoding': 'gzip'})
+        self.assertEqual(flat.status_code, 200)
+        self.assertNotIn('Content-Encoding', flat.headers)
 
     def test_items_endpoint_returns_all_items_ordered_by_global_order_without_internal_fields(self):
         payload = self._payload(build_literature_items_response(self.db, self.bot_token, self.init_data))

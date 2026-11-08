@@ -159,9 +159,9 @@ def test_all_published_literature_entries_have_stable_short_callbacks():
             for row in view[1].inline_keyboard:
                 for button in row:
                     assert len(button.callback_data.encode("utf-8")) <= 64
-                    if button.callback_data.startswith("lit:i:"):
+                    if button.callback_data.startswith("lit:ci:"):
                         seen.add(button.callback_data)
-    selected_ids = {item['id'] for item in items if 'lit:i:' + literature_chat._token(item['id']) in seen}
+    selected_ids = {item['id'] for item in items if any(value.startswith('lit:ci:' + literature_chat._token(item['id']) + ':') for value in seen)}
     assert {item['work_id'] for item in items if item['id'] in selected_ids} == {item['work_id'] for item in items}
 
 
@@ -214,14 +214,14 @@ def test_chat_reading_module_navigation_and_filter_keep_tally_and_pagination(mon
         text, keyboard = literature_chat._topic_view(items, states, token, 0, code)
         assert "Прочитано 8 из 12" in text
         buttons = [b for row in keyboard.inline_keyboard for b in row]
-        assert len([b for b in buttons if b.callback_data.startswith("lit:i:")]) == expected
+        assert len([b for b in buttons if b.callback_data.startswith("lit:ci:")]) == expected
         assert all(literature_chat.CALLBACK_PATTERN.fullmatch(b.callback_data) for b in buttons)
         assert all(len(b.callback_data.encode()) <= 64 for b in buttons)
         if not expected:
             assert "По этому статусу книг пока нет" in text
     page = literature_chat._topic_view(items, states, token, 1, "d")
     buttons = [b for row in page[1].inline_keyboard for b in row]
-    assert len([b for b in buttons if b.callback_data.startswith("lit:i:")]) == 3
+    assert len([b for b in buttons if b.callback_data.startswith("lit:ci:")]) == 3
     assert next(b for b in buttons if b.text == "←").callback_data == f"lit:t:{token}:0:d"
     assert literature_chat._topic_view(items, states, token, 2, "d") is None
     assert literature_chat._topic_view(items, states, token, 0, "invalid") is None
