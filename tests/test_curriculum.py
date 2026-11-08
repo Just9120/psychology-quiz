@@ -124,7 +124,10 @@ def test_catalog_is_grounded_in_exact_reviewed_primary_editions(tmp_path):
     assert len(core['disciplines']) == 13 and len(catalog['editions']) == 1509
     assert catalog['editions'] == core['editions']
     assert curriculum.load_reviewed_catalog() == core
-    assert len(catalog['disciplines']) == 23 and len(catalog['topics']) == 174
+    assert len(catalog['disciplines']) == 25 and len(catalog['topics']) == 174
+    assert all(catalog['disciplines'][key]['modules'] == ['module7'] for key in (
+        'acceptance_commitment_therapy', 'compassion_focused_therapy',
+    ))
     assert all(catalog['topics'][key] == value for key, value in core['topics'].items())
     private_bindings = curriculum.load_private_bindings(catalog)
     # Source-free lesson bindings can add learning contours outside the core graph.

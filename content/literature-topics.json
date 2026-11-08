@@ -88,6 +88,14 @@
     {
       "id": "reading_reference",
       "title": "Словари и справочники"
+    },
+    {
+      "id": "reading_acceptance_commitment",
+      "title": "Терапия принятия и ответственности"
+    },
+    {
+      "id": "reading_compassion_therapy",
+      "title": "Терапия, сфокусированная на сострадании"
     }
   ],
   "works": {
@@ -1000,6 +1008,59 @@
     ],
     "khovansky_comfortable_consultant": [
       "reading_counseling"
+    ],
+    "harris_act_illustrated": [
+      "reading_therapy",
+      "reading_acceptance_commitment"
+    ],
+    "twohig_levin_ong_act_steps": [
+      "reading_therapy",
+      "reading_acceptance_commitment"
+    ],
+    "brown_gillard_act_dummies": [
+      "reading_therapy",
+      "reading_acceptance_commitment"
+    ],
+    "hayes_strosahl_wilson_act_process": [
+      "reading_therapy",
+      "reading_acceptance_commitment"
+    ],
+    "harris_act_questions_answers": [
+      "reading_therapy",
+      "reading_acceptance_commitment"
+    ],
+    "stoddard_afari_act_metaphors": [
+      "reading_therapy",
+      "reading_acceptance_commitment"
+    ],
+    "torneke_relational_frame_theory": [
+      "reading_therapy",
+      "reading_acceptance_commitment"
+    ],
+    "westrup_advanced_act": [
+      "reading_therapy",
+      "reading_acceptance_commitment"
+    ],
+    "kolts_cft_clinical_guide": [
+      "reading_therapy",
+      "reading_compassion_therapy"
+    ],
+    "gilbert_cft_distinctive_features": [
+      "reading_therapy",
+      "reading_compassion_therapy"
+    ],
+    "irons_cft_difficult_emotions": [
+      "reading_therapy",
+      "reading_compassion_therapy"
+    ],
+    "kolts_bell_bennett_levy_irons_cft_workbook": [
+      "reading_therapy",
+      "reading_compassion_therapy"
+    ],
+    "tirch_schoendorff_silberstein_act_compassion": [
+      "reading_therapy",
+      "reading_compassion_therapy",
+      "reading_acceptance_commitment"
     ]
   }
 }

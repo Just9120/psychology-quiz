@@ -7,7 +7,7 @@ from pathlib import Path
 from app.curriculum import load_reviewed_catalog
 
 ROOT = Path(__file__).resolve().parents[1]
-PROJECTION_SHA256 = '0ebcb6ed0ae9d0831439aa9caa897347ec40efe03856acc4e83da57bf1cd7582'
+PROJECTION_SHA256 = '8364457dae56d0106a733a34f66cd6c3779352e93c69016c6b610a6d984af1a1'
 
 
 def project(manifest, curriculum, registry):

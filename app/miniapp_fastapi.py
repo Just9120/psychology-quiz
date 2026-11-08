@@ -6,6 +6,7 @@ from contextlib import closing
 from pathlib import Path
 
 import json
+import gzip
 import logging
 import os
 import time
@@ -48,6 +49,24 @@ _ENDPOINTS.add("/miniapp/literature/catalog-compact")
 
 def _to_response(status: int, headers: dict[str, str], body: bytes) -> Response:
     return Response(content=body, status_code=status, headers=headers)
+
+
+def _accepts_gzip(value: str) -> bool:
+    qualities = {}
+    for part in value.split(","):
+        name, _, parameter = part.partition(";")
+        name = name.strip().lower()
+        if name not in {"gzip", "*"}:
+            continue
+        quality = 1.0
+        if parameter:
+            key, separator, number = parameter.lower().partition("=")
+            try:
+                quality = float(number) if key.strip() == "q" and separator else 0.0
+            except ValueError:
+                quality = 0.0
+        qualities[name] = 0 < quality <= 1
+    return qualities.get("gzip", qualities.get("*", False))
 
 
 def _duration_ms(started_at: float) -> int:
@@ -405,7 +424,17 @@ def create_app(
 
     @app.get("/miniapp/literature/catalog-compact")
     async def get_literature_catalog(request: Request) -> Response:
-        return await _get_builder_response("/miniapp/literature/catalog-compact", request, build_literature_catalog_response, db_path, bot_token)
+        response = await _get_builder_response("/miniapp/literature/catalog-compact", request, build_literature_catalog_response, db_path, bot_token)
+        if response.status_code == 200:
+            # This payload contains published catalogue fields and the current
+            # actor's bounded reading state. It contains no credential, free
+            # text entered by the actor or reflected request fields.
+            response.headers.add_vary_header("Accept-Encoding")
+            if _accepts_gzip(request.headers.get("Accept-Encoding", "")):
+                response.body = await asyncio.to_thread(gzip.compress, response.body, compresslevel=5, mtime=0)
+                response.headers["Content-Encoding"] = "gzip"
+                response.headers["Content-Length"] = str(len(response.body))
+        return response
 
     @app.post("/miniapp/literature/progress")
     async def post_literature_progress(request: Request) -> Response:

@@ -27,7 +27,8 @@ export function OwnerContentView({ data, busy, onRefresh }: { data: OwnerContent
       </>}
     </article>
     {knowledge && <article className="panel"><h2>Опубликованная база знаний</h2>
-      <p>Пакет от {knowledge.published_at}: {knowledge.atomic_notes} самостоятельных заметок; тематических обзоров: {knowledge.sections?.length}.</p>
+      <p>Пакет от {knowledge.published_at}: {knowledge.atomic_notes} страниц понятий; тематических обзоров: {knowledge.sections?.length}.</p>
+      {knowledge.reviewed_boundaries !== undefined && <p>Границы подтверждения указаны на {knowledge.reviewed_boundaries} страницах. На {knowledge.reference_pages} страницах определение требует дальнейшей проверки.</p>}
       <p>Заметок без подтверждённой связи с зарегистрированными занятиями: {knowledge.unmapped_notes}. Они остаются в базе знаний.</p>
       <p className="muted">Связь установлена по точным названиям источников опубликованного пакета. Подготовленные заметки не снимают возражения к источникам и не подтверждают актуальность их редакций или полноту личного Obsidian.</p>
       <details><summary>Разделы базы знаний</summary>{knowledge.sections?.map(section => <p key={section.title}>{section.title}: {section.notes}</p>)}</details>

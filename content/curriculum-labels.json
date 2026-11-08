@@ -156,6 +156,20 @@
       "modules": [
         "module6"
       ]
+    },
+    "acceptance_commitment_therapy": {
+      "title": "Терапия принятия и ответственности",
+      "module": "module7",
+      "modules": [
+        "module7"
+      ]
+    },
+    "compassion_focused_therapy": {
+      "title": "Терапия, сфокусированная на сострадании",
+      "module": "module7",
+      "modules": [
+        "module7"
+      ]
     }
   },
   "topics": {

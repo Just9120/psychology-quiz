@@ -327,5 +327,29 @@
       "literature"
     ],
     "source_notes": "Source-backed current private fragment review; raw sources and publication dossiers remain local."
+  },
+  {
+    "id": "acceptance_commitment_therapy",
+    "title": "Терапия принятия и ответственности",
+    "module": "module7",
+    "question_file": null,
+    "status": "active",
+    "order": 711,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Module 7 bibliography; exact private metadata review per work."
+  },
+  {
+    "id": "compassion_focused_therapy",
+    "title": "Терапия, сфокусированная на сострадании",
+    "module": "module7",
+    "question_file": null,
+    "status": "active",
+    "order": 712,
+    "available_contours": [
+      "literature"
+    ],
+    "source_notes": "Module 7 bibliography; exact private metadata review per work."
   }
 ]

@@ -20,7 +20,7 @@ from app.literature_navigation import reading_paths, reading_nodes, path_token, 
 
 logger = logging.getLogger(__name__)
 PAGE_SIZE = 5
-CALLBACK_PATTERN = re.compile(r"^lit:(?:topics(?::\d{1,3})?|(?:r|cr):[0-9a-f]{12}:\d{1,3}|n:(?:root|[0-9a-f]{12}):\d{1,3}|m:[0-9a-f]{12}|(?:t|c):[0-9a-f]{12}:\d{1,3}(?::[anpdf](?::[0-9a-f]{12})?)?|i:[0-9a-f]{12}|ci:[0-9a-f]{12}:[cr]:[0-9a-f]{12}:\d{1,3}:[anpdf]|s:[0-9a-f]{12}:[npdf]|cs:[0-9a-f]{12}:[npdf]:[cr]:[0-9a-f]{12}:\d{1,3}:[anpdf])$")
+CALLBACK_PATTERN = re.compile(r"^lit:(?:topics(?::\d{1,3})?|(?:r|cr):[0-9a-f]{12}:\d{1,3}|n:(?:root|[0-9a-f]{12}):\d{1,3}|m:[0-9a-f]{12}|(?:t|c):[0-9a-f]{12}:\d{1,3}(?::[anpdf](?::[0-9a-f]{12})?)?|i:[0-9a-f]{12}|ci:[0-9a-f]{12}:[crto]:[0-9a-f]{12}:\d{1,3}:[anpdf]|s:[0-9a-f]{12}:[npdf]|cs:[0-9a-f]{12}:[npdf]:[crto]:[0-9a-f]{12}:\d{1,3}:[anpdf])$")
 STATUS_CODES = {
     "n": ("Не начато", "not_started"),
     "p": ("Читаю", "in_progress"),
@@ -110,7 +110,7 @@ def _course_navigation(items=None, token='root', page=0):
     if page and page * PAGE_SIZE >= len(children):
         return None
     text = ['<b>Литература по программе</b>', ' → '.join(escape(value) for value in node['labels'])]
-    text.append(('Выберите модуль.', 'Выберите дисциплину.', 'Выберите тему курса.')[depth])
+    text.append(('Выберите модуль.', 'Выберите дисциплину.', 'Выберите предметную тему.')[depth])
     rows = []
     if path:
         parent = path[:-1]
@@ -139,18 +139,25 @@ def _course_navigation(items=None, token='root', page=0):
 
 
 
+def _topic_items(items, token):
+    topic = _find(_navigation_topics(), token, "topic_id")
+    if topic is None:
+        return None, []
+    identity = topic["topic_id"]
+    return topic, [item for item in items if item["topic_id"] == identity
+                   or any(link["id"] == identity for link in item.get("reading_topics", []))]
+
+
 def _topic_view(items: list[dict], states: dict, token: str, page: int, status_filter: str = "a", lesson_token: str | None = None, *, course=False) -> tuple[str, InlineKeyboardMarkup] | None:
     if course:
         scope = select_reading_scope(items, token)
         topic, selected = ({'title': ' → '.join(scope[0]['labels'])}, scope[1]) if scope else (None, [])
     else:
-        topic = _find(_navigation_topics(), token, "topic_id")
-        selected = [item for item in items if topic and (any(link["id"] == topic["topic_id"] for link in item.get("reading_topics", []))
-                    or item["topic_id"] == topic["topic_id"])]
+        topic, selected = _topic_items(items, token)
     if topic is None or status_filter not in {"a", *STATUS_CODES} or page < 0 or lesson_token:
         return None  # Retired lesson buttons request a fresh topic selection.
     prefix = 'lit:c' if course else 'lit:t'
-    location = ('c', token, page, status_filter) if course else None
+    location = ('c' if course else 't', token, page, status_filter)
     works = {}
     for item in selected:
         works.setdefault(item.get("work_id", item["id"]), item)
@@ -224,10 +231,13 @@ def _book_callback(item, location=None):
     return f"lit:ci:{_token(item['id'])}:{kind}:{token}:{page}:{status}"
 
 
-def _item_view(item: dict, state: dict | None, location=None) -> tuple[str, InlineKeyboardMarkup]:
+def _item_view(item: dict, state: dict | None, location=None, *, subject=None) -> tuple[str, InlineKeyboardMarkup]:
     status = STATUS_LABELS.get((state or {}).get("reading_status"), "Не начато")
     authors = ", ".join(item.get("authors") or [])
     text = f"<b>{escape(item['title'])}</b>\n{escape(authors)}\nСтатус: {status}"
+    subject = subject or " · ".join(link["title"] for link in item.get("reading_topics", []))
+    if subject:
+        text += f"\n{escape(subject)}"
     importance = IMPORTANCE_LABELS.get(item.get("importance"))
     if importance is None:
         text += "\nЗначимость: не определена"
@@ -254,10 +264,13 @@ def _item_view(item: dict, state: dict | None, location=None) -> tuple[str, Inli
         text += f"\n\nПоисковый запрос книги:\n<code>{escape(search['query'])}</code>"
         text += "\nРезультаты поиска не подтверждают доступность скачивания."
         rows.append([InlineKeyboardButton("Поиск книги в интернете", url=search["url"])])
-    back = (f"lit:c:{location[1]}:{location[2]}:{location[3]}" if location and location[0] == 'c' else
-            f"lit:cr:{location[1]}:{location[2]}" if location else
-            f"lit:t:{_token(item.get('reading_topics', [{'id': item['topic_id']}])[0]['id'])}:0")
-    rows.insert(0, [InlineKeyboardButton("К порядку чтения" if location and location[0] == 'r' else "К теме", callback_data=back)])
+    if location:
+        kind, token, page, filter_code = location
+        back = f"lit:{kind}:{token}:{page}:{filter_code}" if kind in {'c', 't'} else f"lit:{'cr' if kind == 'r' else 'r'}:{token}:{page}"
+    else:
+        topics = item.get('reading_topics') or [{'id': item['topic_id']}]
+        back = f"lit:t:{_token(topics[0]['id'])}:0"
+    rows.insert(0, [InlineKeyboardButton("К порядку чтения" if location and location[0] in {'r', 'o'} else "К теме", callback_data=back)])
     return text, InlineKeyboardMarkup(rows)
 
 
@@ -266,9 +279,7 @@ def _reading_view(items: list[dict], token: str, page: int, *, course=False) -> 
         scope = select_reading_scope(items, token)
         topic, selected = ({'title': ' → '.join(scope[0]['labels'])}, scope[1]) if scope else (None, [])
     else:
-        topic = _find(_navigation_topics(), token, "topic_id")
-        selected = [item for item in items if topic and (any(link["id"] == topic["topic_id"] for link in item.get("reading_topics", []))
-                    or item["topic_id"] == topic["topic_id"])]
+        topic, selected = _topic_items(items, token)
     if topic is None or page < 0:
         return None
     prefix = 'lit:cr' if course else 'lit:r'
@@ -286,7 +297,7 @@ def _reading_view(items: list[dict], token: str, page: int, *, course=False) -> 
             text += "\nПриоритет преподавателя."
         if row["prerequisites"]:
             text += "\nПодготовка: " + ", ".join(escape(entry["title"][:100]) for entry in row["prerequisites"])
-        rows.append([InlineKeyboardButton(item["title"][:60], callback_data=_book_callback(item, ('r', token, page, 'a') if course else None))])
+        rows.append([InlineKeyboardButton(item["title"][:60], callback_data=_book_callback(item, ('r' if course else 'o', token, page, 'a')))])
     if not order:
         text += "\nДля этой темы последовательность пока не определена."
     nav = []
@@ -357,11 +368,17 @@ async def literature_callback(update, context) -> None:
         else:
             item = _find(items, parts[0], "id")
             location = None
+            subject = None
             if action in {'ci', 'cs'}:
                 index = 1 if action == 'ci' else 2
                 location = (parts[index], parts[index + 1], int(parts[index + 2]), parts[index + 3])
-                scope = select_reading_scope(items, location[1])
-                if item is None or scope is None or not any(value['id'] == item['id'] for value in scope[1]):
+                if location[0] in {'c', 'r'}:
+                    scope = select_reading_scope(items, location[1])
+                    subject, entries = (scope[0]['labels'][-1], scope[1]) if scope else (None, [])
+                else:
+                    topic, entries = _topic_items(items, location[1])
+                    subject = topic['title'] if topic else None
+                if item is None or not any(value['id'] == item['id'] for value in entries):
                     item = None
             if item is None:
                 view = None
@@ -370,7 +387,7 @@ async def literature_callback(update, context) -> None:
                     status = STATUS_CODES[parts[1]][1]
                     states[item["id"]] = await asyncio.to_thread(
                         _save, settings.db_path, update.effective_user, item["id"], status)
-                view = _item_view(item, states.get(item["id"]), location)
+                view = _item_view(item, states.get(item["id"]), location, subject=subject)
     except DATABASE_ERRORS as error:
         logger.warning("literature_chat_database_unavailable type=%s", type(error).__name__)
         await query.message.reply_text("Не удалось открыть список чтения. Попробуйте ещё раз позже.")

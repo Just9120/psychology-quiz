@@ -3600,6 +3600,48 @@
         "access_modes": [],
         "access_review": "Аудиосборник Николая Носова, чтецАллаЧовжик,издательствоМахаон,2ч27мин; соответствует сборнику с полным рассказом первым в официальном оглавлении Литрес. Собственная карточка предлагает полное прослушивание; условия доступа не подтверждены, бесплатный фрагмент не означает бесплатного полного аудио. Личные права, региональные ограничения и совпадение с конкретной редакцией курса не проверены."
       }
+    ],
+    "harris_act_illustrated": [
+      {
+        "format": "text",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/herris-rass/polnoe-naglyadnoe-posobie-po-terapii-prinyatiya-i/",
+        "access": "provider_terms",
+        "checked_at": "2026-11-08",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Официальная карточка полного электронного текста, автор и название совпадают. Доступ указан по подписке."
+      },
+      {
+        "format": "audio",
+        "provider": "MyBook",
+        "url": "https://mybook.ru/author/herris-rass/polnoe-naglyadnoe-posobie-po-terapii-prinyatiya-2/",
+        "access": "provider_terms",
+        "checked_at": "2026-11-08",
+        "access_modes": [
+          "subscription"
+        ],
+        "access_review": "Официальная карточка аудиокниги, чтец Сергей Уделов. Полный доступ указан по подписке."
+      },
+      {
+        "format": "text",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/books/TgR5QAKK",
+        "access": "provider_terms",
+        "checked_at": "2026-11-08",
+        "access_modes": [],
+        "access_review": "Официальная карточка текста заявляет полное чтение. Бесплатно помечен только отрывок. Условия полного доступа не подтверждены."
+      },
+      {
+        "format": "audio",
+        "provider": "Яндекс Книги",
+        "url": "https://books.yandex.ru/audiobooks/ZBF2EcFi",
+        "access": "provider_terms",
+        "checked_at": "2026-11-08",
+        "access_modes": [],
+        "access_review": "Официальная карточка аудиокниги, рассказчик Сергей Уделов. Условия полного доступа не подтверждены."
+      }
     ]
   }
 }

@@ -37,7 +37,7 @@ def reading_paths(items):
         title = discipline.get('title') or item.get('topic_title') or 'Другие материалы'
         modules = ([module_key(item['module'])] if item.get('module') else
                    discipline.get('modules', [module_key(discipline.get('module'))])) or ['other']
-        topics = item.get('curriculum_topics') or [{'id': 'general:' + identity, 'title': 'Общее чтение дисциплины'}]
+        topics = item.get('reading_topics') or [{'id': 'general:' + identity, 'title': 'Общее чтение дисциплины'}]
         for module in modules:
             for topic in topics:
                 records.append({'path': (module, identity, topic['id']),

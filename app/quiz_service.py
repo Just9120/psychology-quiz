@@ -92,14 +92,17 @@ def prepare_quiz(conn, payload: dict, *, actor_user_id: int | None = None) -> Pr
         selected = tuple(category_ids)
     else:
         questions = select_random_approved_question_ids_across_active_categories(conn, pool_limit, difficulty)
+    topic_by_question = {}
     if topic_ids is not None:
         navigation, scopes = question_scopes(conn)
         allowed = {topic['id'] for item in navigation
                    if not category_ids or item['category_id'] in category_ids for topic in item['topics']}
         if any(topic not in allowed for topic in topic_ids):
             raise QuizSetupError("invalid_setup")
-        selected_questions = set().union(*(scopes[topic] for topic in topic_ids))
-        questions = [qid for qid in questions if qid in selected_questions]
+        # A captured question belongs to one curriculum leaf. Multiple chosen
+        # leaves can share the same discipline, which is only the outer filter.
+        topic_by_question = {qid: topic for topic in topic_ids for qid in scopes[topic]}
+        questions = [qid for qid in questions if qid in topic_by_question]
         if count is not None and kinds is None and mode in {'single', 'all'}:
             questions = questions[:count]
     kind_by_id = {}
@@ -119,9 +122,10 @@ def prepare_quiz(conn, payload: dict, *, actor_user_id: int | None = None) -> Pr
         if kinds is not None and count is not None:
             questions = _include_available_kinds(candidates, questions, kind_by_id, kinds, count)
     elif mode == "selected_mix" and count is not None:
+        buckets = topic_ids if topic_ids is not None else list(dict.fromkeys(category_ids))
         questions = balanced_kinds_diverse_first(
-            [(qid, metadata_by_id[qid][1], metadata_by_id[qid][0], metadata_by_id[qid][2])
-             for qid in questions], list(dict.fromkeys(category_ids)), kinds or [], count)
+            [(qid, metadata_by_id[qid][1], topic_by_question.get(qid, metadata_by_id[qid][0]), metadata_by_id[qid][2])
+             for qid in questions], buckets, kinds or [], count)
     elif kinds is not None and count is not None:
         # Single-topic and bank-wide finite quizzes also need the conceptual
         # overlap gate after kind filtering; one synthetic bucket preserves
