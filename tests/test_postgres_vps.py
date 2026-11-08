@@ -15,6 +15,25 @@ from scripts.postgres_backup import backup_and_rehearse
 SHA = 'a' * 40
 
 
+def test_missing_journal_after_rollout_cannot_start_a_new_baseline(tmp_path, monkeypatch):
+    class ExistingRuntime:
+        def require_stopped_writers(self):
+            pass
+
+        def container(self, service):
+            assert service in vps.SERVICES
+            return {"Config": {"Labels": {"org.opencontainers.image.revision": SHA}}}
+
+    def existing_journal_code(command):
+        assert command == ["git", "ls-tree", SHA, "--", "app/deletion_journal.py"]
+        return b"tracked journal module"
+
+    monkeypatch.setattr(vps, "PROJECT", tmp_path)
+    monkeypatch.setattr(vps, "run", existing_journal_code)
+    with pytest.raises(vps.OperationError, match="existing_deletion_journal"):
+        vps.prepare_deletion_journal(ExistingRuntime())
+
+
 @pytest.mark.parametrize('owner,phase,mode,allowed', [
     (0, 'allocated', stat.S_IFDIR | 0o700, True),
     (999, 'allocated', stat.S_IFDIR | 0o700, True),

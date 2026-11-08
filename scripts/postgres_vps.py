@@ -600,8 +600,8 @@ def prepare_deletion_journal(runtime):
     if not journal.exists() and not journal.is_symlink():
         # A later missing journal is a recovery incident, never a new baseline.
         for service in SERVICES:
-            previous = runtime.container(service)["Config"]["Labels"].get(
-                "org.opencontainers.image.revision", "")
+            labels = runtime.container(service)["Config"].get("Labels") or {}
+            previous = labels.get("org.opencontainers.image.revision", "")
             if re.fullmatch(r"[0-9a-f]{40}", previous) is None:
                 raise OperationError("verified_previous_revision_required")
             if run(["git", "ls-tree", previous, "--", "app/deletion_journal.py"]).strip():
