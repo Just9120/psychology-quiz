@@ -61,7 +61,9 @@ def test_telegram_continuation_opens_exact_association_and_escapes_title(monkeyp
         items, {"book": {"reading_status": "in_progress"}}, literature_chat._token("one"), 0)
     assert "&lt;Book&gt;" in text and "<Book>" not in text
     assert "Следующий шаг" in text
-    assert keyboard.inline_keyboard[0][0].callback_data == "lit:i:" + literature_chat._token("book")
+    assert keyboard.inline_keyboard[0][0].callback_data.split(":") == [
+        "lit", "ci", literature_chat._token("book"), "t", literature_chat._token("one"), "0", "a",
+    ]
 
 
 def test_start_recommendation_requires_reviewed_metadata_and_completed_prerequisites():
@@ -113,7 +115,9 @@ def test_telegram_video_continuation_preserves_association_and_viewing_language(
     assert "Продолжите просмотр" in text and "Продолжите чтение" not in text
     assert "&lt;Film&gt;" in text and "<Film>" not in text
     assert keyboard.inline_keyboard[0][0].text == "Продолжить просмотр"
-    assert keyboard.inline_keyboard[0][0].callback_data == "lit:i:" + literature_chat._token("film")
+    assert keyboard.inline_keyboard[0][0].callback_data.split(":") == [
+        "lit", "ci", literature_chat._token("film"), "t", literature_chat._token("one"), "0", "a",
+    ]
     assert states == {"film": {"reading_status": "in_progress"}}
 
 

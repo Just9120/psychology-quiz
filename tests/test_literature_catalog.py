@@ -21,9 +21,9 @@ def test_topic_module_membership_requires_primary_module_and_unique_course_modul
 
 def test_reviewed_catalog_preserves_ids_sources_and_explicit_work_groups():
     items = load_literature_items()
-    assert len(items) == 322
-    assert len({item['work_id'] for item in items}) == 284
-    assert len({item['topic_id'] for item in items}) == 20
+    assert len(items) == 335
+    assert len({item['work_id'] for item in items}) == 297
+    assert len({item['topic_id'] for item in items}) == 22
     for work in ('lit_anna_freud_ego_defence', 'lit_frankl_man_search_meaning'):
         entries = [item for item in items if item['work_id'] == work]
         expected = 3 if work == 'lit_frankl_man_search_meaning' else 2
@@ -186,7 +186,7 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
         'lit_org_lecture_02', 'lit_b76317a4d7bec59d',
         'lit_newton_principia_1989', 'lit_cefdc62fe30c6d9d', 'fch_dubynin_mozg_i_ego_potrebnosti',
         'lit_vasilyuk_understanding_psychotherapy_system', 'psf_aleksandrov_psihofiziologiya',
-        'judith_beck_cbt_basics_beyond', 'lit_nosov_mishkina_kasha',
+        'judith_beck_cbt_basics_beyond', 'lit_nosov_mishkina_kasha', 'harris_act_illustrated',
     }
     assert {link['provider'] for link in links['gippenreiter_vvedenie_v_obschuyu_psihologiyu']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     assert {link['format'] for link in links['lit_burlachuk_psychodiagnostics']} == {'text', 'audio'}
@@ -195,6 +195,9 @@ def test_verified_outbound_versions_are_work_scoped_and_never_claim_owned_access
     assert links['fch_kandel_v_poiskah_pamyati'] == []
     assert {link['format'] for link in links['judith_beck_cbt_basics_beyond']} == {'text'}
     assert {link['format'] for link in links['lit_nosov_mishkina_kasha']} == {'audio'}
+    assert {(link['provider'], link['format']) for link in links['harris_act_illustrated']} == {
+        ('MyBook', 'text'), ('MyBook', 'audio'), ('Яндекс Книги', 'text'), ('Яндекс Книги', 'audio'),
+    }
     assert {link['format'] for link in links['fch_yakutenko_volya_i_samokontrol']} == {'text', 'audio'}
     assert {link['provider'] for link in links['fch_martynov_mozg']} == {'Литрес', 'MyBook', 'Яндекс Книги'}
     # An identically titled work by another author must never be offered as Carter's book.

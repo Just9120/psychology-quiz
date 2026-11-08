@@ -12,7 +12,7 @@ from app import literature_chat
 def test_entire_public_catalog_has_standalone_topics_without_changing_identity():
     items = load_literature_items()
     topics, mapping = load_reading_topics()
-    assert len({item['work_id'] for item in items}) == 284
+    assert len({item['work_id'] for item in items}) == 297
     assert set(mapping) - {item['work_id'] for item in items} == {
         'lit_tereshonok_levina_psychology_pedagogy_part1',
         'lit_meshcheryakov_zinchenko_big_dictionary',
