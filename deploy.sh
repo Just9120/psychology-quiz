@@ -52,6 +52,7 @@ done
 
 STATEFUL=0
 MIGRATE=0
+DELETION_RECOVERY_CHANGED=0
 if [[ "$DEPLOYED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
   git cat-file -e "${DEPLOYED_SHA}^{commit}" || fail 'Unknown deployed source revision'
   BASE_SHA="$DEPLOYED_SHA"
@@ -68,6 +69,7 @@ while IFS= read -r file; do
   esac
   case "$file" in
     docker-compose.yml) STATEFUL=1 ;;
+    app/deletion_journal.py|app/privacy_data.py|scripts/postgres_manifest.py|scripts/postgres_backup.py|scripts/postgres_vps.py) STATEFUL=1; DELETION_RECOVERY_CHANGED=1 ;;
     app/db.py|app/database.py|app/postgres_*.py|app/homework*.py|app/attempt_content.py|app/*_schema.py|app/pwa_promotion.py|app/web_auth.py|app/glossary.py|app/glossary_projection.py|app/case_content.py|app/content_publication.py|app/publication_certificate.py|app/publication_receipt.py|app/source_evidence.py|sql/*|scripts/init_db.py|scripts/seed_questions.py|content/homework.json|content/questions/*|content/glossary/*|content/publication-reviews.json|content/publication-certificates.json|content/publication-receipts.json|content/publication-review-public-key.hex|content/learning-quality-reviews.json|content/legacy-publication-baseline.json|content/source-corpus.json) STATEFUL=1; MIGRATE=1 ;;
   esac
 done <<< "$CHANGED_FILES"
@@ -135,6 +137,7 @@ if [[ "$STATEFUL" == 1 ]]; then
   STOPPED=1
   if [[ "$DATABASE_BACKEND" == postgresql ]]; then
     if [[ "$PG_IMAGE_STATE" == current ]]; then
+      python3 scripts/postgres_vps.py prepare-deletion-journal --expected-sha "$EXPECTED_SHA" --lock-held
       BACKUP_PATH="$(python3 scripts/postgres_vps.py backup --expected-sha "$EXPECTED_SHA" --lock-held)"
     else
       # The transition owns backup/isolated restore before changing the DB
@@ -143,7 +146,7 @@ if [[ "$STATEFUL" == 1 ]]; then
       BACKUP_PATH="$(python3 scripts/postgres_vps.py upgrade-vector-image --expected-sha "$EXPECTED_SHA" --lock-held)"
     fi
     [[ "$BACKUP_PATH" == "$PROJECT_DIR"/.postgres/backups/release-*/record.json ]] || fail 'Invalid PostgreSQL backup record'
-    if [[ "$MIGRATE" == 1 ]]; then
+    if [[ "$MIGRATE" == 1 || "$DELETION_RECOVERY_CHANGED" == 1 ]]; then
       # Use the existing stopped-writer/lock window. Rebuild only an owned
       # restored copy before any production schema/content change.
       USER_RECOVERY_RECORD="$(python3 scripts/postgres_vps.py rehearse-user-recovery --expected-sha "$EXPECTED_SHA" --lock-held --record "$BACKUP_PATH")"

@@ -12,9 +12,11 @@ from psycopg import sql
 import pytest
 
 from app.db import get_connection, upsert_approved_questions
+from app.deletion_journal import initialize, recorded_deletion, recovery_records
 from app.postgres_import import import_snapshot
 from app.postgres_recovery import manifest, verify_user_state
 from app.postgres_schema import upgrade_schema
+from app.privacy_data import confirm_learning_data_deletion, prepare_learning_data_deletion, replay_learning_deletions
 from scripts.postgres_backup import backup_and_rehearse, read_verified_record, rehearse_user_recovery
 from scripts.postgres_test_support import test_target as validate_test_target
 from tests.test_attempt_content import make_attempt, NEW, OTHER
@@ -168,6 +170,54 @@ def test_native_restored_history_survives_current_content_rebuild(native_runtime
     verify_user_state(before, record['after'])
     assert native_runtime.manifest() == before
     assert not native_runtime.created
+
+
+@pytest.mark.skipif(os.name != "posix", reason="The production journal uses POSIX durability and locking")
+def test_native_restore_replays_only_confirmed_post_backup_deletions(native_runtime, tmp_path, monkeypatch):
+    runtime = native_runtime
+    journal_path = tmp_path / "deletions"
+    monkeypatch.setenv("LEARNING_DELETION_JOURNAL", str(journal_path))
+    with closing(get_connection(runtime.target)) as conn, conn:
+        upgrade_schema(conn)
+        conn.execute("INSERT INTO users (id, telegram_user_id) VALUES (902, 100902)")
+        conn.execute("INSERT INTO user_learning_goals VALUES (902, 'study', 3, '2026-11-08T00:00:00Z')")
+    initialize(journal_path, cluster="1234", database=runtime.identity()["database"])
+    with closing(get_connection(runtime.target)) as conn:
+        point = recovery_records(journal_path, conn, cluster="1234")
+    backup = backup_and_rehearse(runtime, tmp_path / "backups", deletion_point=point)
+    with pytest.raises(RuntimeError, match="simulated interruption"):
+        with closing(get_connection(runtime.target)) as conn, conn:
+            with recorded_deletion(conn, 100902):
+                conn.execute("DELETE FROM user_learning_goals WHERE user_id=902")
+                raise RuntimeError("simulated interruption")
+    with closing(get_connection(runtime.target)) as conn:
+        assert recovery_records(journal_path, conn, cluster="1234", point=point)[1] == set()
+        assert conn.execute("SELECT count(*) FROM user_learning_goals WHERE user_id=902").fetchone()[0] == 1
+    with closing(get_connection(runtime.target)) as conn, conn:
+        token = prepare_learning_data_deletion(conn, 902)["confirmation_token"]
+        assert confirm_learning_data_deletion(conn, 902, token)["ok"]
+    live = runtime.manifest()
+
+    def replay(name, restored_point, expected):
+        with closing(get_connection(runtime.target)) as conn:
+            state, actors = recovery_records(journal_path, conn, cluster="1234", point=restored_point)
+        target = urlunsplit(urlsplit(runtime.target)._replace(path="/" + name))
+        with closing(get_connection(target)) as conn, conn:
+            assert manifest(conn) == expected
+            assert conn.execute("SELECT count(*) FROM user_learning_goals WHERE user_id=902").fetchone()[0] == 1
+            assert replay_learning_deletions(conn, state, actors) == 1
+            assert replay_learning_deletions(conn, state, actors) == 1
+            after = manifest(conn)
+            assert after["tables"]["user_learning_goals"] == live["tables"]["user_learning_goals"]
+            assert after["tables"]["quiz_sessions"] == live["tables"]["quiz_sessions"]
+            assert after["tables"]["web_accounts"] == live["tables"]["web_accounts"]
+            assert after["tables"]["users"] == live["tables"]["users"]
+        return {"status": "verified", "actors_reconciled": 1}
+
+    path = rehearse_user_recovery(runtime, backup, tmp_path / "rehearsals", replay_deletions=replay)
+    assert json.loads(path.read_text())["deletion_reconciliation"] == {"status": "verified", "actors_reconciled": 1}
+    assert runtime.manifest() == live
+    assert not runtime.created
 
 
 def test_failed_native_restore_preserves_source_and_cleans_only_owned_database(native_runtime, tmp_path, monkeypatch):

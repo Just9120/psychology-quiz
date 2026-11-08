@@ -11,6 +11,7 @@ import hmac
 import secrets
 
 from app.database import begin_write
+from app.deletion_journal import JournalError, actor_digest, recorded_deletion
 
 CHALLENGE_LIFETIME = timedelta(minutes=10)
 LEARNING_TABLES = (
@@ -69,8 +70,37 @@ def confirm_learning_data_deletion(conn, actor_user_id: int, token: str) -> dict
         valid = False
     if not valid:
         raise PrivacyError("confirmation_expired")
-    conn.execute("DELETE FROM user_data_deletion_challenges WHERE user_id=?", (actor_user_id,))
+    telegram_id = conn.execute("SELECT telegram_user_id FROM users WHERE id=?", (actor_user_id,)).fetchone()[0]
+    try:
+        with recorded_deletion(conn, telegram_id):
+            conn.execute("DELETE FROM user_data_deletion_challenges WHERE user_id=?", (actor_user_id,))
+            deleted = _delete_learning_rows(conn, actor_user_id)
+    except (OSError, JournalError) as error:
+        raise PrivacyError("deletion_reconciliation_required") from error
+    return {"ok": True, "deleted": deleted, "telegram_access_retained": True}
+
+
+def _delete_learning_rows(conn, actor_user_id: int) -> dict:
     deleted = {}
     for table in LEARNING_TABLES:
         deleted[table] = conn.execute(f"DELETE FROM {table} WHERE user_id=?", (actor_user_id,)).rowcount
-    return {"ok": True, "deleted": deleted, "telegram_access_retained": True}
+    return deleted
+
+
+def replay_learning_deletions(conn, journal: dict, affected: set[str]) -> int:
+    """Apply receipts to a verified, offline restore after rebuilding its schema."""
+    if not affected:
+        return 0
+    actors = [int(row[0]) for row in conn.execute(
+        "SELECT id,telegram_user_id FROM users WHERE telegram_user_id IS NOT NULL")
+        if actor_digest(journal, row[1]) in affected]
+    for actor in actors:
+        begin_write(conn, f"actor:{actor}")
+        if conn.execute("SELECT 1 FROM web_accounts WHERE user_id=?", (actor,)).fetchone():
+            raise PrivacyError("restored_actor_requires_owner_reconciliation")
+        conn.execute("DELETE FROM user_data_deletion_challenges WHERE user_id=?", (actor,))
+        _delete_learning_rows(conn, actor)
+        if any(conn.execute(f"SELECT 1 FROM {table} WHERE user_id=? LIMIT 1", (actor,)).fetchone()
+               for table in LEARNING_TABLES):
+            raise PrivacyError("restored_learning_deletion_incomplete")
+    return len(actors)

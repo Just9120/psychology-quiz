@@ -12,6 +12,10 @@ import tempfile
 import uuid
 
 
+class LegacyDeletionPointError(ValueError):
+    pass
+
+
 def file_digest(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as source:
@@ -43,7 +47,7 @@ def sync_directory(path: Path) -> None:
             os.close(descriptor)
 
 
-def backup_and_rehearse(runtime, backup_root: Path) -> Path:
+def backup_and_rehearse(runtime, backup_root: Path, *, deletion_point=None) -> Path:
     """Writers stopped and target/lock verified by the concrete runtime boundary.
 
     runtime supplies manifest(), dump(), create_restore_database(), restore(),
@@ -57,6 +61,8 @@ def backup_and_rehearse(runtime, backup_root: Path) -> Path:
     record = {"format": "psychology-postgres-recovery-v1", "phase": "started",
               "source": runtime.identity(), "before": before,
               "created_at": datetime.now(timezone.utc).isoformat()}
+    if deletion_point is not None:
+        record["deletion_point"] = deletion_point
     write_record(record_path, record)
     restore_name = "psychology_restore_" + uuid.uuid4().hex
     created = False
@@ -113,7 +119,7 @@ def read_verified_record(path: Path) -> dict:
     return record
 
 
-def rehearse_user_recovery(runtime, verified_path: Path, output_root: Path) -> Path:
+def rehearse_user_recovery(runtime, verified_path: Path, output_root: Path, *, replay_deletions=None) -> Path:
     """Restore a verified snapshot and rebuild serving content in an owned copy.
 
     This never replaces production, deletes a backup, or restores the derivative
@@ -129,6 +135,8 @@ def rehearse_user_recovery(runtime, verified_path: Path, output_root: Path) -> P
             or {k: v for k, v in source.items() if k != "revision"}
             != {k: v for k, v in identity.items() if k != "revision"}):
         raise ValueError("Recovery snapshot belongs to another runtime")
+    if replay_deletions is not None and not isinstance(backup.get("deletion_point"), dict):
+        raise LegacyDeletionPointError("Legacy backup requires separately verified deletion reconciliation")
     live_before = runtime.manifest()
     if output_root.exists() or output_root.is_symlink():
         info = output_root.lstat()
@@ -162,6 +170,14 @@ def rehearse_user_recovery(runtime, verified_path: Path, output_root: Path) -> P
         runtime.rebuild_restore_content(name)
         after = runtime.manifest(database=name)
         verify_user_state(backup["before"], after)
+        if replay_deletions is not None:
+            reconciliation = replay_deletions(name, backup["deletion_point"], after)
+            if (not isinstance(reconciliation, dict) or reconciliation.get("status") != "verified"
+                    or type(reconciliation.get("actors_reconciled")) is not int
+                    or reconciliation["actors_reconciled"] < 0):
+                raise ValueError("Deletion reconciliation was not verified")
+            record["deletion_reconciliation"] = reconciliation
+            after = runtime.manifest(database=name)
         runtime.require_stopped_writers()
         if runtime.identity() != identity or runtime.manifest() != live_before:
             raise ValueError("Runtime changed during user recovery rehearsal")

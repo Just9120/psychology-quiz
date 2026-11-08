@@ -127,7 +127,9 @@ def build_learning_response(db_path: str, bot_token: str, action: str,
     except learning_goals.GoalError as error:
         return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": error.code})
     except privacy_data.PrivacyError as error:
-        return _json(HTTPStatus.BAD_REQUEST, {"ok": False, "error": str(error)})
+        code = str(error)
+        status = HTTPStatus.SERVICE_UNAVAILABLE if code == "deletion_reconciliation_required" else HTTPStatus.BAD_REQUEST
+        return _json(status, {"ok": False, "error": code})
     except OPERATIONAL_ERRORS as error:
         if _is_sqlite_locked_error(error):
             return _database_busy_response()

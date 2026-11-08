@@ -15,6 +15,25 @@ from scripts.postgres_backup import backup_and_rehearse
 SHA = 'a' * 40
 
 
+def test_missing_journal_after_rollout_cannot_start_a_new_baseline(tmp_path, monkeypatch):
+    class ExistingRuntime:
+        def require_stopped_writers(self):
+            pass
+
+        def container(self, service):
+            assert service in vps.SERVICES
+            return {"Config": {"Labels": {"org.opencontainers.image.revision": SHA}}}
+
+    def existing_journal_code(command):
+        assert command == ["git", "ls-tree", SHA, "--", "app/deletion_journal.py"]
+        return b"tracked journal module"
+
+    monkeypatch.setattr(vps, "PROJECT", tmp_path)
+    monkeypatch.setattr(vps, "run", existing_journal_code)
+    with pytest.raises(vps.OperationError, match="existing_deletion_journal"):
+        vps.prepare_deletion_journal(ExistingRuntime())
+
+
 @pytest.mark.parametrize('owner,phase,mode,allowed', [
     (0, 'allocated', stat.S_IFDIR | 0o700, True),
     (999, 'allocated', stat.S_IFDIR | 0o700, True),
@@ -170,13 +189,14 @@ def cutover_host(tmp_path, monkeypatch):
     monkeypatch.setattr(vps, 'Runtime', FakeRuntime)
     monkeypatch.setattr(vps, 'configured_runtime', lambda revision: (FakeRuntime(revision), json.loads((state / 'state.json').read_text())))
     monkeypatch.setattr(vps, 'compose', compose)
+    monkeypatch.setattr(vps, 'prepare_deletion_journal', lambda runtime: fail_at('deletion_journal'))
     monkeypatch.setattr(vps, 'backup', native_backup)
     monkeypatch.setattr(vps, 'verify_backup', lambda *args: fail_at('preservation'))
     monkeypatch.setattr(vps, 'post_checks', lambda *args: fail_at('post_checks'))
     return host
 
 
-@pytest.mark.parametrize('failure', ['sqlite_backup','import','native_backup','preservation','start','post_checks'])
+@pytest.mark.parametrize('failure', ['sqlite_backup','import','deletion_journal','native_backup','preservation','start','post_checks'])
 def test_interrupted_cutover_resumes_without_sqlite_rollback_or_reimport_after_writes(cutover_host, failure):
     host = cutover_host
     original = (host.project / '.env').read_bytes()

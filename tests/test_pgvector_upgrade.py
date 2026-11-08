@@ -234,6 +234,7 @@ def test_vector_upgrade_orders_backup_switch_manifest_and_extension(tmp_path, mo
     monkeypatch.setattr(vps, "stage_vector_image", lambda _revision, *, pull: events.append("staged") if not pull else None)
     monkeypatch.setattr(vps, "run", lambda *_args, **_kwargs: b"[{}]")
     monkeypatch.setattr(vps, "compose", compose)
+    monkeypatch.setattr(vps, "prepare_deletion_journal", lambda _: events.append("deletion_journal_ready"))
     monkeypatch.setattr(vps, "backup", lambda _: events.append("verified_backup") or record_path)
     monkeypatch.setattr(vps, "read_verified_record", lambda _: {
         "before": before, "source": {"cluster": "synthetic-cluster"}})
@@ -244,6 +245,7 @@ def test_vector_upgrade_orders_backup_switch_manifest_and_extension(tmp_path, mo
         assert events.index("staged") < events.index("verified_backup")
         assert events.index("writers_stopped") < events.index("verified_backup")
         assert events.index("search_stopped") < events.index("verified_backup")
+        assert events.index("deletion_journal_ready") < events.index("verified_backup")
         assert events.index("verified_backup") < events.index("switch_image")
         assert events.index("switch_image") < events.index("extension_bootstrap")
         assert vps.vector_upgrade_record()["phase"] == "complete"
