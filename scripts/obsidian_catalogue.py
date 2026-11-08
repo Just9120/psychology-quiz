@@ -18,7 +18,8 @@ from scripts.obsidian_vault import VaultError, _private_input, valid_generated_n
 
 ENTRY = 'База знаний.md'
 LEGACY_STATE_SHA256 = '7bf9cb0ddcb88c0874624f4ca58e30734e22bbbcc6e2b3c87cc0d30fe5fcd886'
-REVIEWED_NOTES_SHA256 = '76940d2ec39cb33a0a690a4b68484c98d37b32082153dfe951be28545e6a28ba'
+REVIEWED_NOTES_SHA256 = '2e762b94cb107b92479b5f0652b6c3d4e8954ac59b08f9293b40efade4bec3a0'
+PREVIOUS_REVIEWED_NOTES_SHA256 = '76940d2ec39cb33a0a690a4b68484c98d37b32082153dfe951be28545e6a28ba'
 RETIRED_NOTE = ('# Заметка предыдущей редакции\n\n'
                 'Эта заметка больше не входит в проверенный пакет. '
                 'Содержимое не переопубликовано; имя сохранено для личных ссылок.\n\n'
@@ -27,7 +28,7 @@ RETIRED_NOTE = ('# Заметка предыдущей редакции\n\n'
 
 def reviewed_notes_payload(payload: bytes):
     """An archive's status or metadata cannot substitute for the reviewed bytes."""
-    if hashlib.sha256(payload).hexdigest() != REVIEWED_NOTES_SHA256:
+    if hashlib.sha256(payload).hexdigest() not in {REVIEWED_NOTES_SHA256, PREVIOUS_REVIEWED_NOTES_SHA256}:
         raise VaultError('prepared_note_source_review_required')
     manifest = json.loads(payload)
     if set(manifest) != {'schema_version', 'notes', 'coverage'} or manifest['schema_version'] != 2:

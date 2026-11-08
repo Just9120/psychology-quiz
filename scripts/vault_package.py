@@ -135,7 +135,7 @@ def read_package_bytes(data: bytes, expected_sha256: str):
         metadata = json.loads(members[METADATA])
         if (set(metadata) != {'schema_version', 'kind', 'reviewed_notes_sha256', 'counts', 'files'}
                 or metadata['schema_version'] != 1 or metadata['kind'] != 'PSYCHOLOGYATLAS_PRIVATE_VAULT'
-                or metadata['reviewed_notes_sha256'] != catalogue.REVIEWED_NOTES_SHA256
+                or metadata['reviewed_notes_sha256'] != sha256(members[REVIEWED])
                 or metadata['files'] != {name: sha256(body) for name, body in members.items()
                                          if name != METADATA}):
             raise VaultError('private_package_manifest_mismatch')

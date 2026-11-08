@@ -17964,6 +17964,175 @@
         "sources"
       ],
       "source_support": "supported"
+    },
+    "literature:harris_act_illustrated": {
+      "schema_version": 1,
+      "item_sha256": "9cc3fb1f3301a85aca68a7311478731e05087acc34f8e229ad9cd7f2cc8f9f07",
+      "review_sha256": "4ce9fbce489c171b382e113991c7166705535940c6e1c32a450808fbfa557a30",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:twohig_levin_ong_act_steps": {
+      "schema_version": 1,
+      "item_sha256": "09eccd10fbac33e410ad43181460df3fff57f092ea4c73756b7018f0c2e60588",
+      "review_sha256": "3c76b6b376a182fdee6bdcb94110e45dc7b4133287162198b5f1e3dc6796bd04",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:brown_gillard_act_dummies": {
+      "schema_version": 1,
+      "item_sha256": "8868f90f1269daf5c2dbbfd90ef8c16c8171b54836f9781f8d030818c270e21f",
+      "review_sha256": "953321ce2ba15183cbaa5f439f625cec8de10e8e445f3bd7a6630f1db2bd1eea",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:hayes_strosahl_wilson_act_process": {
+      "schema_version": 1,
+      "item_sha256": "da8ae6884a921d3049b6739035c44aeb280f8e593dc30fe2e7598d37c76f4b8b",
+      "review_sha256": "3645c93f4337b5faf4d76cfee58dafe0d224817e836a7cfba00c4f639f54754c",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:harris_act_questions_answers": {
+      "schema_version": 1,
+      "item_sha256": "b4e70ec4b9dd478bca23d21e40b1aff03de1c5d86347ec2faa6bd46df613a3b1",
+      "review_sha256": "efca496882119009488d36938a29bcd60acf5ee2d29ce94a0c89d4b04b3bb038",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:stoddard_afari_act_metaphors": {
+      "schema_version": 1,
+      "item_sha256": "189c8a348b9c15bec3158ce00289460885a0cd57032e5ea0a863e86d5255839f",
+      "review_sha256": "f371c94a030b94344c7d23152d60469d48801758619a5f502ecf5f0a805ad3d7",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:torneke_relational_frame_theory": {
+      "schema_version": 1,
+      "item_sha256": "a13b31a21df220ae319c5274a7e6387b2b9ba0cfd74892d5111ef3d963125cef",
+      "review_sha256": "0321bcc08cd71a953a48440b98288671336504fb4babf86be48ddf1d18b45bc0",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:westrup_advanced_act": {
+      "schema_version": 1,
+      "item_sha256": "8edd4e38f13d82a81c2b5585fdf3b37408f08aa6a14bcfc596a85650641ebfbf",
+      "review_sha256": "ed5406c5f6f764b0a6712f79fd5b21627607f04e1e0b2e5c2ec429907b1eb0d2",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:kolts_cft_clinical_guide": {
+      "schema_version": 1,
+      "item_sha256": "726cf6f3e7f9ec788b01a27ba85d3b75e53d6c79a6f5893d4a8f67acbc7ca1e9",
+      "review_sha256": "0907d77b7cee31be1f83dbd8da52d79b4c46e4687cbeebcfbfab9ec68c27686d",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:gilbert_cft_distinctive_features": {
+      "schema_version": 1,
+      "item_sha256": "fb3c53a1be5c6c005b64bb3f3fd8281a8e692b26b9bc8ed025529c210060714f",
+      "review_sha256": "46f5d94df90a3fcbd0449d79dffd08f4bf1f3e4f99e575b688bc549f7054ad27",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:irons_cft_difficult_emotions": {
+      "schema_version": 1,
+      "item_sha256": "494780924e87db92be8f45d72b048bd48cf1c3b1f66b027b4cb5e4f91b66ed4d",
+      "review_sha256": "b6904a8cd3f7099a3c7e8c7fce3c19c1d62706476d33fd772ba3e93bd7be1eaa",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:kolts_bell_bennett_levy_irons_cft_workbook": {
+      "schema_version": 1,
+      "item_sha256": "991cfc60b7231dc9d35e653c576d1082f6b8c2b8267217a03740faa6f00cd10d",
+      "review_sha256": "0f45b0175450278af837c43a778ccd886873dde7b330de121156545ec93816f1",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
+    },
+    "literature:tirch_schoendorff_silberstein_act_compassion": {
+      "schema_version": 1,
+      "item_sha256": "dd597ca7fe8408a90b1255bfbc05dfe577d925fda13c1f4d10677cb30f957c83",
+      "review_sha256": "4b7ebdbe2c561457e177fe21e254de2769404f72caf382a852540f032c67dd7b",
+      "decision": "approved",
+      "purpose": "bibliographic_metadata",
+      "reviewer": "private-review",
+      "reviewed_at": "2026-11-08",
+      "checks": [
+        "sources"
+      ],
+      "source_support": "supported"
     }
   }
 }

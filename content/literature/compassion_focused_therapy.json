@@ -1,0 +1,172 @@
+[
+  {
+    "id": "kolts_cft_clinical_guide",
+    "work_id": "kolts_cft_clinical_guide",
+    "title": "Терапия, сфокусированная на сострадании (CFT). Практическое руководство для клинических психологов",
+    "authors": [
+      "Кольц Р. Л."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "compassion_focused_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 10,
+    "global_order": 712010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для знакомства с языком и структурой практического руководства по CFT.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Кольц Р. Л.. Терапия, сфокусированная на сострадании (CFT). Практическое руководство для клинических психологов. Диалектика. ISBN 978-5-907365-19-3."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "gilbert_cft_distinctive_features",
+    "work_id": "gilbert_cft_distinctive_features",
+    "title": "Терапия, сфокусированная на сострадании: отличительные особенности",
+    "authors": [
+      "Гилберт П."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "compassion_focused_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 20,
+    "global_order": 712020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для выделения характерных понятий CFT и их сопоставления с более общим разговором о сострадании.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Гилберт П.. Терапия, сфокусированная на сострадании: отличительные особенности. Диалектика. ISBN 978-5-907365-62-9."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "irons_cft_difficult_emotions",
+    "work_id": "irons_cft_difficult_emotions",
+    "title": "Терапия, сфокусированная на сострадании, для управления трудными эмоциями",
+    "authors": [
+      "Айронс К."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "compassion_focused_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 30,
+    "global_order": 712030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для изучения того, как автор связывает язык CFT с обсуждением трудных эмоций.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Айронс К.. Терапия, сфокусированная на сострадании, для управления трудными эмоциями. Диалектика. ISBN 978-5-907458-18-5."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "kolts_bell_bennett_levy_irons_cft_workbook",
+    "work_id": "kolts_bell_bennett_levy_irons_cft_workbook",
+    "title": "Практика терапии, сфокусированной на сострадании: взгляд изнутри. Рабочая тетрадь для терапевтов с заданиями для самостоятельной работы и саморефлексии",
+    "authors": [
+      "Кольц Р. Л.",
+      "Белл Т.",
+      "Беннетт-Леви Дж.",
+      "Айронс К."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "compassion_focused_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 40,
+    "global_order": 712040,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для знакомства с форматом профессиональной саморефлексии и самостоятельной работы терапевта в CFT.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Кольц Р. Л., Белл Т., Беннетт-Леви Дж., Айронс К.. Практика терапии, сфокусированной на сострадании: взгляд изнутри. Рабочая тетрадь для терапевтов с заданиями для самостоятельной работы и саморефлексии. Диалектика. ISBN 978-5-907458-19-2."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "tirch_schoendorff_silberstein_act_compassion",
+    "work_id": "tirch_schoendorff_silberstein_act_compassion",
+    "title": "Сострадание в терапии принятия и ответственности. Практическое руководство",
+    "authors": [
+      "Тирч Д.",
+      "Шендорф Б.",
+      "Зильберштейн-Тирч Л. Р."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "compassion_focused_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 50,
+    "global_order": 712050,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для тематического сопоставления обсуждения сострадания в ACT и CFT.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Тирч Д., Шендорф Б., Зильберштейн-Тирч Л. Р.. Сострадание в терапии принятия и ответственности. Практическое руководство. Диалектика. ISBN 978-5-907458-01-7."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  }
+]

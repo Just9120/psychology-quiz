@@ -1,0 +1,272 @@
+[
+  {
+    "id": "harris_act_illustrated",
+    "work_id": "harris_act_illustrated",
+    "title": "Полное наглядное пособие по терапии принятия и ответственности: революционные методы и стратегии для содействия глубоким изменениям в поведении клиентов",
+    "authors": [
+      "Хэррис Р."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "acceptance_commitment_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 10,
+    "global_order": 711010,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для знакомства со структурой ACT и примерами объяснения её основных процессов клиенту.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Хэррис Р.. Полное наглядное пособие по терапии принятия и ответственности: революционные методы и стратегии для содействия глубоким изменениям в поведении клиентов. Эксмо. ISBN 978-5-04-113715-1."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "twohig_levin_ong_act_steps",
+    "work_id": "twohig_levin_ong_act_steps",
+    "title": "Терапия принятия и ответственности. Пошаговое трансдиагностическое руководство",
+    "authors": [
+      "Тухиг М. П.",
+      "Левин М. Э.",
+      "Онг К. У."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "acceptance_commitment_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 20,
+    "global_order": 711020,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для разбора того, как авторы организуют обучение ACT по шагам и переносят понятия между разными запросами.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Тухиг М. П., Левин М. Э., Онг К. У.. Терапия принятия и ответственности. Пошаговое трансдиагностическое руководство. Диалектика. ISBN 978-5-907365-74-2."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "brown_gillard_act_dummies",
+    "work_id": "brown_gillard_act_dummies",
+    "title": "Терапия принятия и ответственности для чайников",
+    "authors": [
+      "Браун Ф. Дж.",
+      "Гиллард Д."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "acceptance_commitment_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 30,
+    "global_order": 711030,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для знакомства с терминологией ACT в популярном изложении перед чтением специализированных руководств.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Браун Ф. Дж., Гиллард Д.. Терапия принятия и ответственности для чайников. Диалектика. ISBN 978-5-907365-83-4."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "hayes_strosahl_wilson_act_process",
+    "work_id": "hayes_strosahl_wilson_act_process",
+    "title": "Терапия принятия и ответственности. Процессы и практика осознанных изменений",
+    "authors": [
+      "Хейс С. С.",
+      "Штросаль К. Д.",
+      "Уилсон К. Г."
+    ],
+    "year": 2021,
+    "type": "book",
+    "topic_id": "acceptance_commitment_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 40,
+    "global_order": 711040,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для сопоставления описания процессов ACT с тем, как авторы связывают их с практикой.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Хейс С. С., Штросаль К. Д., Уилсон К. Г.. Терапия принятия и ответственности. Процессы и практика осознанных изменений. Диалектика, 2-е изд.. 2021. ISBN 978-5-907365-43-8."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "harris_act_questions_answers",
+    "work_id": "harris_act_questions_answers",
+    "title": "ACT в вопросах и ответах. Практическое руководство по преодолению 150 основных проблем в терапии принятия и ответственности",
+    "authors": [
+      "Хэррис Р."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "acceptance_commitment_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 50,
+    "global_order": 711050,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для поиска разбора конкретного затруднения, которое возникло при изучении или обсуждении ACT.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Хэррис Р.. ACT в вопросах и ответах. Практическое руководство по преодолению 150 основных проблем в терапии принятия и ответственности. Диалектика. ISBN 978-5-907515-05-5."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "stoddard_afari_act_metaphors",
+    "work_id": "stoddard_afari_act_metaphors",
+    "title": "Метафоры в терапии принятия и ответственности. Практическое руководство",
+    "authors": [
+      "Стоддард Дж. А.",
+      "Афари Н."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "acceptance_commitment_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 60,
+    "global_order": 711060,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для сравнения метафор и обсуждения того, какую задачу каждая из них помогает объяснить.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Стоддард Дж. А., Афари Н.. Метафоры в терапии принятия и ответственности. Практическое руководство. Диалектика. ISBN 978-5-907365-02-5."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "torneke_relational_frame_theory",
+    "work_id": "torneke_relational_frame_theory",
+    "title": "Теория реляционных фреймов в клинической практике",
+    "authors": [
+      "Торнеке Н."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "acceptance_commitment_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 70,
+    "global_order": 711070,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для чтения о теоретических основаниях языка и познания в контекстуально-поведенческом подходе.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Торнеке Н.. Теория реляционных фреймов в клинической практике. Диалектика. ISBN 978-5-907365-69-8."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  },
+  {
+    "id": "westrup_advanced_act",
+    "work_id": "westrup_advanced_act",
+    "title": "Продвинутая терапия принятия и ответственности. Как достичь оптимальных результатов",
+    "authors": [
+      "Веструп Д."
+    ],
+    "year": null,
+    "type": "book",
+    "topic_id": "acceptance_commitment_therapy",
+    "module": "module7",
+    "reading_level": null,
+    "status": "approved",
+    "priority": null,
+    "importance": null,
+    "importance_source": null,
+    "topic_order": 80,
+    "global_order": 711080,
+    "estimated_minutes": null,
+    "tags": [],
+    "why_read": "Для сравнения базового изложения ACT с вопросами, которые автор адресует уже знакомым с подходом специалистам.",
+    "learning_outcomes": [],
+    "prerequisites": [],
+    "source": {
+      "citation": "Веструп Д.. Продвинутая терапия принятия и ответственности. Как достичь оптимальных результатов. Диалектика указана в списке курса. Оригинал: Advanced Acceptance and Commitment Therapy, New Harbinger, ISBN 978-1-60882-649-0."
+    },
+    "content_access": "not_verified",
+    "metadata_warnings": [
+      "Библиография курса не устанавливает обязательность и порядок чтения.",
+      "Полный цифровой текст и аудио в проверенных каталогах не подтверждены.",
+      "Подтверждена идентичность оригинала, выходные данные русского издания уточняются."
+    ],
+    "notes": "Проверены библиографическое упоминание и идентичность работы. Содержание книги не использовано для публикации учебных утверждений."
+  }
+]

@@ -59,6 +59,15 @@ def test_digest_is_required_and_approval_cannot_be_self_declared(reviewed, tmp_p
     assert not (tmp_path / 'unreviewed.zip').exists()
 
 
+def test_previous_reviewed_package_is_still_readable(reviewed, tmp_path, monkeypatch):
+    archive = tmp_path / 'previous.zip'
+    result = package.create_package(reviewed, archive)
+    monkeypatch.setattr(catalogue, 'PREVIOUS_REVIEWED_NOTES_SHA256', catalogue.REVIEWED_NOTES_SHA256)
+    monkeypatch.setattr(catalogue, 'REVIEWED_NOTES_SHA256', '0' * 64)
+    _, payload, _ = package.read_package(archive, result['sha256'])
+    assert payload == reviewed.read_bytes()
+
+
 @pytest.mark.parametrize('change', ['traversal', 'symlink', 'duplicate', 'body', 'manifest', 'missing'])
 def test_rehashed_tampered_archive_cannot_update_vault(reviewed, tmp_path, change):
     archive = tmp_path / 'vault.zip'
