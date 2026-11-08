@@ -1,3 +1,5 @@
+import { compareBooks, LiteratureControls, LiteratureEmpty, readingStatuses as labels, type LiteratureSort } from '../LiteratureControls'
+import { SourcesMenu } from '../SourcesMenu'
 import { BookOffers } from '../BookOffers'
 import { ChoiceMenu } from '../ChoiceMenu'
 import { useLayoutEffect, useRef, useState } from 'react'
@@ -10,7 +12,6 @@ import { emptyStudyScope, literaturePaths, matchesStudy, studyChoices } from '..
 import type { ReadingStatus } from '../types'
 import { miniApi, type MiniLiteratureItem, type MiniLiteratureTopic } from './api'
 
-const labels: Record<ReadingStatus, string> = { not_started: 'Не начато', in_progress: 'Читаю', read: 'Прочитано', deferred: 'Отложено' }
 const importanceLabels = { basic: 'Базовая', important: 'Важная', additional: 'Дополнительная', advanced: 'Углублённая' } as const
 const importanceSources = { teacher: 'приоритет преподавателя', agent: 'рекомендация агента' } as const
 
@@ -22,6 +23,7 @@ export function MiniLiterature({ initial, topics, studyTopics = [], busy, run, o
   onInvalidate?: () => void
 }) {
   const [query, setQuery] = useState('')
+  const [sort, setSort] = useState<LiteratureSort>('catalog')
   const heading = useRef<HTMLHeadingElement>(null)
   const returnTo = useRef<{ y: number; id: string; element: HTMLElement | null } | null>(null)
   const [items, setItems] = useState(initial)
@@ -39,7 +41,17 @@ export function MiniLiterature({ initial, topics, studyTopics = [], busy, run, o
   const study = studyChoices(items.flatMap(entry => literaturePaths(entry, disciplines)), studyScope)
   const scoped = items.filter(entry => matchesStudy(literaturePaths(entry, disciplines), study.scope)
     && (!topic || (entry.reading_topics ? entry.reading_topics.some(link => link.id === topic) : entry.topic_id === topic)))
-  const visible = [...new Map(scoped.filter(entry => (!statusFilter || (entry.user_state?.reading_status ?? 'not_started') === statusFilter) && [entry.title ?? '', ...(entry.authors ?? [])].join(' ').toLocaleLowerCase('ru').includes(query.trim().toLocaleLowerCase('ru'))).map(entry => [entry.work_id ?? entry.id, entry])).values()]
+  const visible = [...new Map(scoped.filter(entry => (!statusFilter || (entry.user_state?.reading_status ?? 'not_started') === statusFilter) && [entry.title ?? '', ...(entry.authors ?? [])].join(' ').toLocaleLowerCase('ru').includes(query.trim().toLocaleLowerCase('ru'))).map(entry => [entry.work_id ?? entry.id, entry])).values()].sort((a, b) => compareBooks(sort, { title: a.title, status: a.user_state?.reading_status ?? 'not_started' }, { title: b.title, status: b.user_state?.reading_status ?? 'not_started' }))
+  const activeFilters = [
+    study.modules.find(item => item.value === study.scope.module)?.label,
+    study.disciplines.find(item => item.value === study.scope.discipline)?.label,
+    study.topics.find(item => item.value === study.scope.topic)?.label,
+    navigationTopics.find(item => item.topic_id === topic)?.title,
+    statusFilter ? labels[statusFilter] : undefined,
+  ].filter((label): label is string => Boolean(label))
+  function resetFilters() {
+    setQuery(''); setTopic(''); setStudyScope(emptyStudyScope); setStatusFilter('')
+  }
   useLayoutEffect(() => {
     if (selected) { heading.current?.focus({ preventScroll: true }); heading.current?.scrollIntoView?.({ block: 'start' }) }
     else if (returnTo.current) { if (returnTo.current.element?.isConnected) returnTo.current.element.focus({ preventScroll: true }); else document.getElementById(`mini-literature-${returnTo.current.id}`)?.focus({ preventScroll: true }); window.scrollTo?.(0, returnTo.current.y) }
@@ -67,31 +79,33 @@ export function MiniLiterature({ initial, topics, studyTopics = [], busy, run, o
   }
   return <section className="page-width literature-page"><span className="eyebrow">СПИСКИ ЛИТЕРАТУРЫ</span><h1>Литература</h1>
     <p className="lead">Книги и другие материалы по темам и ваши личные отметки чтения.</p>
-    <p className="muted">Выберите тему или откройте рекомендуемую последовательность чтения.</p>
     <button className="button secondary" disabled={busy} onClick={() => void run(refresh)}>Обновить каталог</button>
     {item && <article className="panel literature-detail"><button className="text-button" disabled={busy || uncertain} onClick={() => setSelected(null)}>← К списку</button>
       <header className="book-heading"><span className="book-kicker">{materialType(item.type)}</span><h2 ref={heading} tabIndex={-1}>{item.title}</h2><p className="book-authors">{item.authors?.join(', ') || 'Автор не указан'} · {item.year ?? 'год не указан'}</p></header>
       <p className="eyebrow">{item.reading_topics?.map(link => link.title).join(' · ')}</p>
       <p className="book-purpose">{item.why_read}</p>
       <p className="book-metadata">Значимость: {item.importance ? `${importanceLabels[item.importance]} · ${item.importance_source ? importanceSources[item.importance_source] : 'источник оценки не указан'}` : 'не определена'}</p>
-      <BookOffers links={item.access_links} description="Доступ и совпадение издания уточняются у провайдера." />
-      <BookSearch search={item.book_search} />
-      {(item.source?.citation || item.metadata_warnings?.length) && <details className="source-details"><summary>Библиографическая запись</summary>
-        {item.source?.citation && <blockquote>{item.source.citation}</blockquote>}
-        {item.metadata_warnings?.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
-      </details>}
       <form className="reading-form" onSubmit={event => { event.preventDefault(); if (!uncertain) void run(save) }}>
         <h3>Моё чтение</h3><ChoiceMenu label="Статус" value={status} disabled={busy || uncertain} onChange={value => { setStatus(value as ReadingStatus); setSaved(false) }} options={Object.entries(labels).map(([value, label]) => ({ value, label }))} />
         {uncertain && <p role="status">Сохранение не подтверждено. Сначала обновите каталог.</p>}
         <button className="button primary" type="submit" disabled={busy || uncertain}>Сохранить чтение</button>{saved && <p role="status">Отметка сохранена.</p>}
-      </form></article>}<div hidden={Boolean(item)}>
-      <label className="field">Поиск по названию или автору<input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Название или автор" /></label>
+      </form>
+      <BookOffers links={item.access_links} description="Доступ и совпадение издания уточняются у провайдера." />
+      {item.book_search && <SourcesMenu label="Другие способы найти книгу"><BookSearch search={item.book_search} /></SourcesMenu>}
+      {(item.source?.citation || item.metadata_warnings?.length) && <details className="source-details"><summary>Библиографическая запись</summary>
+        {item.source?.citation && <blockquote>{item.source.citation}</blockquote>}
+        {item.metadata_warnings?.map((warning, index) => <p className="muted" key={index}>{warning}</p>)}
+      </details>}
+</article>}<div hidden={Boolean(item)}>
+      <LiteratureControls query={query} onQuery={setQuery} filters={activeFilters} onReset={resetFilters} sort={sort} onSort={setSort} busy={busy}>
       <StudyFilters choices={study} busy={busy} onChange={setStudyScope} />
       <div className="literature-filters"><ChoiceMenu label="Направление чтения" value={topic} disabled={busy} onChange={setTopic} options={[{ value: '', label: 'Все направления' }, ...navigationTopics.map(entry => ({ value: entry.topic_id, label: entry.title }))]} />
         <ChoiceMenu label="Фильтр статуса чтения" value={statusFilter} disabled={busy} onChange={value => setStatusFilter(value as ReadingStatus | '')} options={[{ value: '', label: 'Все статусы' }, ...Object.entries(labels).map(([value, label]) => ({ value, label }))]} /></div>
-      {!query.trim() && <><ReadingSummary showActions={!statusFilter} allItems={items} items={scoped} busy={busy} onSelect={id => choose(items.find(entry => entry.id === id)!)} />
-      <ReadingOrder items={scoped} allItems={items} busy={busy} onSelect={id => choose(items.find(entry => entry.id === id)!)} /></>}
-      {visible.length ? <div className="literature-list">{visible.map(entry => <article className="panel literature-card" key={entry.id}><h2><button className="text-button literature-title" id={`mini-literature-${entry.id}`} disabled={busy} onClick={() => choose(entry)}>{entry.title}</button></h2><p>{entry.authors?.join(', ') || 'Автор не указан'}</p><p className="muted">{labels[entry.user_state?.reading_status ?? 'not_started']}</p></article>)}</div> : <p role="status">По этим условиям материалы не найдены.</p>}
+      </LiteratureControls>
+      {!query.trim() && <><details className="reading-progress-disclosure"><summary>Прогресс чтения</summary><ReadingSummary showActions={!statusFilter} allItems={items} items={scoped} busy={busy} onSelect={id => choose(items.find(entry => entry.id === id)!)} />
+      </details><ReadingOrder items={scoped} allItems={items} busy={busy} onSelect={id => choose(items.find(entry => entry.id === id)!)} /></>}
+      <p className="muted" role="status">Работ по фильтру: {visible.length}</p>
+      {visible.length ? <div className="literature-list">{visible.map(entry => <article className="panel literature-card" key={entry.id}><h2><button className="text-button literature-title" id={`mini-literature-${entry.id}`} disabled={busy} onClick={() => choose(entry)}>{entry.title}</button></h2><p>{entry.authors?.join(', ') || 'Автор не указан'}</p><span className="status-chip" data-status={entry.user_state?.reading_status ?? 'not_started'}>{labels[entry.user_state?.reading_status ?? 'not_started']}</span></article>)}</div> : <LiteratureEmpty filtered={Boolean(query.trim() || activeFilters.length)} onReset={resetFilters} />}
     </div>
   </section>
 }

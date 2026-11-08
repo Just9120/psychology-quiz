@@ -257,7 +257,7 @@ def _item_view(item: dict, state: dict | None, location=None) -> tuple[str, Inli
     back = (f"lit:c:{location[1]}:{location[2]}:{location[3]}" if location and location[0] == 'c' else
             f"lit:cr:{location[1]}:{location[2]}" if location else
             f"lit:t:{_token(item.get('reading_topics', [{'id': item['topic_id']}])[0]['id'])}:0")
-    rows.append([InlineKeyboardButton("К порядку чтения" if location and location[0] == 'r' else "К теме", callback_data=back)])
+    rows.insert(0, [InlineKeyboardButton("К порядку чтения" if location and location[0] == 'r' else "К теме", callback_data=back)])
     return text, InlineKeyboardMarkup(rows)
 
 

@@ -14,6 +14,7 @@ export async function scopeHomework(page: Page) {
 }
 
 export async function scopeLiterature(page: Page) {
+  await page.locator('.literature-filter-panel > summary').click()
   await page.getByRole('searchbox', { name: 'Поиск по названию или автору', exact: true }).fill('')
   await studyChoice(page, 'Модуль обучения', 'module7')
   await studyChoice(page, 'Дисциплина', 'cognitive_behavioral_therapy')

@@ -21,8 +21,19 @@ export function LearningView({ review, mastery, goals, achievements, busy, onRef
   const dueQuiz = review.items.filter(item => item.kind === 'quiz' && item.is_due)
   const dueGlossary = review.items.filter(item => item.kind === 'glossary' && item.is_due)
   const glossaryTopics = [...new Map(dueGlossary.map(item => [item.topic_id!, item.topic])).entries()]
+  const weeklyGoals = goals.goals.filter(item => item.weekly_target !== null)
   return <section className="page-width progress-page"><div className="practice-heading"><div><span className="eyebrow">ЛИЧНЫЙ РИТМ</span><h1>Повторение и цели</h1></div><button className="button secondary" disabled={busy} onClick={onRefresh}><Icon name="refresh" />Обновить</button></div>
     <p className="lead">Повторяйте изученное в своём темпе. Даты рассчитываются по UTC; освоение требует нескольких ответов на одну редакцию с интервалами.</p>
+    {(review.due_count > 0 || weeklyGoals.length > 0) && <section className="panel practice-section week-checklist">
+      <h2>Чек-лист недели</h2>
+      <ul>
+        {review.due_count > 0 && <li><span className="status-chip" data-status="in_progress">Сегодня</span><span>Повторить по очереди · {review.due_count}</span></li>}
+        {weeklyGoals.map(item => <li key={item.goal_kind}>
+          <span className="status-chip" data-status={item.reached ? 'read' : 'not_started'}>{item.reached ? 'Готово' : 'В работе'}</span>
+          <span>{goalNames[item.goal_kind]} · {item.completed} из {item.weekly_target}</span>
+        </li>)}
+      </ul>
+    </section>}
     <section className="panel practice-section"><h2>Сегодня к повторению · {review.due_count}</h2>
       {review.items.length === 0 ? <p className="muted">Пока нет ответов, по которым можно составить очередь. Начните квиз или глоссарий.</p> : !review.due_count ? <p className="muted">На сегодня всё повторено. Следующие даты показаны ниже.</p> : <><p>{dueQuiz.length} вопросов · {dueGlossary.length} терминов</p>
         {dueQuiz.length > 0 && <button className="button primary" disabled={busy} onClick={() => { setReplace('quiz'); onStartQuiz(false) }}>Повторить вопросы<Icon name="arrow" /></button>}

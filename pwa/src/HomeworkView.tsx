@@ -13,12 +13,14 @@ export function HomeworkView({ catalog, busy, confirmId, onStart, onConfirm, onR
   onRefresh: () => void
 }) {
   const [scope, setScope] = useState(emptyStudyScope)
+  const [status, setStatus] = useState<'all' | 'open' | 'completed'>('all')
   const path = (item: HomeworkAssignment): StudyPath[] => [{ module: moduleId(item.module),
     discipline_id: item.discipline_id ?? item.discipline, discipline: item.discipline,
     topic_id: item.curriculum_topic?.id ?? JSON.stringify([item.discipline, item.topic]),
     topic: item.curriculum_topic?.title ?? item.topic }]
   const choices = studyChoices(catalog.assignments.flatMap(path), scope)
-  const assignments = catalog.assignments.filter(item => matchesStudy(path(item), choices.scope))
+  const assignments = catalog.assignments.filter(item => matchesStudy(path(item), choices.scope)
+    && (status === 'all' || item.completed === (status === 'completed')))
 
   return <section className="page-width homework-page">
     <span className="eyebrow">МОЁ ОБУЧЕНИЕ</span><h1>Домашние задания</h1>
@@ -26,7 +28,12 @@ export function HomeworkView({ catalog, busy, confirmId, onStart, onConfirm, onR
     <p className="muted">Задание считается выполненным при 80% верных ответов в одной завершённой попытке. Можно попробовать снова.</p>
     <button className="text-button" disabled={busy} onClick={onRefresh}>Обновить результаты</button>
     <StudyFilters choices={choices} busy={busy} onChange={setScope} topicLabel="Тема домашних заданий" />
-    {!assignments.length && <p role="status">Домашних заданий пока нет.</p>}
+    <div className="quick-filters" role="group" aria-label="Статус домашнего задания">
+      <button type="button" aria-pressed={status === 'all'} onClick={() => setStatus('all')}>Все</button>
+      <button type="button" aria-pressed={status === 'open'} onClick={() => setStatus('open')}>К прохождению</button>
+      <button type="button" aria-pressed={status === 'completed'} onClick={() => setStatus('completed')}>Зачтено</button>
+    </div>
+    {!assignments.length && <p role="status">{status === 'all' ? 'Домашних заданий пока нет.' : 'Заданий с выбранным статусом нет.'}</p>}
     {assignments.map(item => <article className="panel homework-card" key={item.id}>
       <p className="eyebrow">{moduleLabel(moduleId(item.module))} · {item.discipline}</p>
       <h2>{item.title}</h2>{item.topic.trim().toLocaleLowerCase('ru') !== item.title.trim().toLocaleLowerCase('ru') && <p className="muted">{item.topic}</p>}<p>{item.description}</p>

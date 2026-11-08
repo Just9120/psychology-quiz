@@ -5,7 +5,7 @@ export function readRoute(): Route | null {
   const match = /^#\/([^?]+)(?:\?(.*))?$/.exec(window.location.hash)
   if (!match || !sections.has(match[1] as Section)) return null
   const params = new URLSearchParams(match[2] ?? '')
-  return { view: match[1] as Section, params: new URLSearchParams([...params].filter(([key]) => ['book', 'entry', 'topic', 'status', 'q'].includes(key))) }
+  return { view: match[1] as Section, params: new URLSearchParams([...params].filter(([key]) => ['book', 'entry', 'topic', 'status', 'q', 'study_module', 'study_discipline', 'study_topic'].includes(key))) }
 }
 export function writeRoute(view: Section, params = new URLSearchParams(), replace = false) {
   const query = params.toString()

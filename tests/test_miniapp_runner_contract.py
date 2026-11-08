@@ -686,13 +686,15 @@ class MiniAppRunnerContractTests(unittest.TestCase):
 
             asyncio.run(ui_command(update, context))
 
-            self.assertEqual(1, message.reply_text.await_count)
-            first_call = message.reply_text.await_args_list[0]
-            self.assertIn("Откройте викторину в удобном окне.", first_call.args[0])
-            self.assertIn(f"через {START_QUIZ_BUTTON_TEXT}", first_call.args[0])
-            self.assertIn(f"нажмите {MINI_APP_BUTTON_TEXT} в меню", first_call.args[0])
-            self.assertIn("reply_markup", first_call.kwargs)
-            inline_markup = first_call.kwargs["reply_markup"]
+            self.assertEqual(2, message.reply_text.await_count)
+            removal, launch = message.reply_text.await_args_list
+            self.assertTrue(removal.kwargs["reply_markup"].remove_keyboard)
+            self.assertIn("/start", removal.args[0])
+            self.assertIn("Откройте викторину в удобном окне.", launch.args[0])
+            self.assertIn(f"через {START_QUIZ_BUTTON_TEXT}", launch.args[0])
+            self.assertIn("отправьте /ui ещё раз", launch.args[0])
+            self.assertIn("reply_markup", launch.kwargs)
+            inline_markup = launch.kwargs["reply_markup"]
             self.assertTrue(hasattr(inline_markup, "inline_keyboard"))
             self.assertTrue(inline_markup.inline_keyboard[0][0].web_app.url.startswith("https://example.com/ui?context="))
 

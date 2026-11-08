@@ -13,7 +13,7 @@ const routes = new Set([
 ])
 
 declare global {
-  interface Window { Telegram?: { WebApp?: { initData?: string; ready?: () => void; expand?: () => void; BackButton?: { show: () => void; hide: () => void; onClick: (callback: () => void) => void; offClick: (callback: () => void) => void } } } }
+  interface Window { Telegram?: { WebApp?: { initData?: string; colorScheme?: 'light' | 'dark'; onEvent?: (event: 'themeChanged', callback: () => void) => void; offEvent?: (event: 'themeChanged', callback: () => void) => void; ready?: () => void; expand?: () => void; BackButton?: { show: () => void; hide: () => void; onClick: (callback: () => void) => void; offClick: (callback: () => void) => void } } } }
 }
 
 export class MiniAppError extends Error {
