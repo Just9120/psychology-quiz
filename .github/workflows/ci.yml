@@ -23,6 +23,8 @@ jobs:
     outputs:
       runtime_checks: ${{ steps.scope.outputs.runtime_checks }}
       dependency_lock: ${{ steps.scope.outputs.dependency_lock }}
+      # Main still supplies both exact-revision artifacts to the existing CD.
+      build_artifacts: ${{ steps.scope.outputs.runtime_checks != 'false' || github.event_name != 'pull_request' }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -34,6 +36,38 @@ jobs:
           PUSH_BASE: ${{ github.event.before }}
           CI_EVENT: ${{ github.event_name }}
         run: python3 scripts/ci_scope.py --github-output "$GITHUB_OUTPUT"
+      - name: Validate changed documentation links
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PUSH_BASE: ${{ github.event.before }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          import re
+          import subprocess
+          from urllib.parse import unquote, urlsplit
+          from scripts.ci_scope import changed_paths
+
+          base = os.environ.get('PR_BASE') or os.environ.get('PUSH_BASE')
+          if not base or base == '0' * 40:
+              base = subprocess.check_output(['git', 'rev-parse', 'HEAD^'], text=True).strip()
+          root = Path.cwd().resolve()
+          for name in changed_paths(base):
+              path = root / name
+              if path.suffix != '.md' or not path.is_file():
+                  continue
+              text = path.read_text(encoding='utf-8')
+              text = re.sub(r'^```.*?^```[^\n]*$', '', text, flags=re.M | re.S)
+              for href in re.findall(r'\[[^\]]*\]\(([^\s)]+)\)', text):
+                  target = urlsplit(href.strip('<>'))
+                  if target.scheme or target.netloc or not target.path:
+                      continue
+                  destination = (path.parent / unquote(target.path)).resolve()
+                  if not destination.is_relative_to(root) or not destination.exists():
+                      raise SystemExit(f'Invalid documentation target: {name}: {href}')
+              print(f'DOCUMENTATION_LINKS_OK {name}')
+          PY
 
   pwa-client:
     needs: scope
@@ -60,7 +94,12 @@ jobs:
           SCOPE_RESULT: ${{ needs.scope.result }}
         run: test "$SCOPE_RESULT" = success
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - name: Check documentation consumer
+        if: needs.scope.outputs.runtime_checks == 'false'
+        working-directory: .
+        run: python3 -m unittest tests.test_miniapp_frontend_contract.MiniAppFrontendContractTests.test_docs_numbered_h2_headings_have_unique_numbers
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        if: needs.scope.outputs.build_artifacts != 'false'
         with:
           node-version: "22.23.1"
           cache: npm
@@ -74,6 +113,7 @@ jobs:
             requirements-bootstrap.lock
             requirements.lock
       - name: Install pinned frontend tooling
+        if: needs.scope.outputs.build_artifacts != 'false'
         run: |
           npm install --global npm@12.0.2
           npm ci --ignore-scripts
@@ -83,6 +123,7 @@ jobs:
           python -m pip install --require-hashes -r ../requirements-bootstrap.lock
           pip install --require-hashes -r ../requirements.lock
       - name: Components, types and production build
+        if: needs.scope.outputs.build_artifacts != 'false'
         env:
           PWA_BUILD_SHA: ${{ github.sha }}
         run: |
@@ -111,12 +152,16 @@ jobs:
           sudo apt-get install -y --no-install-recommends nginx
           python tests/nginx_smoke.py
       - name: Upload versioned public assets
+        if: needs.scope.outputs.build_artifacts != 'false'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: pwa-${{ github.sha }}
           path: pwa/dist/
           if-no-files-found: error
           retention-days: 7
+      - name: Explain documentation-only PR profile
+        if: needs.scope.outputs.build_artifacts == 'false'
+        run: echo 'Documentation-only PR; links and documentation consumer checked, frontend setup/tests/build/artifact not applicable. Main retains exact-revision delivery artifacts.' >> "$GITHUB_STEP_SUMMARY"
 
   validate-and-smoke-test:
     needs: scope
@@ -291,6 +336,7 @@ jobs:
         run: python scripts/audit_question_bank.py --db-path "$DB_PATH"
 
       - name: Build and package exact backend image
+        if: needs.scope.outputs.build_artifacts != 'false'
         env:
           EXPECTED_SHA: ${{ github.sha }}
         shell: bash
@@ -316,6 +362,7 @@ jobs:
       - name: Write CI summary
         env:
           RUNTIME_CHECKS: ${{ needs.scope.outputs.runtime_checks }}
+          BUILD_ARTIFACTS: ${{ needs.scope.outputs.build_artifacts }}
         shell: bash
         run: |
           set -euo pipefail
@@ -336,4 +383,9 @@ jobs:
             echo "- validate_literature passed"
             echo "- DB init/seed smoke passed"
             echo "- git diff --check passed"
+            if [[ "$BUILD_ARTIFACTS" == false ]]; then
+              echo "- documentation-only PR: backend image/artifact not applicable; no delivery consumes PR artifacts"
+            else
+              echo "- exact-revision backend image/artifact passed; main artifacts remain required for delivery"
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
