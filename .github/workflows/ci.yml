@@ -35,7 +35,17 @@ jobs:
           PR_BASE: ${{ github.event.pull_request.base.sha }}
           PUSH_BASE: ${{ github.event.before }}
           CI_EVENT: ${{ github.event_name }}
-        run: python3 scripts/ci_scope.py --github-output "$GITHUB_OUTPUT"
+        run: |
+          set -euo pipefail
+          base="${PR_BASE:-${PUSH_BASE:-}}"
+          if [[ "$CI_EVENT" != workflow_dispatch &&
+                ( ! "$base" =~ ^[0-9a-f]{40}$ || "$base" == 0000000000000000000000000000000000000000 ) ]]; then
+            echo 'CI_SCOPE_INCOMPLETE_BASE: force the existing full profile'
+            PR_BASE= PUSH_BASE= CI_EVENT=workflow_dispatch \
+              python3 scripts/ci_scope.py --github-output "$GITHUB_OUTPUT"
+          else
+            python3 scripts/ci_scope.py --github-output "$GITHUB_OUTPUT"
+          fi
       - name: Validate changed documentation links
         env:
           PR_BASE: ${{ github.event.pull_request.base.sha }}
